@@ -8,4 +8,41 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PtrStyle">
+        <item name="ptr_duration_to_close">200</item>
+        <item name="ptr_duration_to_close_header">1000</item>
+        <item name="ptr_keep_header_when_refresh">true</item>
+        <item name="ptr_pull_to_fresh">false</item>
+        <item name="ptr_ratio_of_header_height_to_refresh">1.0</item>
+        <item name="ptr_resistance">1.7</item>
+    </style>
+
+    <style name="LoadingPageViewStubStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <style name="ShareHolderStyle">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ShareIconStyle">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="ShareTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_subhead</item>
+        <item name="android:textColor">@color/text_content_title</item>
+        <item name="android:layout_marginTop">@dimen/base_margin</item>
+    </style>
+
 </resources>
