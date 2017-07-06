@@ -20,7 +20,7 @@ public class DBManager {
     private DaoSession daoSession;
 
     private DBManager() {
-        devOpenHelper = new ProductionOpenHelp(App.getInstance(), "djk-db", null);
+        devOpenHelper = new ProductionOpenHelp(App.getInstance(), "qinlin-db", null);
         database = devOpenHelper.getWritableDatabase();
         daoMaster = new DaoMaster(database);
         daoSession = daoMaster.newSession();

@@ -1,12 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/AppButtonStyle</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
+
+    <style name="AppTheme" parent="BaseTheme" />
+
+    <style name="TranslateStatusBarTheme" parent="BaseTheme">
+
+    </style>
+
+    <style name="AppButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
 
     <style name="PtrStyle">
         <item name="ptr_duration_to_close">200</item>

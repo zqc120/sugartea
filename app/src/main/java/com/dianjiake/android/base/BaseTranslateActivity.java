@@ -24,17 +24,4 @@ public abstract class BaseTranslateActivity<P extends BasePresenter> extends Bas
         }
     }
 
-    protected void setToolbarSpaceHeight(final View space) {
-        space.post(new Runnable() {
-            @Override
-            public void run() {
-                if (space != null) {
-                    ViewGroup.LayoutParams lp = space.getLayoutParams();
-                    lp.height = UIUtil.getStatusBarHeight();
-                    space.setLayoutParams(lp);
-                    space.postInvalidate();
-                }
-            }
-        });
-    }
 }
