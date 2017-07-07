@@ -3,16 +3,13 @@
     package="com.dianjiake.android">
 
     <application
+        android:name=".base.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".base.App"
         android:theme="@style/TranslateStatusBarTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
@@ -22,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

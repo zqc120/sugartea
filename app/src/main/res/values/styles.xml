@@ -21,6 +21,18 @@
     </style>
 
 
+    <style name="MainTabStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">9dp</item>
+        <item name="android:drawablePadding">@dimen/base_size1</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
     <style name="PtrStyle">
         <item name="ptr_duration_to_close">200</item>
         <item name="ptr_duration_to_close_header">1000</item>

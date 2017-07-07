@@ -3,9 +3,9 @@ package com.dianjiake.android.ui.splash;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.dianjiake.android.MainActivity;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
+import com.dianjiake.android.ui.main.MainActivity;
 import com.dianjiake.android.util.IntentUtil;
 
 
