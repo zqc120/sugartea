@@ -1,5 +1,6 @@
 package com.dianjiake.android.ui.main;
 
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.TabFragmentManager;
+import com.dianjiake.android.view.widget.ViewWrapper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,5 +64,15 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
 //        tabManager.start();
     }
 
+    @OnClick(R.id.button)
+    void click(View v) {
+        View view = findViewById(R.id.toolbar_location_holder);
+
+        if(view.getLayoutParams().width<1024){
+            ObjectAnimator.ofInt(new ViewWrapper(view), "width", 1024).setDuration(500).start();
+        }else{
+            ObjectAnimator.ofInt(new ViewWrapper(view), "width", 100).setDuration(500).start();
+        }
+    }
 
 }

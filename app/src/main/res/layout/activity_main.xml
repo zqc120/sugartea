@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context="com.dianjiake.android.ui.main.MainActivity">
 
+    <include layout="@layout/toolbar_home" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:text="变化"
+        android:layout_height="wrap_content" />
+
     <FrameLayout
         android:id="@id/fragment_content"
         android:layout_width="match_parent"
