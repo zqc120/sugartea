@@ -8,7 +8,7 @@ public interface Constant {
 
     String WX_AppID = "wxcdea443bd8007398";
     String WX_AppSecret = "a813f7bd20858f729683dd0672fcd984";
-    String URL_VERSION = "clerk100/";
+    String URL_VERSION = "api100/";
 
     String SALT = "3c66790a694fd53aed110a8e85f1aeec";
     float CHART_LINE_SIZE = 1f;

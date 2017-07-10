@@ -4,28 +4,29 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
-import com.dianjiake.android.base.BasePresenter;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 
 /**
  * Created by lfs on 2017/7/7.
  */
 
-public class HomeFragment extends BaseListFragment {
+public class HomeFragment extends BaseListFragment<HomeContract.Presenter> implements HomeContract.View {
+
     @Override
     protected int provideLayout() {
-        return 0;
+        return R.layout.fragment_home;
     }
 
     @Override
-    protected BasePresenter getPresenter() {
-        return null;
+    protected HomeContract.Presenter getPresenter() {
+        return new HomePresenter(this);
     }
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        return null;
+        return new HomeAdapter(presenter.getItems());
     }
 
     @Override
@@ -35,11 +36,11 @@ public class HomeFragment extends BaseListFragment {
 
     @Override
     public void onLoadMore() {
-
+        presenter.load(false);
     }
 
     @Override
     public void onReload() {
-
+        presenter.reload();
     }
 }

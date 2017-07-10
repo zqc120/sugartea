@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StarView">
+        <attr name="total_stars" format="integer"/>
+        <attr name="positive_star" format="reference"/>
+        <attr name="negative_star" format="reference"/>
+        <attr name="size" format="dimension"/>
+        <attr name="score" format="float"/>
+    </declare-styleable>
+</resources>

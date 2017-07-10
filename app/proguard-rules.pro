@@ -146,8 +146,8 @@ public static final ** CREATOR;
 #gson
 -keepattributes Signature
 -keep class sun.misc.Unsafe { *; }
--keep class com.dianjiake.employee.data.bean.** { *; }
--keep class com.dianjiake.employee.data.model.** { *; }
+-keep class com.dianjiake.android.data.bean.** { *; }
+-keep class com.dianjiake.android.data.model.** { *; }
 
 #ali
 -keep class com.taobao.securityjni.**{*;}

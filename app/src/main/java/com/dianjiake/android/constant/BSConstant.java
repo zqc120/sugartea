@@ -40,4 +40,5 @@ public interface BSConstant {
     String PERFORMANCE_WEEKLY = "qitian";// 业绩七天
     String PERFORMANCE_DETAIL = "yejimingxi";// 业绩明细
     String WAGE = "xinzi";// 薪资明细
+    String SHOP_LIST = "jingxuanshanghu";
 }
