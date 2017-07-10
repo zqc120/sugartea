@@ -55,6 +55,15 @@ public class HomeShopBean implements Parcelable {
     private String jichufuwutxt;
     private String gongkaikaquan;
     private String paixu;
+    private int viewType;
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
 
     public String getId() {
         return id;

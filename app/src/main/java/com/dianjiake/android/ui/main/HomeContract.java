@@ -12,6 +12,8 @@ import java.util.List;
 
 public interface HomeContract {
     interface View extends BaseListView {
+
+        void judgeScrollY(int totalY);
     }
 
     interface Presenter extends BaseListPresenter {

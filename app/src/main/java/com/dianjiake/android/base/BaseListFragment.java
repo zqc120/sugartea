@@ -17,7 +17,7 @@ import com.dianjiake.android.view.widget.PtrListLayout;
 
 public abstract class BaseListFragment<P extends BaseListPresenter> extends BaseFragment<P> implements BaseListView
         , LoadingLayout.OnReloadListener,LoadMoreRecyclerView.OnLoadMoreListener {
-    PtrListLayout ptrListLayout;
+    protected PtrListLayout ptrListLayout;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

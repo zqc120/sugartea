@@ -70,4 +70,12 @@
         <item name="android:layout_marginTop">@dimen/base_margin</item>
     </style>
 
+    <style name="HomeFilterRadioStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:button">@null</item>
+    </style>
+
 </resources>

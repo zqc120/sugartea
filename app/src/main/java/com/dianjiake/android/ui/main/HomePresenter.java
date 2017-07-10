@@ -47,11 +47,12 @@ public class HomePresenter implements HomeContract.Presenter {
     @Override
     public void reload() {
         page = 1;
+        items.clear();
         load(true);
     }
 
     @Override
-    public void load(boolean isReload) {
+    public void load(final boolean isReload) {
         Network.getInstance().homeShop(BSConstant.SHOP_LIST, loginInfo.getOpenId(), order, null, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -68,6 +69,14 @@ public class HomePresenter implements HomeContract.Presenter {
 
                     @Override
                     public void onSuccess(List<HomeShopBean> list, boolean isAll) {
+                        if (isReload) {
+                            HomeShopBean temp = new HomeShopBean();
+                            temp.setViewType(HomeType.AD);
+                            items.add(0, temp);
+                            HomeShopBean filter = new HomeShopBean();
+                            filter.setViewType(HomeType.FILTER);
+                            items.add(filter);
+                        }
                         items.addAll(list);
                         page++;
                         if (isAll) {

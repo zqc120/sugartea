@@ -6,6 +6,7 @@
     android:id="@+id/toolbar_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/text_white"
     android:orientation="vertical">
 
     <com.dianjiake.android.view.widget.ToolbarSpaceView
@@ -78,6 +79,7 @@
             android:layout_width="@dimen/base_size6"
             android:layout_height="@dimen/base_size6"
             android:layout_marginRight="@dimen/base_margin"
-            android:background="@drawable/bg_home_search"></FrameLayout>
+            android:background="@drawable/bg_home_search"
+            android:visibility="gone"></FrameLayout>
     </LinearLayout>
 </LinearLayout>

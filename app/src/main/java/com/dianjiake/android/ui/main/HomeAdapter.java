@@ -15,6 +15,7 @@ import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
+import com.dianjiake.android.view.widget.HomeFilterView;
 import com.dianjiake.android.view.widget.StarView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -33,19 +34,33 @@ public class HomeAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
     @Override
     public void myOnBindViewHolder(BaseViewHolder holder, int position) {
-        ViewHolder vh = (ViewHolder) holder;
-        vh.setItem(getItem(position));
+        switch (myGetItemViewType(position)) {
+            case HomeType.AD:
+                break;
+            case HomeType.FILTER:
+                break;
+            default:
+                ViewHolder vh = (ViewHolder) holder;
+                vh.setItem(getItem(position));
+        }
 
     }
 
     @Override
     public BaseViewHolder myOnCreateViewHolder(ViewGroup parent, int viewType) {
-        return ViewHolder.newInstance(parent);
+        switch (viewType) {
+            case HomeType.AD:
+                return ADHolder.newInstance(parent);
+            case HomeType.FILTER:
+                return FilterHolder.newInstance(parent);
+            default:
+                return ViewHolder.newInstance(parent);
+        }
     }
 
     @Override
     public int myGetItemViewType(int position) {
-        return 0;
+        return getItem(position).getViewType();
     }
 
 
@@ -86,6 +101,39 @@ public class HomeAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
             distance.setText(AMapUtil.formatDistance(LongUtil.parseLong(item.getJuli())));
             star.setScore(FloatUtil.parseFloat(item.getPingfen()));
 
+        }
+
+        @Override
+        public void destroy() {
+
+        }
+    }
+
+    public static class ADHolder extends BaseViewHolder {
+
+        public static ADHolder newInstance(ViewGroup parent) {
+            return new ADHolder(UIUtil.inflate(R.layout.item_home_ad, parent));
+        }
+
+        private ADHolder(View itemView) {
+            super(itemView);
+        }
+
+
+        @Override
+        public void destroy() {
+
+        }
+    }
+
+    public static class FilterHolder extends BaseViewHolder {
+
+        public static FilterHolder newInstance(ViewGroup parent) {
+            return new FilterHolder(new HomeFilterView(parent.getContext()));
+        }
+
+        private FilterHolder(View itemView) {
+            super(itemView);
         }
 
         @Override
