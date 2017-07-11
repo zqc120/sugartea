@@ -3,9 +3,16 @@ package com.dianjiake.android.ui.main;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.HomeShopBean;
+import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.request.ListObserver;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +34,23 @@ public class HomePresenter implements HomeContract.Presenter {
     LoginInfoModel loginInfo;
     CompositeDisposable cd;
     List<HomeShopBean> items = new ArrayList<>();
+    AppInfoModel appInfo;
+
+    String locationName;
+    String longitude;
+    String latitude;
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
         loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
+        appInfo = AppInfoDBHelper.newInstance().getAppInfo();
         cd = new CompositeDisposable();
+
+        locationName = appInfo.getLocationName();
+        longitude = appInfo.getLongitude();
+        latitude = appInfo.getLatitude();
+        view.setLocationName(locationName);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -41,6 +60,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void onDestroy() {
+        EventBus.getDefault().unregister(this);
         cd.clear();
     }
 
@@ -53,7 +73,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void load(final boolean isReload) {
-        Network.getInstance().homeShop(BSConstant.SHOP_LIST, loginInfo.getOpenId(), order, null, page)
+        Network.getInstance().homeShop(BSConstant.SHOP_LIST, loginInfo.getOpenId(), order, longitude + "," + latitude, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new ListObserver<HomeShopBean>() {
@@ -101,5 +121,13 @@ public class HomePresenter implements HomeContract.Presenter {
     @Override
     public List<HomeShopBean> getItems() {
         return items;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLocationChange(LocationEvent event) {
+        locationName = event.locationName;
+        longitude = event.longitude;
+        latitude = event.latitude;
+        view.setLocationName(event.locationName);
     }
 }

@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_white"
                 android:textSize="@dimen/text_size_body"
-                tools:text="可以的说" />
+                android:text="正在定位" />
 
             <ImageView
                 android:layout_width="@dimen/base_size3"

@@ -111,5 +111,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     compile 'com.tencent.bugly:crashreport:2.6.5'
+    compile 'com.amap.api:map2d:5.2.0'
+    compile 'com.amap.api:search:5.2.1'
+    compile 'com.amap.api:location:3.4.1'
 
 }

@@ -1,7 +1,6 @@
 package com.dianjiake.android.data.db;
 
 
-
 import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.AppInfoModelDao;
 import com.dianjiake.android.util.CheckEmptyUtil;
@@ -13,6 +12,9 @@ import java.util.List;
  */
 
 public class AppInfoDBHelper {
+    private static final String DEFAULT_LOCAION_NAME = "SOHO现代城";
+    private static final String DEFAULT_LONGITUDE = "116.4758400000";//默认经度
+    private static final String DEFAULT_LATITUDE = "39.9060700000";//默认纬度
 
 
     public static AppInfoDBHelper newInstance() {
@@ -51,5 +53,41 @@ public class AppInfoDBHelper {
         AppInfoModel infoModel = getAppInfo();
         infoModel.setCid(cid);
         save(infoModel);
+    }
+
+    public void saveLocationInfo(String name, String longitude, String latitude) {
+        AppInfoModel infoModel = getAppInfo();
+        if (infoModel == null) {
+            infoModel = new AppInfoModel();
+            infoModel.setId(1l);
+        }
+        infoModel.setLongitude(longitude);
+        infoModel.setLatitude(latitude);
+        infoModel.setLocationName(name);
+        getAppInfoDao().insertOrReplace(infoModel);
+    }
+
+    public String getLocationName() {
+        if (CheckEmptyUtil.isEmpty(getAppInfo().getLocationName())) {
+            return DEFAULT_LOCAION_NAME;
+        } else {
+            return getAppInfo().getLocationName();
+        }
+    }
+
+    public String getLongitude() {
+        if (CheckEmptyUtil.isEmpty(getAppInfo().getLocationName())) {
+            return DEFAULT_LONGITUDE;
+        } else {
+            return getAppInfo().getLongitude();
+        }
+    }
+
+    public String getLatitude() {
+        if (CheckEmptyUtil.isEmpty(getAppInfo().getLocationName())) {
+            return DEFAULT_LATITUDE;
+        } else {
+            return getAppInfo().getLatitude();
+        }
     }
 }

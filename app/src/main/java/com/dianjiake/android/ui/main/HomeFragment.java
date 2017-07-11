@@ -100,6 +100,11 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     }
 
     @Override
+    public void setLocationName(String locationName) {
+        toolbarLocationText.setText(locationName);
+    }
+
+    @Override
     public void judgeScrollY(int totalY) {
         int toolbarThreshold = adViewTopDistance - toolbarBottomDistance;
         if (totalY >= toolbarThreshold) {
