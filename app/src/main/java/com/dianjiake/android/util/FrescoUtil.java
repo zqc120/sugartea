@@ -21,10 +21,10 @@ public class FrescoUtil {
     }
 
     public static Uri getShopLogoUri(String logo, String cover) {
-        if (!TextUtils.isEmpty(logo)) {
-            return Uri.parse(Constant.IMAGE_SHOP + logo);
-        } else {
+        if (!TextUtils.isEmpty(cover)) {
             return Uri.parse(Constant.IMAGE_SHOP + cover);
+        } else {
+            return Uri.parse(Constant.IMAGE_SHOP + logo);
         }
     }
 

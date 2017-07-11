@@ -1,7 +1,7 @@
 package com.dianjiake.android.base;
 
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.db.DBManager;
@@ -18,7 +18,7 @@ import timber.log.Timber;
  * Created by lfs on 2017/5/11.
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
     public static Context instance;
 
     public static Context getInstance() {

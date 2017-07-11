@@ -2,6 +2,7 @@ package com.dianjiake.android.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
+import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.HomeFilterView;
@@ -21,7 +24,9 @@ import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 /**
  * Created by lfs on 2017/7/7.
@@ -78,9 +83,12 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
         ptrListLayout.getRecyclerView().addOnScrollListener(scrollListener);
+        toolbarLocationText.setMaxWidth(UIUtil.getScreenWidth() * 1 / 4);
+
         toolbarBottomDistance = UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.toolbar_size);
         adViewTopDistance = UIUtil.getScreenWidth() / 2;
         toolbarHolder.getBackground().mutate().setAlpha(0);
+        toolbarSpace.getBackground().mutate().setAlpha(0);
     }
 
     @Override
@@ -111,14 +119,21 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
             toolbarLocationHolder.setVisibility(View.GONE);
             toolbarMsgHolder.setVisibility(View.GONE);
             toolbarHolder.getBackground().mutate().setAlpha(255);
+            toolbarSpace.getBackground().mutate().setAlpha(255);
             filter.setVisibility(View.VISIBLE);
         } else {
-            toolbarHolder.getBackground().mutate().setAlpha(255 * (totalY / toolbarThreshold));
+            Timber.d("alpha " + (255 * totalY * 1.0f / toolbarThreshold));
+            toolbarHolder.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
+            toolbarSpace.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
             filter.setVisibility(View.GONE);
             toolbarLocationHolder.setVisibility(View.VISIBLE);
             toolbarMsgHolder.setVisibility(View.VISIBLE);
         }
     }
 
+    @OnClick(R.id.toolbar_location_holder)
+    void clickLocation(View v) {
+        startActivity(IntentUtil.getIntent(SearchLocationActivity.class));
+    }
 
 }

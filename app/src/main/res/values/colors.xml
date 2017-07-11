@@ -48,6 +48,8 @@
     <color name="green">#ff2fcab1</color>
     <color name="blue">#ff54d5ff</color>
 
+    <color name="map_radius_fill">#55ff5c5c</color>
+    <color name="map_radius_stroke">@color/text_white</color>
 
 
 </resources>

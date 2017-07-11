@@ -11,7 +11,7 @@
 
     <com.dianjiake.android.view.widget.ToolbarSpaceView
         android:id="@+id/toolbar_space"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/base_size6"
             android:layout_marginLeft="@dimen/base_size3"
-            android:background="@drawable/bg_home_search"
+            android:background="@drawable/bg_home_location"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/base_size2"
@@ -38,9 +38,11 @@
                 android:id="@+id/toolbar_location_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="正在定位"
                 android:textColor="@color/text_white"
-                android:textSize="@dimen/text_size_body"
-                android:text="正在定位" />
+                android:textSize="@dimen/text_size_body" />
 
             <ImageView
                 android:layout_width="@dimen/base_size3"
@@ -68,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:singleLine="true"
-                android:textColor="@color/text_white"
+                android:textColor="@color/text_content_secondary"
+                android:textColorHint="@color/text_content_hint"
                 android:textSize="@dimen/text_size_body"
                 tools:text="可以的说" />
 
@@ -79,7 +82,7 @@
             android:layout_width="@dimen/base_size6"
             android:layout_height="@dimen/base_size6"
             android:layout_marginRight="@dimen/base_margin"
-            android:background="@drawable/bg_home_search"
+            android:background="@drawable/bg_home_location"
             android:visibility="gone"></FrameLayout>
     </LinearLayout>
 </LinearLayout>
