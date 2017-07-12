@@ -1,11 +1,15 @@
 package com.dianjiake.android.ui.searchlocation;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
@@ -16,11 +20,23 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.core.PoiItem;
+import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeQuery;
+import com.amap.api.services.geocoder.RegeocodeResult;
+import com.amap.api.services.poisearch.PoiResult;
+import com.amap.api.services.poisearch.PoiSearch;
 import com.dianjiake.android.R;
+import com.dianjiake.android.base.App;
 import com.dianjiake.android.base.BaseTranslateActivity;
+import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,9 +57,17 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
     TextView toolbarRight;
     @BindView(R.id.map_view)
     MapView mapView;
+    @BindView(R.id.list_view)
+    ListView listView;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
 
     AMap map;
     Marker marker;
+    String cityCode;
+    SearchResultAdapter searchResultAdapter;
+    boolean searchFocus;//搜索框是否获取焦点
+    InputMethodManager imm;
 
     int markerPositionX, markerPositionY;
 
@@ -59,11 +83,20 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+        imm = (InputMethodManager) App.getInstance().getSystemService(INPUT_METHOD_SERVICE);
         mapView.onCreate(savedInstanceState);
         map = mapView.getMap();
         intiMapView();
         markerPositionX = UIUtil.getScreenWidth() / 2;
         markerPositionY = UIUtil.getScreenWidth() / 5;
+        searchResultAdapter = new SearchResultAdapter();
+        listView.setAdapter(searchResultAdapter);
+        toolbarInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                ToastUtil.showShortToast(hasFocus + "");
+            }
+        });
     }
 
     private void intiMapView() {
@@ -93,26 +126,24 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
         map.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
-                if (marker != null) {
-                    Timber.d("position :" + marker.getPosition().toString());
-                }
+
             }
 
             @Override
             public void onCameraChangeFinish(CameraPosition cameraPosition) {
-
+                if (marker != null) {
+                    Timber.d("position :" + marker.getPosition().toString());
+                    presenter.geoSearch(marker.getPosition());
+                }
             }
         });
 
     }
 
-    private void geoSearch(LatLng latLng) {
-        GeocodeSearch geocodeSearch = new GeocodeSearch(this);
-    }
 
     @Override
     public SearchLocationContract.Presenter getPresenter() {
-        return null;
+        return new SearchLocationPresenter(this);
     }
 
     @Override
@@ -130,7 +161,17 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
     @Override
     protected void onDestroy() {
         mapView.onDestroy();
+        imm = null;
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (searchFocus) {
+            setSearchFocus(false);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @OnClick(R.id.toolbar_right)
@@ -138,4 +179,37 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
         setResult(RESULT_CANCELED);
         finish();
     }
+
+    @OnClick(R.id.toolbar_title)
+    void clickSearch(View v) {
+        setSearchFocus(true);
+    }
+
+    void setSearchFocus(boolean focus) {
+        searchFocus = focus;
+        if (focus) {
+            imm.toggleSoftInput(0, InputMethodManager.SHOW_IMPLICIT);
+        } else {
+            imm.hideSoftInputFromWindow(toolbarInput.getWindowToken(), 0);
+        }
+
+        toolbarTitle.setVisibility(focus ? View.GONE : View.VISIBLE);
+        toolbarInput.setVisibility(focus ? View.VISIBLE : View.GONE);
+        if (focus) {
+            toolbarInput.requestFocus();
+        }
+    }
+
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void setItems(List<PoiItem> items) {
+        searchResultAdapter.setItems(items);
+    }
+
+
 }
