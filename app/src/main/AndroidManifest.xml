@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dianjiake.android">
 
     <application
@@ -31,7 +32,6 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="48359150ad4b29e5b514a626e12433c2"></meta-data>
-
     </application>
 
 </manifest>

@@ -34,6 +34,7 @@ public abstract class BaseLoadMoreAdapter<T> extends RecyclerView.Adapter<BaseVi
     private int mLoadAllTextRes;
 
     List<BaseViewHolder> viewHolders = new ArrayList<>();
+    private OnItemClickListener onItemClickListener;
 
 
     public BaseLoadMoreAdapter(List<T> items) {
@@ -108,6 +109,16 @@ public abstract class BaseLoadMoreAdapter<T> extends RecyclerView.Adapter<BaseVi
             ((ProgressViewHolder) holder).setItemViewVisible(mType == VIEW_END || mIsLoading);
             ((ProgressViewHolder) holder).setIsEnd(mType == VIEW_END, mItems.size());
             ((ProgressViewHolder) holder).setLoadAllText(mLoadAllTextRes);
+        }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener clickListener) {
+        this.onItemClickListener = clickListener;
+    }
+
+    public void onClick(T t, int position) {
+        if (onItemClickListener != null) {
+            onItemClickListener.onClick(t, position);
         }
     }
 
@@ -197,5 +208,9 @@ public abstract class BaseLoadMoreAdapter<T> extends RecyclerView.Adapter<BaseVi
         public void destroy() {
 
         }
+    }
+
+    public interface OnItemClickListener {
+        void onClick(Object t, int position);
     }
 }

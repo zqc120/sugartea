@@ -13,6 +13,7 @@ import java.util.List;
 
 public class SearchHistoryHelper {
     private static final int TYPE_LOCATION = 1;
+    private static final int TYPE_SHOP = 1;
 
     public static SearchHistoryHelper newInstance() {
         return new SearchHistoryHelper();
@@ -23,7 +24,15 @@ public class SearchHistoryHelper {
     }
 
     public List<SearchHistoryModel> getSearchLocationHistory() {
-        List<SearchHistoryModel> list = getDao().queryBuilder().where(SearchHistoryModelDao.Properties.Type.eq(TYPE_LOCATION))
+        return getSearchHistory(TYPE_LOCATION);
+    }
+
+    public List<SearchHistoryModel> getSearchShopHistory() {
+        return getSearchHistory(TYPE_SHOP);
+    }
+
+    private List<SearchHistoryModel> getSearchHistory(int type) {
+        List<SearchHistoryModel> list = getDao().queryBuilder().where(SearchHistoryModelDao.Properties.Type.eq(true))
                 .orderDesc(SearchHistoryModelDao.Properties.Update_at)
                 .list();
         if (CheckEmptyUtil.isEmpty(list)) {
@@ -37,6 +46,14 @@ public class SearchHistoryHelper {
         searchHistoryModel.setSearch(search);
         searchHistoryModel.setUpdate_at(System.currentTimeMillis());
         searchHistoryModel.setType(TYPE_LOCATION);
+        getDao().insertOrReplace(searchHistoryModel);
+    }
+
+    public void addSearchShopEntity(String search) {
+        SearchHistoryModel searchHistoryModel = new SearchHistoryModel();
+        searchHistoryModel.setSearch(search);
+        searchHistoryModel.setUpdate_at(System.currentTimeMillis());
+        searchHistoryModel.setType(TYPE_SHOP);
         getDao().insertOrReplace(searchHistoryModel);
     }
 }

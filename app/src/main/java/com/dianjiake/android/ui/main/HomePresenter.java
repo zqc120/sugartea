@@ -73,6 +73,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void load(final boolean isReload) {
+        cd.clear();
         Network.getInstance().homeShop(BSConstant.SHOP_LIST, loginInfo.getOpenId(), order, longitude + "," + latitude, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -129,5 +130,6 @@ public class HomePresenter implements HomeContract.Presenter {
         longitude = event.longitude;
         latitude = event.latitude;
         view.setLocationName(event.locationName);
+        reload();
     }
 }

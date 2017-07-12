@@ -2,11 +2,8 @@ package com.dianjiake.android.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -14,18 +11,16 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
+import com.dianjiake.android.ui.common.ShopListAdapter;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.HomeFilterView;
-import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import timber.log.Timber;
 
 /**
@@ -77,7 +72,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        return new HomeAdapter(presenter.getItems());
+        return new ShopListAdapter(presenter.getItems());
     }
 
     @Override
