@@ -15,5 +15,9 @@ public class LocationEvent {
         this.locationName = locationName;
     }
 
-
+    public LocationEvent(String locationName, double longitude, double latitude) {
+        this.longitude = longitude + "";
+        this.latitude = latitude + "";
+        this.locationName = locationName;
+    }
 }

@@ -46,7 +46,8 @@ public class MainPresenter implements MainContract.Presenter {
         public void onLocationChanged(AMapLocation aMapLocation) {
             if (aMapLocation.getErrorCode() == 0) {
                 Timber.d("location:" + aMapLocation.getLongitude() + " " + aMapLocation.getLatitude() + " " + aMapLocation.toString());
-                AppInfoDBHelper.newInstance().saveLocationInfo(aMapLocation.getPoiName(), aMapLocation.getLongitude() + "", aMapLocation.getLatitude() + "");
+                AppInfoDBHelper.newInstance().saveLocationInfo(aMapLocation.getPoiName(), aMapLocation.getLongitude() + "",
+                        aMapLocation.getLatitude() + "", aMapLocation.getCityCode());
                 EventUtil.postLocationEvent(new LocationEvent(aMapLocation.getPoiName(), aMapLocation.getLongitude() + "", aMapLocation.getLatitude() + ""));
                 client.setLocationListener(null);
                 client.stopLocation();

@@ -55,7 +55,7 @@ public class AppInfoDBHelper {
         save(infoModel);
     }
 
-    public void saveLocationInfo(String name, String longitude, String latitude) {
+    public void saveLocationInfo(String name, String longitude, String latitude, String cityCode) {
         AppInfoModel infoModel = getAppInfo();
         if (infoModel == null) {
             infoModel = new AppInfoModel();
@@ -64,6 +64,7 @@ public class AppInfoDBHelper {
         infoModel.setLongitude(longitude);
         infoModel.setLatitude(latitude);
         infoModel.setLocationName(name);
+        infoModel.setCityCode(cityCode);
         getAppInfoDao().insertOrReplace(infoModel);
     }
 

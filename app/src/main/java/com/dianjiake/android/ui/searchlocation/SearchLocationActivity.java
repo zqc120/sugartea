@@ -1,13 +1,14 @@
 package com.dianjiake.android.ui.searchlocation;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.MotionEvent;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,21 +21,18 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.amap.api.services.core.AMapException;
-import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
-import com.amap.api.services.geocoder.GeocodeResult;
-import com.amap.api.services.geocoder.GeocodeSearch;
-import com.amap.api.services.geocoder.RegeocodeQuery;
-import com.amap.api.services.geocoder.RegeocodeResult;
-import com.amap.api.services.poisearch.PoiResult;
-import com.amap.api.services.poisearch.PoiSearch;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.App;
 import com.dianjiake.android.base.BaseTranslateActivity;
+import com.dianjiake.android.event.LocationEvent;
+import com.dianjiake.android.ui.common.SearchHistoryAdapter;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -61,13 +59,19 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
     ListView listView;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
+    @BindView(R.id.history_holder)
+    View historyHolder;
+    @BindView(R.id.history)
+    ListView history;
+
 
     AMap map;
     Marker marker;
-    String cityCode;
     SearchResultAdapter searchResultAdapter;
     boolean searchFocus;//搜索框是否获取焦点
     InputMethodManager imm;
+    SearchHistoryAdapter searchHistoryAdapter;
+    boolean isMoveMapSearch = true;
 
     int markerPositionX, markerPositionY;
 
@@ -89,32 +93,45 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
         intiMapView();
         markerPositionX = UIUtil.getScreenWidth() / 2;
         markerPositionY = UIUtil.getScreenWidth() / 5;
-        searchResultAdapter = new SearchResultAdapter();
+        searchResultAdapter = new SearchResultAdapter(presenter);
         listView.setAdapter(searchResultAdapter);
+        searchHistoryAdapter = new SearchHistoryAdapter();
+        history.setAdapter(searchHistoryAdapter);
         toolbarInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 ToastUtil.showShortToast(hasFocus + "");
             }
         });
+
+        toolbarInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchLocation(v.getText().toString());
+                }
+                return false;
+            }
+        });
+
+        history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                searchLocation(searchHistoryAdapter.getItem(position).getSearch());
+            }
+        });
+
     }
 
     private void intiMapView() {
         map.getUiSettings().setZoomControlsEnabled(false);
         map.getUiSettings().setRotateGesturesEnabled(false);
-        MyLocationStyle locationStyle = new MyLocationStyle();
-        locationStyle.myLocationType((MyLocationStyle.LOCATION_TYPE_SHOW));
-        locationStyle.showMyLocation(true);
-        locationStyle.radiusFillColor(UIUtil.getColor(R.color.map_radius_fill));
-        locationStyle.strokeColor(UIUtil.getColor(R.color.map_radius_stroke));
-        locationStyle.strokeWidth(3);
-        map.setMyLocationStyle(locationStyle);
-        map.setMyLocationEnabled(true);
+        reLocation();
         map.setOnMyLocationChangeListener(new AMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                map.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(latLng, 16, 0, 0)));
+                mapMoveToLocation(latLng);
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.draggable(false);
@@ -131,9 +148,11 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
 
             @Override
             public void onCameraChangeFinish(CameraPosition cameraPosition) {
-                if (marker != null) {
+                if (marker != null && isMoveMapSearch) {
                     Timber.d("position :" + marker.getPosition().toString());
                     presenter.geoSearch(marker.getPosition());
+                } else {
+                    isMoveMapSearch = true;
                 }
             }
         });
@@ -185,6 +204,11 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
         setSearchFocus(true);
     }
 
+    @OnClick(R.id.history_holder)
+    void clickSearchHistoryHolder(View v) {
+        setSearchFocus(false);
+    }
+
     void setSearchFocus(boolean focus) {
         searchFocus = focus;
         if (focus) {
@@ -198,12 +222,47 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
         if (focus) {
             toolbarInput.requestFocus();
         }
+        historyHolder.setVisibility(focus ? View.VISIBLE : View.GONE);
+
+        searchHistoryAdapter.setItems(presenter.getSearchHistory());
+    }
+
+    void searchLocation(String search) {
+        isMoveMapSearch = false;
+        toolbarTitle.setText(search);
+        presenter.addSearchHistory(search);
+        presenter.poiSearch(search);
+        setSearchFocus(false);
     }
 
 
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public void mapMoveToLocation(LatLng latLng) {
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(latLng, 16, 0, 0)));
+    }
+
+    @Override
+    public void reLocation() {
+        MyLocationStyle locationStyle = new MyLocationStyle();
+        locationStyle.myLocationType((MyLocationStyle.LOCATION_TYPE_SHOW));
+        locationStyle.showMyLocation(true);
+        locationStyle.radiusFillColor(UIUtil.getColor(R.color.translate));
+        locationStyle.strokeColor(UIUtil.getColor(R.color.translate));
+        map.setMyLocationStyle(locationStyle);
+        map.setMyLocationEnabled(true);
+    }
+
+    @Override
+    public void chooseLocation(PoiItem item) {
+        EventUtil.postLocationEvent(new LocationEvent(item.getTitle(),
+                item.getLatLonPoint().getLongitude(),
+                item.getLatLonPoint().getLatitude()));
+        finish();
     }
 
     @Override

@@ -24,6 +24,11 @@ import butterknife.OnClick;
 
 public class SearchResultAdapter extends BaseAdapter {
     List<PoiItem> list = new ArrayList<>();
+    SearchLocationContract.Presenter presenter;
+
+    public SearchResultAdapter(SearchLocationContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 
     public void setItems(List<PoiItem> items) {
         list.clear();
@@ -50,7 +55,7 @@ public class SearchResultAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder vh = null;
         if (convertView == null) {
-            vh = new ViewHolder(parent);
+            vh = new ViewHolder(parent, presenter);
             convertView = vh.getItemView();
         } else {
             vh = (ViewHolder) convertView.getTag();
@@ -60,7 +65,7 @@ public class SearchResultAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder {
-
+        SearchLocationContract.Presenter presenter;
         View itemView;
         @BindView(R.id.name)
         TextView name;
@@ -73,7 +78,10 @@ public class SearchResultAdapter extends BaseAdapter {
         @BindView(R.id.desc)
         TextView desc;
 
-        public ViewHolder(ViewGroup parent) {
+        PoiItem item;
+
+        public ViewHolder(ViewGroup parent, SearchLocationContract.Presenter presenter) {
+            this.presenter = presenter;
             itemView = UIUtil.inflate(R.layout.item_search_location_result, parent);
             ButterKnife.bind(this, itemView);
             itemView.setTag(this);
@@ -84,6 +92,7 @@ public class SearchResultAdapter extends BaseAdapter {
         }
 
         public void setItem(PoiItem item, int position) {
+            this.item =item;
             name.setText(item.getTitle());
             desc.setText(item.getSnippet());
             setFunctionTextVisible(position);
@@ -98,7 +107,12 @@ public class SearchResultAdapter extends BaseAdapter {
 
         @OnClick(R.id.relocation_text)
         void clickReloaction(View v) {
+            presenter.reLocation();
+        }
 
+        @OnClick(R.id.item_holder)
+        void clickHolder(View v) {
+            presenter.chooseLocation(item);
         }
     }
 

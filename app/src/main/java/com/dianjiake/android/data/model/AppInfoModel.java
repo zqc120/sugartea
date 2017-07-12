@@ -17,15 +17,17 @@ public class AppInfoModel {
     private String longitude;//经度
     private String latitude;//纬度
     private String locationName;//定位地点名称
+    private String cityCode;//定位到的 city code
 
-    @Generated(hash = 1354096273)
+    @Generated(hash = 996025001)
     public AppInfoModel(Long id, String cid, String longitude, String latitude,
-            String locationName) {
+            String locationName, String cityCode) {
         this.id = id;
         this.cid = cid;
         this.longitude = longitude;
         this.latitude = latitude;
         this.locationName = locationName;
+        this.cityCode = cityCode;
     }
 
     @Generated(hash = 1825615946)
@@ -70,6 +72,14 @@ public class AppInfoModel {
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;
+    }
+
+    public String getCityCode() {
+        return this.cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
     }
 
 }
