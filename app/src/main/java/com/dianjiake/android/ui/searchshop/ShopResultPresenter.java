@@ -24,6 +24,7 @@ public class ShopResultPresenter extends BaseSearchPresenter<HomeShopBean, ShopR
 
     @Override
     public void load(boolean isReload) {
+        cd.clear();
         Network.getInstance().searchShop(
                 BSConstant.SEARCH_SHOP,
                 loginInfo.getOpenId(),
@@ -36,7 +37,7 @@ public class ShopResultPresenter extends BaseSearchPresenter<HomeShopBean, ShopR
                 .subscribeWith(new ListObserver<HomeShopBean>() {
                     @Override
                     public void onSuccess(List<HomeShopBean> list, boolean isAll) {
-                        list.addAll(list);
+                        items.addAll(list);
                         page++;
                         if (isAll) {
                             view.loadAll();

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/click_white"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/base_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:placeholderImage="@color/divider"
+        app:roundBottomLeft="true"
+        app:roundBottomRight="true"
+        app:roundTopLeft="true"
+        app:roundTopRight="true"
+        app:roundedCornerRadius="@dimen/base_size1" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/base_margin"
+        android:layout_marginRight="@dimen/base_margin"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toRightOf="@+id/logo"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/sail_count">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:textColor="@color/text_content_title"
+                    android:textSize="@dimen/text_size_subhead"
+                    tools:text="fsdfdsfdfsdfsdfsdfs" />
+
+                <TextView
+                    android:id="@+id/service_promotion"
+                    style="@style/TagStyle.Promotion"
+                    android:layout_marginLeft="@dimen/base_size2" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sail_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/base_margin"
+            android:layout_weight="1"
+            android:textColor="@color/text_content_secondary"
+            android:textSize="@dimen/text_size_body"
+            android:visibility="gone"
+            tools:text="已约456单" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/logo"
+        android:layout_marginRight="@dimen/base_margin"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_content_secondary"
+        android:textSize="@dimen/text_size_body" />
+
+
+</android.support.constraint.ConstraintLayout>

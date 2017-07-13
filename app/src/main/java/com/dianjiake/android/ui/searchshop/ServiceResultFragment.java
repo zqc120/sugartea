@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
+import com.dianjiake.android.ui.common.ServiceListAdapter;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 
 /**
@@ -25,7 +26,7 @@ public class ServiceResultFragment extends BaseListFragment<ServiceResultPresent
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        return null;
+        return new ServiceListAdapter(presenter.getItems());
     }
 
     @Override
@@ -35,11 +36,11 @@ public class ServiceResultFragment extends BaseListFragment<ServiceResultPresent
 
     @Override
     public void onLoadMore() {
-
+        presenter.load(false);
     }
 
     @Override
     public void onReload() {
-
+        presenter.reload();
     }
 }

@@ -32,7 +32,7 @@ public class SearchHistoryHelper {
     }
 
     private List<SearchHistoryModel> getSearchHistory(int type) {
-        List<SearchHistoryModel> list = getDao().queryBuilder().where(SearchHistoryModelDao.Properties.Type.eq(true))
+        List<SearchHistoryModel> list = getDao().queryBuilder().where(SearchHistoryModelDao.Properties.Type.eq(type))
                 .orderDesc(SearchHistoryModelDao.Properties.Update_at)
                 .list();
         if (CheckEmptyUtil.isEmpty(list)) {

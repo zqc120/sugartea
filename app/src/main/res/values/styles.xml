@@ -78,4 +78,28 @@
         <item name="android:button">@null</item>
     </style>
 
+
+    <style name="TagStyle">
+        <item name="android:layout_width">@dimen/text_size_subhead</item>
+        <item name="android:layout_height">@dimen/text_size_subhead</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+    </style>
+
+    <!--购物券标签样式-->
+    <style name="TagStyle.Card">
+        <item name="android:text">券</item>
+        <item name="android:background">@drawable/bg_text_card</item>
+    </style>
+    <!--促销标签样式-->
+    <style name="TagStyle.Promotion">
+        <item name="android:text">促</item>
+        <item name="android:background">@drawable/bg_text_promotion</item>
+    </style>
+
 </resources>

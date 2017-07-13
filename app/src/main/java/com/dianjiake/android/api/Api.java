@@ -45,6 +45,7 @@ public interface Api {
      * @param page
      * @return
      */
+    @GET(Constant.SHOP)
     Observable<BaseListBean<HomeShopBean>> searchShop(
             @Query("bs") String bs,
             @Query("openid") String openid,
@@ -63,6 +64,7 @@ public interface Api {
      * @param page
      * @return
      */
+    @GET(Constant.SHOP)
     Observable<BaseListBean<ServiceBean>> searchService(
             @Query("bs") String bs,
             @Query("openid") String openid,

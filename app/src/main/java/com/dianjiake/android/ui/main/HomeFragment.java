@@ -13,6 +13,7 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
 import com.dianjiake.android.ui.common.ShopListAdapter;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
+import com.dianjiake.android.ui.searchshop.SearchShopActivity;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
@@ -40,7 +41,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @BindView(R.id.toolbar_location_holder)
     LinearLayout toolbarLocationHolder;
     @BindView(R.id.toolbar_search_input)
-    EditText toolbarSearchInput;
+    TextView toolbarSearchInput;
     @BindView(R.id.toolbar_search_holder)
     LinearLayout toolbarSearchHolder;
     @BindView(R.id.toolbar_msg_holder)
@@ -131,4 +132,8 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         startActivity(IntentUtil.getIntent(SearchLocationActivity.class));
     }
 
+    @OnClick(R.id.toolbar_search_holder)
+    void clickSearch(View v) {
+        startActivity(IntentUtil.getIntent(SearchShopActivity.class));
+    }
 }

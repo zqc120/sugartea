@@ -6,6 +6,7 @@ import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.event.SearchShopEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,15 +33,15 @@ public abstract class BaseSearchPresenter<T, V extends BaseListView> implements 
     public BaseSearchPresenter(V view) {
         super();
         this.view = view;
-
-    }
-
-    private BaseSearchPresenter() {
         items = new ArrayList<>();
         cd = new CompositeDisposable();
         appInfo = AppInfoDBHelper.newInstance().getAppInfo();
         loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
         EventBus.getDefault().register(this);
+    }
+
+    private BaseSearchPresenter() {
+
     }
 
     @Override
@@ -69,8 +70,8 @@ public abstract class BaseSearchPresenter<T, V extends BaseListView> implements 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
+    public void setKeyword(SearchShopEvent event) {
+        this.keyword = event.getSearch();
         reload();
     }
 }

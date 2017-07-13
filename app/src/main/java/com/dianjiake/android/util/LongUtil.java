@@ -7,7 +7,8 @@ package com.dianjiake.android.util;
 public class LongUtil {
     public static long parseLong(String s) {
         try {
-            return Long.parseLong(s);
+            double d = Double.parseDouble(s);
+            return (long) d;
         } catch (Exception e) {
             return 0;
         }

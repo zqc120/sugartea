@@ -11,11 +11,11 @@ import java.util.List;
  * Created by lfs on 2017/7/12.
  */
 
-public class SeachShopAdapter extends FragmentPagerAdapter {
+public class SearchShopAdapter extends FragmentPagerAdapter {
     List<String> titles;
     List<Fragment> fragments;
 
-    public SeachShopAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public SearchShopAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
         titles = new ArrayList<>();
@@ -31,6 +31,11 @@ public class SeachShopAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragments.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles.get(position);
     }
 
     public List<String> getTitles() {

@@ -2,10 +2,13 @@ package com.dianjiake.android.ui.searchshop;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.security.keystore.KeyInfo;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -13,17 +16,21 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.amap.api.maps.MapView;
 import com.dianjiake.android.R;
+import com.dianjiake.android.base.App;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.ui.common.SearchHistoryAdapter;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/12.
@@ -46,6 +53,8 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
     TabLayout tabLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.toolbar_divider)
+    View toolbarDivider;
 
     InputMethodManager imm;
     boolean searchFocus;
@@ -59,13 +68,15 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
 
     @Override
     public int provideContentView() {
-        return R.layout.activity_search_location;
+        return R.layout.activity_search_shop;
     }
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+        imm = (InputMethodManager) App.getInstance().getSystemService(INPUT_METHOD_SERVICE);
         toolbarTitle.setHint("搜索感兴趣的服务和商家");
         toolbarInput.setHint("搜索感兴趣的服务和商家");
+        toolbarDivider.setVisibility(View.GONE);
         searchHistoryAdapter = new SearchHistoryAdapter();
         history.setAdapter(searchHistoryAdapter);
         history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,18 +87,26 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
         });
 
         List<Fragment> fragments = new ArrayList<>();
+        fragments.add(FragmentFactory.createFragment(ServiceResultFragment.class));
         fragments.add(FragmentFactory.createFragment(ShopResultFragment.class));
-        fragments.add(FragmentFactory.createFragment(ShopResultFragment.class));
-        SeachShopAdapter adapter = new SeachShopAdapter(getFragmentManager(), fragments);
+        SearchShopAdapter adapter = new SearchShopAdapter(getFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
+        toolbarInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search(v.getText().toString());
+                }
+                return false;
+            }
+        });
     }
 
 
     @Override
     public SearchShopContract.Presenter getPresenter() {
-        return null;
+        return new SearchShopPresenter(this);
     }
 
 
@@ -113,6 +132,31 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
         setSearchFocus(false);
         toolbarTitle.setText(search);
         presenter.addSearchHistory(search);
+        EventUtil.postSearchShopEvent(search);
+    }
+
+    @OnClick(R.id.toolbar_title)
+    void clickSearch(View v) {
+        setSearchFocus(true);
+    }
+
+    @OnClick(R.id.history_holder)
+    void clickHistoryHolder(View v) {
+        setSearchFocus(false);
+    }
+
+    @OnClick(R.id.toolbar_right)
+    void clickCancel(View v) {
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (searchFocus) {
+            setSearchFocus(false);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
