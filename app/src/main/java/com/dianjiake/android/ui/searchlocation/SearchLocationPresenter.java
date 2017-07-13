@@ -23,6 +23,7 @@ public class SearchLocationPresenter implements SearchLocationContract.Presenter
     SearchHistoryHelper searchHistoryHelper;
     AppInfoModel appInfo;
 
+    boolean isGeoSearch;
 
     public SearchLocationPresenter(SearchLocationContract.View view) {
         this.view = view;
@@ -46,7 +47,7 @@ public class SearchLocationPresenter implements SearchLocationContract.Presenter
 
     @Override
     public void geoSearch(LatLng latLng) {
-
+        isGeoSearch = true;
         PoiSearch.Query query = new PoiSearch.Query("", "120302");
         poiSearch.setQuery(query);
         LatLonPoint latLonPoint = new LatLonPoint(latLng.latitude, latLng.longitude);
@@ -56,7 +57,7 @@ public class SearchLocationPresenter implements SearchLocationContract.Presenter
 
     @Override
     public void poiSearch(String keyword) {
-
+        isGeoSearch = false;
         PoiSearch.Query query = new PoiSearch.Query(keyword, "", appInfo.getCityCode());
         poiSearch.setBound(null);
         poiSearch.setQuery(query);
@@ -88,7 +89,9 @@ public class SearchLocationPresenter implements SearchLocationContract.Presenter
         if (!CheckEmptyUtil.isEmpty(poiResult.getPois())) {
             LatLonPoint latLonPoint = poiResult.getPois().get(0).getLatLonPoint();
             LatLng latLng = new LatLng(latLonPoint.getLatitude(), latLonPoint.getLongitude());
-            view.mapMoveToLocation(latLng);
+            if (!isGeoSearch) {
+                view.mapMoveToLocation(latLng);
+            }
         }
         view.setItems(poiResult.getPois());
     }

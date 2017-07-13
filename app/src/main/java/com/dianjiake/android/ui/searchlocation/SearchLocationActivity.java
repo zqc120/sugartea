@@ -97,12 +97,6 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
         listView.setAdapter(searchResultAdapter);
         searchHistoryAdapter = new SearchHistoryAdapter();
         history.setAdapter(searchHistoryAdapter);
-        toolbarInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                ToastUtil.showShortToast(hasFocus + "");
-            }
-        });
 
         toolbarInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
