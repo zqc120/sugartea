@@ -60,7 +60,9 @@ public class StarView extends LinearLayout {
         for (int i = 0; i < totalStars; i++) {
             ImageView iv = new ImageView(getContext());
             LayoutParams lp = new LayoutParams(size, size);
-            lp.setMargins(0, 0, 8, 0);
+            if (i != totalStars - 1) {
+                lp.setMargins(0, 0, 8, 0);
+            }
             iv.setLayoutParams(lp);
             iv.setImageResource(negativeStarRes);
             addView(iv);

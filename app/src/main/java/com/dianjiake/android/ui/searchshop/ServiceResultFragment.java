@@ -26,7 +26,7 @@ public class ServiceResultFragment extends BaseListFragment<ServiceResultPresent
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        return new ServiceListAdapter(presenter.getItems());
+        return new ServiceListAdapter(presenter.getItems(), true);
     }
 
     @Override

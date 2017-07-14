@@ -1,30 +1,48 @@
 package com.dianjiake.android.ui.common;
 
+import android.graphics.Paint;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.util.FloatUtil;
+import com.dianjiake.android.util.FrescoUtil;
+import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
+import com.dianjiake.android.view.widget.StarView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
+
+import static android.view.View.GONE;
 
 /**
  * Created by lfs on 2017/7/13.
  */
 
 public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
-
+    boolean showShop;
 
     public ServiceListAdapter(List<ServiceBean> items) {
         super(items);
+    }
+
+    public ServiceListAdapter(List<ServiceBean> items, boolean showShop) {
+        super(items);
+        this.showShop = showShop;
     }
 
     @Override
@@ -35,7 +53,7 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
     @Override
     public BaseViewHolder myOnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(UIUtil.inflate(R.layout.item_service, parent));
+        return new ViewHolder(UIUtil.inflate(R.layout.item_service, parent), showShop);
     }
 
     @Override
@@ -53,15 +71,102 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         TextView servicePromotion;
         @BindView(R.id.sail_count)
         TextView sailCount;
+        @BindView(R.id.title_holder)
+        LinearLayout titleHolder;
+        @BindView(R.id.desc)
+        TextView desc;
+        @BindView(R.id.price)
+        TextView price;
+        @BindView(R.id.price_unit)
+        TextView priceUnit;
+        @BindView(R.id.old_price)
+        TextView oldPrice;
+        @BindView(R.id.subscribe)
+        TextView subscribe;
+        @BindView(R.id.price_holder)
+        LinearLayout priceHolder;
+        @BindView(R.id.divider)
+        ImageView divider;
+        @BindView(R.id.shop_name)
+        TextView shopName;
+        @BindView(R.id.shop_promotion)
+        TextView shopPromotion;
+        @BindView(R.id.shop_card)
+        TextView shopCard;
+        @BindView(R.id.star)
+        StarView star;
+        @BindView(R.id.shop_holder)
+        LinearLayout shopHolder;
 
-        public ViewHolder(View itemView) {
+
+        boolean showShop;
+        int size;
+
+        public ViewHolder(View itemView, boolean showShop) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            this.showShop = showShop;
+
+            ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) logo.getLayoutParams();
+            if (showShop) {
+                size = (int) UIUtil.dp2px(100);
+                if (lp == null) {
+                    lp = new ConstraintLayout.LayoutParams(size, size);
+                }
+                logo.setLayoutParams(lp);
+                divider.setVisibility(View.VISIBLE);
+                shopHolder.setVisibility(View.VISIBLE);
+
+            } else {
+                size = (int) UIUtil.dp2px(80);
+                if (lp == null) {
+                    lp = new ConstraintLayout.LayoutParams(size, size);
+                }
+                logo.setLayoutParams(lp);
+
+                divider.setVisibility(GONE);
+                shopHolder.setVisibility(GONE);
+            }
         }
 
         public void setItem(ServiceBean serviceBean) {
-            title.setText("fajdslf");
-            sailCount.setText("已售565单");
+            int sailCountWidth = 0;
+            title.setText(serviceBean.getName());
+            servicePromotion.setVisibility("1".equals(serviceBean.getCuxiao()) ? View.VISIBLE : GONE);
+            logo.setImageURI(FrescoUtil.getServiceUri(serviceBean.getPhoto()));
+            desc.setText(serviceBean.getJianjie());
+            if (IntegerUtil.parseInt(serviceBean.getYuyueshu()) > 0) {
+                sailCountWidth = 80;
+                sailCount.setVisibility(View.VISIBLE);
+                sailCount.setText("已约" + serviceBean.getYuyueshu() + "单");
+            } else {
+                sailCountWidth = 0;
+                sailCount.setVisibility(GONE);
+            }
+
+            title.setMaxWidth(UIUtil.getScreenWidth() - (int) UIUtil.dp2px(sailCountWidth + 32) + size);
+
+            priceUnit.setText(serviceBean.getDanwei());
+            if ("1".equals(serviceBean.getCuxiao())) {
+                price.setText(serviceBean.getCuxiaojia());
+                oldPrice.setVisibility(View.VISIBLE);
+                oldPrice.setText(serviceBean.getJine() + serviceBean.getDanwei());
+                oldPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+            } else {
+                price.setText(serviceBean.getJine());
+                oldPrice.setVisibility(GONE);
+            }
+
+            HomeShopBean shopBean = serviceBean.getDianpu();
+            if (shopBean != null) {
+                shopName.setText(shopBean.getMingcheng());
+                star.setScore(FloatUtil.parseFloat(shopBean.getPingfen()));
+                shopPromotion.setVisibility("1".equals(shopBean.getCuxiao()) ? View.VISIBLE : GONE);
+                shopCard.setVisibility("1".equals(shopBean.getGongkaikaquan()) ? View.VISIBLE : GONE);
+                Timber.e("size:" + size);
+                Timber.e("dp2px:" + UIUtil.dp2px(size + 90));
+                shopName.setMaxWidth(UIUtil.getScreenWidth() - (int) UIUtil.dp2px(90) + size);
+            }
         }
 
         @Override
