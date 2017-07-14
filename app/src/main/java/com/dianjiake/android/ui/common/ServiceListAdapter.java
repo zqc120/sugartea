@@ -12,9 +12,11 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntegerUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -167,6 +170,11 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
                 Timber.e("dp2px:" + UIUtil.dp2px(size + 90));
                 shopName.setMaxWidth(UIUtil.getScreenWidth() - (int) UIUtil.dp2px(90) + size);
             }
+        }
+
+        @OnClick(R.id.holder)
+        void click(View v){
+            IntentUtil.startActivity(v, ShopDetailActivity.class);
         }
 
         @Override

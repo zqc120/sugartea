@@ -43,4 +43,5 @@ public interface BSConstant {
     String SHOP_LIST = "jingxuanshanghu";
     String SEARCH_SHOP = "sousuoshanghuliebiao";//搜索商户
     String SEARCH_SERVICE = "sousuofuwuliebiao";// 搜索服务
+    String SHOP_DETAIL = "shanghuxiangqing";// 商户详情
 }

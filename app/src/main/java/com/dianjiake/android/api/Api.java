@@ -1,10 +1,12 @@
 package com.dianjiake.android.api;
 
 import com.dianjiake.android.constant.Constant;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.data.bean.ShopDetailBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -72,6 +74,14 @@ public interface Api {
             @Query("paixu") int order,
             @Query("zuobiao") String coordinate,
             @Query("page") int page
+    );
+
+    @GET(Constant.SHOP)
+    Observable<BaseBean<ShopDetailBean>> shopDetail(
+            @Query("bs") String bs,
+            @Query("openid") String openid,
+            @Query("shanghuid") String shopid,
+            @Query("zuobiao") String coordinate
     );
 
 }

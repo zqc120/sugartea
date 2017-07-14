@@ -8,10 +8,12 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.ui.main.HomeType;
+import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.util.AMapUtil;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
@@ -112,7 +114,7 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
         @OnClick(R.id.holder)
         void click(View v) {
-            adapter.onClick(item, getAdapterPosition());
+            IntentUtil.startActivity(v, ShopDetailActivity.getStartIntent(item.getId()));
         }
 
         @Override
