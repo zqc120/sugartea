@@ -18,5 +18,7 @@ public interface ShopDetailContract {
 
     interface Presenter extends BasePresenter {
         void load();
+
+        String getPhone();
     }
 }

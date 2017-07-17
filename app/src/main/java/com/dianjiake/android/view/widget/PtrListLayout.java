@@ -24,6 +24,7 @@ public class PtrListLayout extends LoadingLayout implements PtrHandler, LifeCycl
     PtrFrameLayout ptr;
     LoadMoreRecyclerView rv;
     BaseLoadMoreAdapter adapter;
+    int appBarOffset;
 
     public PtrListLayout(Context context) {
         super(context);
@@ -51,7 +52,7 @@ public class PtrListLayout extends LoadingLayout implements PtrHandler, LifeCycl
 
     @Override
     public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-        return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+        return appBarOffset == 0 && PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
     }
 
     @Override
@@ -108,6 +109,11 @@ public class PtrListLayout extends LoadingLayout implements PtrHandler, LifeCycl
         return rv;
     }
 
+
+    public PtrFrameLayout getPtr() {
+        return ptr;
+    }
+
     /**
      * 是否需要上拉加载功能
      *
@@ -125,4 +131,8 @@ public class PtrListLayout extends LoadingLayout implements PtrHandler, LifeCycl
         rv.setOnLoadMoreListener(listener);
     }
 
+
+    public void setAppBarOffset(int appBarOffset) {
+        this.appBarOffset = appBarOffset;
+    }
 }

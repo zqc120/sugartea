@@ -4,11 +4,13 @@
     android:id="@+id/ptr"
     style="@style/PtrStyle"
     android:layout_width="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="match_parent">
 
     <com.dianjiake.android.view.widget.LoadMoreRecyclerView
         android:id="@+id/recycler_view"
         android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

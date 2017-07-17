@@ -59,6 +59,11 @@ public class DateUtil {
 
     }
 
+    public static String formatHM(String timestamp) {
+        return formatHM(LongUtil.parseLong(timestamp));
+
+    }
+
     /**
      * HH:mm
      *
@@ -70,6 +75,10 @@ public class DateUtil {
             timestamp *= 1000L;
         }
         return DateFormat.format("HH:mm", timestamp).toString();
+    }
+
+    public static String formatOnlyHM(String timestamp) {
+        return formatOnlyHM(LongUtil.parseLong(timestamp));
     }
 
     /**
@@ -140,6 +149,7 @@ public class DateUtil {
 
     /**
      * 2016-12-23 12:23
+     *
      * @param timestamp
      * @return
      */

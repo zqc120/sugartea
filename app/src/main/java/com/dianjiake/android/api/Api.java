@@ -7,6 +7,7 @@ import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
+import com.dianjiake.android.data.bean.UserInfoBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -84,4 +85,48 @@ public interface Api {
             @Query("zuobiao") String coordinate
     );
 
+    /**
+     * 商户列表
+     *
+     * @param bs     {@link BSConstant#SERVICE_LIST}
+     * @param shopid
+     * @param page
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<ServiceBean>> serviceList(
+            @Query("bs") String bs,
+            @Query("shanghuid") String shopid,
+            @Query("page") int page
+    );
+
+    /**
+     * 商户员工列表
+     *
+     * @param bs     {@link BSConstant#SHOP_STAFF}
+     * @param shopid
+     * @param page
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<UserInfoBean>>  shopStaff(
+            @Query("bs") String bs,
+            @Query("shanghuid") String shopid,
+            @Query("page") int page
+    );
+
+    /**
+     * 商户评论列表
+     *
+     * @param bs     {@link BSConstant#SHOP_STAFF}
+     * @param shopid
+     * @param page
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<UserInfoBean>> shopComment(
+            @Query("bs") String bs,
+            @Query("shanghuid") String shopid,
+            @Query("page") int page
+    );
 }
