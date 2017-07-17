@@ -63,6 +63,15 @@ public class UserInfoBean implements Parcelable {
     private String jicika;
     private String youhuiquan;
     private String yuangongjianjie;
+    private String shopName;//店铺名称
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
 
     public String getYuangongjianjie() {
         return yuangongjianjie;
@@ -551,6 +560,7 @@ public class UserInfoBean implements Parcelable {
         dest.writeString(this.jicika);
         dest.writeString(this.youhuiquan);
         dest.writeString(this.yuangongjianjie);
+        dest.writeString(this.shopName);
     }
 
     protected UserInfoBean(Parcel in) {
@@ -607,6 +617,7 @@ public class UserInfoBean implements Parcelable {
         this.jicika = in.readString();
         this.youhuiquan = in.readString();
         this.yuangongjianjie = in.readString();
+        this.shopName = in.readString();
     }
 
     public static final Creator<UserInfoBean> CREATOR = new Creator<UserInfoBean>() {

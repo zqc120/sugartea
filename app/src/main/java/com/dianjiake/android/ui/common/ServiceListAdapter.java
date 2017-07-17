@@ -13,6 +13,7 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
+import com.dianjiake.android.ui.shopweb.ShopWebActivity;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntegerUtil;
@@ -104,6 +105,7 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
         boolean showShop;
         int size;
+        ServiceBean serviceBean;
 
         public ViewHolder(View itemView, boolean showShop) {
             super(itemView);
@@ -133,6 +135,7 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         }
 
         public void setItem(ServiceBean serviceBean) {
+            this.serviceBean = serviceBean;
             int sailCountWidth = 0;
             title.setText(serviceBean.getName());
             servicePromotion.setVisibility("1".equals(serviceBean.getCuxiao()) ? View.VISIBLE : GONE);
@@ -173,8 +176,8 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         }
 
         @OnClick(R.id.holder)
-        void click(View v){
-            IntentUtil.startActivity(v, ShopDetailActivity.class);
+        void click(View v) {
+            IntentUtil.startActivity(v, ShopWebActivity.getServiceDetail(serviceBean));
         }
 
         @Override

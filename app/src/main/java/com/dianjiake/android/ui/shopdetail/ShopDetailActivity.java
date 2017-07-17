@@ -19,6 +19,7 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.data.bean.ShopDetailBean;
+import com.dianjiake.android.ui.shopdetail.comment.CommentFragment;
 import com.dianjiake.android.ui.shopdetail.service.ServiceFragment;
 import com.dianjiake.android.ui.shopdetail.staff.StaffFragment;
 import com.dianjiake.android.util.AMapUtil;
@@ -123,7 +124,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         fragmentList.clear();
         fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));
         fragmentList.add(FragmentFactory.createFragment(StaffFragment.class, StaffFragment.getBundle(getShopId())));
-        fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));
+        fragmentList.add(FragmentFactory.createFragment(CommentFragment.class, CommentFragment.getBundle(getShopId())));
         adapter = new ShopDetailAdapter(getFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);

@@ -6,9 +6,11 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.ui.shopweb.ShopWebActivity;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntegerUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
@@ -18,6 +20,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/17.
@@ -58,6 +61,7 @@ public class ShopStaffAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
         StarView starView;
         @BindView(R.id.sail_count)
         TextView sailCount;
+        UserInfoBean userInfo;
 
         public static ViewHolder newInstance(ViewGroup parent) {
             return new ViewHolder(UIUtil.inflate(R.layout.item_shop_staff, parent));
@@ -68,6 +72,7 @@ public class ShopStaffAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
         }
 
         public void setItem(UserInfoBean userInfo) {
+            this.userInfo = userInfo;
             avatar.setImageURI(FrescoUtil.getOccupationAvatar(userInfo.getZhiyezhao()));
             name.setText(userInfo.getShanghunicheng());
             desc.setText(userInfo.getYuangongjianjie());
@@ -81,6 +86,11 @@ public class ShopStaffAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
         @Override
         public void destroy() {
 
+        }
+
+        @OnClick(R.id.holder)
+        void click(View v) {
+            IntentUtil.startActivity(v, ShopWebActivity.getStaffDetaill(userInfo));
         }
     }
 }

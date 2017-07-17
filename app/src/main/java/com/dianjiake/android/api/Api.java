@@ -6,6 +6,7 @@ import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
@@ -124,7 +125,7 @@ public interface Api {
      * @return
      */
     @GET(Constant.SHOP)
-    Observable<BaseListBean<UserInfoBean>> shopComment(
+    Observable<BaseListBean<ShopCommentBean>> shopComment(
             @Query("bs") String bs,
             @Query("shanghuid") String shopid,
             @Query("page") int page

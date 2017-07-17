@@ -5,7 +5,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.util.CheckEmptyUtil;
+import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntegerUtil;
@@ -23,9 +26,9 @@ import butterknife.BindView;
  * Created by lfs on 2017/7/17.
  */
 
-public class ShopCommentAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
+public class ShopCommentAdapter extends BaseLoadMoreAdapter<ShopCommentBean> {
 
-    public ShopCommentAdapter(List<UserInfoBean> items) {
+    public ShopCommentAdapter(List<ShopCommentBean> items) {
         super(items);
     }
 
@@ -52,30 +55,30 @@ public class ShopCommentAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
         SimpleDraweeView avatar;
         @BindView(R.id.name)
         TextView name;
-        @BindView(R.id.desc)
-        TextView desc;
+        @BindView(R.id.time)
+        TextView time;
         @BindView(R.id.star_view)
         StarView starView;
-        @BindView(R.id.sail_count)
-        TextView sailCount;
+        @BindView(R.id.comment)
+        TextView comment;
 
         public static ViewHolder newInstance(ViewGroup parent) {
-            return new ViewHolder(UIUtil.inflate(R.layout.item_shop_staff, parent));
+            return new ViewHolder(UIUtil.inflate(R.layout.item_shop_comment, parent));
         }
 
         private ViewHolder(View itemView) {
             super(itemView);
         }
 
-        public void setItem(UserInfoBean userInfo) {
-            avatar.setImageURI(FrescoUtil.getOccupationAvatar(userInfo.getZhiyezhao()));
-            name.setText(userInfo.getShanghunicheng());
-            desc.setText(userInfo.getYuangongjianjie());
-            starView.setScore(FloatUtil.parseFloat(userInfo.getFuwupingfen()));
-            int sails = IntegerUtil.parseInt(userInfo.getJiedanshu());
-            sailCount.setVisibility(sails > 0 ? View.VISIBLE : View.GONE);
-            sailCount.setText("已约" + sails + "单");
-
+        public void setItem(ShopCommentBean bean) {
+            if (bean.getUser() != null) {
+                avatar.setImageURI(FrescoUtil.getAvatarUri(bean.getUser().getAvatar()));
+                name.setText(bean.getUser().getNickname());
+            }
+            starView.setScore(FloatUtil.parseFloat(bean.getPingfen()));
+            time.setText(DateUtil.formatMDHM(bean.getShijian()));
+            comment.setVisibility(CheckEmptyUtil.isEmpty(bean.getNeirong()) ? View.GONE : View.VISIBLE);
+            comment.setText(bean.getNeirong());
         }
 
         @Override

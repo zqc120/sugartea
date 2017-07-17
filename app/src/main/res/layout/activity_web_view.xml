@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <include layout="@layout/toolbar_main"/>
+
+    <ProgressBar
+        android:id="@+id/activity_web_view_progressbar"
+        style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:max="100"
+        android:progressDrawable="@drawable/progressbar_webview"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <WebView
+            android:id="@+id/activity_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></WebView>
+
+        <com.qinlin.lebang.ui.view.ProportionLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:height_pro="9"
+            app:width_pro="16">
+
+            <Button
+                android:id="@+id/web_view_button_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_size_small"
+                android:layout_gravity="bottom|right"
+                android:background="@drawable/ripple_main_color"
+                android:text="@string/all_collection"
+                android:textColor="@color/text_white"
+                />
+        </com.qinlin.lebang.ui.view.ProportionLayout>
+    </FrameLayout>
+
+    <include layout="@layout/divider_horizontal"/>
+
+    <FrameLayout
+        android:id="@+id/webview_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
+</LinearLayout>
