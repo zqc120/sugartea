@@ -35,12 +35,8 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
     ImageView mToolbarBack;
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
-    @BindView(R.id.toolbar_right)
+    @BindView(R.id.toolbar_icon_right)
     public ImageView mToolbarRight;
-    @BindView(R.id.toolbar_holder)
-    View mToolbarHolder;
-    @BindView(R.id.toolbar_divider)
-    View mToolbarDivider;
     @BindView(R.id.webview_content)
     FrameLayout mContent;
 

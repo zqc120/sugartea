@@ -2,6 +2,7 @@ package com.dianjiake.android.ui.shopweb;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.StringBuilderPrinter;
 
 import com.dianjiake.android.data.bean.UserInfoBean;
 
@@ -9,7 +10,7 @@ import com.dianjiake.android.data.bean.UserInfoBean;
  * Created by lfs on 2017/7/17.
  */
 
-public class StaffProvider implements BaseProvider<UserInfoBean>,Parcelable {
+public class StaffProvider implements BaseProvider<UserInfoBean>, Parcelable {
     UserInfoBean userInfoBean;
 
     public StaffProvider(UserInfoBean userInfoBean) {
@@ -18,17 +19,22 @@ public class StaffProvider implements BaseProvider<UserInfoBean>,Parcelable {
 
     @Override
     public String getTitle() {
-        return userInfoBean.getName() + "-" + userInfoBean.getShopName();
+        StringBuilder sb = new StringBuilder(userInfoBean.getName());
+        if (userInfoBean.getDianpu() != null) {
+            sb.append("-")
+                    .append(userInfoBean.getDianpu().getMingcheng());
+        }
+        return sb.toString();
     }
 
     @Override
     public String getUrl() {
-        return null;
+        return "http://www.quanminlebang.com/m/activity/revenue/mainClerk.html?shanghuid=" + userInfoBean.getShanghuid() + "&openid=" + userInfoBean.getOpenid();
     }
 
     @Override
     public UserInfoBean getBean() {
-        return null;
+        return userInfoBean;
     }
 
     @Override

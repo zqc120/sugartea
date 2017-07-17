@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 
 public class UserInfoBean implements Parcelable {
-    
+
 
     private String id;
     private String phone;
@@ -63,14 +63,23 @@ public class UserInfoBean implements Parcelable {
     private String jicika;
     private String youhuiquan;
     private String yuangongjianjie;
-    private String shopName;//店铺名称
+    private String shanghuid;
+    private HomeShopBean dianpu;
 
-    public String getShopName() {
-        return shopName;
+    public String getShanghuid() {
+        return shanghuid;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public void setShanghuid(String shanghuid) {
+        this.shanghuid = shanghuid;
+    }
+
+    public HomeShopBean getDianpu() {
+        return dianpu;
+    }
+
+    public void setDianpu(HomeShopBean dianpu) {
+        this.dianpu = dianpu;
     }
 
     public String getYuangongjianjie() {
@@ -560,7 +569,8 @@ public class UserInfoBean implements Parcelable {
         dest.writeString(this.jicika);
         dest.writeString(this.youhuiquan);
         dest.writeString(this.yuangongjianjie);
-        dest.writeString(this.shopName);
+        dest.writeString(this.shanghuid);
+        dest.writeParcelable(this.dianpu, flags);
     }
 
     protected UserInfoBean(Parcel in) {
@@ -617,7 +627,8 @@ public class UserInfoBean implements Parcelable {
         this.jicika = in.readString();
         this.youhuiquan = in.readString();
         this.yuangongjianjie = in.readString();
-        this.shopName = in.readString();
+        this.shanghuid = in.readString();
+        this.dianpu = in.readParcelable(HomeShopBean.class.getClassLoader());
     }
 
     public static final Creator<UserInfoBean> CREATOR = new Creator<UserInfoBean>() {
