@@ -20,6 +20,7 @@ import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.ui.shopdetail.service.ServiceFragment;
+import com.dianjiake.android.ui.shopdetail.staff.StaffFragment;
 import com.dianjiake.android.util.AMapUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FrescoUtil;
@@ -36,6 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
  * Created by lfs on 2017/7/14.
@@ -43,6 +45,8 @@ import butterknife.OnClick;
 
 public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresenter> implements ShopDetailContract.View {
     private static final String KEY_ID = "keyid";
+    private static final int TOOLBAR_ICON_THRESHOLD = 170;
+
     @BindView(R.id.shop_logo)
     SimpleDraweeView shopLogo;
     @BindView(R.id.collapsing_toolbar)
@@ -53,15 +57,10 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     CoordinatorLayout mainContent;
     @BindView(R.id.system_toolbar)
     Toolbar systemToolbar;
-
     @BindView(R.id.toolbar_space)
     ToolbarSpaceView toolbarSpace;
     @BindView(R.id.toolbar_icon_left)
     ImageView toolbarIconLeft;
-    @BindView(R.id.toolbar_title)
-    TextView toolbarTitle;
-    @BindView(R.id.toolbar_icon_right)
-    ImageView toolbarIconRight;
     @BindView(R.id.toolbar_holder)
     ConstraintLayout toolbarHolder;
     @BindView(R.id.tab)
@@ -80,16 +79,29 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     FrameLayout shopCall;
     @BindView(R.id.shop_cards)
     ViewPager shopCards;
+    @BindView(R.id.toolbar_icon_share)
+    ImageView toolbarShare;
+    @BindView(R.id.toolbar_icon_collection)
+    ImageView toolbarCollection;
+
 
     ShopDetailAdapter adapter;
     List<BaseShopContentFragment> fragmentList = new ArrayList<>();
+    int shopLogoHeight = UIUtil.getScreenWidth() * 2 / 3;
+    int toolbarBottomLocation = UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.toolbar_size);
+    int toolbarAlpha;
+
 
     AppBarLayout.OnOffsetChangedListener onOffsetChangedListener = new AppBarLayout.OnOffsetChangedListener() {
         @Override
         public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
             for (BaseShopContentFragment f : fragmentList) {
                 f.setAppbarOffset(verticalOffset);
+                int[] location = new int[2];
+                shopLogo.getLocationOnScreen(location);
+                setupToolbar(location[1]);
             }
+
         }
     };
 
@@ -110,13 +122,14 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         systemToolbar.getLayoutParams().height += UIUtil.getStatusBarHeight();
         fragmentList.clear();
         fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));
-        fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));
+        fragmentList.add(FragmentFactory.createFragment(StaffFragment.class, StaffFragment.getBundle(getShopId())));
         fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));
         adapter = new ShopDetailAdapter(getFragmentManager(), fragmentList);
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         tab.setupWithViewPager(viewPager);
         appbar.addOnOffsetChangedListener(onOffsetChangedListener);
+        setToolbarBGTransparent();
     }
 
     @Override
@@ -143,14 +156,68 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     }
 
     @OnClick(R.id.shop_call)
-    void clickCall(View v){
+    void clickCall(View v) {
         IntentUtil.startCall(this, presenter.getPhone());
+    }
+
+    @OnClick(R.id.toolbar_icon_left)
+    void clickBack(View v) {
+        finish();
+    }
+
+    @OnClick(R.id.toolbar_icon_collection)
+    void clickCollect(View v) {
+
+    }
+
+    @OnClick(R.id.toolbar_icon_share)
+    void clickShare(View v) {
+
     }
 
     @Override
     protected void onDestroy() {
         appbar.removeOnOffsetChangedListener(onOffsetChangedListener);
         super.onDestroy();
+    }
+
+    private void setupToolbar(int location) {
+        Timber.e("shoplogoheight:" + shopLogoHeight + "\n" + "location:" + Math.abs(location)
+                + "\ntoolbarBL:" + toolbarBottomLocation);
+        if (location == 0) {
+            setToolbarBGTransparent();
+        } else if (shopLogoHeight - Math.abs(location) > toolbarBottomLocation) {
+            float property = Math.abs(location) / (float) (shopLogoHeight - toolbarBottomLocation);
+            setToolbarBGAlpha((int) (255 * property));
+        } else {
+            setToolbarBGOpacity();
+        }
+    }
+
+    private void setToolbarBGTransparent() {
+        setToolbarBGAlpha(0);
+    }
+
+    private void setToolbarBGOpacity() {
+        setToolbarBGAlpha(255);
+    }
+
+
+    private void setToolbarBGAlpha(int alpha) {
+        toolbarHolder.getBackground().mutate().setAlpha(alpha);
+        toolbarSpace.getBackground().mutate().setAlpha(alpha);
+        toolbarAlpha = alpha;
+        setToolbarIconByAlpha();
+    }
+
+    private void setToolbarIconByAlpha() {
+        toolbarIconLeft.setImageResource(toolbarAlpha > TOOLBAR_ICON_THRESHOLD ? R.drawable.ic_shop_detail_back_grey : R.drawable.ic_shop_detail_back_white);
+        toolbarShare.setImageResource(toolbarAlpha > TOOLBAR_ICON_THRESHOLD ? R.drawable.ic_shop_detail_share_grey : R.drawable.ic_shop_detail_share_white);
+        if (presenter.isCollect()) {
+            toolbarCollection.setImageResource(toolbarAlpha > TOOLBAR_ICON_THRESHOLD ? R.drawable.ic_shop_detail_collect : R.drawable.ic_shop_detail_collect_circle);
+        } else {
+            toolbarCollection.setImageResource(toolbarAlpha > TOOLBAR_ICON_THRESHOLD ? R.drawable.ic_shop_detail_uncollect : R.drawable.ic_shop_detail_uncollect_circle);
+        }
     }
 
 

@@ -65,6 +65,7 @@
             android:textSize="@dimen/text_size_body"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toLeftOf="@+id/shop_time"
+            app:layout_constraintRight_toLeftOf="@+id/shop_call"
             app:layout_constraintRight_toRightOf="@+id/shop_time"
             app:layout_constraintTop_toBottomOf="@+id/shop_time"
             tools:text="asfasdfsdafdsfd" />

@@ -101,5 +101,10 @@
         <item name="android:text">促</item>
         <item name="android:background">@drawable/bg_text_promotion</item>
     </style>
+    
+    <style name="AvatarStyle">
+        <item name="roundAsCircle">true</item>
+        <item name="placeholderImage">@drawable/ic_defaul_avatar</item>
+    </style>
 
 </resources>

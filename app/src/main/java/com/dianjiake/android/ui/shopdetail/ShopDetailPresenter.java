@@ -27,6 +27,7 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
     LoginInfoModel loginInfo;
     CompositeDisposable cd;
     String phone;
+    boolean isCollect;
 
     public ShopDetailPresenter(ShopDetailContract.View view) {
         this.view = view;
@@ -65,6 +66,7 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
                         if (shopDetailBean.getCode() == 200) {
                             view.setView(shopDetailBean.getObj());
                             phone = shopDetailBean.getObj().getDianpu().getDianhua();
+                            isCollect = "1".equals(shopDetailBean.getObj().getDianpu().getShifoushoucang());
                         }
                     }
 
@@ -83,5 +85,10 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
     @Override
     public String getPhone() {
         return phone;
+    }
+
+    @Override
+    public boolean isCollect() {
+        return isCollect;
     }
 }

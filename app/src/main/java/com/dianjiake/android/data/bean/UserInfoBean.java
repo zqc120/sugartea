@@ -62,6 +62,15 @@ public class UserInfoBean implements Parcelable {
     private String wanshanziliao;
     private String jicika;
     private String youhuiquan;
+    private String yuangongjianjie;
+
+    public String getYuangongjianjie() {
+        return yuangongjianjie;
+    }
+
+    public void setYuangongjianjie(String yuangongjianjie) {
+        this.yuangongjianjie = yuangongjianjie;
+    }
 
     public String getId() {
         return id;
@@ -479,6 +488,9 @@ public class UserInfoBean implements Parcelable {
         this.youhuiquan = youhuiquan;
     }
 
+    public UserInfoBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -538,9 +550,7 @@ public class UserInfoBean implements Parcelable {
         dest.writeString(this.wanshanziliao);
         dest.writeString(this.jicika);
         dest.writeString(this.youhuiquan);
-    }
-
-    public UserInfoBean() {
+        dest.writeString(this.yuangongjianjie);
     }
 
     protected UserInfoBean(Parcel in) {
@@ -596,9 +606,10 @@ public class UserInfoBean implements Parcelable {
         this.wanshanziliao = in.readString();
         this.jicika = in.readString();
         this.youhuiquan = in.readString();
+        this.yuangongjianjie = in.readString();
     }
 
-    public static final Parcelable.Creator<UserInfoBean> CREATOR = new Parcelable.Creator<UserInfoBean>() {
+    public static final Creator<UserInfoBean> CREATOR = new Creator<UserInfoBean>() {
         @Override
         public UserInfoBean createFromParcel(Parcel source) {
             return new UserInfoBean(source);

@@ -20,5 +20,7 @@ public interface ShopDetailContract {
         void load();
 
         String getPhone();
+
+        boolean isCollect();
     }
 }
