@@ -3,6 +3,10 @@ package com.dianjiake.android.ui.subscribe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BasePresenter;
@@ -10,6 +14,10 @@ import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.base.BaseView;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by lfs on 2017/7/18.
@@ -21,6 +29,18 @@ public class ServiceStaffListActivity extends BaseTranslateActivity implements B
     private static final String KEY_SHOP_ID = "shop_id";
     private static final String KEY_SERVICE_ID = "service_id";
     private static final String KEY_OPEN_ID = "open_id";
+    @BindView(R.id.toolbar_space)
+    ToolbarSpaceView toolbarSpace;
+    @BindView(R.id.toolbar_icon_left)
+    ImageView toolbarIconLeft;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.toolbar_icon_right)
+    ImageView toolbarIconRight;
+    @BindView(R.id.toolbar_holder)
+    ConstraintLayout toolbarHolder;
+    @BindView(R.id.content)
+    FrameLayout content;
 
 
     public static Intent getServiceIntent(String shopId, String openId) {
@@ -60,14 +80,24 @@ public class ServiceStaffListActivity extends BaseTranslateActivity implements B
         if (TYPE_SERVICE.equals(getIntent().getType())) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.content, FragmentFactory.createFragment(StaffServiceFragment.class, b)).commit();
+            toolbarTitle.setText("服务列表");
+
         } else if (TYPE_STAFF.equals(getIntent().getType())) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.content, FragmentFactory.createFragment(ServiceStaffFragment.class, b)).commit();
+            toolbarTitle.setText("员工列表");
         }
     }
 
     @Override
     public BasePresenter getPresenter() {
         return null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

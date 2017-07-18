@@ -20,7 +20,7 @@ public abstract class BaseServiceStaffFragment extends BaseListFragment<BaseServ
     public static Bundle getBundle(String shopId, String serviceId, String openId) {
         Bundle b = new Bundle();
         b.putString("shopId", shopId);
-        b.putString("openId", serviceId);
+        b.putString("serviceId", serviceId);
         b.putString("openId", openId);
         return b;
     }
@@ -29,7 +29,7 @@ public abstract class BaseServiceStaffFragment extends BaseListFragment<BaseServ
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         shopId = getArguments().getString("shopId");
-        serviceId = getArguments().getString("openId");
+        serviceId = getArguments().getString("serviceId");
         openId = getArguments().getString("openId");
     }
 
