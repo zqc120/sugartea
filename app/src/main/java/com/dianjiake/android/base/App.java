@@ -48,5 +48,6 @@ public class App extends MultiDexApplication {
 
     {
         PlatformConfig.setWeixin(Constant.WX_AppID, Constant.WX_AppSecret);
+
     }
 }

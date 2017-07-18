@@ -6,8 +6,8 @@ package com.dianjiake.android.constant;
 
 public interface Constant {
 
-    String WX_AppID = "wxcdea443bd8007398";
-    String WX_AppSecret = "a813f7bd20858f729683dd0672fcd984";
+    String WX_AppID = "wx2ab30dbdea83497b";
+    String WX_AppSecret = "3e07746e20905304c76e9285b986de02";
     String URL_VERSION = "api100/";
 
     String SALT = "3c66790a694fd53aed110a8e85f1aeec";
