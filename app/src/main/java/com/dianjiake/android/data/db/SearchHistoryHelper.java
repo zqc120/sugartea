@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public class SearchHistoryHelper {
-    private static final int TYPE_LOCATION = 1;
+    private static final int TYPE_LOCATION = 0;
     private static final int TYPE_SHOP = 1;
 
     public static SearchHistoryHelper newInstance() {

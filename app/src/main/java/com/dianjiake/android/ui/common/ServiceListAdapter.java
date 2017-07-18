@@ -14,6 +14,7 @@ import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.ui.shopweb.ShopWebActivity;
+import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntegerUtil;
@@ -178,6 +179,11 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         @OnClick(R.id.holder)
         void click(View v) {
             IntentUtil.startActivity(v, ShopWebActivity.getServiceDetail(serviceBean));
+        }
+
+        @OnClick(R.id.subscribe)
+        void clickSub(View v) {
+            IntentUtil.startActivity(v, SubscribeActivity.class);
         }
 
         @Override

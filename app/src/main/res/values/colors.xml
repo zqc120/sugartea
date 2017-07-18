@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff5c5c</color>
+    <color name="colorPrimary">#f74461</color>
     <color name="colorPrimaryDark">#e6454a</color>
     <color name="colorAccent">#ffbd21</color>
     <color name="background">#f3f3f3</color>
     <color name="translate">#00000000</color>
 
-    <color name="main">#ff5c5c</color>
+    <color name="main">#f74461</color>
     <color name="main_unable">#ff9797</color>
 
     <color name="gradient_main">@color/colorPrimary</color>
