@@ -110,7 +110,7 @@ public interface Api {
      * @return
      */
     @GET(Constant.SHOP)
-    Observable<BaseListBean<UserInfoBean>>  shopStaff(
+    Observable<BaseListBean<UserInfoBean>> shopStaff(
             @Query("bs") String bs,
             @Query("shanghuid") String shopid,
             @Query("page") int page
@@ -128,6 +128,38 @@ public interface Api {
     Observable<BaseListBean<ShopCommentBean>> shopComment(
             @Query("bs") String bs,
             @Query("shanghuid") String shopid,
+            @Query("page") int page
+    );
+
+    /**
+     * 服务员工列表
+     *
+     * @param bs     {@link BSConstant#SHOP_STAFF}
+     * @param shopid
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<UserInfoBean>> serviceStaff(
+            @Query("bs") String bs,
+            @Query("shanghuid") String shopid,
+            @Query("fuwuid") String serviceId,
+            @Query("page") int page
+    );
+
+
+    /**
+     * 员工可提供的服务列表
+     *
+     * @param bs     {@link BSConstant#STAFF_SERVICE}
+     * @param shopid
+     * @param page
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<ServiceBean>> staffService(
+            @Query("bs") String bs,
+            @Query("shanghuid") String shopid,
+            @Query("openid") String openId,
             @Query("page") int page
     );
 }

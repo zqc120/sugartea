@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import timber.log.Timber;
 
@@ -183,8 +182,6 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     }
 
     private void setupToolbar(int location) {
-        Timber.e("shoplogoheight:" + shopLogoHeight + "\n" + "location:" + Math.abs(location)
-                + "\ntoolbarBL:" + toolbarBottomLocation);
         if (location == 0) {
             setToolbarBGTransparent();
         } else if (shopLogoHeight - Math.abs(location) > toolbarBottomLocation) {

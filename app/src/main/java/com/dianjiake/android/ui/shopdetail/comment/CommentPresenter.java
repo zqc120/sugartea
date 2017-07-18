@@ -4,7 +4,6 @@ import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.ShopCommentBean;
-import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.shopdetail.BaseShopContentPresenter;
 
 import io.reactivex.Observable;

@@ -58,7 +58,7 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
     @Override
     public BaseViewHolder myOnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(UIUtil.inflate(R.layout.item_service, parent), showShop);
+        return new ViewHolder(UIUtil.inflate(R.layout.item_service, parent), showShop, this);
     }
 
     @Override
@@ -107,11 +107,13 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         boolean showShop;
         int size;
         ServiceBean serviceBean;
+        ServiceListAdapter adapter;
 
-        public ViewHolder(View itemView, boolean showShop) {
+        public ViewHolder(View itemView, boolean showShop, ServiceListAdapter adapter) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             this.showShop = showShop;
+            this.adapter = adapter;
 
             ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) logo.getLayoutParams();
             if (showShop) {
@@ -178,12 +180,12 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
         @OnClick(R.id.holder)
         void click(View v) {
-            IntentUtil.startActivity(v, ShopWebActivity.getServiceDetail(serviceBean));
+            adapter.onClick(serviceBean, getAdapterPosition());
         }
 
         @OnClick(R.id.subscribe)
         void clickSub(View v) {
-            IntentUtil.startActivity(v, SubscribeActivity.class);
+            IntentUtil.startActivity(v, SubscribeActivity.getStartIntent(serviceBean,null));
         }
 
         @Override

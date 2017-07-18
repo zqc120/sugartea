@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.dianjiake.android.ui.common.ShopCommentAdapter;
-import com.dianjiake.android.ui.common.ShopStaffAdapter;
 import com.dianjiake.android.ui.shopdetail.BaseShopContentFragment;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 

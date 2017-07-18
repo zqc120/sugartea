@@ -3,7 +3,6 @@ package com.dianjiake.android.ui.shopdetail.staff;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseListBean;
-import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.shopdetail.BaseShopContentPresenter;
 

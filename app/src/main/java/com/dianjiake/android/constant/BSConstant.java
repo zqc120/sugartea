@@ -20,7 +20,6 @@ public interface BSConstant {
     String SUBSCRIBE_DETAIL = "yuyuexiangqing";//预约详情
     String FINISH_LIST = "wanchengliebiao";//预约列表
     String STAFF_INFO = "clerkinfo";//员工信息
-    String STAFF_SERVICE = "dianyuanfuwuliebiao";//员工可提供的服务列表
     String SEARCH_VIP = "userinfo";//员工可提供的服务列表
     String ADD_SERVICE = "fuwudingdanadd";//下单
     String START_SERVICE = "kaishifuwu";//开始服务
@@ -47,4 +46,6 @@ public interface BSConstant {
     String SERVICE_LIST = "shanghufuwuliebiao";// 商户服务列表
     String SHOP_STAFF = "shanghuyuangongliebiao";// 商户员工列表
     String SHOP_COMMENT = "shanghupinglun";// 商户评论
+    String SERVICE_STAFF = "fuwudianyuanliebiao";// 服务员工列表
+    String STAFF_SERVICE = "dianyuanfuwuliebiao";// 员工服务列表
 }

@@ -40,7 +40,7 @@ public class ShopStaffAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
 
     @Override
     public BaseViewHolder myOnCreateViewHolder(ViewGroup parent, int viewType) {
-        return ViewHolder.newInstance(parent);
+        return ViewHolder.newInstance(parent, this);
     }
 
     @Override
@@ -63,12 +63,15 @@ public class ShopStaffAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
         TextView sailCount;
         UserInfoBean userInfo;
 
-        public static ViewHolder newInstance(ViewGroup parent) {
-            return new ViewHolder(UIUtil.inflate(R.layout.item_shop_staff, parent));
+        ShopStaffAdapter adapter;
+
+        public static ViewHolder newInstance(ViewGroup parent, ShopStaffAdapter adapter) {
+            return new ViewHolder(UIUtil.inflate(R.layout.item_shop_staff, parent), adapter);
         }
 
-        private ViewHolder(View itemView) {
+        private ViewHolder(View itemView, ShopStaffAdapter adapter) {
             super(itemView);
+            this.adapter = adapter;
         }
 
         public void setItem(UserInfoBean userInfo) {
@@ -90,7 +93,7 @@ public class ShopStaffAdapter extends BaseLoadMoreAdapter<UserInfoBean> {
 
         @OnClick(R.id.holder)
         void click(View v) {
-            IntentUtil.startActivity(v, ShopWebActivity.getStaffDetaill(userInfo));
+            adapter.onClick(userInfo, getAdapterPosition());
         }
     }
 }
