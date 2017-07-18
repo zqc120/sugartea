@@ -70,4 +70,8 @@
         android:paddingBottom="@dimen/base_margin"
         tools:text="fsfsafsdfsdfsdfdsffsdfsdfsdfsdfsdffsdfsddfsdfsdfsffsdfsdfsfsffsdfsdfdddddddddddddddddddddddddddddddddfssdfsdfd" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_size"
+        android:src="@color/divider" />
 </LinearLayout>

@@ -95,9 +95,10 @@ public class ServiceStaffListActivity extends BaseTranslateActivity implements B
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
