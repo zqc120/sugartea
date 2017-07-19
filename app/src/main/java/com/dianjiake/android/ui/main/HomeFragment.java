@@ -16,6 +16,7 @@ import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.ui.searchshop.SearchShopActivity;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.HomeFilterView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -51,6 +52,8 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @BindView(R.id.filter)
     HomeFilterView filter;
 
+    NormalProgressDialog pd;
+
     RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -85,6 +88,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         adViewTopDistance = UIUtil.getScreenWidth() / 2;
         toolbarHolder.getBackground().mutate().setAlpha(0);
         toolbarSpace.getBackground().mutate().setAlpha(0);
+        presenter.addRG(filter.getFilterGroup());
     }
 
     @Override
@@ -121,9 +125,24 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
             Timber.d("alpha " + (255 * totalY * 1.0f / toolbarThreshold));
             toolbarHolder.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
             toolbarSpace.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
-            filter.setVisibility(View.GONE);
+            filter.setVisibility(View.INVISIBLE);
             toolbarLocationHolder.setVisibility(View.VISIBLE);
             toolbarMsgHolder.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void showPD() {
+        if (pd == null) {
+            pd = NormalProgressDialog.newInstance("正在加载，请稍候...");
+        }
+        pd.showDialog(getFragmentManager(), "pdd");
+    }
+
+    @Override
+    public void dismissPD() {
+        if (pd != null) {
+            pd.dismissAllowingStateLoss();
         }
     }
 

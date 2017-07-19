@@ -22,6 +22,8 @@ import com.dianjiake.android.view.widget.HomeFilterView;
 import com.dianjiake.android.view.widget.StarView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -150,6 +152,7 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
         private FilterHolder(View itemView) {
             super(itemView);
+            EventBus.getDefault().post(((HomeFilterView) itemView).getFilterGroup());
         }
 
         @Override

@@ -1,5 +1,7 @@
 package com.dianjiake.android.ui.main;
 
+import android.widget.RadioGroup;
+
 import com.dianjiake.android.base.BaseListPresenter;
 import com.dianjiake.android.base.BaseListView;
 import com.dianjiake.android.data.bean.HomeShopBean;
@@ -17,10 +19,15 @@ public interface HomeContract {
         void setLocationName(String locationName);
 
         void judgeScrollY(int totalY);
+
+        void showPD();
+
+        void dismissPD();
     }
 
     interface Presenter extends BaseListPresenter {
         List<HomeShopBean> getItems();
 
+        void addRG(RadioGroup rg);
     }
 }

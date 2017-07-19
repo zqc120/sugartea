@@ -51,11 +51,15 @@ public class EditUserInfoParams extends BaseParams {
     }
 
     public void setlongitude(String longitude) {
-        requestParams.put("longitude", getTextBody(longitude));
+        if (!CheckEmptyUtil.isEmpty(longitude)) {
+            requestParams.put("longitude", getTextBody(longitude));
+        }
     }
 
     public void setlatitude(String latitude) {
-        requestParams.put("latitude", getTextBody(latitude));
+        if (!CheckEmptyUtil.isEmpty(latitude)) {
+            requestParams.put("latitude", getTextBody(latitude));
+        }
     }
 
     public void setTouxiang(String touxiang) {

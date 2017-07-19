@@ -1,5 +1,9 @@
 package com.dianjiake.android.ui.main;
 
+import android.support.annotation.IdRes;
+import android.widget.RadioGroup;
+
+import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.HomeShopBean;
@@ -27,8 +31,8 @@ import io.reactivex.schedulers.Schedulers;
  * Created by lfs on 2017/7/7.
  */
 
-public class HomePresenter implements HomeContract.Presenter {
-    int order;
+public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheckedChangeListener {
+    int order;//0默认 2距离 1评分
     int page = 1;
     HomeContract.View view;
     LoginInfoModel loginInfo;
@@ -39,6 +43,7 @@ public class HomePresenter implements HomeContract.Presenter {
     String locationName;
     String longitude;
     String latitude;
+    HomeTabHelper homeTabHelper;
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
@@ -51,6 +56,8 @@ public class HomePresenter implements HomeContract.Presenter {
         latitude = appInfo.getLatitude();
         view.setLocationName(locationName);
         EventBus.getDefault().register(this);
+        homeTabHelper = new HomeTabHelper();
+        homeTabHelper.setCheckedChangeListener(this);
     }
 
     @Override
@@ -90,6 +97,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
                     @Override
                     public void onSuccess(List<HomeShopBean> list, boolean isAll) {
+                        view.dismissPD();
                         if (isReload) {
                             HomeShopBean temp = new HomeShopBean();
                             temp.setViewType(HomeType.AD);
@@ -109,11 +117,13 @@ public class HomePresenter implements HomeContract.Presenter {
 
                     @Override
                     public void onEmpty() {
+                        view.dismissPD();
                         view.loadEmptyContent();
                     }
 
                     @Override
                     public void onAll() {
+                        view.dismissPD();
                         view.loadAll();
                     }
                 });
@@ -124,12 +134,40 @@ public class HomePresenter implements HomeContract.Presenter {
         return items;
     }
 
+    @Override
+    public void addRG(RadioGroup rg) {
+        homeTabHelper.addRG(rg);
+
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLocationChange(LocationEvent event) {
         locationName = event.locationName;
         longitude = event.longitude;
         latitude = event.latitude;
         view.setLocationName(event.locationName);
+        reload();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onBindTabEvent(RadioGroup radioGroup) {
+        homeTabHelper.addRG(radioGroup);
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        switch (checkedId) {
+            case R.id.filter_base:
+                order = 0;
+                break;
+            case R.id.filter_distance:
+                order = 2;
+                break;
+            case R.id.filter_score:
+                order = 1;
+                break;
+        }
+        view.showPD();
         reload();
     }
 }
