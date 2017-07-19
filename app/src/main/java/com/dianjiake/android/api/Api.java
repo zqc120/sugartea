@@ -195,7 +195,7 @@ public interface Api {
             @Field("shuliang") int servicesSize,
             @Field("fuwumoshi") int serviceType,
             @Field("laiyuan") int from,
-            @Field("sex") String gender,
+            @Field("sex") int gender,
             @Field("dizhi") String location,
             @Field("shanghuid") String shopid,
             @Field("fuwuxiangmu") String services

@@ -28,8 +28,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class SubscribePresenter implements SubscribeContract.Presenter {
-    private static final int SERVICE_TYPE_SHOP = 0;//到店
     private static final int SERVICE_TYPE_HOME = 1;//到家
+    private static final int SERVICE_TYPE_SHOP = 2;//到店
     CompositeDisposable cd;
     SubscribeContract.View view;
     LoginInfoModel loginInfo;
@@ -141,6 +141,9 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
             serviceItemView.initServiceAndStaff(defaultService, defaultUserInfo);
         } else {
             serviceItemView.initServiceAndStaff(null, defaultUserInfo);
+        }
+        if (defaultUserInfo != null) {
+            putChooseStaff(otherServiceTag, defaultUserInfo);
         }
         servicesViews.put((int) serviceItemView.getTag(), serviceItemView);
         otherServiceTag++;
@@ -267,5 +270,66 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
         view.setSubmitButtonEnable(true);
         return;
 
+    }
+
+    @Override
+    public void submit() {
+        view.showProgressDialog();
+        cd.clear();
+
+        StringBuilder services = new StringBuilder();
+        for (Integer key : servicesViews.keySet()) {
+            services.append(chooseServices.get(key).getId())
+                    .append("-")
+                    .append(chooseServices.get(key).getName())
+                    .append("-")
+                    .append(chooseStaffs.get(key).getOpenid())
+                    .append("-")
+                    .append(chooseServices.get(key).getJine())
+                    .append(",");
+        }
+
+        Network.getInstance().addService(
+                BSConstant.ADD_SERVICE,
+                loginInfo.getOpenId(),
+                name,
+                phone,
+                chooseTime / 1000,
+                servicesViews.size(),
+                serviceType,
+                1,
+                gender,
+                location + address,
+                shopId,
+                services.toString())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseBean baseBean) {
+                        view.dismissProgressDialog();
+                        if (baseBean.getCode() == 200) {
+                            view.submitSuccess();
+                        } else {
+                            view.submitFail();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        view.dismissProgressDialog();
+                        view.submitFail();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

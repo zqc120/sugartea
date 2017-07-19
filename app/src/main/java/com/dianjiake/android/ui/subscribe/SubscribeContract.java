@@ -19,6 +19,14 @@ public interface SubscribeContract {
         void setHomeHolderVisible(boolean visible);
 
         void setSubmitButtonEnable(boolean enable);
+
+        void showProgressDialog();
+
+        void dismissProgressDialog();
+
+        void submitSuccess();
+
+        void submitFail();
     }
 
     interface Presenter extends BasePresenter {
@@ -71,5 +79,7 @@ public interface SubscribeContract {
         void setGender(int gender);
 
         void checkSubmitButtonEnable();
+
+        void submit();
     }
 }

@@ -25,6 +25,7 @@ import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ServiceItemView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -157,6 +158,11 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
         startActivityForResult(ChooseTimeActivity.getStartIntent(presenter.getStartTime(), presenter.getEndTime()), REQUEST_TIME);
     }
 
+    @OnClick(R.id.button)
+    void clickSubmit(View v) {
+        presenter.submit();
+    }
+
     @OnClick(R.id.location_holder)
     void clickLocation(View v) {
         startActivityForResult(SearchLocationActivity.getChooseLocationIntent(), REQUEST_LOCATION);
@@ -216,6 +222,31 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
     @Override
     public void setSubmitButtonEnable(boolean enable) {
         button.setEnabled(enable);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = NormalProgressDialog.newInstance("正在提交，请稍候...");
+        }
+        progressDialog.showDialog(getFragmentManager(), "p");
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        if (progressDialog != null) {
+            progressDialog.dismissAllowingStateLoss();
+        }
+    }
+
+    @Override
+    public void submitSuccess() {
+        ToastUtil.showShortToast("提交成功");
+    }
+
+    @Override
+    public void submitFail() {
+        ToastUtil.showShortToast("提交失败");
     }
 
     MyTextWatcher phoneWatcher = new MyTextWatcher() {
