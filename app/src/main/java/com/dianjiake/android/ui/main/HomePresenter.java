@@ -88,6 +88,7 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
     @Override
     public void load(final boolean isReload) {
         cd.clear();
+
         Network.getInstance().homeShop(BSConstant.SHOP_LIST, loginInfo.getOpenId(), order, longitude + "," + latitude, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

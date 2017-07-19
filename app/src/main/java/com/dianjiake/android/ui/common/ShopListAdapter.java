@@ -6,7 +6,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.api.Network;
+import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.ADItemBean;
+import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
+import com.dianjiake.android.data.db.AppInfoDBHelper;
+import com.dianjiake.android.data.model.AppInfoModel;
+import com.dianjiake.android.event.HomeReloadEvent;
 import com.dianjiake.android.ui.main.HomeType;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.util.AMapUtil;
@@ -16,6 +23,7 @@ import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.widget.ADView;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
 import com.dianjiake.android.view.widget.HomeFilterView;
@@ -23,11 +31,19 @@ import com.dianjiake.android.view.widget.StarView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by lfs on 2017/7/10.
@@ -129,18 +145,52 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
     public static class ADHolder extends BaseViewHolder {
 
+        CompositeDisposable cd;
+        ADView adView;
+
         public static ADHolder newInstance(ViewGroup parent) {
             return new ADHolder(UIUtil.inflate(R.layout.item_home_ad, parent));
         }
 
         private ADHolder(View itemView) {
             super(itemView);
+            adView = (ADView) itemView;
+            cd = new CompositeDisposable();
+        }
+
+        @Subscribe(threadMode = ThreadMode.MAIN)
+        void onLoad(HomeReloadEvent event) {
+            cd.clear();
+            AppInfoModel appInfo = AppInfoDBHelper.newInstance().getAppInfo();
+            Network.getInstance().ad(BSConstant.AD, appInfo.getLongitude() + "," + appInfo.getLatitude())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+                    .subscribeWith(new Observer<BaseListBean<ADItemBean>>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(@NonNull BaseListBean<ADItemBean> adItemBeanBaseListBean) {
+
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
         }
 
 
         @Override
         public void destroy() {
-
+            cd.clear();
         }
     }
 

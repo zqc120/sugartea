@@ -57,7 +57,7 @@
 
         <TextView
             android:id="@+id/shop_location"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/base_margin"
             android:layout_marginTop="@dimen/base_margin"
@@ -66,9 +66,8 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toLeftOf="@+id/shop_time"
             app:layout_constraintRight_toLeftOf="@+id/shop_call"
-            app:layout_constraintRight_toRightOf="@+id/shop_time"
             app:layout_constraintTop_toBottomOf="@+id/shop_time"
-            tools:text="asfasdfsdafdsfd" />
+            tools:text="asfasdfsdafdffsdkljkfklajdfsdfsdfjkf" />
 
         <FrameLayout
             android:id="@+id/shop_call"

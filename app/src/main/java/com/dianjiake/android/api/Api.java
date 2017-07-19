@@ -3,6 +3,7 @@ package com.dianjiake.android.api;
 import android.support.annotation.NonNull;
 
 import com.dianjiake.android.constant.Constant;
+import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
@@ -294,4 +295,17 @@ public interface Api {
     @Multipart
     @POST(Constant.USER)
     Observable<BaseBean> editUserInfo(@PartMap Map<String, RequestBody> parts);
+
+    /**
+     * 首页广告
+     *
+     * @param bs
+     * @param lonlat
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseListBean<ADItemBean>> ad(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("zuobiao") String lonlat
+    );
 }

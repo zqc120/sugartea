@@ -14,32 +14,37 @@
         android:layout_weight="1"
         android:fillViewport="true">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.facebook.drawee.view.SimpleDraweeView
-
-                android:id="@+id/complete_info_avatar"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/base_size5"
-                app:placeholderImage="@drawable/ic_defaul_avatar"
-                app:roundAsCircle="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                style="@style/MeItemHolderStyle"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/base_size3"
-                android:text="上传头像，展现最好的一面吧！"
-                android:textColor="@color/text_content_secondary" />
+                android:paddingBottom="@dimen/base_size2"
+                android:paddingTop="@dimen/base_size2">
 
-            <ImageView
-                style="@style/DividerHorizontalStyle"
-                android:layout_marginTop="@dimen/base_size4" />
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/complete_info_avatar"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:layout_gravity="center_vertical"
+                    app:placeholderImage="@drawable/ic_defaul_avatar"
+                    app:roundAsCircle="true" />
+
+                <ImageView
+                    style="@style/MeItemIconStyle"
+                    android:src="@drawable/ic_right_arrow" />
+            </LinearLayout>
+
+            <ImageView style="@style/DividerHorizontalStyle" />
 
             <LinearLayout style="@style/MeItemHolderStyle">
 
@@ -60,6 +65,7 @@
                     android:textCursorDrawable="@null" />
 
             </LinearLayout>
+
 
             <ImageView style="@style/DividerHorizontalStyle" />
 

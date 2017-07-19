@@ -119,6 +119,8 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+        toolbarShare.setVisibility(View.GONE);
+        toolbarCollection.setVisibility(View.GONE);
         systemToolbar.getLayoutParams().height += UIUtil.getStatusBarHeight();
         fragmentList.clear();
         fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));

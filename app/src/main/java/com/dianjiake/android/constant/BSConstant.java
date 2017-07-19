@@ -49,4 +49,6 @@ public interface BSConstant {
     String SERVICE_STAFF = "fuwudianyuanliebiao";// 服务员工列表
     String STAFF_SERVICE = "dianyuanfuwuliebiao";// 员工服务列表
     String USER_INFO = "userinfo";//  查看用户信息
+    String AD = "appjiaodiantu";//   首页广告
+
 }

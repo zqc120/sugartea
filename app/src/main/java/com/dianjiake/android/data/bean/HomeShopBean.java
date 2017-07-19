@@ -3,6 +3,8 @@ package com.dianjiake.android.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by lfs on 2017/7/10.
  */
@@ -56,6 +58,15 @@ public class HomeShopBean implements Parcelable {
     private String gongkaikaquan;
     private String paixu;
     private int viewType;
+    private List<ADItemBean> ads;
+
+    public List<ADItemBean> getAds() {
+        return ads;
+    }
+
+    public void setAds(List<ADItemBean> ads) {
+        this.ads = ads;
+    }
 
     public int getViewType() {
         return viewType;
@@ -433,6 +444,9 @@ public class HomeShopBean implements Parcelable {
         this.paixu = paixu;
     }
 
+    public HomeShopBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -486,9 +500,8 @@ public class HomeShopBean implements Parcelable {
         dest.writeString(this.jichufuwutxt);
         dest.writeString(this.gongkaikaquan);
         dest.writeString(this.paixu);
-    }
-
-    public HomeShopBean() {
+        dest.writeInt(this.viewType);
+        dest.writeTypedList(this.ads);
     }
 
     protected HomeShopBean(Parcel in) {
@@ -538,9 +551,11 @@ public class HomeShopBean implements Parcelable {
         this.jichufuwutxt = in.readString();
         this.gongkaikaquan = in.readString();
         this.paixu = in.readString();
+        this.viewType = in.readInt();
+        this.ads = in.createTypedArrayList(ADItemBean.CREATOR);
     }
 
-    public static final Parcelable.Creator<HomeShopBean> CREATOR = new Parcelable.Creator<HomeShopBean>() {
+    public static final Creator<HomeShopBean> CREATOR = new Creator<HomeShopBean>() {
         @Override
         public HomeShopBean createFromParcel(Parcel source) {
             return new HomeShopBean(source);

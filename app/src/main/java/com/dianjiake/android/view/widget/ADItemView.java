@@ -9,7 +9,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.api.Network;
+import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.db.AppInfoDBHelper;
+import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.util.IntentUtil;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
