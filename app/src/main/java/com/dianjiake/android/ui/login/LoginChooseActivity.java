@@ -175,7 +175,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
     }
 
 
-    void login(String wxOpenId, String unionId) {
+    void login(final String wxOpenId, final String unionId) {
         Network.getInstance().login(BSConstant.LOGIN,
                 null,
                 null,
@@ -210,7 +210,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
                                 break;
                             case 203:
                             case 204:
-//                                startActivity(LoginPhoneActivity.getBindIntent(mLoginAuthorModule));
+                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));
                                 break;
                             case 201://绑定失败，这用不上
                                 ToastUtil.showShortToast("登录失败");

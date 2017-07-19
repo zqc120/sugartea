@@ -18,18 +18,18 @@ public class LoginActivitiesManger {
      * 手机号第一次登录
      */
     public void phoneRegisterSuccess() {
-//        if (LoginPhoneActivity.sInstance != null) {
-//            LoginPhoneActivity.sInstance.finish();
-//        }
+        if (LoginPhoneActivity.sInstance != null) {
+            LoginPhoneActivity.sInstance.finish();
+        }
     }
 
     /**
      * 手机号登录成功
      */
     public void phoneLoginSuccess() {
-//        if (LoginPhoneActivity.sInstance != null) {
-//            LoginPhoneActivity.sInstance.finish();
-//        }
+        if (LoginPhoneActivity.sInstance != null) {
+            LoginPhoneActivity.sInstance.finish();
+        }
         if (LoginChooseActivity.sInstance != null) {
             LoginChooseActivity.sInstance.finish();
         }
@@ -40,12 +40,12 @@ public class LoginActivitiesManger {
      * 完善资料
      */
     public void completeInfoSuccess() {
-//        if (LoginChooseActivity.sInstance != null) {
-//            LoginChooseActivity.sInstance.finish();
-//        }
-//        if (LoginPhoneActivity.sInstance != null) {
-//            LoginPhoneActivity.sInstance.finish();
-//        }
+        if (LoginChooseActivity.sInstance != null) {
+            LoginChooseActivity.sInstance.finish();
+        }
+        if (LoginPhoneActivity.sInstance != null) {
+            LoginPhoneActivity.sInstance.finish();
+        }
         EventUtil.postLoginEvent();
     }
 

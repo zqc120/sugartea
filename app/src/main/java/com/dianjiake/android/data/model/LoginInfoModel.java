@@ -1,5 +1,8 @@
 package com.dianjiake.android.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -10,7 +13,7 @@ import org.greenrobot.greendao.annotation.Unique;
  */
 
 @Entity
-public class LoginInfoModel {
+public class LoginInfoModel implements Parcelable {
     @Id
     @Unique
     private Long id;
@@ -215,4 +218,65 @@ public class LoginInfoModel {
         this.staffLevel = staffLevel;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.openId);
+        dest.writeString(this.name);
+        dest.writeString(this.nickname);
+        dest.writeString(this.phone);
+        dest.writeString(this.avatar);
+        dest.writeString(this.gender);
+        dest.writeString(this.intro);
+        dest.writeString(this.birthday);
+        dest.writeString(this.occupationAvatar);
+        dest.writeString(this.occupationName);
+        dest.writeString(this.shopId);
+        dest.writeString(this.shopName);
+        dest.writeString(this.shopLogo);
+        dest.writeString(this.shopCover);
+        dest.writeString(this.shopDesc);
+        dest.writeString(this.shopStartTime);
+        dest.writeString(this.shopEndTime);
+        dest.writeString(this.staffLevel);
+    }
+
+    protected LoginInfoModel(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.openId = in.readString();
+        this.name = in.readString();
+        this.nickname = in.readString();
+        this.phone = in.readString();
+        this.avatar = in.readString();
+        this.gender = in.readString();
+        this.intro = in.readString();
+        this.birthday = in.readString();
+        this.occupationAvatar = in.readString();
+        this.occupationName = in.readString();
+        this.shopId = in.readString();
+        this.shopName = in.readString();
+        this.shopLogo = in.readString();
+        this.shopCover = in.readString();
+        this.shopDesc = in.readString();
+        this.shopStartTime = in.readString();
+        this.shopEndTime = in.readString();
+        this.staffLevel = in.readString();
+    }
+
+    public static final Parcelable.Creator<LoginInfoModel> CREATOR = new Parcelable.Creator<LoginInfoModel>() {
+        @Override
+        public LoginInfoModel createFromParcel(Parcel source) {
+            return new LoginInfoModel(source);
+        }
+
+        @Override
+        public LoginInfoModel[] newArray(int size) {
+            return new LoginInfoModel[size];
+        }
+    };
 }

@@ -1,5 +1,7 @@
 package com.dianjiake.android.api;
 
+import android.support.annotation.NonNull;
+
 import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
@@ -212,7 +214,7 @@ public interface Api {
      * @param sms
      * @param wxOpenId
      * @param unionId
-     * @param qqOpenid
+     * @param cid
      * @return
      */
     @FormUrlEncoded
@@ -223,6 +225,30 @@ public interface Api {
             @Field("sms") String sms,
             @Field("wxopenid") String wxOpenId,
             @Field("unionid") String unionId,
-            @Field("cid") String qqOpenid
+            @Field("cid") String cid
+    );
+
+    /**
+     * 获得验证码
+     *
+     * @param bs    {@link BSConstant#VERIFY_CODE}
+     * @param phone
+     * @param ip
+     * @param mac
+     * @param time
+     * @param sign
+     * @param type
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseBean> getVerifycode(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("phone") String phone,
+            @NonNull @Query("ip") String ip,
+            @NonNull @Query("mac") String mac,
+            @NonNull @Query("time") long time,
+            @NonNull @Query("sign") String sign,
+            @NonNull @Query("leixing") String type
+
     );
 }

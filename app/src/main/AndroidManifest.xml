@@ -51,6 +51,9 @@
         <activity
             android:name=".ui.login.LoginChooseActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.LoginPhoneActivity"
+            android:screenOrientation="portrait" />
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -58,6 +61,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="48359150ad4b29e5b514a626e12433c2"></meta-data>

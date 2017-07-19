@@ -176,4 +176,35 @@
         <item name="android:background">@drawable/click_white</item>
         <item name="android:layout_weight">1</item>
     </style>
+
+    <style name="LoginPhoneRlStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_size_mini</item>
+        <item name="android:paddingLeft">@dimen/base_size4</item>
+        <item name="android:paddingRight">@dimen/base_size4</item>
+    </style>
+
+    <style name="LoginPhoneInputStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:textColor">@color/text_content_title</item>
+        <item name="android:textColorHint">@color/text_content_hint</item>
+        <item name="android:layout_marginLeft">@dimen/base_size4</item>
+        <item name="android:layout_marginRight">@dimen/base_size4</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="LoginPhoneIconStyle">
+        <item name="android:layout_width">@dimen/base_size4</item>
+        <item name="android:layout_height">@dimen/base_size4</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="DividerHorizontalStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/divider_size</item>
+        <item name="android:background">@color/divider</item>
+    </style>
 </resources>
