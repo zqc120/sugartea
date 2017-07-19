@@ -27,8 +27,8 @@ public interface BSConstant {
     String REMARK = "beizhu";//备注
     String LEVELS = "huiyuandengji";//会员等级列表
     String FROM_LIST = "laiyuanliebiao";//会员等级列表
-    String OCCUPATION_LIST = "zhiyeliebiao";//职业列表
-    String ADD_VIP = "huiyuantianjia";//添加会员
+    String OCCUPATION_LIST = "master";//职业列表
+    String EDIT_USER_INFO = "bianjixinxi";//编辑用户信息
     String EDIT_VIP = "huiyuanbianji";//编辑会员
     String CUSTOMER_LIST = "kehu";//会员列表
     String PERFORMANCE_LIST = "kaoqin";//考勤列表

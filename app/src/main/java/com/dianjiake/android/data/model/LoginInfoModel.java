@@ -35,12 +35,17 @@ public class LoginInfoModel implements Parcelable {
     private String shopStartTime;
     private String shopEndTime;
     private String staffLevel;
+    private String longitude;
+    private String latitude;
+    private String location;
+    private String occupation;
+    private String occupationId;
 
-    @Generated(hash = 2017414386)
-    public LoginInfoModel(Long id, String openId, String name, String nickname, String phone, String avatar, String gender,
-            String intro, String birthday, String occupationAvatar, String occupationName, String shopId, String shopName,
-            String shopLogo, String shopCover, String shopDesc, String shopStartTime, String shopEndTime,
-            String staffLevel) {
+    @Generated(hash = 1882123062)
+    public LoginInfoModel(Long id, String openId, String name, String nickname, String phone, String avatar, String gender, String intro,
+            String birthday, String occupationAvatar, String occupationName, String shopId, String shopName, String shopLogo, String shopCover,
+            String shopDesc, String shopStartTime, String shopEndTime, String staffLevel, String longitude, String latitude, String location,
+            String occupation, String occupationId) {
         this.id = id;
         this.openId = openId;
         this.name = name;
@@ -60,6 +65,11 @@ public class LoginInfoModel implements Parcelable {
         this.shopStartTime = shopStartTime;
         this.shopEndTime = shopEndTime;
         this.staffLevel = staffLevel;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.location = location;
+        this.occupation = occupation;
+        this.occupationId = occupationId;
     }
 
     @Generated(hash = 261654949)
@@ -244,6 +254,46 @@ public class LoginInfoModel implements Parcelable {
         dest.writeString(this.shopStartTime);
         dest.writeString(this.shopEndTime);
         dest.writeString(this.staffLevel);
+    }
+
+    public String getLongitude() {
+        return this.longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return this.latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getOccupation() {
+        return this.occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    public String getOccupationId() {
+        return this.occupationId;
+    }
+
+    public void setOccupationId(String occupationId) {
+        this.occupationId = occupationId;
     }
 
     protected LoginInfoModel(Parcel in) {

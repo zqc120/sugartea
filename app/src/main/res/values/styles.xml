@@ -262,4 +262,6 @@
         <item name="android:layout_width">@dimen/base_size3</item>
         <item name="android:layout_height">@dimen/base_size3</item>
     </style>
+
+    <style name="BaseAlertDialog" parent="@android:style/Theme.Dialog"></style>
 </resources>

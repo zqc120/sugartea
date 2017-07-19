@@ -8,17 +8,23 @@ import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.LoginBean;
+import com.dianjiake.android.data.bean.OccupationBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 
@@ -267,4 +273,27 @@ public interface Api {
             @NonNull @Query("phone") String phone
 
     );
+
+    /**
+     * 职业列表
+     *
+     * @param bs
+     * @param id
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseListBean<OccupationBean>> occupationList(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("id") String id
+    );
+
+    /**
+     * 添加用户
+     *
+     * @param parts
+     * @return
+     */
+    @Multipart
+    @POST(Constant.USER)
+    Observable<BaseBean> editUserInfo(@PartMap Map<String, RequestBody> parts);
 }
