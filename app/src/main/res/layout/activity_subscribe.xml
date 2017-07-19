@@ -163,7 +163,7 @@
 
                     <TextView
                         style="@style/ItemTitleStyle"
-                        android:text="服务时间"
+                        android:text="服务地址"
                         android:visibility="invisible" />
 
                     <EditText

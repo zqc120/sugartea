@@ -109,7 +109,9 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
             desc.setText(item.getJianjie());
             distance.setText(AMapUtil.formatDistance(LongUtil.parseLong(item.getJuli())));
             star.setScore(FloatUtil.parseFloat(item.getPingfen()));
-
+            promotionHolder.setVisibility("1".equals(item.getCuxiao()) ? View.VISIBLE : View.GONE);
+            promotionDesc.setText(item.getCuxiaofuwumingcheng());
+            cardHolder.setVisibility("0".equals(item.getGongkaikaquan()) ? View.GONE : View.VISIBLE);
         }
 
         @OnClick(R.id.holder)

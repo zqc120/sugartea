@@ -13,7 +13,6 @@
 
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/base_size1" />
             <gradient android:endColor="@color/gradient_main_press" android:startColor="@color/gradient_main_dark_press" />
         </shape>
     </item>

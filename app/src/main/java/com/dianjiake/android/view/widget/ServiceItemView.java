@@ -67,7 +67,7 @@ public class ServiceItemView extends LinearLayout implements View.OnClickListene
         if (service != null) {
             serviceHolder.setClickable(false);
             chooseServiceBean = service;
-            serviceArrow.setVisibility(GONE);
+            serviceArrow.setVisibility(INVISIBLE);
             serviceName.setText(service.getName());
         } else {
             serviceArrow.setVisibility(VISIBLE);
@@ -75,7 +75,7 @@ public class ServiceItemView extends LinearLayout implements View.OnClickListene
         }
 
         if (userInfo != null) {
-            staffArrow.setVisibility(GONE);
+            staffArrow.setVisibility(INVISIBLE);
             chooseStaffBean = userInfo;
             staffHolder.setClickable(false);
             staffName.setText(userInfo.getShanghunicheng());
@@ -83,6 +83,16 @@ public class ServiceItemView extends LinearLayout implements View.OnClickListene
             staffArrow.setVisibility(VISIBLE);
             staffHolder.setClickable(true);
         }
+    }
+
+    public void setService(ServiceBean service) {
+        chooseServiceBean = service;
+        serviceName.setText(service.getName());
+    }
+
+    public void setStaff(UserInfoBean staff) {
+        chooseStaffBean = staff;
+        staffName.setText(staff.getShanghunicheng());
     }
 
     public void setListener(OnChooseClickListener listener) {

@@ -11,7 +11,10 @@ import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 
@@ -162,4 +165,40 @@ public interface Api {
             @Query("openid") String openId,
             @Query("page") int page
     );
+
+
+    /**
+     *
+     * 下单
+     * @param bs           {@link BSConstant#ADD_SERVICE}
+     * @param openid
+     * @param vipName
+     * @param vipPhone
+     * @param timestamp
+     * @param servicesSize
+     * @param serviceType
+     * @param from
+     * @param gender
+     * @param location
+     * @param shopid
+     * @param services
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constant.ORDERS)
+    Observable<BaseBean> addService(
+            @Field("bs") String bs,
+            @Field("openid") String openid,
+            @Field("name") String vipName,
+            @Field("phone") String vipPhone,
+            @Field("fuwushijian") long timestamp,
+            @Field("shuliang") int servicesSize,
+            @Field("fuwumoshi") int serviceType,
+            @Field("laiyuan") int from,
+            @Field("sex") String gender,
+            @Field("dizhi") String location,
+            @Field("shanghuid") String shopid,
+            @Field("fuwuxiangmu") String services
+    );
+
 }

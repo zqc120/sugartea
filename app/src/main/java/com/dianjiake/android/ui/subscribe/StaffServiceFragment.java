@@ -29,5 +29,6 @@ public class StaffServiceFragment extends BaseServiceStaffFragment implements Ba
     @Override
     public void onClick(Object t, int position) {
         activity.setResult(Activity.RESULT_OK, ActiivtyDataHelper.getStaffServiceData((ServiceBean) t));
+        activity.finish();
     }
 }

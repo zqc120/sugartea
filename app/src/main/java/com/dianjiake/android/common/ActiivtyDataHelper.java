@@ -4,6 +4,7 @@ package com.dianjiake.android.common;
 import android.app.Service;
 import android.content.Intent;
 
+import com.amap.api.services.core.PoiItem;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
@@ -15,6 +16,8 @@ public class ActiivtyDataHelper {
 
     private static final String KEY_SS = "keyss";
     private static final String KEY_STAFF_SERVICE = "keysts";
+    private static final String KEY_TIME = "keytime";
+    private static final String KEY_POI = "keypoi";
 
     public static Intent getServiceStaffData(UserInfoBean item) {
         Intent intent = new Intent();
@@ -34,5 +37,25 @@ public class ActiivtyDataHelper {
 
     public static ServiceBean getStaffServiceBean(Intent intent) {
         return intent.getParcelableExtra(KEY_STAFF_SERVICE);
+    }
+
+    public static Intent getChooseTimeData(long timestamp) {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_TIME, timestamp);
+        return intent;
+    }
+
+    public static Long getChooseTime(Intent data) {
+        return data.getLongExtra(KEY_TIME, System.currentTimeMillis());
+    }
+
+    public static Intent getPoiItemData(PoiItem item) {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_POI, item);
+        return intent;
+    }
+
+    public static PoiItem getPoiItem(Intent intent) {
+        return intent.getParcelableExtra(KEY_POI);
     }
 }

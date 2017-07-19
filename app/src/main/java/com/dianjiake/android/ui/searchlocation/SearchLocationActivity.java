@@ -1,6 +1,7 @@
 package com.dianjiake.android.ui.searchlocation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,9 +26,11 @@ import com.amap.api.services.core.PoiItem;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.App;
 import com.dianjiake.android.base.BaseTranslateActivity;
+import com.dianjiake.android.common.ActiivtyDataHelper;
 import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.ui.common.SearchHistoryAdapter;
 import com.dianjiake.android.util.EventUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -45,7 +48,14 @@ import timber.log.Timber;
  */
 
 public class SearchLocationActivity extends BaseTranslateActivity<SearchLocationContract.Presenter> implements SearchLocationContract.View {
+    private static final String TYPE_CHANGE_LOCATION = "change";//首页跳转过来
+    private static final String TYPE_CHOOSE_LOCATION = "choose";//填写资料，下单跳转过来
 
+    public static Intent getChooseLocationIntent() {
+        Intent intent = IntentUtil.getIntent(SearchLocationActivity.class);
+        intent.setType(TYPE_CHOOSE_LOCATION);
+        return intent;
+    }
 
     @BindView(R.id.toolbar_space)
     ToolbarSpaceView toolbarSpace;
@@ -65,6 +75,7 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
     ListView history;
 
 
+    String type;
     AMap map;
     Marker marker;
     SearchResultAdapter searchResultAdapter;
@@ -74,6 +85,7 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
     boolean isMoveMapSearch = true;
 
     int markerPositionX, markerPositionY;
+
 
     @Override
     public void setPresenter(SearchLocationContract.Presenter presenter) {
@@ -87,6 +99,7 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+        type = getIntent().getType();
         imm = (InputMethodManager) App.getInstance().getSystemService(INPUT_METHOD_SERVICE);
         mapView.onCreate(savedInstanceState);
         map = mapView.getMap();
@@ -253,9 +266,13 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
 
     @Override
     public void chooseLocation(PoiItem item) {
-        EventUtil.postLocationEvent(new LocationEvent(item.getTitle(),
-                item.getLatLonPoint().getLongitude(),
-                item.getLatLonPoint().getLatitude()));
+        if (TYPE_CHOOSE_LOCATION.equals(type)) {
+            setResult(RESULT_OK, ActiivtyDataHelper.getPoiItemData(item));
+        } else {
+            EventUtil.postLocationEvent(new LocationEvent(item.getTitle(),
+                    item.getLatLonPoint().getLongitude(),
+                    item.getLatLonPoint().getLatitude()));
+        }
         finish();
     }
 

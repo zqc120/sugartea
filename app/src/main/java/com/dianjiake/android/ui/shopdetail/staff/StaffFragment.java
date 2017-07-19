@@ -4,15 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.common.ShopStaffAdapter;
 import com.dianjiake.android.ui.shopdetail.BaseShopContentFragment;
+import com.dianjiake.android.ui.shopweb.ShopWebActivity;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 
 /**
  * Created by lfs on 2017/7/17.
  */
 
-public class StaffFragment extends BaseShopContentFragment implements StaffContract.View {
+public class StaffFragment extends BaseShopContentFragment implements StaffContract.View, BaseLoadMoreAdapter.OnItemClickListener {
 
     @Override
     protected StaffPresenter getPresenter() {
@@ -21,7 +23,9 @@ public class StaffFragment extends BaseShopContentFragment implements StaffContr
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        return new ShopStaffAdapter(presenter.getItems());
+        BaseLoadMoreAdapter adapter = new ShopStaffAdapter(presenter.getItems());
+        adapter.setOnItemClickListener(this);
+        return adapter;
     }
 
     @Override
@@ -30,4 +34,8 @@ public class StaffFragment extends BaseShopContentFragment implements StaffContr
     }
 
 
+    @Override
+    public void onClick(Object t, int position) {
+        startActivity(ShopWebActivity.getStaffDetaill((UserInfoBean) t));
+    }
 }

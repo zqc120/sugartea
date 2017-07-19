@@ -6,12 +6,10 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.ShopCommentBean;
-import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
-import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
