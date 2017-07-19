@@ -23,9 +23,13 @@ public interface HomeContract {
         void showPD();
 
         void dismissPD();
+
+        void moveRecyclerView();
     }
 
     interface Presenter extends BaseListPresenter {
+        void filterLoad();
+
         List<HomeShopBean> getItems();
 
         void addRG(RadioGroup rg);

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/base_size4">
 
-    <com.qinlin.lebang.ui.view.calender.GregorianLunarCalendarView
+    <com.dianjiake.android.view.calender.GregorianLunarCalendarView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="160dp"

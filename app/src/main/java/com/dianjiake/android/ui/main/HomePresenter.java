@@ -72,6 +72,13 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
     }
 
     @Override
+    public void filterLoad() {
+        view.moveRecyclerView();
+        page = 1;
+        load(true);
+    }
+
+    @Override
     public void reload() {
         page = 1;
         items.clear();
@@ -99,6 +106,7 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
                     public void onSuccess(List<HomeShopBean> list, boolean isAll) {
                         view.dismissPD();
                         if (isReload) {
+                            items.clear();
                             HomeShopBean temp = new HomeShopBean();
                             temp.setViewType(HomeType.AD);
                             items.add(0, temp);
@@ -128,6 +136,7 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
                     }
                 });
     }
+
 
     @Override
     public List<HomeShopBean> getItems() {
@@ -168,6 +177,6 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
                 break;
         }
         view.showPD();
-        reload();
+        filterLoad();
     }
 }

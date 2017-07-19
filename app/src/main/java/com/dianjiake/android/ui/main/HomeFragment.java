@@ -2,6 +2,7 @@ package com.dianjiake.android.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
@@ -144,6 +145,13 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         if (pd != null) {
             pd.dismissAllowingStateLoss();
         }
+    }
+
+    @Override
+    public void moveRecyclerView() {
+        totalScrollY = adViewTopDistance - toolbarBottomDistance;
+        ((LinearLayoutManager) ptrListLayout.getRecyclerView().getLayoutManager())
+                .scrollToPositionWithOffset(1,UIUtil.getStatusBarHeight()+UIUtil.getDimensionPixelSize(R.dimen.button_size_normal));
     }
 
     @OnClick(R.id.toolbar_location_holder)
