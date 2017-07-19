@@ -12,6 +12,7 @@ public interface Constant {
 
     String SALT = "3c66790a694fd53aed110a8e85f1aeec";
     float CHART_LINE_SIZE = 1f;
+    String WX_PACKAGE_NAME = "com.tencent.mm";
 
     /**
      * 测试

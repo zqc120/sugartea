@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.ui.shopweb.ShopWebActivity;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
@@ -185,7 +186,11 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
         @OnClick(R.id.subscribe)
         void clickSub(View v) {
-            IntentUtil.startActivity(v, SubscribeActivity.getStartIntent(serviceBean,null));
+            if (LoginInfoDBHelper.newInstance().isLogin()) {
+                IntentUtil.startActivity(v, SubscribeActivity.getStartIntent(serviceBean, null));
+            } else {
+                IntentUtil.startLoginActivity(v);
+            }
         }
 
         @Override

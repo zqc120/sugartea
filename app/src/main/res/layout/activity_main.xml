@@ -26,18 +26,19 @@
             android:id="@+id/main_radio_home"
             style="@style/MainTabStyle"
             android:checked="true"
-            android:text="预约" />
+            android:text="首页" />
 
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/main_radio_service"
             style="@style/MainTabStyle"
-            android:text="客户" />
+            android:text="服务"
+            android:visibility="gone" />
 
 
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/main_radio_orders"
             style="@style/MainTabStyle"
-            android:text="业绩" />
+            android:text="订单" />
 
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/main_radio_mine"

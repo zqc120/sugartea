@@ -2,6 +2,7 @@ package com.dianjiake.android.util;
 
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 
 import com.dianjiake.android.base.App;
@@ -89,6 +90,21 @@ public class AppUtil {
 
         }
         return ret;
+    }
+
+    /**
+     * 判断app是否安装
+     *
+     * @return
+     */
+    public static boolean isAppInstalled(String packageName) {
+        PackageManager pm = App.getInstance().getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (Exception x) {
+            return false;
+        }
     }
 
 }

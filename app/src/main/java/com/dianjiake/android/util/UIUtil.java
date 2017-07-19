@@ -139,4 +139,16 @@ public class UIUtil {
         return App.getInstance().getResources().getColor(colorRes);
     }
 
+
+    /**
+     * 设置view是否可见
+     *
+     * @param view {@link View}
+     * @param visible
+     */
+    public static void setVisibility(View view, boolean visible) {
+        if (view != null) {
+            view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
 }

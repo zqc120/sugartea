@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.View;
 
 import com.dianjiake.android.base.App;
+import com.dianjiake.android.ui.login.LoginChooseActivity;
 
 
 /**
@@ -71,4 +72,12 @@ public class IntentUtil {
         return startActivity(c, intent);
     }
 
+
+    public static void startLoginActivity(View v) {
+        startLoginActivity(v.getContext());
+    }
+
+    public static void startLoginActivity(Context c) {
+        startActivity(c, LoginChooseActivity.class);
+    }
 }

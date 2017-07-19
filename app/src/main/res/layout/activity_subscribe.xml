@@ -79,6 +79,7 @@
 
                 <EditText
                     android:id="@+id/phone"
+                    android:inputType="numberSigned"
                     style="@style/ItemAddContentStyle"
 
                     android:background="@null"

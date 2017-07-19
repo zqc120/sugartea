@@ -2,6 +2,7 @@ package com.dianjiake.android.util;
 
 
 import com.dianjiake.android.event.LocationEvent;
+import com.dianjiake.android.event.LoginEvent;
 import com.dianjiake.android.event.SearchShopEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -18,5 +19,9 @@ public class EventUtil {
 
     public static void postSearchShopEvent(String search) {
         EventBus.getDefault().post(new SearchShopEvent(search));
+    }
+
+    public static void postLoginEvent() {
+        EventBus.getDefault().post(new LoginEvent());
     }
 }

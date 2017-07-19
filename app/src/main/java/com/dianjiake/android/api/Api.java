@@ -5,12 +5,14 @@ import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.LoginBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -168,8 +170,8 @@ public interface Api {
 
 
     /**
-     *
      * 下单
+     *
      * @param bs           {@link BSConstant#ADD_SERVICE}
      * @param openid
      * @param vipName
@@ -201,4 +203,26 @@ public interface Api {
             @Field("fuwuxiangmu") String services
     );
 
+
+    /**
+     * 登录
+     *
+     * @param bs
+     * @param phone
+     * @param sms
+     * @param wxOpenId
+     * @param unionId
+     * @param qqOpenid
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constant.USER)
+    Observable<BaseBean<LoginBean>> login(
+            @Field("bs") String bs,
+            @Field("phone") String phone,
+            @Field("sms") String sms,
+            @Field("wxopenid") String wxOpenId,
+            @Field("unionid") String unionId,
+            @Field("cid") String qqOpenid
+    );
 }
