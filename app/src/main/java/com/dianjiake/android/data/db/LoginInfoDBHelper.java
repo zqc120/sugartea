@@ -38,7 +38,11 @@ public class LoginInfoDBHelper {
         model.setOpenId(bean.getOpenid());
         model.setGender(bean.getSex());
         model.setBirthday(bean.getBirthday());
-
+        model.setLongitude(bean.getLongitude());
+        model.setLatitude(bean.getLatitude());
+        model.setLocation(bean.getLocation());
+        model.setOccupation(bean.getProfession());
+        model.setOccupationId(bean.getZhiyeid());
         //绑定个推别名
         PushManager.getInstance().bindAlias(App.getInstance(), bean.getOpenid());
 

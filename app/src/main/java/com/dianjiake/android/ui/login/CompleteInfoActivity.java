@@ -346,7 +346,7 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
 
     void getOccupation() {
 
-        Network.getInstance().occupationList(BSConstant.OCCUPATION_LIST, "1")
+        Network.getInstance().occupationList(BSConstant.OCCUPATION_LIST)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseListBean<OccupationBean>>() {
@@ -416,7 +416,9 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
     void commit() {
         showCommitDialog();
         EditUserInfoParams infoParams = new EditUserInfoParams();
-        infoParams.setAvatar(new File(mAvatarPath));
+        if (!CheckEmptyUtil.isEmpty(mAvatarPath)) {
+            infoParams.setAvatar(new File(mAvatarPath));
+        }
         infoParams.setNickname(mFormNickname);
         infoParams.setSex(mFormGender);
         infoParams.setBirthday(mFormAge);

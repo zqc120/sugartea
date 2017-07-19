@@ -121,7 +121,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
 
     @OnClick(R.id.login_choose_phone)
     void pressPhone(View v) {
-//        startActivity(LoginPhoneActivity.getSignIntent());
+        startActivity(LoginPhoneActivity.getSignIntent());
     }
 
 

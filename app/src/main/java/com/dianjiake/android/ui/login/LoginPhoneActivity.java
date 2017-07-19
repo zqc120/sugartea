@@ -340,12 +340,15 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
 
                     @Override
                     public void onNext(@NonNull BaseBean<LoginBean> baseBean) {
+                        dissmissLoginDialog();
                         if (baseBean != null && baseBean.getCode() == 200) {
+                            saveLoginUserInfo(baseBean.getObj().getUser());
                             if (getIntent().getType().equals(TYPE_BIND)) {
-                                saveLoginUserInfo(baseBean.getObj().getUser());
                                 LoginActivitiesManger.newInstance().phoneRegisterSuccess();
 //                                startActivity(CompleteInfoActivity.getStartIntent(response.body().getObj().getUser().getOpenid(),
 //                                        null, null));
+                            } else if (getIntent().getType().equals(TYPE_SIGN)) {
+                                LoginActivitiesManger.newInstance().phoneLoginSuccess();
                             }
                         } else if (baseBean != null && baseBean.getCode() == 4003) {
                             ToastUtil.showShortToast("验证码有误，请重新输入");

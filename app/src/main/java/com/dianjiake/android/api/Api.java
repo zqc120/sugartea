@@ -278,13 +278,11 @@ public interface Api {
      * 职业列表
      *
      * @param bs
-     * @param id
      * @return
      */
     @GET(Constant.USER)
     Observable<BaseListBean<OccupationBean>> occupationList(
-            @NonNull @Query("bs") String bs,
-            @NonNull @Query("id") String id
+            @NonNull @Query("bs") String bs
     );
 
     /**

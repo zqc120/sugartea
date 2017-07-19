@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.ui.login.CompleteInfoActivity;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -124,5 +125,10 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
                     }
                 })
                 .show();
+    }
+
+    @OnClick(R.id.avatar)
+    void clickAvatar(View v){
+        startActivity(CompleteInfoActivity.getEditIntent());
     }
 }

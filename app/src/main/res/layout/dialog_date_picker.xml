@@ -10,8 +10,8 @@
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        app:glcv_GregorianThemeColor="@color/app_main_color"
-        app:glcv_LunarThemeColor="@color/app_main_color"
+        app:glcv_GregorianThemeColor="@color/main"
+        app:glcv_LunarThemeColor="@color/main"
         app:glcv_NormalTextColor="@color/text_content_secondary"
         app:glcv_ScrollAnimation="true" />
 </LinearLayout>
