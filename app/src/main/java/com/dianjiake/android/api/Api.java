@@ -251,4 +251,20 @@ public interface Api {
             @NonNull @Query("leixing") String type
 
     );
+
+    /**
+     * 获取用户信息
+     *
+     * @param bs
+     * @param openId
+     * @param phone
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseBean<LoginBean>> getUserInfo(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openId,
+            @NonNull @Query("phone") String phone
+
+    );
 }

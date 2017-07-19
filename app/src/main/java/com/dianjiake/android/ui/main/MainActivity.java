@@ -51,15 +51,15 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
         Fragment fm1 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
         Fragment fm2 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
         Fragment fm3 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
-        Fragment fm4 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
+        Fragment fm4 = FragmentFactory.createFragmentByFM(MineFragment.class, getFragmentManager());
 //        Fragment fm3 = FragmentFactory.createFragmentByFM(MineFragment.class, getFragmentManager());
 //        Fragment fmVip = new FragmentFactory().createFragmentByFM(VipListFragment.class, getFragmentManager());
 //        Fragment fmPerformance = new FragmentFactory().createFragmentByFM(PerformanceFragment.class, getFragmentManager());
 //
         tabManager.putFragment(R.id.main_radio_home, fm1);
-        tabManager.putFragment(R.id.main_radio_home, fm2);
-        tabManager.putFragment(R.id.main_radio_home, fm3);
-        tabManager.putFragment(R.id.main_radio_home, fm4);
+        tabManager.putFragment(R.id.main_radio_service, fm2);
+        tabManager.putFragment(R.id.main_radio_orders, fm3);
+        tabManager.putFragment(R.id.main_radio_mine, fm4);
         tabManager.start();
     }
 

@@ -48,4 +48,5 @@ public interface BSConstant {
     String SHOP_COMMENT = "shanghupinglun";// 商户评论
     String SERVICE_STAFF = "fuwudianyuanliebiao";// 服务员工列表
     String STAFF_SERVICE = "dianyuanfuwuliebiao";// 员工服务列表
+    String USER_INFO = "userinfo";//  查看用户信息
 }
