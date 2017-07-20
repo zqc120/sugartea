@@ -7,32 +7,20 @@
     android:orientation="vertical">
 
 
-    <FrameLayout
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_splash_top" />
+
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/colorAccent">
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_splash_bottom" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:adjustViewBounds="true"
-            android:src="@color/colorAccent" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="@color/text_white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="49dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:src="@color/colorAccent" />
-    </FrameLayout>
 </LinearLayout>

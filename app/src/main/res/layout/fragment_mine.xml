@@ -67,7 +67,7 @@
 
             <ImageView
                 style="@style/MineIconStyle"
-                android:src="@drawable/ic_defaul_avatar" />
+                android:src="@drawable/ic_mine_order" />
 
             <TextView
                 style="@style/MineTitleStyle"
@@ -165,7 +165,7 @@
 
             <ImageView
                 style="@style/MineIconStyle"
-                android:src="@drawable/ic_defaul_avatar" />
+                android:src="@drawable/ic_mine_call" />
 
             <TextView
                 style="@style/MineTitleStyle"
