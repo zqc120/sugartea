@@ -8,6 +8,8 @@ import com.dianjiake.android.util.CheckEmptyUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * Created by lfs on 2017/7/20.
  */
@@ -16,11 +18,13 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     EvaluateContract.View view;
     ArrayList<OrderServiceBean> items;
     List<EvaluateBean> evaluates;
+    CompositeDisposable cd;
 
     public EvaluatePresenter(EvaluateContract.View view) {
         this.view = view;
         items = new ArrayList<>();
         evaluates = new ArrayList<>();
+        cd = new CompositeDisposable();
     }
 
     @Override
@@ -80,6 +84,12 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     @Override
     public ArrayList<OrderServiceBean> getItems() {
         return items;
+    }
+
+    @Override
+    public void submit() {
+        view.showPD();
+        cd.clear();
     }
 
 }

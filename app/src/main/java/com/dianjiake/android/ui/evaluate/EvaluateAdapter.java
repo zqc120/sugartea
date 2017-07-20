@@ -1,6 +1,5 @@
 package com.dianjiake.android.ui.evaluate;
 
-import android.graphics.Paint;
 import android.text.InputFilter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import butterknife.BindView;
-
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/20.
@@ -50,7 +47,7 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
     @Override
     public BaseViewHolder myOnCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == EvaluateType.BUTTON) {
-            return new SubmmitVH(UIUtil.inflate(R.layout.item_evaluate_button, parent), presenter);
+            return new SubmitVH(UIUtil.inflate(R.layout.item_evaluate_button, parent), presenter);
         } else {
             return new ViewHolder(UIUtil.inflate(R.layout.item_evaluate, parent), presenter);
 
@@ -158,14 +155,19 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
         }
     }
 
-    public static class SubmmitVH extends BaseViewHolder {
+    public static class SubmitVH extends BaseViewHolder {
         @BindView(R.id.button)
         Button button;
         EvaluateContract.Presenter presenter;
 
-        public SubmmitVH(View itemView, EvaluateContract.Presenter presenter) {
+        public SubmitVH(View itemView, EvaluateContract.Presenter presenter) {
             super(itemView);
             this.presenter = presenter;
+        }
+
+        @OnClick(R.id.button)
+        void onClick(View v) {
+            presenter.submit();
         }
 
         @Override

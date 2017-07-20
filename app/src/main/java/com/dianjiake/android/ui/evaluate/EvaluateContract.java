@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 public interface EvaluateContract {
     interface View extends BaseListView {
+        void showPD();
+
+        void dismissPD();
     }
 
     interface Presenter extends BaseListPresenter {
@@ -23,5 +26,7 @@ public interface EvaluateContract {
         void setRate(int rate, int position);
 
         ArrayList<OrderServiceBean> getItems();
+
+        void submit();
     }
 }

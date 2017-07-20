@@ -12,6 +12,7 @@ import com.dianjiake.android.base.BaseListActivity;
 import com.dianjiake.android.common.AndroidBug5497Workaround;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -44,6 +45,8 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
     @BindView(R.id.ptr_list)
     PtrListLayout ptrList;
 
+    NormalProgressDialog pd;
+
     @Override
     public int provideContentView() {
         return R.layout.activity_no_comment;
@@ -55,6 +58,7 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
         ptrListLayout.setNeedPtr(false);
         ptrListLayout.setNeedLoadMore(false);
         presenter.setServices((OrderBean) getIntent().getParcelableExtra("order"));
+        toolbarTitle.setText("评价服务");
     }
 
     @Override
@@ -77,4 +81,17 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
 
     }
 
+    @Override
+    public void showPD() {
+        if (pd == null) {
+            pd = NormalProgressDialog.newInstance("正在提交，请稍候...");
+        }
+    }
+
+    @Override
+    public void dismissPD() {
+        if (pd != null) {
+            pd.dismissAllowingStateLoss();
+        }
+    }
 }
