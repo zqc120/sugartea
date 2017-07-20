@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/holder"
     android:layout_marginLeft="@dimen/base_margin"
     android:layout_marginRight="@dimen/base_margin"
     android:layout_marginTop="@dimen/base_size2"
@@ -76,22 +76,27 @@
         android:layout_marginTop="@dimen/base_size2"
         app:layout_constraintTop_toBottomOf="@+id/table_layout" />
 
-    <Button
-        android:id="@+id/button1"
-        style="@style/OrderButtonStyle"
-        android:layout_marginRight="@dimen/base_margin"
-        app:layout_constraintRight_toLeftOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2"
-        tools:text="再来一次" />
-
-    <Button
-        android:id="@+id/button2"
-        style="@style/OrderButtonStyle"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/base_size2"
         android:layout_marginRight="@dimen/base_margin"
         android:layout_marginTop="@dimen/base_size2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table_divider"
-        tools:text="再来一次" />
+        app:layout_constraintTop_toBottomOf="@+id/table_divider">
+
+        <Button
+            android:id="@+id/button1"
+            style="@style/OrderButtonStyle"
+            tools:text="再来一次" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/OrderButtonStyle"
+            android:layout_marginLeft="@dimen/base_margin"
+
+            tools:text="再来一次" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

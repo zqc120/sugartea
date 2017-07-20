@@ -16,6 +16,7 @@ import com.dianjiake.android.ui.login.CompleteInfoActivity;
 import com.dianjiake.android.ui.setting.SettingActivity;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.view.dialog.NormalAlertDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -114,21 +115,17 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
 
     @OnClick(R.id.mine_call)
     void clickCall(View v) {
-        AlertDialog alertDialog = new AlertDialog.Builder(activity)
-                .setMessage("确定呼叫：010-57206260")
-                .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01057206260"));
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
+        NormalAlertDialog dialog = NormalAlertDialog.newInstance("确定呼叫：010-57206260？", true, true);
+        dialog.setOnButtonClick(new NormalAlertDialog.OnButtonClick() {
+            @Override
+            public void click(int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01057206260"));
+                    startActivity(intent);
+                }
+            }
+        });
+        dialog.showDialog(getFragmentManager(), "call");
     }
 
     @OnClick(R.id.avatar)

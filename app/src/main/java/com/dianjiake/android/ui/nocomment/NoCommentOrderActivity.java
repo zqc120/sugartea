@@ -1,5 +1,6 @@
 package com.dianjiake.android.ui.nocomment;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListActivity;
 import com.dianjiake.android.ui.common.OrderListAdapter;
 import com.dianjiake.android.ui.common.OrderView;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -41,6 +43,8 @@ public class NoCommentOrderActivity extends BaseListActivity<NoCommentOrderPrese
     @BindView(R.id.ptr_list)
     PtrListLayout ptrList;
 
+    NormalProgressDialog cancelPD;
+
     @Override
     public void setShowNoCommentHolder(boolean show) {
 
@@ -59,6 +63,26 @@ public class NoCommentOrderActivity extends BaseListActivity<NoCommentOrderPrese
     @Override
     public Context getViewContext() {
         return this;
+    }
+
+    @Override
+    public void showCancelPD() {
+        if (cancelPD == null) {
+            cancelPD = NormalProgressDialog.newInstance("正在取消预约，请稍候...");
+        }
+        cancelPD.showDialog(getFragmentManager(), "cancel");
+    }
+
+    @Override
+    public void dismissCancelPD() {
+        if (cancelPD != null) {
+            cancelPD.dismissAllowingStateLoss();
+        }
+    }
+
+    @Override
+    public FragmentManager provideFragmentManager() {
+        return getFragmentManager();
     }
 
     @Override

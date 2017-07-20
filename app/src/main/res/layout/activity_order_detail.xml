@@ -68,6 +68,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/detail_button2"
                     app:layout_constraintTop_toBottomOf="@+id/detail_desc"
+                    app:layout_goneMarginRight="0dp"
                     tools:text="再来一次" />
 
                 <Button

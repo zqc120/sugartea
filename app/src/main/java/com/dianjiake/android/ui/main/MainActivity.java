@@ -3,13 +3,20 @@ package com.dianjiake.android.ui.main;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;
 import android.widget.RadioGroup;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
+import com.dianjiake.android.event.LogOutEvent;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.TabFragmentManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,7 +26,10 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
 
     @BindView(R.id.main_radio_group)
     RadioGroup mainRadioGroup;
+    @BindView(R.id.main_radio_home)
+    AppCompatRadioButton homeRadio;
     TabFragmentManager tabManager;
+
 
     @Override
     public int provideContentView() {
@@ -28,8 +38,8 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
-
-        tabManager = new TabFragmentManager(getFragmentManager(), mainRadioGroup);
+        EventBus.getDefault().register(this);
+        tabManager = new TabFragmentManager(getFragmentManager(), mainRadioGroup, true);
         initFragments();
     }
 
@@ -63,5 +73,14 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
         tabManager.start();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogoutEvent(LogOutEvent event) {
+        homeRadio.setChecked(true);
+    }
 
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

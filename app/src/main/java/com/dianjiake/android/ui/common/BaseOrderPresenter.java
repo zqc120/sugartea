@@ -4,16 +4,19 @@ import com.dianjiake.android.api.Network;
 import com.dianjiake.android.base.BaseListPresenter;
 import com.dianjiake.android.base.BasePresenter;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.request.OrderListObserver;
+import com.dianjiake.android.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -97,6 +100,44 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
                 view.loadNetworkError();
             }
         });
+    }
+
+    public void cancelOrder(final OrderBean orderBean, final int position) {
+        cd.clear();
+        view.showCancelPD();
+        Network.getInstance().orderCancel(BSConstant.ORDER_CANCEL, loginInfo.getOpenId(), orderBean.getOrdernum())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseBean baseBean) {
+                        view.dismissCancelPD();
+                        if (baseBean.getCode() == 200) {
+                            ToastUtil.showShortToast("取消预约成功");
+                            orderBean.setStatus("4");
+                            items.set(position, orderBean);
+                            view.loadComplete();
+                        } else {
+                            ToastUtil.showShortToast("取消预约失败，请稍候重试");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        ToastUtil.showShortToast("取消预约失败，请稍候重试");
+                        view.dismissCancelPD();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 

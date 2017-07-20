@@ -17,6 +17,7 @@ import com.dianjiake.android.ui.common.OrderPresenter;
 import com.dianjiake.android.ui.common.OrderView;
 import com.dianjiake.android.ui.nocomment.NoCommentOrderActivity;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -52,6 +53,8 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
     TextView noCommentText;
     @BindView(R.id.no_comment_holder)
     View noCommentHolder;
+
+    NormalProgressDialog cancelPD;
 
     @Override
     protected int provideLayout() {
@@ -120,6 +123,21 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
     @Override
     public Context getViewContext() {
         return activity;
+    }
+
+    @Override
+    public void showCancelPD() {
+        if (cancelPD == null) {
+            cancelPD = NormalProgressDialog.newInstance("正在取消预约，请稍候...");
+        }
+        cancelPD.showDialog(getFragmentManager(), "cancel");
+    }
+
+    @Override
+    public void dismissCancelPD() {
+        if (cancelPD != null) {
+            cancelPD.dismissAllowingStateLoss();
+        }
     }
 
 

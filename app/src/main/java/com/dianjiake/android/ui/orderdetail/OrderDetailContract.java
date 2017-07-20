@@ -11,8 +11,13 @@ import com.dianjiake.android.data.bean.OrderBean;
 public interface OrderDetailContract {
     interface View extends BaseView<Presenter> {
         void setView(OrderBean bean);
+        void showCancelPD();
+
+        void dismissCancelPD();
     }
 
     interface Presenter extends BasePresenter {
+        void setOrderBean(OrderBean orderBean);
+        void cancelOrder();
     }
 }

@@ -51,6 +51,7 @@ public interface BSConstant {
     String USER_INFO = "userinfo";//  查看用户信息
     String AD = "appjiaodiantu";//   首页广告
     String NO_COMMENT_ORDER_LIST = "weipinglundingdanliebiao";// 为评价订单列表
+    String ORDER_CANCEL = "fuwudingdanquxiao";// 取消订单
 
 
 }

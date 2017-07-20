@@ -108,6 +108,8 @@ public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
 
             tableLayout.removeAllViews();
 
+            button2.setVisibility("1".equals(item.getShifoupinglun()) ? View.GONE : View.VISIBLE);
+
             if (!CheckEmptyUtil.isEmpty(item.getDingdanfuwu())) {
                 for (int i = 0; i < item.getDingdanfuwu().size(); i++) {
                     OrderServiceBean orderService = item.getDingdanfuwu().get(i);

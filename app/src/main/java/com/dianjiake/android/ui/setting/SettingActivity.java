@@ -14,12 +14,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.api.Network;
 import com.dianjiake.android.base.BaseTranslateActivity;
+import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.BaseBean;
+import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.util.EventUtil;
+import com.dianjiake.android.view.dialog.NormalAlertDialog;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by lfs on 2017/7/20.
@@ -73,21 +85,17 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
 
     @OnClick(R.id.setting_call)
     void clickCall(View v) {
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setMessage("确定呼叫：010-57206260")
-                .setPositiveButton("呼叫", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01057206260"));
-                        startActivity(intent);
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
+        NormalAlertDialog dialog = NormalAlertDialog.newInstance("确定呼叫：010-57206260？", true, true);
+        dialog.setOnButtonClick(new NormalAlertDialog.OnButtonClick() {
+            @Override
+            public void click(int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01057206260"));
+                    startActivity(intent);
+                }
+            }
+        });
+        dialog.showDialog(getFragmentManager(), "call");
     }
 
     @OnClick(R.id.setting_evaluate)
@@ -96,5 +104,35 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.setting_log_out)
+    void clickLogOut(View v) {
+        NormalAlertDialog dialog = NormalAlertDialog.newInstance("确定要退出登录？", true, true);
+        dialog.setOnButtonClick(new NormalAlertDialog.OnButtonClick() {
+            @Override
+            public void click(int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    logOut();
+                }
+            }
+        });
+        dialog.showDialog(getFragmentManager(), "logout");
+    }
+
+    void logOut() {
+        Network.getInstance().logout(BSConstant.LOGOUT, LoginInfoDBHelper.newInstance().getLoginInfo().getOpenId())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+
+                    }
+                });
+
+        LoginInfoDBHelper.newInstance().logout();
+        EventUtil.postLogOutEvent();
+        finish();
     }
 }

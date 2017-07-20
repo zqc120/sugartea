@@ -323,4 +323,33 @@ public interface Api {
             @NonNull @Query("openid") String openid,
             @NonNull @Query("page") int page
     );
+
+    /**
+     * 退出登录
+     *
+     * @param bs
+     * @param openid
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseBean> logout(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid
+    );
+
+    /**
+     * 取消订单
+     *
+     * @param bs       {@link BSConstant#ORDER_CANCEL}
+     * @param openid
+     * @param ordernum
+     * @return
+     */
+    @GET(Constant.ORDERS)
+    Observable<BaseBean> orderCancel(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid,
+            @NonNull @Query("ordernum") String ordernum
+
+    );
 }

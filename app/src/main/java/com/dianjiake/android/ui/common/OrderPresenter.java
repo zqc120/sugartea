@@ -1,6 +1,8 @@
 package com.dianjiake.android.ui.common;
 
 
+import android.content.DialogInterface;
+
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseListBean;
@@ -9,6 +11,7 @@ import com.dianjiake.android.ui.evaluate.EvaluateActivity;
 import com.dianjiake.android.ui.orderdetail.OrderDetailActivity;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.view.dialog.NormalAlertDialog;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,8 +45,17 @@ public class OrderPresenter extends BaseOrderPresenter {
     }
 
     @Override
-    public void clickCancel(OrderBean orderBean, int position) {
-
+    public void clickCancel(final OrderBean orderBean, final int position) {
+        NormalAlertDialog alertDialog = NormalAlertDialog.newInstance("确定要取消预约？");
+        alertDialog.setOnButtonClick(new NormalAlertDialog.OnButtonClick() {
+            @Override
+            public void click(int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    cancelOrder(orderBean, position);
+                }
+            }
+        });
+        alertDialog.showDialog(view.provideFragmentManager(), "cancel");
     }
 
     @Override

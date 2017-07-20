@@ -23,6 +23,7 @@ import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.TableRowUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -84,6 +85,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
     int orderStatus;
     OrderBean orderBean;
+    NormalProgressDialog cancelPD;
 
     public static Intent getStartIntent(OrderBean order) {
         Intent intent = IntentUtil.getIntent(OrderDetailActivity.class);
@@ -130,6 +132,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         orderStatus = OrderStatus.getStatus(item.getStatus());
         detailStatus.setText(OrderStatus.getStatusText(item.getStatus()));
         detailDesc.setText(OrderStatus.getStatusDescText(item.getStatus()));
+        detailButton2.setVisibility("1".equals(item.getShifoupinglun()) ? View.GONE : View.VISIBLE);
 
         tableLayout.removeAllViews();
 
@@ -205,6 +208,22 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         addTime.addView(TableRowUtil.getSubText(DateUtil.formatYMDHM(item.getAddtime()), this));
         subTable.addView(addTime);
     }
+
+    @Override
+    public void showCancelPD() {
+        if (cancelPD == null) {
+            cancelPD = NormalProgressDialog.newInstance("正在取消预约，请稍候...");
+        }
+        cancelPD.showDialog(getFragmentManager(), "cancel");
+    }
+
+    @Override
+    public void dismissCancelPD() {
+        if (cancelPD != null) {
+            cancelPD.dismissAllowingStateLoss();
+        }
+    }
+
 
 
     void setButtonText() {

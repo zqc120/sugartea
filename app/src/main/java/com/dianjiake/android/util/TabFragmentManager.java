@@ -4,10 +4,14 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.annotation.IdRes;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.util.SparseArray;
 import android.widget.RadioGroup;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.ui.login.LoginChooseActivity;
 
 
 /**
@@ -18,10 +22,16 @@ public class TabFragmentManager implements RadioGroup.OnCheckedChangeListener {
 
     FragmentManager fm;
     SparseArray<Fragment> fragments;
+    boolean checkLogin;
+    LoginInfoDBHelper loginInfo;
+    RadioGroup radioGroup;
 
-    public TabFragmentManager(FragmentManager fm, RadioGroup radioGroup) {
+    public TabFragmentManager(FragmentManager fm, RadioGroup radioGroup, boolean checkLogin) {
         this.fm = fm;
         this.fragments = new SparseArray<>();
+        this.checkLogin = checkLogin;
+        this.radioGroup = radioGroup;
+        loginInfo = LoginInfoDBHelper.newInstance();
         radioGroup.setOnCheckedChangeListener(this);
     }
 
@@ -34,6 +44,12 @@ public class TabFragmentManager implements RadioGroup.OnCheckedChangeListener {
     }
 
     public void changeTab(@IdRes int id) {
+        if (checkLogin && !loginInfo.isLogin() && id != radioGroup.getChildAt(0).getId()) {
+            ((AppCompatRadioButton) radioGroup.getChildAt(0)).setChecked(true);
+            IntentUtil.startActivity(radioGroup.getContext(), LoginChooseActivity.class);
+            return;
+        }
+
         FragmentTransaction ft = fm.beginTransaction();
         if (!fragments.get(id).isAdded()) {
             ft.add(R.id.fragment_content, fragments.get(id), fragments.get(id).getClass().getName());
@@ -63,4 +79,6 @@ public class TabFragmentManager implements RadioGroup.OnCheckedChangeListener {
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         changeTab(checkedId);
     }
+
+
 }
