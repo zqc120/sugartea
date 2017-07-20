@@ -112,6 +112,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
         orderBean = getIntent().getParcelableExtra("order");
+        toolbarTitle.setText("订单详情");
         setView(orderBean);
         button1.setVisibility(View.GONE);
         button2.setVisibility(View.GONE);
@@ -269,7 +270,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         alertDialog.showDialog(getFragmentManager(), "cancel");
     }
 
-    @OnClick(R.id.button1)
+    @OnClick(R.id.detail_button1)
     void clickButton1(View v) {
         switch (orderStatus) {
             case OrderStatus.NO_CONFIRM:
@@ -284,7 +285,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         }
     }
 
-    @OnClick(R.id.button2)
+    @OnClick(R.id.detail_button2)
     void clickButton2(View v) {
         switch (orderStatus) {
             case OrderStatus.NO_CONFIRM:

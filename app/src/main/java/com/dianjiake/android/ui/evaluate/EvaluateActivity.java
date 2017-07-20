@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/20.
@@ -93,5 +95,10 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
         if (pd != null) {
             pd.dismissAllowingStateLoss();
         }
+    }
+
+    @OnClick(R.id.toolbar_icon_left)
+    void clickBack(View v) {
+        finish();
     }
 }

@@ -122,6 +122,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
             toolbarHolder.getBackground().mutate().setAlpha(255);
             toolbarSpace.getBackground().mutate().setAlpha(255);
             filter.setVisibility(View.VISIBLE);
+            toolbarSearchHolder.setBackgroundResource(R.drawable.bg_home_search);
         } else {
             Timber.d("alpha " + (255 * totalY * 1.0f / toolbarThreshold));
             toolbarHolder.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
@@ -129,6 +130,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
             filter.setVisibility(View.INVISIBLE);
             toolbarLocationHolder.setVisibility(View.VISIBLE);
 //            toolbarMsgHolder.setVisibility(View.VISIBLE);
+            toolbarSearchHolder.setBackgroundResource(R.drawable.bg_home_search_white);
         }
     }
 

@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/holder"
     android:background="@drawable/click_white"
     android:orientation="vertical">
 
@@ -91,12 +91,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/star">
 
-        <TextView
+        <ImageView
             android:layout_width="@dimen/text_size_body"
             android:layout_height="@dimen/text_size_body"
             android:background="@drawable/bg_text_promotion"
             android:gravity="center"
-            android:text="促"
+            android:src="@drawable/ic_shop_promotion"
             android:textColor="@color/text_white"
             android:textSize="@dimen/text_size_caption" />
 
@@ -125,12 +125,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/promotion_holder">
 
-        <TextView
+        <ImageView
             android:layout_width="@dimen/text_size_body"
             android:layout_height="@dimen/text_size_body"
-            android:background="@drawable/bg_text_card"
+            android:background="@drawable/bg_text_promotion"
             android:gravity="center"
-            android:text="券"
+            android:src="@drawable/ic_shop_coupon"
             android:textColor="@color/text_white"
             android:textSize="@dimen/text_size_caption" />
 
