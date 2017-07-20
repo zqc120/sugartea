@@ -2,6 +2,7 @@ package com.dianjiake.android.ui.evaluate;
 
 import com.dianjiake.android.base.BaseListPresenter;
 import com.dianjiake.android.base.BaseListView;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public interface EvaluateContract {
     }
 
     interface Presenter extends BaseListPresenter {
-        void setServices(ArrayList<OrderServiceBean> services);
+        void setServices(OrderBean orderBean);
 
         void setComment(String comment, int position);
 

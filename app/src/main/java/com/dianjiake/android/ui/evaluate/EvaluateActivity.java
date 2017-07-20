@@ -10,13 +10,11 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListActivity;
 import com.dianjiake.android.common.AndroidBug5497Workaround;
-import com.dianjiake.android.data.bean.OrderServiceBean;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -25,9 +23,9 @@ import butterknife.BindView;
  */
 
 public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presenter> implements EvaluateContract.View {
-    public static Intent getStartIntent(ArrayList<OrderServiceBean> service) {
+    public static Intent getStartIntent(OrderBean order) {
         Intent intent = IntentUtil.getIntent(EvaluateActivity.class);
-        intent.putParcelableArrayListExtra("service", service);
+        intent.putExtra("order", order);
         return intent;
     }
 
@@ -56,7 +54,7 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
         AndroidBug5497Workaround.assistActivity(this);
         ptrListLayout.setNeedPtr(false);
         ptrListLayout.setNeedLoadMore(false);
-        presenter.setServices(getIntent().<OrderServiceBean>getParcelableArrayListExtra("service"));
+        presenter.setServices((OrderBean) getIntent().getParcelableExtra("order"));
     }
 
     @Override

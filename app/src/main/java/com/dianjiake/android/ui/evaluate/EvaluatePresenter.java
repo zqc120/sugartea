@@ -1,6 +1,7 @@
 package com.dianjiake.android.ui.evaluate;
 
 import com.dianjiake.android.data.bean.EvaluateBean;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
 import com.dianjiake.android.util.CheckEmptyUtil;
 
@@ -43,7 +44,8 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     }
 
     @Override
-    public void setServices(ArrayList<OrderServiceBean> services) {
+    public void setServices(OrderBean orderBean) {
+        ArrayList<OrderServiceBean> services = orderBean.getDingdanfuwu();
         items.clear();
         if (CheckEmptyUtil.isEmpty(services)) {
             view.loadEmptyContent();
@@ -59,7 +61,6 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
             items.add(bean);
             view.loadAll();
         }
-
     }
 
     @Override
