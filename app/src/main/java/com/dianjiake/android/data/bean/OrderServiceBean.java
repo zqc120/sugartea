@@ -20,6 +20,15 @@ public class OrderServiceBean implements Parcelable {
     private String status;
     private String kaishishijian;
     private String wanchengshijian;
+    private int viewType;
+
+    public int getViewType() {
+        return viewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+    }
 
     public String getId() {
         return id;
@@ -117,6 +126,9 @@ public class OrderServiceBean implements Parcelable {
         this.wanchengshijian = wanchengshijian;
     }
 
+    public OrderServiceBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -136,9 +148,7 @@ public class OrderServiceBean implements Parcelable {
         dest.writeString(this.status);
         dest.writeString(this.kaishishijian);
         dest.writeString(this.wanchengshijian);
-    }
-
-    public OrderServiceBean() {
+        dest.writeInt(this.viewType);
     }
 
     protected OrderServiceBean(Parcel in) {
@@ -154,9 +164,10 @@ public class OrderServiceBean implements Parcelable {
         this.status = in.readString();
         this.kaishishijian = in.readString();
         this.wanchengshijian = in.readString();
+        this.viewType = in.readInt();
     }
 
-    public static final Parcelable.Creator<OrderServiceBean> CREATOR = new Parcelable.Creator<OrderServiceBean>() {
+    public static final Creator<OrderServiceBean> CREATOR = new Creator<OrderServiceBean>() {
         @Override
         public OrderServiceBean createFromParcel(Parcel source) {
             return new OrderServiceBean(source);
