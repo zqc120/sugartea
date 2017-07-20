@@ -35,9 +35,9 @@ import butterknife.OnClick;
  */
 
 public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
-    OrderPresenter presenter;
+    BaseOrderPresenter presenter;
 
-    public OrderListAdapter(List<OrderBean> items, OrderPresenter presenter) {
+    public OrderListAdapter(List<OrderBean> items, BaseOrderPresenter presenter) {
         super(items);
         this.presenter = presenter;
     }
@@ -67,7 +67,7 @@ public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
     public static class ViewHolder extends BaseViewHolder {
 
         OrderBean item;
-        OrderPresenter presenter;
+        BaseOrderPresenter presenter;
 
         @BindView(R.id.logo)
         SimpleDraweeView logo;
@@ -88,11 +88,11 @@ public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
 
         int orderStatus;
 
-        public static ViewHolder newInstance(ViewGroup parent, OrderPresenter presenter) {
+        public static ViewHolder newInstance(ViewGroup parent, BaseOrderPresenter presenter) {
             return new ViewHolder(UIUtil.inflate(R.layout.item_order, parent), presenter);
         }
 
-        private ViewHolder(View itemView, OrderPresenter presenter) {
+        private ViewHolder(View itemView, BaseOrderPresenter presenter) {
             super(itemView);
             this.presenter = presenter;
         }

@@ -58,6 +58,10 @@
         <activity
             android:name=".ui.login.CompleteInfoActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.nocomment.NoCommentOrderActivity"
+            android:screenOrientation="portrait" />
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"

@@ -14,6 +14,8 @@ import com.dianjiake.android.base.BaseListFragment;
 import com.dianjiake.android.ui.common.OrderListAdapter;
 import com.dianjiake.android.ui.common.OrderPresenter;
 import com.dianjiake.android.ui.common.OrderView;
+import com.dianjiake.android.ui.nocomment.NoCommentOrderActivity;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -89,7 +91,7 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
 
     @OnClick(R.id.no_comment_holder)
     void clickComment(View v) {
-
+        startActivity(IntentUtil.getIntent(NoCommentOrderActivity.class));
     }
 
     @Override
