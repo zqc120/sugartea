@@ -46,7 +46,7 @@ public class OrderPresenter extends BaseOrderPresenter {
 
     @Override
     public void clickCancel(final OrderBean orderBean, final int position) {
-        NormalAlertDialog alertDialog = NormalAlertDialog.newInstance("确定要取消预约？");
+        NormalAlertDialog alertDialog = NormalAlertDialog.newInstance("确定要取消预约？", true, true);
         alertDialog.setOnButtonClick(new NormalAlertDialog.OnButtonClick() {
             @Override
             public void click(int which) {

@@ -1,12 +1,11 @@
 package com.dianjiake.android.ui.main;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,9 +22,7 @@ import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by lfs on 2017/7/19.
@@ -138,6 +135,11 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
         if (cancelPD != null) {
             cancelPD.dismissAllowingStateLoss();
         }
+    }
+
+    @Override
+    public FragmentManager provideFragmentManager() {
+        return getFragmentManager();
     }
 
 

@@ -9,8 +9,12 @@ import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.event.RefreshOrderListEvent;
 import com.dianjiake.android.request.OrderListObserver;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
         items = new ArrayList<>();
         cd = new CompositeDisposable();
         loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -49,6 +54,7 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
     @Override
     public void onDestroy() {
         cd.clear();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -150,6 +156,10 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
             items.remove(0);
             view.loadComplete();
         }
+    }
+
+    public void onRefreshEvent(RefreshOrderListEvent event) {
+        reload();
     }
 
     public abstract void clickHolder(OrderBean orderBean, int position);

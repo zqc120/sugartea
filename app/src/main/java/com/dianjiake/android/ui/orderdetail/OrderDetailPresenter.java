@@ -6,7 +6,11 @@ import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.ui.evaluate.EvaluateActivity;
 import com.dianjiake.android.ui.main.OrderContract;
+import com.dianjiake.android.ui.subscribe.SubscribeActivity;
+import com.dianjiake.android.util.EventUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.ToastUtil;
 
 import io.reactivex.Observer;
@@ -66,6 +70,7 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter {
                             ToastUtil.showShortToast("取消预约成功");
                             orderBean.setStatus("4");
                             view.setView(orderBean);
+                            EventUtil.postRefreshOrderList();
                         } else {
                             ToastUtil.showShortToast("取消预约失败，请稍候重试");
                         }
@@ -82,5 +87,20 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter {
 
                     }
                 });
+    }
+
+    @Override
+    public void call() {
+        IntentUtil.startCall(view.provideContext(), orderBean.getDianpu().getDianhua());
+    }
+
+    @Override
+    public void reSub() {
+        IntentUtil.startActivity(view.provideContext(), SubscribeActivity.getStartIntent(null, null));
+    }
+
+    @Override
+    public void evaluate() {
+        IntentUtil.startActivity(view.provideContext(), EvaluateActivity.getStartIntent(orderBean));
     }
 }

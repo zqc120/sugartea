@@ -106,7 +106,7 @@ public class ADView extends ProportionLayout {
                 int iconSize = UIUtil.getDimensionPixelSize(R.dimen.ad_icon_size);
                 int marginSize = UIUtil.getDimensionPixelSize(R.dimen.ad_icon_size);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(iconSize, iconSize);
-                lp.setMargins(0, 0, marginSize, marginSize);
+                lp.setMargins(0, 0, marginSize, marginSize * 2);
                 imageView.setLayoutParams(lp);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setImageResource(R.drawable.indicator_negative);

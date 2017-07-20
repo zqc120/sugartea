@@ -1,5 +1,7 @@
 package com.dianjiake.android.ui.orderdetail;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +25,7 @@ import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.TableRowUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.dialog.NormalAlertDialog;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -224,6 +227,10 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         }
     }
 
+    @Override
+    public Context provideContext() {
+        return this;
+    }
 
 
     void setButtonText() {
@@ -245,13 +252,47 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         }
     }
 
+    void cancelOrder() {
+        NormalAlertDialog alertDialog = NormalAlertDialog.newInstance("确定要取消预约？", true, true);
+        alertDialog.setOnButtonClick(new NormalAlertDialog.OnButtonClick() {
+            @Override
+            public void click(int which) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    presenter.cancelOrder();
+                }
+            }
+        });
+        alertDialog.showDialog(getFragmentManager(), "cancel");
+    }
+
     @OnClick(R.id.button1)
     void clickButton1(View v) {
-
+        switch (orderStatus) {
+            case OrderStatus.NO_CONFIRM:
+            case OrderStatus.CONFIRM:
+            case OrderStatus.RUNNING:
+                presenter.cancelOrder();
+                break;
+            case OrderStatus.COMPLETE:
+            case OrderStatus.CANCEL:
+                presenter.reSub();
+                break;
+        }
     }
 
     @OnClick(R.id.button2)
     void clickButton2(View v) {
+        switch (orderStatus) {
+            case OrderStatus.NO_CONFIRM:
+            case OrderStatus.CONFIRM:
+            case OrderStatus.RUNNING:
+            case OrderStatus.CANCEL:
+                presenter.call();
+                break;
+            case OrderStatus.COMPLETE:
+                presenter.evaluate();
+                break;
 
+        }
     }
 }
