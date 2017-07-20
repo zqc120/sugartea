@@ -144,15 +144,17 @@ public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
                 }
             }
 
+            if (!CheckEmptyUtil.isEmpty(item.getDingdanfuwu())) {
+                TableRow countRow = new TableRow(itemView.getContext());
+                countRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
+                countRow.addView(TableRowUtil.getCountTitleText(item.getDingdanfuwu().size() + "个项目", itemView.getContext()));
+                countRow.addView(TableRowUtil.getCountEndText("合计：￥" + item.getYingfujine(), itemView.getContext()));
+                tableLayout.addView(countRow);
+            }
 
-            TableRow countRow = new TableRow(itemView.getContext());
-            countRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-            countRow.addView(TableRowUtil.getCountTitleText(item.getDingdanfuwu().size() + "个项目", itemView.getContext()));
-            countRow.addView(TableRowUtil.getCountEndText("合计：￥" + item.getYingfujine(), itemView.getContext()));
-            tableLayout.addView(countRow);
 
             TableRow finalPay = new TableRow(itemView.getContext());
-            countRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
+            finalPay.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
             finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng() + item.getFuwuzhekou() + "折", itemView.getContext()));
             finalPay.addView(TableRowUtil.getVipEndText("会员价格：￥" + item.getShifujine(), itemView.getContext()));
             tableLayout.addView(finalPay);

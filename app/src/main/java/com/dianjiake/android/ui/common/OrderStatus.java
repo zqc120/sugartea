@@ -46,4 +46,21 @@ public class OrderStatus {
                 return "商家已确认";
         }
     }
+
+    public static String getStatusDescText(String status) {
+        switch (status) {
+            case "0":
+            case "1":
+                return "商家若长时间未联系你，你可以与商家联系";
+            case "2":
+                return "商家已确认，商家已确认预约，请按照约定时间准时到店";
+            case "3":
+                return "感谢你对商家的信任，期待再次光临";
+            case "4":
+            case "5":
+                return "如果对订单有疑惑，可以拨打客服热线或联系商家";
+            default:
+                return "商家已确认，商家已确认预约，请按照约定时间准时到店";
+        }
+    }
 }

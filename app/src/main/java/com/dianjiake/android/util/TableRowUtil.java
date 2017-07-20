@@ -71,4 +71,13 @@ public class TableRowUtil {
         tv.setTextColor(UIUtil.getColor(R.color.main));
         return tv;
     }
+
+
+    public static TextView getSubText(String text, Context context){
+        TextView textView = new TextView(context);
+        textView.setTextColor(UIUtil.getColor(R.color.text_content_title));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setText(text);
+        return textView;
+    }
 }

@@ -121,7 +121,7 @@ public class DateUtil {
         if (timestamp < 1e11) {
             timestamp *= 1e3;
         }
-        return DateFormat.format("MM月dd日 HH:mm", timestamp).toString();
+        return DateFormat.format("MM-dd HH:mm", timestamp).toString();
 
     }
 
@@ -139,7 +139,7 @@ public class DateUtil {
         if (timestamp < 1e11) {
             timestamp *= 1e3;
         }
-        return DateFormat.format("MM月dd日", timestamp).toString();
+        return DateFormat.format("MM-dd", timestamp).toString();
 
     }
 
