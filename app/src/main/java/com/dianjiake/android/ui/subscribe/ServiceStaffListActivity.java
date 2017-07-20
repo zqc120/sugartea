@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/18.
@@ -100,5 +102,10 @@ public class ServiceStaffListActivity extends BaseTranslateActivity implements B
 
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @OnClick(R.id.toolbar_icon_left)
+    void clickBack(View v) {
+        finish();
     }
 }

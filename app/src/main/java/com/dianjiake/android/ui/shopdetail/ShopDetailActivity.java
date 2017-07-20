@@ -25,6 +25,7 @@ import com.dianjiake.android.ui.shopdetail.staff.StaffFragment;
 import com.dianjiake.android.util.AMapUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FrescoUtil;
+import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
@@ -130,6 +131,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
         tab.setupWithViewPager(viewPager);
+        UIUtil.setUpIndicatorWidth(tab);
         appbar.addOnOffsetChangedListener(onOffsetChangedListener);
         setToolbarBGTransparent();
     }
@@ -155,6 +157,11 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         shopName.setText(shopDetail.getDianpu().getMingcheng());
         shopTime.setText("营业时间：" + DateUtil.formatOnlyHM(shopDetail.getDianpu().getKaishishijian()) + DateUtil.formatOnlyHM(shopDetail.getDianpu().getJieshushijian()));
         shopLocation.setText(shopDetail.getDianpu().getDizhi() + " " + AMapUtil.formatDistance(LongUtil.parseLong(shopDetail.getDianpu().getJuli())));
+        String evaluateCount = shopDetail.getDianpu().getPinglunshu();
+        if (IntegerUtil.parseInt(shopDetail.getDianpu().getPinglunshu()) > 999) {
+            evaluateCount += "+";
+        }
+        tab.getTabAt(2).setText("评价(" + evaluateCount + ")");
     }
 
     @OnClick(R.id.shop_call)

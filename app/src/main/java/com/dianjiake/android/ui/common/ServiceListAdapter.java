@@ -121,18 +121,23 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
                 size = (int) UIUtil.dp2px(100);
                 if (lp == null) {
                     lp = new ConstraintLayout.LayoutParams(size, size);
+                }else {
+                    lp.width =lp.height = size;
                 }
                 logo.setLayoutParams(lp);
                 divider.setVisibility(View.VISIBLE);
                 shopHolder.setVisibility(View.VISIBLE);
+                subscribe.setVisibility(View.VISIBLE);
 
             } else {
                 size = (int) UIUtil.dp2px(80);
                 if (lp == null) {
                     lp = new ConstraintLayout.LayoutParams(size, size);
+                }else{
+                    lp.width =lp.height = size;
                 }
                 logo.setLayoutParams(lp);
-
+                subscribe.setVisibility(GONE);
                 divider.setVisibility(GONE);
                 shopHolder.setVisibility(GONE);
             }

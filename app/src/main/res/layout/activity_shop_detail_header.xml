@@ -80,10 +80,10 @@
             app:layout_constraintTop_toTopOf="@+id/shop_time">
 
             <ImageView
-                android:layout_width="@dimen/base_margin"
-                android:layout_height="@dimen/base_margin"
+                android:layout_width="@dimen/base_size4"
+                android:layout_height="@dimen/base_size4"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_service_shop" />
+                android:src="@drawable/ic_phone" />
         </FrameLayout>
     </android.support.constraint.ConstraintLayout>
 

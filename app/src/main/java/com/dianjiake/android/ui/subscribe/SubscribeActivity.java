@@ -148,6 +148,11 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
         return new SubscribePresenter(this);
     }
 
+    @OnClick(R.id.toolbar_icon_left)
+    void clickBack(View v) {
+        finish();
+    }
+
     @OnClick(R.id.add_service)
     void clickAdd(View v) {
         addServiceItem();

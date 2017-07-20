@@ -22,6 +22,7 @@ import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.ui.common.SearchHistoryAdapter;
 import com.dianjiake.android.util.EventUtil;
+import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -92,6 +93,7 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
         SearchShopAdapter adapter = new SearchShopAdapter(getFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+        UIUtil.setUpIndicatorWidth(tabLayout);
         toolbarInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
