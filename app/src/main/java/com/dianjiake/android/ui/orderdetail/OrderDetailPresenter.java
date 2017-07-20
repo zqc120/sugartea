@@ -101,6 +101,6 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter {
 
     @Override
     public void evaluate() {
-        IntentUtil.startActivity(view.provideContext(), EvaluateActivity.getStartIntent(orderBean));
+
     }
 }

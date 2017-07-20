@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
+import com.dianjiake.android.common.ActiivtyDataHelper;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderGoodBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
 import com.dianjiake.android.ui.common.OrderStatus;
+import com.dianjiake.android.ui.evaluate.EvaluateActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FrescoUtil;
@@ -40,6 +42,7 @@ import butterknife.OnClick;
  */
 
 public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresenter> implements OrderDetailContract.View {
+    public final int REQUEST_CODE = 789;
 
     @BindView(R.id.toolbar_space)
     ToolbarSpaceView toolbarSpace;
@@ -127,6 +130,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
     @Override
     public void setView(OrderBean item) {
+        orderBean = item;
         if (item.getDianpu() != null) {
             logo.setImageURI(FrescoUtil.getShopLogoUri(item.getDianpu().getLogo(), item.getDianpu().getCover()));
             detailLogo.setImageURI(FrescoUtil.getShopLogoUri(item.getDianpu().getLogo(), item.getDianpu().getCover()));
@@ -290,9 +294,17 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
                 presenter.call();
                 break;
             case OrderStatus.COMPLETE:
-                presenter.evaluate();
+                startActivityForResult(EvaluateActivity.getStartIntent(orderBean), REQUEST_CODE);
                 break;
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            setView(ActiivtyDataHelper.getOrderBean(data));
         }
     }
 }

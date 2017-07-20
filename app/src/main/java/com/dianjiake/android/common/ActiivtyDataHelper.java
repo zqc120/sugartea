@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 
 import com.amap.api.services.core.PoiItem;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
@@ -18,6 +19,7 @@ public class ActiivtyDataHelper {
     private static final String KEY_STAFF_SERVICE = "keysts";
     private static final String KEY_TIME = "keytime";
     private static final String KEY_POI = "keypoi";
+    private static final String KEY_ORDER = "keyorder";
 
     public static Intent getServiceStaffData(UserInfoBean item) {
         Intent intent = new Intent();
@@ -57,5 +59,15 @@ public class ActiivtyDataHelper {
 
     public static PoiItem getPoiItem(Intent intent) {
         return intent.getParcelableExtra(KEY_POI);
+    }
+
+    public static Intent getOrderData(OrderBean order) {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_ORDER, order);
+        return intent;
+    }
+
+    public static OrderBean getOrderBean(Intent intent) {
+        return intent.getParcelableExtra(KEY_ORDER);
     }
 }
