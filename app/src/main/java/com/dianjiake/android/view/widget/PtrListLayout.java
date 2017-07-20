@@ -42,7 +42,7 @@ public class PtrListLayout extends LoadingLayout implements PtrHandler, LifeCycl
     protected View provideContentView() {
         View view = UIUtil.inflate(R.layout.ptr_list_layout, this);
         ptr = (PtrFrameLayout) view.findViewById(R.id.ptr);
-//        PtrDefaultHeader header = new PtrDefaultHeader(getContext());
+//        PtrDefaultHeader header = new PtrDefaultHeader(getViewContext());
 //        ptr.setHeaderView(header);
 //        ptr.addPtrUIHandler(header);
         rv = (LoadMoreRecyclerView) view.findViewById(R.id.recycler_view);

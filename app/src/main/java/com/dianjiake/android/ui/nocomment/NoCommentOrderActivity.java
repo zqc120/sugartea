@@ -1,5 +1,6 @@
 package com.dianjiake.android.ui.nocomment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -53,6 +54,11 @@ public class NoCommentOrderActivity extends BaseListActivity<NoCommentOrderPrese
     @Override
     public void setNoCommentCount(int count) {
 
+    }
+
+    @Override
+    public Context getViewContext() {
+        return this;
     }
 
     @Override

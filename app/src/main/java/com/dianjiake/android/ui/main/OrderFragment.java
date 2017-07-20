@@ -1,5 +1,6 @@
 package com.dianjiake.android.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -114,6 +115,11 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
     public void setNoCommentCount(int count) {
         noCommentHolder.setVisibility(showNoComment ? View.VISIBLE : View.INVISIBLE);
         noCommentText.setText(count + "个订单未评价，点击评价");
+    }
+
+    @Override
+    public Context getViewContext() {
+        return activity;
     }
 
 

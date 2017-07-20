@@ -6,6 +6,9 @@ import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.ui.common.BaseOrderPresenter;
 import com.dianjiake.android.ui.common.OrderView;
+import com.dianjiake.android.ui.evaluate.EvaluateActivity;
+import com.dianjiake.android.ui.evaluate.EvaluateContract;
+import com.dianjiake.android.util.IntentUtil;
 
 import io.reactivex.Observable;
 
@@ -17,6 +20,31 @@ public class NoCommentOrderPresenter extends BaseOrderPresenter {
 
     public NoCommentOrderPresenter(OrderView view) {
         super(view);
+    }
+
+    @Override
+    public void clickHolder(OrderBean orderBean, int position) {
+        clickEvaluate(orderBean, position);
+    }
+
+    @Override
+    public void clickCall(OrderBean orderBean, int position) {
+
+    }
+
+    @Override
+    public void clickReSub(OrderBean orderBean, int position) {
+
+    }
+
+    @Override
+    public void clickCancel(OrderBean orderBean, int position) {
+
+    }
+
+    @Override
+    public void clickEvaluate(OrderBean orderBean, int position) {
+        IntentUtil.startActivity(view.getViewContext(), EvaluateActivity.getStartIntent(orderBean.getDingdanfuwu()));
     }
 
     @Override

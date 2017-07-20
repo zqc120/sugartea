@@ -25,9 +25,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public abstract class BaseOrderPresenter implements BaseListPresenter {
-    OrderView view;
-    List<OrderBean> items;
-    CompositeDisposable cd;
+    public OrderView view;
+    public List<OrderBean> items;
+    public CompositeDisposable cd;
     public LoginInfoModel loginInfo;
     public int page = 1;
 
@@ -58,45 +58,45 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
     @Override
     public void load(final boolean isReload) {
         cd.clear();
-       provideApi().subscribeWith(new OrderListObserver<OrderBean>() {
-                    @Override
-                    public void onSuccess(List<OrderBean> list, boolean isAll, int noCommentCount) {
-                        if (isReload && view.getShowNoCommentHolder() && noCommentCount > 0) {
-                            OrderBean orderBean = new OrderBean();
-                            orderBean.setViewType(OrderViewType.HEADER);
-                            items.add(orderBean);
-                            view.setNoCommentCount(noCommentCount);
-                        }
+        provideApi().subscribeWith(new OrderListObserver<OrderBean>() {
+            @Override
+            public void onSuccess(List<OrderBean> list, boolean isAll, int noCommentCount) {
+                if (isReload && view.getShowNoCommentHolder() && noCommentCount > 0) {
+                    OrderBean orderBean = new OrderBean();
+                    orderBean.setViewType(OrderViewType.HEADER);
+                    items.add(orderBean);
+                    view.setNoCommentCount(noCommentCount);
+                }
 
-                        items.addAll(list);
-                        page++;
-                        if (isAll) {
-                            view.loadAll();
-                        } else {
-                            view.loadComplete();
-                        }
-                    }
+                items.addAll(list);
+                page++;
+                if (isAll) {
+                    view.loadAll();
+                } else {
+                    view.loadComplete();
+                }
+            }
 
-                    @Override
-                    public void onEmpty() {
-                        view.loadEmptyContent();
-                    }
+            @Override
+            public void onEmpty() {
+                view.loadEmptyContent();
+            }
 
-                    @Override
-                    public void onAll() {
-                        view.loadAll();
-                    }
+            @Override
+            public void onAll() {
+                view.loadAll();
+            }
 
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        cd.add(d);
-                    }
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                cd.add(d);
+            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        view.loadNetworkError();
-                    }
-                });
+            @Override
+            public void onError(@NonNull Throwable e) {
+                view.loadNetworkError();
+            }
+        });
     }
 
 
@@ -111,5 +111,16 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
         }
     }
 
+    public abstract void clickHolder(OrderBean orderBean, int position);
+
+    public abstract void clickCall(OrderBean orderBean, int position);
+
+    public abstract void clickReSub(OrderBean orderBean, int position);
+
+    public abstract void clickCancel(OrderBean orderBean, int position);
+
+    public abstract void clickEvaluate(OrderBean orderBean, int position);
+
     public abstract Observable<BaseListBean<OrderBean>> provideApi();
+
 }

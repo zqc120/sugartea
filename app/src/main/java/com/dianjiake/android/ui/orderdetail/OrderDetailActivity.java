@@ -77,8 +77,13 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     ImageView subDivider;
     @BindView(R.id.sub_table)
     TableLayout subTable;
+    @BindView(R.id.button1)
+    Button button1;
+    @BindView(R.id.button2)
+    Button button2;
 
     int orderStatus;
+    OrderBean orderBean;
 
     public static Intent getStartIntent(OrderBean order) {
         Intent intent = IntentUtil.getIntent(OrderDetailActivity.class);
@@ -98,7 +103,11 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
-
+        orderBean = getIntent().getParcelableExtra("order");
+        setView(orderBean);
+        button1.setVisibility(View.GONE);
+        button2.setVisibility(View.GONE);
+        tableDivider.setVisibility(View.GONE);
     }
 
     @Override
@@ -179,7 +188,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
         subTable.removeAllViews();
         TableRow serviceTime = new TableRow(this);
-        finalPay.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
+        serviceTime.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
         serviceTime.addView(TableRowUtil.getSubText("服务时间：", this));
         serviceTime.addView(TableRowUtil.getSubText(DateUtil.formatYMDHM(item.getFuwushijian()), this));
         subTable.addView(serviceTime);

@@ -1,5 +1,7 @@
 package com.dianjiake.android.ui.common;
 
+import android.content.Context;
+
 import com.dianjiake.android.base.BaseListView;
 
 /**
@@ -12,4 +14,6 @@ public interface OrderView extends BaseListView {
     boolean getShowNoCommentHolder();
 
     void setNoCommentCount(int count);
+
+    Context getViewContext();
 }

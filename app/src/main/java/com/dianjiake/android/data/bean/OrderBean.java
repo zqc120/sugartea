@@ -3,6 +3,7 @@ package com.dianjiake.android.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class OrderBean implements Parcelable {
     private HomeShopBean dianpu;
     private String chuzhi;
     private String youhui;
-    private List<OrderServiceBean> dingdanfuwu;
+    private ArrayList<OrderServiceBean> dingdanfuwu;
     int viewType;
 
     public int getViewType() {
@@ -382,11 +383,11 @@ public class OrderBean implements Parcelable {
         this.youhui = youhui;
     }
 
-    public List<OrderServiceBean> getDingdanfuwu() {
+    public ArrayList<OrderServiceBean> getDingdanfuwu() {
         return dingdanfuwu;
     }
 
-    public void setDingdanfuwu(List<OrderServiceBean> dingdanfuwu) {
+    public void setDingdanfuwu(ArrayList<OrderServiceBean> dingdanfuwu) {
         this.dingdanfuwu = dingdanfuwu;
     }
 

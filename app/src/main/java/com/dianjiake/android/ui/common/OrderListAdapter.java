@@ -184,12 +184,37 @@ public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
 
         @OnClick(R.id.button1)
         void clickButton1(View v) {
-
+            switch (orderStatus) {
+                case OrderStatus.NO_CONFIRM:
+                case OrderStatus.CONFIRM:
+                case OrderStatus.RUNNING:
+                    presenter.clickCancel(item, getAdapterPosition());
+                    break;
+                case OrderStatus.COMPLETE:
+                case OrderStatus.CANCEL:
+                    presenter.clickReSub(item, getAdapterPosition());
+                    break;
+            }
         }
 
         @OnClick(R.id.button2)
         void clickButton2(View v) {
+            switch (orderStatus) {
+                case OrderStatus.NO_CONFIRM:
+                case OrderStatus.CONFIRM:
+                case OrderStatus.RUNNING:
+                case OrderStatus.CANCEL:
+                    presenter.clickCall(item, getAdapterPosition());
+                    break;
+                case OrderStatus.COMPLETE:
+                    presenter.clickEvaluate(item, getAdapterPosition());
+                    break;
+            }
+        }
 
+        @OnClick(R.id.holder)
+        void clickHolder(View v) {
+            presenter.clickHolder(item, getAdapterPosition());
         }
 
         @Override

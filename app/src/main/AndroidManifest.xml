@@ -66,6 +66,10 @@
         <activity
             android:name=".ui.evaluate.EvaluateActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.orderdetail.OrderDetailActivity"
+            android:screenOrientation="portrait" />
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"

@@ -108,7 +108,7 @@ public class LoadMoreRecyclerView extends RecyclerView implements LifeCycle {
      */
     public void setHaveDivider(boolean have) {
         if (have) {
-//            addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST, R.drawable.shape_horizontal_divider));
+//            addItemDecoration(new DividerItemDecoration(getViewContext(), DividerItemDecoration.VERTICAL_LIST, R.drawable.shape_horizontal_divider));
         }
     }
 
