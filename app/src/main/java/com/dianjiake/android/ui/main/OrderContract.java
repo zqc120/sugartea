@@ -14,7 +14,4 @@ public interface OrderContract {
 
     }
 
-    interface Presenter extends BaseListPresenter {
-
-    }
 }

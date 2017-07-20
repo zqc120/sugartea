@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.util.UIUtil;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ADView extends ProportionLayout {
 
     }
 
-    public void setItems(List items) {
+    public void setItems(List<ADItemBean> items) {
 
         mViewPager.setOffscreenPageLimit(0);
         initIndicator(items.size());
@@ -102,10 +103,10 @@ public class ADView extends ProportionLayout {
         for (int i = 0; i < size; i++) {
             if (size > 1) {
                 ImageView imageView = new ImageView(getContext());
-                int iconSize = UIUtil.getDimensionPixelSize(R.dimen. base_size9);
-                int marginSize = UIUtil.getDimensionPixelSize(R.dimen.base_size9);
+                int iconSize = UIUtil.getDimensionPixelSize(R.dimen.ad_icon_size);
+                int marginSize = UIUtil.getDimensionPixelSize(R.dimen.ad_icon_size);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(iconSize, iconSize);
-                lp.setMargins(0, 0,marginSize,marginSize*2);
+                lp.setMargins(0, 0, marginSize, marginSize);
                 imageView.setLayoutParams(lp);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setImageResource(R.drawable.indicator_negative);
@@ -129,7 +130,7 @@ public class ADView extends ProportionLayout {
 
     public static class ADAdapter extends PagerAdapter {
 
-        private List mItems;
+        private List<ADItemBean> mItems;
 
         public ADAdapter() {
             mItems = new ArrayList<>();
@@ -157,7 +158,7 @@ public class ADView extends ProportionLayout {
                 adView = ADItemView.newInstance(container.getContext());
             }
             // TODO: 2017/7/10 录播图接口还没有
-            adView.load();
+            adView.load(mItems.get(position));
             adView.setTag(position);
             container.addView(adView);
             return adView;

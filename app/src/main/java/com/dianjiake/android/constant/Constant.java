@@ -40,9 +40,12 @@ public interface Constant {
     String IMAGE_AVATAR = ROOT + "photo/avatar/";//头像
     String IMAGE_SHOP = ROOT + "photo/shanghu/";//头像
     String IMAGE_QR = ROOT + "photo/erweima/";//二维码
+    String IMAGE_AD = ROOT + "photo/msg/";//首页广告
 
     String SHOP_HOMEPAGE =ROOT+"/m/mobiles/index.html#/page/main?share=yes&id=";
 
     String NETWORK_INFO = "http://pv.sohu.com/cityjson/";
+
+
 
 }

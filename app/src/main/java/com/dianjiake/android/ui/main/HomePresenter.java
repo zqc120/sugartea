@@ -11,6 +11,7 @@ import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.event.HomeReloadEvent;
 import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.request.ListObserver;
 
@@ -107,6 +108,7 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
                     public void onSuccess(List<HomeShopBean> list, boolean isAll) {
                         view.dismissPD();
                         if (isReload) {
+                            EventBus.getDefault().post(new HomeReloadEvent());
                             items.clear();
                             HomeShopBean temp = new HomeShopBean();
                             temp.setViewType(HomeType.AD);

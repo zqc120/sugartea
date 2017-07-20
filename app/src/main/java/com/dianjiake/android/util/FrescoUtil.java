@@ -36,6 +36,10 @@ public class FrescoUtil {
         return Uri.parse(Constant.IMAGE_SERVICE + image);
     }
 
+    public static Uri getADUri(String adImage) {
+        return Uri.parse(Constant.IMAGE_AD + adImage);
+    }
+
     public static Uri getFileUri(String path) {
         return Uri.parse("file://" + path);
     }

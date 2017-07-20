@@ -11,9 +11,12 @@ import android.widget.ImageView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
+import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -24,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class ADItemView extends FrameLayout {
-    ImageView mImage;
+    SimpleDraweeView mImage;
 
     public ADItemView(Context context) {
         this(context, null);
@@ -37,7 +40,7 @@ public class ADItemView extends FrameLayout {
     public ADItemView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         View view = inflate(context, R.layout.ad_item_view, this);
-        mImage = (ImageView) view.findViewById(R.id.ad_item_view_image);
+        mImage = (SimpleDraweeView) view.findViewById(R.id.ad_item_view_image);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         mImage.setOnClickListener(new OnClickListener() {
             @Override
@@ -52,8 +55,8 @@ public class ADItemView extends FrameLayout {
         return view;
     }
 
-    public void load() {
-
+    public void load(ADItemBean adItemBean) {
+        mImage.setImageURI(FrescoUtil.getADUri(adItemBean.getPic()));
     }
 
 

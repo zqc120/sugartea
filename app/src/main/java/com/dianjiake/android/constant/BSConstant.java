@@ -34,7 +34,7 @@ public interface BSConstant {
     String PERFORMANCE_LIST = "kaoqin";//考勤列表
     String MESSAGE = "xiaoxiliebiao";//消息列表
     String RANK = "yejipaiming";//业绩排行列表
-    String VIP_ORDER_LIST = "huiyuandingdanliebiao";// 会员订单列表
+    String ORDER_LIST = "dingdanliebiao";//订单列表
     String PERFORMANCE_HEADER = "yeji";// 业绩头部
     String PERFORMANCE_WEEKLY = "qitian";// 业绩七天
     String PERFORMANCE_DETAIL = "yejimingxi";// 业绩明细

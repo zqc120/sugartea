@@ -8,7 +8,9 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.ADBean;
 import com.dianjiake.android.data.bean.ADItemBean;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
@@ -154,25 +156,29 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
         private ADHolder(View itemView) {
             super(itemView);
-            adView = (ADView) itemView;
+            adView = (ADView) itemView.findViewById(R.id.timeline_ad_view);
             cd = new CompositeDisposable();
+            EventBus.getDefault().register(this);
+            onLoad(null);
         }
 
         @Subscribe(threadMode = ThreadMode.MAIN)
-        void onLoad(HomeReloadEvent event) {
+        public void onLoad(HomeReloadEvent event) {
             cd.clear();
             AppInfoModel appInfo = AppInfoDBHelper.newInstance().getAppInfo();
             Network.getInstance().ad(BSConstant.AD, appInfo.getLongitude() + "," + appInfo.getLatitude())
                     .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
-                    .subscribeWith(new Observer<BaseListBean<ADItemBean>>() {
+                    .subscribeWith(new Observer<BaseBean<ADBean>>() {
                         @Override
                         public void onSubscribe(@NonNull Disposable d) {
 
                         }
 
                         @Override
-                        public void onNext(@NonNull BaseListBean<ADItemBean> adItemBeanBaseListBean) {
-
+                        public void onNext(@NonNull BaseBean<ADBean> ad) {
+                            if (ad.getCode() == 200 && !CheckEmptyUtil.isEmpty(ad.getObj().getContent())) {
+                                adView.setItems(ad.getObj().getContent());
+                            }
                         }
 
                         @Override
@@ -191,6 +197,7 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
         @Override
         public void destroy() {
             cd.clear();
+            EventBus.getDefault().unregister(this);
         }
     }
 

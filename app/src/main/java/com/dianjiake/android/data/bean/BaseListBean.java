@@ -29,9 +29,18 @@ public class BaseListBean<T> {
 
     public static class ObjectBean<O> {
         private ArrayList<O> list;
+        private int weipinglunshu;
         private int zongtiaoshu;
         private int zongyeshu;
         private int page;
+
+        public int getWeipinglunshu() {
+            return weipinglunshu;
+        }
+
+        public void setWeipinglunshu(int weipinglunshu) {
+            this.weipinglunshu = weipinglunshu;
+        }
 
         public ArrayList<O> getList() {
             return list;

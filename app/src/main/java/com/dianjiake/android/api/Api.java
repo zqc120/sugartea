@@ -3,6 +3,7 @@ package com.dianjiake.android.api;
 import android.support.annotation.NonNull;
 
 import com.dianjiake.android.constant.Constant;
+import com.dianjiake.android.data.bean.ADBean;
 import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
@@ -10,6 +11,7 @@ import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.LoginBean;
 import com.dianjiake.android.data.bean.OccupationBean;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
@@ -304,8 +306,21 @@ public interface Api {
      * @return
      */
     @GET(Constant.USER)
-    Observable<BaseListBean<ADItemBean>> ad(
+    Observable<BaseBean<ADBean>> ad(
             @NonNull @Query("bs") String bs,
             @NonNull @Query("zuobiao") String lonlat
+    );
+
+    /**
+     * {@link BSConstant#ORDER_LIST}
+     *
+     * @param bs
+     * @return
+     */
+    @GET(Constant.ORDERS)
+    Observable<BaseListBean<OrderBean>> orders(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid,
+            @NonNull @Query("page") int page
     );
 }

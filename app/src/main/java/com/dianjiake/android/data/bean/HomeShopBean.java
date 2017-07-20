@@ -58,15 +58,16 @@ public class HomeShopBean implements Parcelable {
     private String gongkaikaquan;
     private String paixu;
     private int viewType;
-    private List<ADItemBean> ads;
+    private List<ShopCardBean> kaquanlist;
 
-    public List<ADItemBean> getAds() {
-        return ads;
+    public List<ShopCardBean> getKaquanlist() {
+        return kaquanlist;
     }
 
-    public void setAds(List<ADItemBean> ads) {
-        this.ads = ads;
+    public void setKaquanlist(List<ShopCardBean> kaquanlist) {
+        this.kaquanlist = kaquanlist;
     }
+
 
     public int getViewType() {
         return viewType;
@@ -501,7 +502,7 @@ public class HomeShopBean implements Parcelable {
         dest.writeString(this.gongkaikaquan);
         dest.writeString(this.paixu);
         dest.writeInt(this.viewType);
-        dest.writeTypedList(this.ads);
+        dest.writeTypedList(this.kaquanlist);
     }
 
     protected HomeShopBean(Parcel in) {
@@ -552,7 +553,7 @@ public class HomeShopBean implements Parcelable {
         this.gongkaikaquan = in.readString();
         this.paixu = in.readString();
         this.viewType = in.readInt();
-        this.ads = in.createTypedArrayList(ADItemBean.CREATOR);
+        this.kaquanlist = in.createTypedArrayList(ShopCardBean.CREATOR);
     }
 
     public static final Creator<HomeShopBean> CREATOR = new Creator<HomeShopBean>() {

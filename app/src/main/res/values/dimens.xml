@@ -22,8 +22,8 @@
     <dimen name="text_size_display1">34dp</dimen>
     <dimen name="text_size_headline">24dp</dimen>
     <dimen name="text_size_title">18dp</dimen>
-    <dimen name="text_size_subhead">15dp</dimen>
-    <dimen name="text_size_body">13dp</dimen>
+    <dimen name="text_size_subhead">14dp</dimen>
+    <dimen name="text_size_body">12dp</dimen>
     <dimen name="text_size_caption">11dp</dimen>
     <dimen name="text_size_mini">9dp</dimen>
 
@@ -38,4 +38,6 @@
     <dimen name="bind_guideline_2">110dp</dimen>
 
     <dimen name="base_loading_view_size">120dp</dimen>
+
+    <dimen name="ad_icon_size">6dp</dimen>
 </resources>

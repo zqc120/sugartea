@@ -266,4 +266,15 @@
     </style>
 
     <style name="BaseAlertDialog" parent="@android:style/Theme.Dialog"></style>
+
+    <style name="OrderButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/button_size_mini</item>
+        <item name="android:paddingLeft">@dimen/base_margin</item>
+        <item name="android:paddingRight">@dimen/base_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_order</item>
+        <item name="android:textSize">@dimen/text_size_subhead</item>
+        <item name="android:textColor">@color/text_content_title</item>
+    </style>
 </resources>
