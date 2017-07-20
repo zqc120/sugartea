@@ -13,9 +13,13 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.login.CompleteInfoActivity;
+import com.dianjiake.android.ui.setting.SettingActivity;
 import com.dianjiake.android.util.FrescoUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -128,7 +132,12 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     }
 
     @OnClick(R.id.avatar)
-    void clickAvatar(View v){
+    void clickAvatar(View v) {
         startActivity(CompleteInfoActivity.getEditIntent());
+    }
+
+    @OnClick(R.id.toolbar_icon_left)
+    void clickCancel(View v) {
+        startActivity(IntentUtil.getIntent(SettingActivity.class));
     }
 }
