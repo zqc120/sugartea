@@ -44,7 +44,7 @@ public class NoCommentOrderPresenter extends BaseOrderPresenter {
 
     @Override
     public void clickEvaluate(OrderBean orderBean, int position) {
-        IntentUtil.startActivity(view.getViewContext(), EvaluateActivity.getStartIntent(orderBean.getDingdanfuwu()));
+        IntentUtil.startActivity(view.getViewContext(), EvaluateActivity.getStartIntent(orderBean));
     }
 
     @Override

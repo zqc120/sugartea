@@ -26,15 +26,17 @@
                 android:id="@+id/evaluate_logo"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/evaluate_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/base_size3"
-                android:layout_marginTop="@dimen/base_size3"
+                android:layout_marginTop="@dimen/base_size1"
                 android:layout_toRightOf="@id/evaluate_logo"
                 android:singleLine="true"
                 android:textColor="@color/text_content_title"
@@ -49,10 +51,9 @@
                 android:layout_marginLeft="@dimen/base_size3"
                 android:layout_toRightOf="@id/evaluate_logo"
                 android:gravity="bottom"
-                android:paddingBottom="@dimen/base_size3"
+                android:paddingBottom="@dimen/base_size1"
                 android:singleLine="true"
                 android:textColor="@color/main"
-                android:visibility="gone"
                 tools:text="asdfksajf" />
 
             <TextView
@@ -98,7 +99,7 @@
             app:starFill="@drawable/ic_star_positive"
             app:starHalf="@drawable/ic_star_positive"
             app:starImageHeight="@dimen/base_size8"
-            app:starImagePadding="@dimen/base_size2"
+            app:starImagePadding="@dimen/base_size1"
             app:starImageSize="@dimen/base_size8"
             app:starImageWidth="@dimen/base_size8"
             app:totalStar="5" />

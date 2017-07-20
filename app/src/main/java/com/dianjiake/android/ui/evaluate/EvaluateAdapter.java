@@ -40,7 +40,8 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
     @Override
     public void myOnBindViewHolder(BaseViewHolder holder, int position) {
         if (myGetItemViewType(position) == OrderViewType.NORMAL) {
-
+            ViewHolder vh = (ViewHolder) holder;
+            vh.setItem(getItem(position));
         }
     }
 
@@ -96,6 +97,7 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
                     setRatingDesc((int) ratingCount);
                 }
             });
+            evaluateRating.setStar(5);
 
 
         }
@@ -111,6 +113,7 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
         public void setItem(OrderServiceBean service) {
             evaluateLogo.setImageURI(FrescoUtil.getServiceUri(service.getPhoto()));
             evaluateName.setText(service.getFuwumingcheng());
+            evaluatePrice.setText("￥" + service.getDanjia());
 //            evaluateUnit.setText(service.getDanwei());
 //            long nowTime = System.nanoTime();
 //            if ("1".equals(service.getCuxiao())) {
