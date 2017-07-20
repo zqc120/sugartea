@@ -28,8 +28,8 @@
         <item name="android:button">@null</item>
         <item name="android:textSize">9dp</item>
         <item name="android:drawablePadding">@dimen/base_size1</item>
-        <item name="android:paddingTop">6dp</item>
-        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textColor">@color/main_tab_color</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
 
@@ -72,7 +72,7 @@
 
     <style name="HomeFilterRadioStyle">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">@dimen/text_size_body</item>
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="android:button">@null</item>

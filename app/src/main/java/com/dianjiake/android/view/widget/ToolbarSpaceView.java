@@ -39,6 +39,8 @@ public class ToolbarSpaceView extends FrameLayout {
     private void init() {
         if (!AppUtil.isMIUIV6() && !AppUtil.isFlyme() && (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.M)) {
             setBackgroundResource(R.color.text_grey_tab);
+        }else{
+            setBackgroundResource(R.color.translate);
         }
     }
 

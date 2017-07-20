@@ -118,7 +118,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         int toolbarThreshold = adViewTopDistance - toolbarBottomDistance;
         if (totalY >= toolbarThreshold) {
             toolbarLocationHolder.setVisibility(View.GONE);
-            toolbarMsgHolder.setVisibility(View.GONE);
+//            toolbarMsgHolder.setVisibility(View.GONE);
             toolbarHolder.getBackground().mutate().setAlpha(255);
             toolbarSpace.getBackground().mutate().setAlpha(255);
             filter.setVisibility(View.VISIBLE);
@@ -128,7 +128,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
             toolbarSpace.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
             filter.setVisibility(View.INVISIBLE);
             toolbarLocationHolder.setVisibility(View.VISIBLE);
-            toolbarMsgHolder.setVisibility(View.VISIBLE);
+//            toolbarMsgHolder.setVisibility(View.VISIBLE);
         }
     }
 
@@ -151,7 +151,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     public void moveRecyclerView() {
         totalScrollY = adViewTopDistance - toolbarBottomDistance;
         ((LinearLayoutManager) ptrListLayout.getRecyclerView().getLayoutManager())
-                .scrollToPositionWithOffset(1,UIUtil.getStatusBarHeight()+UIUtil.getDimensionPixelSize(R.dimen.button_size_normal));
+                .scrollToPositionWithOffset(1, UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.button_size_normal));
     }
 
     @OnClick(R.id.toolbar_location_holder)

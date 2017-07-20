@@ -13,6 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></com.dianjiake.android.view.widget.ToolbarSpaceView>
 
+
     <EditText
         android:id="@+id/toolbar_input"
         android:layout_width="0dp"
@@ -22,7 +23,7 @@
         android:background="@drawable/bg_home_search"
         android:hint="搜索你所在的小区"
         android:imeOptions="actionSearch"
-        android:paddingLeft="@dimen/base_margin"
+        android:paddingLeft="@dimen/base_size7"
         android:paddingRight="@dimen/base_margin"
         android:singleLine="true"
         android:textColor="@color/text_content_secondary"
@@ -43,7 +44,7 @@
         android:background="@drawable/bg_home_search"
         android:gravity="center_vertical"
         android:hint="搜索你所在的小区"
-        android:paddingLeft="@dimen/base_margin"
+        android:paddingLeft="@dimen/base_size7"
         android:paddingRight="@dimen/base_margin"
         android:singleLine="true"
         android:textColor="@color/text_content_secondary"
@@ -53,6 +54,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/toolbar_right"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_space" />
+    <ImageView
+        android:layout_width="@dimen/base_size3"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_space"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="@dimen/base_size5"
+        android:src="@drawable/ic_toolbar_search_grey"
+        android:layout_height="@dimen/base_size3" />
 
     <TextView
         android:id="@+id/toolbar_right"

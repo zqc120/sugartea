@@ -101,6 +101,7 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
                 return false;
             }
         });
+        setSearchFocus(true);
     }
 
 
@@ -152,8 +153,8 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
 
     @Override
     public void onBackPressed() {
-        if (searchFocus) {
-            setSearchFocus(false);
+        if (!searchFocus) {
+            setSearchFocus(true);
         } else {
             super.onBackPressed();
         }

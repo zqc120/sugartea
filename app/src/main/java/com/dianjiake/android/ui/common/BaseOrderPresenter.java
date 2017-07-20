@@ -15,6 +15,8 @@ import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,6 +160,7 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRefreshEvent(RefreshOrderListEvent event) {
         reload();
     }

@@ -18,7 +18,6 @@
         android:id="@+id/main_radio_group"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginBottom="0dp"
         android:background="@color/text_white"
         android:orientation="horizontal">
 
@@ -26,6 +25,7 @@
             android:id="@+id/main_radio_home"
             style="@style/MainTabStyle"
             android:checked="true"
+            android:drawableTop="@drawable/radio_home"
             android:text="首页" />
 
         <android.support.v7.widget.AppCompatRadioButton
@@ -38,11 +38,13 @@
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/main_radio_orders"
             style="@style/MainTabStyle"
+            android:drawableTop="@drawable/radio_order"
             android:text="订单" />
 
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/main_radio_mine"
             style="@style/MainTabStyle"
+            android:drawableTop="@drawable/radio_mine"
             android:text="我的" />
 
     </RadioGroup>

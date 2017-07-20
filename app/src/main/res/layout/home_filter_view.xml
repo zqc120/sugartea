@@ -21,7 +21,7 @@
         <RadioGroup
             android:id="@+id/filter_group"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/base_margin"
             android:layout_weight="1"
             android:orientation="horizontal">

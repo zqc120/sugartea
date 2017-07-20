@@ -39,8 +39,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLength="4"
                 android:singleLine="true"
-                android:text="正在定位"
+                android:text="正在定位f"
                 android:textColor="@color/text_white"
                 android:textSize="@dimen/text_size_body" />
 
@@ -48,7 +49,8 @@
                 android:layout_width="@dimen/base_size3"
                 android:layout_height="@dimen/base_size3"
                 android:layout_marginLeft="@dimen/base_size1"
-                android:src="@drawable/ic_bottom_arrow_white" />
+                android:src="@drawable/ic_bottom_arrow_white"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,17 +65,23 @@
             android:orientation="horizontal"
             android:paddingLeft="@dimen/base_size2"
             android:paddingRight="@dimen/base_size2">
+            <ImageView
+                android:layout_width="@dimen/base_size3"
+                android:layout_marginLeft="@dimen/base_size1"
+                android:src="@drawable/ic_toolbar_search_grey"
+                android:layout_height="@dimen/base_size3" />
 
             <TextView
                 android:id="@+id/toolbar_search_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:layout_marginLeft="@dimen/base_size2"
                 android:singleLine="true"
+                android:text="搜索感兴趣的服务和商家"
                 android:textColor="@color/text_content_secondary"
                 android:textColorHint="@color/text_content_hint"
-                android:textSize="@dimen/text_size_body"
-                tools:text="可以的说" />
+                android:textSize="@dimen/text_size_body" />
 
         </LinearLayout>
 
