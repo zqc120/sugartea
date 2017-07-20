@@ -53,7 +53,7 @@ public class OrderStatus {
             case "1":
                 return "商家若长时间未联系你，你可以与商家联系";
             case "2":
-                return "商家已确认，商家已确认预约，请按照约定时间准时到店";
+                return "商家已确认预约，请按照约定时间准时到店";
             case "3":
                 return "感谢你对商家的信任，期待再次光临";
             case "4":

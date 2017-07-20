@@ -17,6 +17,10 @@ public interface EvaluateContract {
     interface Presenter extends BaseListPresenter {
         void setServices(ArrayList<OrderServiceBean> services);
 
+        void setComment(String comment, int position);
+
+        void setRate(int rate, int position);
+
         ArrayList<OrderServiceBean> getItems();
     }
 }

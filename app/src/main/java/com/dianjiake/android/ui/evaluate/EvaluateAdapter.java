@@ -1,5 +1,7 @@
 package com.dianjiake.android.ui.evaluate;
 
+import android.graphics.Paint;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -8,8 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.custom.MyTextWatcher;
 import com.dianjiake.android.data.bean.OrderServiceBean;
 import com.dianjiake.android.ui.common.OrderViewType;
+import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
@@ -19,6 +23,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * Created by lfs on 2017/7/20.
@@ -76,11 +83,73 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
         EditText evaluateInput;
         @BindView(R.id.evaluate_count)
         TextView evaluateCount;
+
         EvaluateContract.Presenter presenter;
+        int mFormScore = 0;
 
         public ViewHolder(View itemView, EvaluateContract.Presenter presenter) {
             super(itemView);
             this.presenter = presenter;
+            evaluateInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});
+            evaluateInput.addTextChangedListener(mInputWatcher);
+            setInputCount(0);
+            evaluateRating.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+                @Override
+                public void onRatingChange(float ratingCount) {
+                    setRatingDesc((int) ratingCount);
+                }
+            });
+
+
+        }
+
+        MyTextWatcher mInputWatcher = new MyTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setInputCount(s.length());
+
+            }
+        };
+
+        public void setItem(OrderServiceBean service) {
+            evaluateLogo.setImageURI(FrescoUtil.getServiceUri(service.getPhoto()));
+            evaluateName.setText(service.getFuwumingcheng());
+//            evaluateUnit.setText(service.getDanwei());
+//            long nowTime = System.nanoTime();
+//            if ("1".equals(service.getCuxiao())) {
+//                mPrice.setText(service.getCuxiaojia());
+//                mOld.setVisibility(VISIBLE);
+//                mOld.setText(service.getJine() + service.getDanwei());
+//                mOld.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+//            } else {
+//                mPrice.setText(service.getJine());
+//                mOld.setVisibility(GONE);
+//            }
+        }
+
+        void setInputCount(int length) {
+            evaluateCount.setText(String.format("%d/140", length));
+        }
+
+        void setRatingDesc(int num) {
+            mFormScore = num;
+            switch (num) {
+                case 1:
+                    evaluateDesc.setText("非常不满意，各方面都比较差");
+                    break;
+                case 2:
+                    evaluateDesc.setText("不满意，比较差");
+                    break;
+                case 3:
+                    evaluateDesc.setText("一般，还需改善");
+                    break;
+                case 4:
+                    evaluateDesc.setText("比较满意，还不错");
+                    break;
+                case 5:
+                    evaluateDesc.setText("非常满意，无可挑剔");
+                    break;
+            }
         }
 
         @Override

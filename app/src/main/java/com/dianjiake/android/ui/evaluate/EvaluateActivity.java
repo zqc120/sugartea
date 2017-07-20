@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListActivity;
+import com.dianjiake.android.common.AndroidBug5497Workaround;
 import com.dianjiake.android.data.bean.OrderServiceBean;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
@@ -52,6 +53,7 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+        AndroidBug5497Workaround.assistActivity(this);
         ptrListLayout.setNeedPtr(false);
         ptrListLayout.setNeedLoadMore(false);
         presenter.setServices(getIntent().<OrderServiceBean>getParcelableArrayListExtra("service"));

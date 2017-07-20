@@ -20,7 +20,16 @@ public class OrderServiceBean implements Parcelable {
     private String status;
     private String kaishishijian;
     private String wanchengshijian;
+    private String photo;
     private int viewType;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public int getViewType() {
         return viewType;
