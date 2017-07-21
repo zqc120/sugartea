@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListActivity;
+import com.dianjiake.android.common.ActiivtyDataHelper;
 import com.dianjiake.android.common.AndroidBug5497Workaround;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.PtrListLayout;
@@ -95,6 +97,19 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
         if (pd != null) {
             pd.dismissAllowingStateLoss();
         }
+    }
+
+    @Override
+    public void evaluateSuccess() {
+        ToastUtil.showShortToast("评价成功");
+        setResult(RESULT_OK, ActiivtyDataHelper.getOrderData(presenter.getOrderBean()));
+        finish();
+    }
+
+    @Override
+    public void evaluateFail() {
+        ToastUtil.showShortToast("评价失败");
+
     }
 
     @OnClick(R.id.toolbar_icon_left)

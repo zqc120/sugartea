@@ -1,14 +1,25 @@
 package com.dianjiake.android.ui.evaluate;
 
+import com.dianjiake.android.api.Network;
+import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
+import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.util.CheckEmptyUtil;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by lfs on 2017/7/20.
@@ -19,12 +30,16 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     ArrayList<OrderServiceBean> items;
     List<EvaluateBean> evaluates;
     CompositeDisposable cd;
+    String orderNum, shopId;
+    LoginInfoModel loginInfo;
+    OrderBean orderBean;
 
     public EvaluatePresenter(EvaluateContract.View view) {
         this.view = view;
         items = new ArrayList<>();
         evaluates = new ArrayList<>();
         cd = new CompositeDisposable();
+        loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
     }
 
     @Override
@@ -49,6 +64,7 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
 
     @Override
     public void setServices(OrderBean orderBean) {
+        this.orderBean = orderBean;
         ArrayList<OrderServiceBean> services = orderBean.getDingdanfuwu();
         items.clear();
         if (CheckEmptyUtil.isEmpty(services)) {
@@ -57,7 +73,9 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
             items.addAll(services);
             for (OrderServiceBean b : services) {
                 EvaluateBean evaluateBean = new EvaluateBean();
-                evaluateBean.setRate(5);
+                evaluateBean.setPingfen(5);
+                evaluateBean.setBeipinglunopenid(b.getFuwuopenid());
+                evaluateBean.getFuwuid();
                 evaluates.add(evaluateBean);
             }
             OrderServiceBean bean = new OrderServiceBean();
@@ -70,14 +88,14 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     @Override
     public void setComment(String comment, int position) {
         if (evaluates.size() > position) {
-            evaluates.get(position).setComemnt(comment);
+            evaluates.get(position).setNeirong(comment);
         }
     }
 
     @Override
     public void setRate(int rate, int position) {
         if (evaluates.size() > position) {
-            evaluates.get(position).setRate(rate);
+            evaluates.get(position).setPingfen(rate);
         }
     }
 
@@ -90,6 +108,52 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     public void submit() {
         view.showPD();
         cd.clear();
+        String postEvaluates = null;
+        if (!CheckEmptyUtil.isEmpty(evaluates)) {
+            postEvaluates = new Gson().toJson(evaluates);
+        }
+        Network.getInstance().evaluateOrder(
+                BSConstant.EVALUATE_ORDER,
+                orderNum,
+                loginInfo.getOpenId(),
+                shopId,
+                postEvaluates)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseBean baseBean) {
+                        view.dismissPD();
+                        if (baseBean.getCode() == 200) {
+                            orderBean.setStatus("3");
+                            orderBean.setShifoupinglun("1");
+                            view.evaluateSuccess();
+                        } else {
+                            view.evaluateFail();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        view.dismissPD();
+                        view.evaluateFail();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public OrderBean getOrderBean() {
+        return orderBean;
     }
 
 }

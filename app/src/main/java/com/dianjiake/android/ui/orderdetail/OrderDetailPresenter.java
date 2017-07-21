@@ -6,8 +6,6 @@ import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
-import com.dianjiake.android.ui.evaluate.EvaluateActivity;
-import com.dianjiake.android.ui.main.OrderContract;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.IntentUtil;

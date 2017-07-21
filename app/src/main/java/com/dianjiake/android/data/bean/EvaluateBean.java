@@ -8,23 +8,41 @@ import android.os.Parcelable;
  */
 
 public class EvaluateBean implements Parcelable {
-    private int rate;
-    private String comemnt;
+    private int pingfen;
+    private String neirong;
+    private String fuwuid;
+    private String beipinglunopenid;
 
-    public int getRate() {
-        return rate;
+    public int getPingfen() {
+        return pingfen;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setPingfen(int pingfen) {
+        this.pingfen = pingfen;
     }
 
-    public String getComemnt() {
-        return comemnt;
+    public String getNeirong() {
+        return neirong;
     }
 
-    public void setComemnt(String comemnt) {
-        this.comemnt = comemnt;
+    public void setNeirong(String neirong) {
+        this.neirong = neirong;
+    }
+
+    public String getFuwuid() {
+        return fuwuid;
+    }
+
+    public void setFuwuid(String fuwuid) {
+        this.fuwuid = fuwuid;
+    }
+
+    public String getBeipinglunopenid() {
+        return beipinglunopenid;
+    }
+
+    public void setBeipinglunopenid(String beipinglunopenid) {
+        this.beipinglunopenid = beipinglunopenid;
     }
 
     @Override
@@ -34,19 +52,23 @@ public class EvaluateBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.rate);
-        dest.writeString(this.comemnt);
+        dest.writeInt(this.pingfen);
+        dest.writeString(this.neirong);
+        dest.writeString(this.fuwuid);
+        dest.writeString(this.beipinglunopenid);
     }
 
     public EvaluateBean() {
     }
 
     protected EvaluateBean(Parcel in) {
-        this.rate = in.readInt();
-        this.comemnt = in.readString();
+        this.pingfen = in.readInt();
+        this.neirong = in.readString();
+        this.fuwuid = in.readString();
+        this.beipinglunopenid = in.readString();
     }
 
-    public static final Parcelable.Creator<EvaluateBean> CREATOR = new Parcelable.Creator<EvaluateBean>() {
+    public static final Creator<EvaluateBean> CREATOR = new Creator<EvaluateBean>() {
         @Override
         public EvaluateBean createFromParcel(Parcel source) {
             return new EvaluateBean(source);

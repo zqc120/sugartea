@@ -112,6 +112,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
         orderBean = getIntent().getParcelableExtra("order");
+        presenter.setOrderBean(orderBean);
         toolbarTitle.setText("订单详情");
         setView(orderBean);
         button1.setVisibility(View.GONE);

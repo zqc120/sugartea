@@ -7,6 +7,7 @@ import com.dianjiake.android.data.bean.ADBean;
 import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
+import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.LoginBean;
@@ -22,6 +23,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -351,5 +353,23 @@ public interface Api {
             @NonNull @Query("openid") String openid,
             @NonNull @Query("ordernum") String ordernum
 
+    );
+
+    /**
+     * @param bs        {@link BSConstant#EVALUATE_ORDER}
+     * @param ordernum
+     * @param openid
+     * @param shopId
+     * @param evaluates
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constant.ORDERS)
+    Observable<BaseBean> evaluateOrder(
+            @Field("bs") String bs,
+            @Field("ordernum") String ordernum,
+            @Field("openid") String openid,
+            @Field("shanghuid") String shopId,
+            @Field("pinglunlist") String evaluates
     );
 }

@@ -16,6 +16,10 @@ public interface EvaluateContract {
         void showPD();
 
         void dismissPD();
+
+        void evaluateSuccess();
+
+        void evaluateFail();
     }
 
     interface Presenter extends BaseListPresenter {
@@ -28,5 +32,7 @@ public interface EvaluateContract {
         ArrayList<OrderServiceBean> getItems();
 
         void submit();
+
+        OrderBean getOrderBean();
     }
 }
