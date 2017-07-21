@@ -25,7 +25,10 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/base_size2"
                 android:paddingTop="@dimen/base_size2">
-
+                <TextView
+                    style="@style/TextMeItemStyle"
+                    android:layout_marginLeft="0dp"
+                    android:text="头像" />
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -34,6 +37,7 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/complete_info_avatar"
                     android:layout_width="62dp"
+                    android:layout_marginRight="@dimen/base_size2"
                     android:layout_height="62dp"
                     android:layout_gravity="center_vertical"
                     app:placeholderImage="@drawable/ic_defaul_avatar"

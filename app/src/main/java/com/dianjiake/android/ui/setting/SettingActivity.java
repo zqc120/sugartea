@@ -69,7 +69,7 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
-
+        toolbarTitle.setText("设置");
     }
 
     @Override

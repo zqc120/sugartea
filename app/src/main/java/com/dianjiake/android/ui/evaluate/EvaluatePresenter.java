@@ -1,6 +1,7 @@
 package com.dianjiake.android.ui.evaluate;
 
 import com.dianjiake.android.api.Network;
+import com.dianjiake.android.api.params.EvaluateParams;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.EvaluateBean;
@@ -12,7 +13,9 @@ import com.dianjiake.android.util.CheckEmptyUtil;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -65,6 +68,8 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     @Override
     public void setServices(OrderBean orderBean) {
         this.orderBean = orderBean;
+        orderNum = orderBean.getOrdernum();
+        shopId = orderBean.getDianpu().getId();
         ArrayList<OrderServiceBean> services = orderBean.getDingdanfuwu();
         items.clear();
         if (CheckEmptyUtil.isEmpty(services)) {
@@ -108,17 +113,12 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     public void submit() {
         view.showPD();
         cd.clear();
-        String postEvaluates = null;
-        if (!CheckEmptyUtil.isEmpty(evaluates)) {
-            postEvaluates = new Gson().toJson(evaluates);
-        }
-        Network.getInstance().evaluateOrder(
-                BSConstant.EVALUATE_ORDER,
-                orderNum,
-                loginInfo.getOpenId(),
-                shopId,
-                postEvaluates)
-                .observeOn(AndroidSchedulers.mainThread())
+        List<String> pinglun = new ArrayList<>();
+
+        EvaluateParams evaluateParams = new EvaluateParams();
+        evaluateParams.setPinglunlist(new Gson().toJson(evaluates));
+        Network.getInstance().test(evaluateParams.getRequestParams()).
+                observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean>() {
                     @Override

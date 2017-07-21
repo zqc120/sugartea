@@ -18,6 +18,8 @@ import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -25,12 +27,14 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 
 /**
@@ -370,6 +374,11 @@ public interface Api {
             @Field("ordernum") String ordernum,
             @Field("openid") String openid,
             @Field("shanghuid") String shopId,
-            @Field("pinglunlist") String evaluates
+            @Field("pinglunlist") List<EvaluateBean> evaluates
     );
+
+    @Multipart
+    @POST(Constant.ORDERS)
+    Observable<BaseBean> test(
+            @PartMap Map<String, RequestBody> parts);
 }

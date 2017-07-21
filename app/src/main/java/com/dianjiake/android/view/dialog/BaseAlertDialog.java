@@ -60,7 +60,7 @@ public abstract class BaseAlertDialog extends DialogFragment implements DialogIn
     @Override
     public void onShow(DialogInterface dialog) {
         ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(UIUtil.getColor(R.color.main));
-        ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(UIUtil.getColor(R.color.text_content_secondary));
+        ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(UIUtil.getColor(R.color.text_content_text));
     }
 
     /**

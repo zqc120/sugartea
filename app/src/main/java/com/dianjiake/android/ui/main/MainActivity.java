@@ -11,6 +11,7 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.event.LogOutEvent;
+import com.dianjiake.android.event.ToOrderEvent;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.TabFragmentManager;
 
@@ -28,6 +29,8 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
     RadioGroup mainRadioGroup;
     @BindView(R.id.main_radio_home)
     AppCompatRadioButton homeRadio;
+    @BindView(R.id.main_radio_orders)
+    AppCompatRadioButton orderRaido;
     TabFragmentManager tabManager;
 
 
@@ -62,10 +65,6 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
         Fragment fm2 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
         Fragment fm3 = FragmentFactory.createFragmentByFM(OrderFragment.class, getFragmentManager());
         Fragment fm4 = FragmentFactory.createFragmentByFM(MineFragment.class, getFragmentManager());
-//        Fragment fm3 = FragmentFactory.createFragmentByFM(MineFragment.class, getFragmentManager());
-//        Fragment fmVip = new FragmentFactory().createFragmentByFM(VipListFragment.class, getFragmentManager());
-//        Fragment fmPerformance = new FragmentFactory().createFragmentByFM(PerformanceFragment.class, getFragmentManager());
-//
         tabManager.putFragment(R.id.main_radio_home, fm1);
         tabManager.putFragment(R.id.main_radio_service, fm2);
         tabManager.putFragment(R.id.main_radio_orders, fm3);
@@ -76,6 +75,11 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLogoutEvent(LogOutEvent event) {
         homeRadio.setChecked(true);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeToOrder(ToOrderEvent event) {
+        orderRaido.setChecked(true);
     }
 
     @Override

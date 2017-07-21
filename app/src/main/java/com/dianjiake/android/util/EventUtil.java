@@ -1,12 +1,12 @@
 package com.dianjiake.android.util;
 
 
-import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.event.LogOutEvent;
 import com.dianjiake.android.event.LoginEvent;
 import com.dianjiake.android.event.RefreshOrderListEvent;
 import com.dianjiake.android.event.SearchShopEvent;
+import com.dianjiake.android.event.ToOrderEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,5 +34,9 @@ public class EventUtil {
 
     public static void postRefreshOrderList() {
         EventBus.getDefault().post(new RefreshOrderListEvent());
+    }
+
+    public static void postToOrder() {
+        EventBus.getDefault().post(new ToOrderEvent());
     }
 }

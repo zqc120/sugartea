@@ -3,36 +3,28 @@ package com.dianjiake.android.ui.main;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
-import com.dianjiake.android.api.Network;
 import com.dianjiake.android.base.BaseFragment;
-import com.dianjiake.android.data.bean.BaseBean;
-import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.ui.login.CompleteInfoActivity;
 import com.dianjiake.android.ui.setting.SettingActivity;
+import com.dianjiake.android.util.CheckEmptyUtil;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.dialog.NormalAlertDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Created by lfs on 2017/7/19.
@@ -90,9 +82,15 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        toolbarIconLeft.setImageResource(R.drawable.ic_mine_setting);
+    }
+
+    @Override
     public void setViews(UserInfoBean userInfoBean) {
         setAvatar(userInfoBean.getAvatar());
-        setPhone(userInfoBean.getPhone());
+        setName(userInfoBean.getNickname(), userInfoBean.getPhone());
     }
 
     @Override
@@ -101,8 +99,12 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     }
 
     @Override
-    public void setPhone(String phone) {
-        name.setText(formatPhone(phone));
+    public void setName(String name, String phone) {
+        if (CheckEmptyUtil.isEmpty(name)) {
+            this.name.setText(formatPhone(phone));
+        } else {
+            this.name.setText(name);
+        }
     }
 
     public String formatPhone(String phone) {
@@ -139,8 +141,7 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
 
     @OnClick(R.id.avatar)
     void clickAvatar(View v) {
-//        startActivity(CompleteInfoActivity.getEditIntent());
-        test();
+        startActivity(CompleteInfoActivity.getEditIntent());
     }
 
     @OnClick(R.id.toolbar_icon_left)
@@ -148,39 +149,9 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
         startActivity(IntentUtil.getIntent(SettingActivity.class));
     }
 
-    void test() {
-        EvaluateBean evaluateBean = new EvaluateBean();
-        evaluateBean.setComment("我是测试数据");
-        evaluateBean.setRate(5);
-        List<EvaluateBean> list = new ArrayList<>();
-        for(int i=0;i<5;i++){
-            list.add(evaluateBean);
-        }
-        String json = new Gson().toJson(list);
-        Timber.d("json:" + json);
-        Network.getInstance().test("ceshi", json)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeWith(new Observer<BaseBean>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull BaseBean baseBean) {
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+    @OnClick(R.id.mine_order)
+    void clickOrder(View v) {
+        EventUtil.postToOrder();
     }
+
 }

@@ -23,8 +23,8 @@ public class Network {
         if (instance == null) {
             synchronized (Network.class) {
                 if (instance == null) {
-                    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-                    logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+                    LogInterceptor logging = new LogInterceptor();
+//                    logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
                     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                     if (Constant.IS_DEBUG) {
                         httpClient.addInterceptor(logging);

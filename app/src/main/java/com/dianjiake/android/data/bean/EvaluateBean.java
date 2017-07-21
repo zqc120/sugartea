@@ -46,6 +46,16 @@ public class EvaluateBean implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "EvaluateBean{" +
+                "pingfen=" + pingfen +
+                ", neirong='" + neirong + '\'' +
+                ", fuwuid='" + fuwuid + '\'' +
+                ", beipinglunopenid='" + beipinglunopenid + '\'' +
+                '}';
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }

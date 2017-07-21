@@ -1,5 +1,9 @@
 package com.dianjiake.android.api.params;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +24,10 @@ public abstract class BaseParams {
 
     protected RequestBody getImageBody(File file) {
         return RequestBody.create(MediaType.parse("image/*"), file);
+    }
+
+    protected RequestBody getJSONBody(String jsonString) {
+        return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonString);
     }
 
     public abstract Map<String, RequestBody> getRequestParams();

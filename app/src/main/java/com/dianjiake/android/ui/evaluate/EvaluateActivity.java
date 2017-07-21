@@ -13,6 +13,7 @@ import com.dianjiake.android.base.BaseListActivity;
 import com.dianjiake.android.common.ActiivtyDataHelper;
 import com.dianjiake.android.common.AndroidBug5497Workaround;
 import com.dianjiake.android.data.bean.OrderBean;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
@@ -90,11 +91,12 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
         if (pd == null) {
             pd = NormalProgressDialog.newInstance("正在提交，请稍候...");
         }
+        pd.showDialog(getFragmentManager(), "tag");
     }
 
     @Override
     public void dismissPD() {
-        if (pd != null) {
+        if (pd != null && pd.isAdded()) {
             pd.dismissAllowingStateLoss();
         }
     }
@@ -102,6 +104,7 @@ public class EvaluateActivity extends BaseListActivity<EvaluateContract.Presente
     @Override
     public void evaluateSuccess() {
         ToastUtil.showShortToast("评价成功");
+        EventUtil.postRefreshOrderList();
         setResult(RESULT_OK, ActiivtyDataHelper.getOrderData(presenter.getOrderBean()));
         finish();
     }

@@ -14,7 +14,7 @@ public interface MineContract {
 
         void setAvatar(String avatar);
 
-        void setPhone(String phone);
+        void setName(String nickname,String phone);
     }
 
     interface Presenter extends BasePresenter {

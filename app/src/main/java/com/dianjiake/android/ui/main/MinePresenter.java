@@ -30,7 +30,7 @@ public class MinePresenter implements MineContract.Presenter {
 
     @Override
     public void start() {
-        view.setPhone(loginInfoDBHelper.getLoginInfo().getPhone());
+        view.setName(loginInfoDBHelper.getLoginInfo().getNickname(),loginInfoDBHelper.getLoginInfo().getPhone());
         view.setAvatar(loginInfoDBHelper.getLoginInfo().getAvatar());
     }
 

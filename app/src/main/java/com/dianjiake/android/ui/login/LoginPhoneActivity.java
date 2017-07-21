@@ -389,7 +389,7 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
 //                    if (getIntent().getType().equals(TYPE_BIND)) {
 //                        startActivity(CompleteInfoActivity.getStartIntent(mOpenId, "", ""));
 //                    } else {
-//                        UserInfoSP.newInstance().setPhone(mPhoneInput.getText().toString());
+//                        UserInfoSP.newInstance().setName(mPhoneInput.getText().toString());
 //                    }
 //                    LoginActivitiesManger.newInstance().phoneRegisterSuccess();
 //                } else if (baseBean != null && baseBean.getCode() == 4003) {
