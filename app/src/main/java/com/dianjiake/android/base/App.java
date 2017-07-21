@@ -39,7 +39,7 @@ public class App extends MultiDexApplication {
         if (Constant.IS_DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
-        CrashReport.initCrashReport(getApplicationContext(), "ded86613e1", Constant.IS_DEBUG);
+        CrashReport.initCrashReport(getApplicationContext(), "f20630151e", Constant.IS_DEBUG);
         CrashReport.setIsDevelopmentDevice(this, Constant.IS_DEBUG);
         Config.DEBUG = Constant.IS_DEBUG;
         UMShareAPI.get(this);

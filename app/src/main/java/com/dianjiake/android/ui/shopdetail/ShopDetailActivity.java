@@ -198,7 +198,8 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     @OnClick(R.id.shop_info_holder)
     void clickShopInfo(View v) {
         if (presenter.getDetailBean() != null) {
-            SimpleActivity.getStartIntent(String.format(Constant.WEB_SHOP_INFO, presenter.getDetailBean().getDianpu().getId()), "店铺简介");
+            startActivity(SimpleActivity.getStartIntent(String.format(Constant.WEB_SHOP_INFO,
+                    presenter.getDetailBean().getDianpu().getId()), "店铺简介"));
         }
     }
 

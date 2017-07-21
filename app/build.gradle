@@ -71,8 +71,8 @@ android {
 }
 
 bugly {
-    appId = 'ded86613e1'
-    appKey = '655628f7-5aff-408c-a115-14f5b6f55642'
+    appId = 'f20630151e'
+    appKey = 'd836aa47-2a42-4971-9406-a822b9d76185'
 }
 
 repositories {
