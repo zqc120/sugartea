@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.StringBuilderPrinter;
 
+import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
 /**
@@ -29,7 +30,7 @@ public class StaffProvider implements BaseProvider<UserInfoBean>, Parcelable {
 
     @Override
     public String getUrl() {
-        return "http://www.quanminlebang.com/m/activity/revenue/mainClerk.html?shanghuid=" + userInfoBean.getShanghuid() + "&openid=" + userInfoBean.getOpenid();
+        return String.format(Constant.WEB_STAFF, userInfoBean.getShanghuid(), userInfoBean.getOpenid());
     }
 
     @Override

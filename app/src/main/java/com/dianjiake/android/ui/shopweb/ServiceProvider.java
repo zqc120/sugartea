@@ -3,13 +3,15 @@ package com.dianjiake.android.ui.shopweb;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.ServiceBean;
 
 /**
  * Created by lfs on 2017/7/17.
  */
 
-public class ServiceProvider implements BaseProvider<ServiceBean>,Parcelable {
+public class ServiceProvider implements BaseProvider<ServiceBean>, Parcelable {
     ServiceBean serviceBean;
 
     public ServiceProvider(ServiceBean serviceBean) {
@@ -23,7 +25,7 @@ public class ServiceProvider implements BaseProvider<ServiceBean>,Parcelable {
 
     @Override
     public String getUrl() {
-        return null;
+        return Constant.WEB_SERVICE + serviceBean.getId();
     }
 
     @Override

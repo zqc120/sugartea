@@ -18,6 +18,18 @@ public class EvaluateParams extends BaseParams {
         requestParams.put("bs", getTextBody("ceshi"));
     }
 
+    public void setOrderNum(String orderNum) {
+        requestParams.put("ordernum", getTextBody(orderNum));
+    }
+
+    public void setOpenId(String openid) {
+        requestParams.put("openid", getTextBody(openid));
+    }
+
+    public void setShopId(String shopId) {
+        requestParams.put("shanghuid", getTextBody(shopId));
+    }
+
     public void setPinglunlist(String json) {
         requestParams.put("pinglunlist", getJSONBody(json));
     }

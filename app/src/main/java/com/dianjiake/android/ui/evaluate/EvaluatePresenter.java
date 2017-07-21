@@ -113,11 +113,12 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     public void submit() {
         view.showPD();
         cd.clear();
-        List<String> pinglun = new ArrayList<>();
-
         EvaluateParams evaluateParams = new EvaluateParams();
+        evaluateParams.setOpenId(loginInfo.getOpenId());
+        evaluateParams.setOrderNum(orderNum);
+        evaluateParams.setShopId(shopId);
         evaluateParams.setPinglunlist(new Gson().toJson(evaluates));
-        Network.getInstance().test(evaluateParams.getRequestParams()).
+        Network.getInstance().editUserInfo(evaluateParams.getRequestParams()).
                 observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean>() {

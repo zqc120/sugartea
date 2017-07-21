@@ -77,6 +77,7 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                mToolbarTitle.setText(view.getTitle());
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {

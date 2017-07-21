@@ -42,10 +42,12 @@ public interface Constant {
     String IMAGE_QR = ROOT + "photo/erweima/";//二维码
     String IMAGE_AD = ROOT + "photo/msg/";//首页广告
 
-    String SHOP_HOMEPAGE =ROOT+"/m/mobiles/index.html#/page/main?share=yes&id=";
+    String SHOP_HOMEPAGE = ROOT + "m/mobiles/index.html#/page/main?share=yes&id=";
 
     String NETWORK_INFO = "http://pv.sohu.com/cityjson/";
 
+    String WEB_SERVICE = "http://www.quanminlebang.com/m/activity/revenue/proDatail.html?src=app&fuwuid=";
+    String WEB_STAFF = "http://www.quanminlebang.com/m/activity/revenue/mainClerk.html?shanghuid=%s&openid=%s&src=app";
 
 
 }

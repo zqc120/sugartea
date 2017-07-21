@@ -1,13 +1,22 @@
 package com.dianjiake.android.ui.shopweb;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
 import com.dianjiake.android.base.BaseWebViewActivity;
+import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
+import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.IntentUtil;
+import com.google.gson.Gson;
+
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/17.
@@ -56,7 +65,32 @@ public class ShopWebActivity extends BaseWebViewActivity {
     }
 
     @Override
+    @SuppressLint("AddJavascriptInterface")
     protected void initWebView(WebView webView) {
+        webView.addJavascriptInterface(new JS(), "storehome");
+    }
 
+
+    class JS {
+        @JavascriptInterface
+        public void getService(String s) {
+            ServiceBean serviceBean;
+            try {
+                serviceBean = new Gson().fromJson(s, ServiceBean.class);
+                startActivity(SubscribeActivity.getStartIntent(serviceBean, null));
+            } catch (Exception e) {
+
+            }
+        }
+        @JavascriptInterface
+        public void shop(String s) {
+            HomeShopBean shopEntity;
+            try {
+                shopEntity = new Gson().fromJson(s, HomeShopBean.class);
+                startActivity(ShopDetailActivity.getStartIntent(shopEntity.getId()));
+            } catch (Exception e) {
+
+            }
+        }
     }
 }

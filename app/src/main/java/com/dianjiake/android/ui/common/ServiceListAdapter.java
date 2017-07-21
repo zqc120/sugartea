@@ -74,7 +74,7 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         @BindView(R.id.title)
         TextView title;
         @BindView(R.id.service_promotion)
-        TextView servicePromotion;
+        View servicePromotion;
         @BindView(R.id.sail_count)
         TextView sailCount;
         @BindView(R.id.title_holder)
@@ -96,9 +96,9 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         @BindView(R.id.shop_name)
         TextView shopName;
         @BindView(R.id.shop_promotion)
-        TextView shopPromotion;
+        View shopPromotion;
         @BindView(R.id.shop_card)
-        TextView shopCard;
+        View shopCard;
         @BindView(R.id.star)
         StarView star;
         @BindView(R.id.shop_holder)

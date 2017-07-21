@@ -359,26 +359,9 @@ public interface Api {
 
     );
 
-    /**
-     * @param bs        {@link BSConstant#EVALUATE_ORDER}
-     * @param ordernum
-     * @param openid
-     * @param shopId
-     * @param evaluates
-     * @return
-     */
-    @FormUrlEncoded
-    @POST(Constant.ORDERS)
-    Observable<BaseBean> evaluateOrder(
-            @Field("bs") String bs,
-            @Field("ordernum") String ordernum,
-            @Field("openid") String openid,
-            @Field("shanghuid") String shopId,
-            @Field("pinglunlist") List<EvaluateBean> evaluates
-    );
 
     @Multipart
     @POST(Constant.ORDERS)
-    Observable<BaseBean> test(
+    Observable<BaseBean> evaluateOrder(
             @PartMap Map<String, RequestBody> parts);
 }

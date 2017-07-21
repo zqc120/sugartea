@@ -153,15 +153,18 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     @Override
     public void setView(ShopDetailBean shopDetail) {
-        shopLogo.setImageURI(FrescoUtil.getShopLogoUri(shopDetail.getDianpu().getLogo(), shopDetail.getDianpu().getCover()));
-        shopName.setText(shopDetail.getDianpu().getMingcheng());
-        shopTime.setText("营业时间：" + DateUtil.formatOnlyHM(shopDetail.getDianpu().getKaishishijian()) + DateUtil.formatOnlyHM(shopDetail.getDianpu().getJieshushijian()));
-        shopLocation.setText(shopDetail.getDianpu().getDizhi() + " " + AMapUtil.formatDistance(LongUtil.parseLong(shopDetail.getDianpu().getJuli())));
-        String evaluateCount = shopDetail.getDianpu().getPinglunshu();
-        if (IntegerUtil.parseInt(shopDetail.getDianpu().getPinglunshu()) > 999) {
-            evaluateCount += "+";
+        if (shopDetail.getDianpu() != null) {
+            shopLogo.setImageURI(FrescoUtil.getShopLogoUri(shopDetail.getDianpu().getLogo(), shopDetail.getDianpu().getCover()));
+            shopName.setText(shopDetail.getDianpu().getMingcheng());
+            shopTime.setText("营业时间：" + DateUtil.formatOnlyHM(shopDetail.getDianpu().getKaishishijian()) + DateUtil.formatOnlyHM(shopDetail.getDianpu().getJieshushijian()));
+            shopLocation.setText(shopDetail.getDianpu().getDizhi() + " " + AMapUtil.formatDistance(LongUtil.parseLong(shopDetail.getDianpu().getJuli())));
+            String evaluateCount = shopDetail.getDianpu().getPinglunshu();
+            if (IntegerUtil.parseInt(shopDetail.getDianpu().getPinglunshu()) > 999) {
+                evaluateCount += "+";
+            }
+            tab.getTabAt(2).setText("评价(" + evaluateCount + ")");
         }
-        tab.getTabAt(2).setText("评价(" + evaluateCount + ")");
+
     }
 
     @OnClick(R.id.shop_call)
