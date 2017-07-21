@@ -1,5 +1,7 @@
 package com.dianjiake.android.ui.orderdetail;
 
+import android.content.DialogInterface;
+
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
@@ -10,6 +12,7 @@ import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.ToastUtil;
+import com.dianjiake.android.view.dialog.NormalAlertDialog;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -50,6 +53,7 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter {
     }
 
     public void cancelOrder() {
+
         cd.clear();
         view.showCancelPD();
         Network.getInstance().orderCancel(BSConstant.ORDER_CANCEL, loginInfo.getOpenId(), orderBean.getOrdernum())

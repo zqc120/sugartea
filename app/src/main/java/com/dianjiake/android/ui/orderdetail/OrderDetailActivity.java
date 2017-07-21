@@ -187,20 +187,20 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
         TableRow finalPay = new TableRow(this);
         finalPay.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-        finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng() , this));
+        finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng(), this));
         finalPay.addView(TableRowUtil.getVipEndText("应付金额：￥" + item.getHuiyuanjia(), this));
         tableLayout2.addView(finalPay);
 
-        if(orderStatus==OrderStatus.COMPLETE){
+        if (orderStatus == OrderStatus.COMPLETE) {
             TableRow payTool = new TableRow(this);
             payTool.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-            payTool.addView(TableRowUtil.getVipTitleText("支付方式："+item.getPays(), this));
+            payTool.addView(TableRowUtil.getVipTitleText("支付方式：" + item.getPays(), this));
             payTool.addView(TableRowUtil.getVipEndText("实付金额：￥" + item.getShifujine(), this));
             tableLayout2.addView(payTool);
 
             TableRow payTime = new TableRow(this);
             payTime.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-            payTime.addView(TableRowUtil.getVipTitleText("结账时间："+DateUtil.formatYMDHM(item.getPaytime()), this));
+            payTime.addView(TableRowUtil.getVipTitleText("结账时间：" + DateUtil.formatYMDHM(item.getPaytime()), this));
             tableLayout2.addView(payTool);
         }
 
@@ -285,7 +285,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
             case OrderStatus.NO_CONFIRM:
             case OrderStatus.CONFIRM:
             case OrderStatus.RUNNING:
-                presenter.cancelOrder();
+                cancelOrder();
                 break;
             case OrderStatus.COMPLETE:
             case OrderStatus.CANCEL:
@@ -309,6 +309,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
         }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
