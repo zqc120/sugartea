@@ -11,9 +11,12 @@ import android.widget.ImageView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
+import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
+import com.dianjiake.android.ui.simpleactivity.SimpleActivity;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -28,6 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ADItemView extends FrameLayout {
     SimpleDraweeView mImage;
+    ADItemBean itemBean;
 
     public ADItemView(Context context) {
         this(context, null);
@@ -46,8 +50,19 @@ public class ADItemView extends FrameLayout {
             @Override
             public void onClick(View v) {
 
+                if (itemBean != null && !TextUtils.isEmpty(itemBean.getUrl())) {
+                    if ("1".equals(itemBean.getLeixing())) {
+                        IntentUtil.startActivity(v, ShopDetailActivity.getStartIntent(itemBean.getShanghuid()));
+                    } else if ("2".equals(itemBean.getLeixing())) {
+                        IntentUtil.startActivity(v.getContext(), SimpleActivity.getStartIntent(itemBean.getUrl(), itemBean.getTitle()));
+                    } else {
+                        IntentUtil.startActivity(v.getContext(), SimpleActivity.getStartIntent(Constant.ROOT + "msg.php?id=" + itemBean.getId(), itemBean.getTitle()));
+                    }
+                }
+
             }
         });
+
     }
 
     public static ADItemView newInstance(Context context) {
@@ -56,6 +71,7 @@ public class ADItemView extends FrameLayout {
     }
 
     public void load(ADItemBean adItemBean) {
+        this.itemBean = adItemBean;
         mImage.setImageURI(FrescoUtil.getADUri(adItemBean.getPic()));
     }
 

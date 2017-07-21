@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,8 +32,6 @@ import com.dianjiake.android.view.dialog.NormalAlertDialog;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
-
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -76,18 +75,15 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     ImageView logoDivider;
     @BindView(R.id.table_layout)
     TableLayout tableLayout;
-    @BindView(R.id.table_divider)
-    ImageView tableDivider;
+    @BindView(R.id.table_layout2)
+    TableLayout tableLayout2;
+
     @BindView(R.id.sub_title)
     TextView subTitle;
     @BindView(R.id.sub_divider)
     ImageView subDivider;
     @BindView(R.id.sub_table)
     TableLayout subTable;
-    @BindView(R.id.button1)
-    Button button1;
-    @BindView(R.id.button2)
-    Button button2;
 
     int orderStatus;
     OrderBean orderBean;
@@ -115,9 +111,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         presenter.setOrderBean(orderBean);
         toolbarTitle.setText("订单详情");
         setView(orderBean);
-        button1.setVisibility(View.GONE);
-        button2.setVisibility(View.GONE);
-        tableDivider.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -144,6 +138,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         detailButton2.setVisibility("1".equals(item.getShifoupinglun()) ? View.GONE : View.VISIBLE);
 
         tableLayout.removeAllViews();
+        tableLayout2.removeAllViews();
 
         if (!CheckEmptyUtil.isEmpty(item.getDingdanfuwu())) {
             for (int i = 0; i < item.getDingdanfuwu().size(); i++) {
@@ -192,9 +187,22 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
         TableRow finalPay = new TableRow(this);
         finalPay.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-        finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng() + item.getFuwuzhekou() + "折", this));
-        finalPay.addView(TableRowUtil.getVipEndText("会员价格：￥" + item.getShifujine(), this));
-        tableLayout.addView(finalPay);
+        finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng() , this));
+        finalPay.addView(TableRowUtil.getVipEndText("应付金额：￥" + item.getHuiyuanjia(), this));
+        tableLayout2.addView(finalPay);
+
+        if(orderStatus==OrderStatus.COMPLETE){
+            TableRow payTool = new TableRow(this);
+            payTool.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
+            payTool.addView(TableRowUtil.getVipTitleText("支付方式："+item.getPays(), this));
+            payTool.addView(TableRowUtil.getVipEndText("实付金额：￥" + item.getShifujine(), this));
+            tableLayout2.addView(payTool);
+
+            TableRow payTime = new TableRow(this);
+            payTime.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
+            payTime.addView(TableRowUtil.getVipTitleText("结账时间："+DateUtil.formatYMDHM(item.getPaytime()), this));
+            tableLayout2.addView(payTool);
+        }
 
         setButtonText();
 

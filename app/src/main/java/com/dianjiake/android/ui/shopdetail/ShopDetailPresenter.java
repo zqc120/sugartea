@@ -63,7 +63,7 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
 
                     @Override
                     public void onNext(@NonNull BaseBean<ShopDetailBean> shopDetailBean) {
-                        if (shopDetailBean.getCode() == 200&&shopDetailBean.getObj()!=null) {
+                        if (shopDetailBean.getCode() == 200&&shopDetailBean.getObj().getDianpu()!=null) {
                             view.setView(shopDetailBean.getObj());
                             phone = shopDetailBean.getObj().getDianpu().getDianhua();
                             isCollect = "1".equals(shopDetailBean.getObj().getDianpu().getShifoushoucang());

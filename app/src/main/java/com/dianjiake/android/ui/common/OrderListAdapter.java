@@ -1,8 +1,5 @@
 package com.dianjiake.android.ui.common;
 
-import android.text.TextUtils;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,8 +9,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
-import com.dianjiake.android.base.BaseView;
-import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderGoodBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
@@ -157,8 +152,8 @@ public class OrderListAdapter extends BaseLoadMoreAdapter<OrderBean> {
 
             TableRow finalPay = new TableRow(itemView.getContext());
             finalPay.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-            finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng() + item.getFuwuzhekou() + "折", itemView.getContext()));
-            finalPay.addView(TableRowUtil.getVipEndText("会员价格：￥" + item.getShifujine(), itemView.getContext()));
+            finalPay.addView(TableRowUtil.getVipTitleText(item.getDengjimingcheng(), itemView.getContext()));
+            finalPay.addView(TableRowUtil.getVipEndText("应付金额：￥" + item.getShifujine(), itemView.getContext()));
             tableLayout.addView(finalPay);
 
             setButtonText();

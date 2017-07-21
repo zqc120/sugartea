@@ -83,6 +83,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
         ptrListLayout.getRecyclerView().addOnScrollListener(scrollListener);
+        ptrListLayout.getPtr().disableWhenHorizontalMove(true);
         toolbarLocationText.setMaxWidth(UIUtil.getScreenWidth() * 1 / 4);
 
         toolbarBottomDistance = UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.toolbar_size);
