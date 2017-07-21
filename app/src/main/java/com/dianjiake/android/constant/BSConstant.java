@@ -54,5 +54,4 @@ public interface BSConstant {
     String ORDER_CANCEL = "fuwudingdanquxiao";// 取消订单
     String EVALUATE_ORDER = "fuwudingdanpinglun";// 评价订单
 
-
 }

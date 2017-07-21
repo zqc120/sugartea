@@ -22,5 +22,7 @@ public interface ShopDetailContract {
         String getPhone();
 
         boolean isCollect();
+
+        ShopDetailBean getDetailBean();
     }
 }

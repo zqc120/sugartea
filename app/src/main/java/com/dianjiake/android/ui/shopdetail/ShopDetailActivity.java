@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.FragmentFactory;
+import com.dianjiake.android.constant.Constant;
+import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.ui.shopdetail.comment.CommentFragment;
 import com.dianjiake.android.ui.shopdetail.service.ServiceFragment;
@@ -29,6 +31,7 @@ import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.dialog.ShareDialog;
 import com.dianjiake.android.view.widget.StarView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -120,7 +123,6 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
-        toolbarShare.setVisibility(View.GONE);
         toolbarCollection.setVisibility(View.GONE);
         systemToolbar.getLayoutParams().height += UIUtil.getStatusBarHeight();
         fragmentList.clear();
@@ -184,7 +186,12 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     @OnClick(R.id.toolbar_icon_share)
     void clickShare(View v) {
-
+        if (presenter.getDetailBean() != null) {
+            HomeShopBean shopBean = presenter.getDetailBean().getDianpu();
+            ShareDialog.Show(this, shopBean.getMingcheng(),
+                    "糖茶app", String.format(Constant.SHARE_SHOP, shopBean.getId()),
+                    FrescoUtil.getShopLogoUri(shopBean.getLogo(), shopBean.getCover()).toString());
+        }
     }
 
     @Override

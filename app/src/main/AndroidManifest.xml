@@ -79,6 +79,10 @@
         <activity
             android:name=".ui.login.EditNameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.dialog.ShareDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogActivity"></activity>
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"

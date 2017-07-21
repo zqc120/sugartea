@@ -3,6 +3,7 @@ package com.dianjiake.android.ui.shopdetail;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
@@ -28,6 +29,7 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
     CompositeDisposable cd;
     String phone;
     boolean isCollect;
+    ShopDetailBean detailBean;
 
     public ShopDetailPresenter(ShopDetailContract.View view) {
         this.view = view;
@@ -63,7 +65,8 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
 
                     @Override
                     public void onNext(@NonNull BaseBean<ShopDetailBean> shopDetailBean) {
-                        if (shopDetailBean.getCode() == 200&&shopDetailBean.getObj().getDianpu()!=null) {
+                        if (shopDetailBean.getCode() == 200 && shopDetailBean.getObj().getDianpu() != null) {
+                            detailBean = shopDetailBean.getObj();
                             view.setView(shopDetailBean.getObj());
                             phone = shopDetailBean.getObj().getDianpu().getDianhua();
                             isCollect = "1".equals(shopDetailBean.getObj().getDianpu().getShifoushoucang());
@@ -90,5 +93,10 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
     @Override
     public boolean isCollect() {
         return isCollect;
+    }
+
+    @Override
+    public ShopDetailBean getDetailBean() {
+        return detailBean;
     }
 }
