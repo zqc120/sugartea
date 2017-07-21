@@ -23,7 +23,7 @@ public class ServiceFragment extends BaseShopContentFragment implements ServiceC
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        ServiceListAdapter adapter = new ServiceListAdapter(presenter.getItems(), false);
+        ServiceListAdapter adapter = new ServiceListAdapter(presenter.getItems(), false,true);
         adapter.setOnItemClickListener(this);
         return adapter;
     }

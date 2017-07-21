@@ -4,6 +4,7 @@ import android.support.v4.util.ArrayMap;
 
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.AddOrderBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
@@ -304,17 +305,18 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
                 services.toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(new Observer<BaseBean>() {
+                .subscribeWith(new Observer<BaseBean<AddOrderBean>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         cd.add(d);
                     }
 
+
                     @Override
-                    public void onNext(@NonNull BaseBean baseBean) {
+                    public void onNext(@NonNull BaseBean<AddOrderBean> baseBean) {
                         view.dismissProgressDialog();
                         if (baseBean.getCode() == 200) {
-                            view.submitSuccess();
+                            view.submitSuccess(baseBean.getObj().getDingdanxiangqiang());
                         } else {
                             view.submitFail();
                         }

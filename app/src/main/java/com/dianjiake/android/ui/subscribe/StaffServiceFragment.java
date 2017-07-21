@@ -21,7 +21,7 @@ public class StaffServiceFragment extends BaseServiceStaffFragment implements Ba
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        BaseLoadMoreAdapter adapter = new ServiceListAdapter(presenter.getItems());
+        BaseLoadMoreAdapter adapter = new ServiceListAdapter(presenter.getItems(), false, false);
         adapter.setOnItemClickListener(this);
         return adapter;
     }

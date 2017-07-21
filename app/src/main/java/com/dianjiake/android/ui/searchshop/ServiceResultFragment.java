@@ -28,14 +28,14 @@ public class ServiceResultFragment extends BaseListFragment<ServiceResultPresent
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        BaseLoadMoreAdapter adapter = new ServiceListAdapter(presenter.getItems(), true);
+        BaseLoadMoreAdapter adapter = new ServiceListAdapter(presenter.getItems(), true,true);
         adapter.setOnItemClickListener(this);
         return adapter;
     }
 
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
-
+        ptrListLayout.setNeedPtr(false);
     }
 
     @Override

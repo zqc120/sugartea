@@ -5,6 +5,7 @@ import android.support.v4.util.ArrayMap;
 
 import com.dianjiake.android.base.BasePresenter;
 import com.dianjiake.android.base.BaseView;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.data.model.LoginInfoModel;
@@ -24,7 +25,7 @@ public interface SubscribeContract {
 
         void dismissProgressDialog();
 
-        void submitSuccess();
+        void submitSuccess(OrderBean orderBean);
 
         void submitFail();
     }

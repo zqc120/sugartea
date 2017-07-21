@@ -124,6 +124,12 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.load();
+    }
+
     @OnClick(R.id.mine_call)
     void clickCall(View v) {
         NormalAlertDialog dialog = NormalAlertDialog.newInstance("确定呼叫：010-57206260？", true, true);

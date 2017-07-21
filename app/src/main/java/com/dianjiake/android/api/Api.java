@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.ADBean;
 import com.dianjiake.android.data.bean.ADItemBean;
+import com.dianjiake.android.data.bean.AddOrderBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.EvaluateBean;
@@ -205,7 +206,7 @@ public interface Api {
      */
     @FormUrlEncoded
     @POST(Constant.ORDERS)
-    Observable<BaseBean> addService(
+    Observable<BaseBean<AddOrderBean>> addService(
             @Field("bs") String bs,
             @Field("openid") String openid,
             @Field("name") String vipName,

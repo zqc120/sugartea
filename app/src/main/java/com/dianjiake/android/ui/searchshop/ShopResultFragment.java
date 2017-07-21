@@ -31,7 +31,7 @@ public class ShopResultFragment extends BaseListFragment<ShopResultPresenter> im
 
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
-
+        ptrListLayout.setNeedPtr(false);
     }
 
     @Override

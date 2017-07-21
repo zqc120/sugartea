@@ -411,6 +411,7 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
         if (!CheckEmptyUtil.isEmpty(mAvatarPath)) {
             infoParams.setAvatar(new File(mAvatarPath));
         }
+        infoParams.setOpenId(loginInfoDBHelper.getLoginInfo().getOpenId());
         infoParams.setNickname(mFormNickname);
         infoParams.setSex(mFormGender);
         infoParams.setBirthday(mFormAge);

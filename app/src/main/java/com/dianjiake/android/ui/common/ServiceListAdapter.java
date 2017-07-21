@@ -40,15 +40,16 @@ import static android.view.View.GONE;
  */
 
 public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
-    boolean showShop;
+    boolean showShop, showSub;
 
     public ServiceListAdapter(List<ServiceBean> items) {
         super(items);
     }
 
-    public ServiceListAdapter(List<ServiceBean> items, boolean showShop) {
+    public ServiceListAdapter(List<ServiceBean> items, boolean showShop, boolean showSub) {
         super(items);
         this.showShop = showShop;
+        this.showSub = showSub;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
     @Override
     public BaseViewHolder myOnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(UIUtil.inflate(R.layout.item_service, parent), showShop, this);
+        return new ViewHolder(UIUtil.inflate(R.layout.item_service, parent), showShop, showSub, this);
     }
 
     @Override
@@ -105,42 +106,43 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         LinearLayout shopHolder;
 
 
-        boolean showShop;
+        boolean showShop, showSub;
         int size;
         ServiceBean serviceBean;
         ServiceListAdapter adapter;
 
-        public ViewHolder(View itemView, boolean showShop, ServiceListAdapter adapter) {
+        public ViewHolder(View itemView, boolean showShop, boolean showSub, ServiceListAdapter adapter) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             this.showShop = showShop;
             this.adapter = adapter;
+            this.showSub = showSub;
 
             ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) logo.getLayoutParams();
             if (showShop) {
                 size = (int) UIUtil.dp2px(100);
                 if (lp == null) {
                     lp = new ConstraintLayout.LayoutParams(size, size);
-                }else {
-                    lp.width =lp.height = size;
+                } else {
+                    lp.width = lp.height = size;
                 }
                 logo.setLayoutParams(lp);
                 divider.setVisibility(View.VISIBLE);
                 shopHolder.setVisibility(View.VISIBLE);
-                subscribe.setVisibility(View.VISIBLE);
 
             } else {
                 size = (int) UIUtil.dp2px(80);
                 if (lp == null) {
                     lp = new ConstraintLayout.LayoutParams(size, size);
-                }else{
-                    lp.width =lp.height = size;
+                } else {
+                    lp.width = lp.height = size;
                 }
                 logo.setLayoutParams(lp);
-                subscribe.setVisibility(GONE);
                 divider.setVisibility(GONE);
                 shopHolder.setVisibility(GONE);
             }
+
+            subscribe.setVisibility(showSub ? View.VISIBLE : GONE);
         }
 
         public void setItem(ServiceBean serviceBean) {

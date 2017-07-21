@@ -20,8 +20,10 @@ import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.ActiivtyDataHelper;
 import com.dianjiake.android.common.AndroidBug5497Workaround;
 import com.dianjiake.android.custom.MyTextWatcher;
+import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.ui.orderdetail.OrderDetailActivity;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.IntentUtil;
@@ -42,8 +44,8 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
 
     private static final String KEY_SERVICE = "key_service";
     private static final String KEY_STAFF = "key_staff";
-    private static final int REQUEST_SERVICE = 23;
-    private static final int REQUEST_STAFF = 34;
+    private static final int REQUEST_SERVICE = 2025;
+    private static final int REQUEST_STAFF = 1025;
     private static final int REQUEST_TIME = 35;
     private static final int REQUEST_LOCATION = 36;
 
@@ -245,8 +247,10 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
     }
 
     @Override
-    public void submitSuccess() {
+    public void submitSuccess(OrderBean orderBean) {
         ToastUtil.showShortToast("提交成功");
+        startActivity(OrderDetailActivity.getStartIntent(orderBean));
+        finish();
     }
 
     @Override
