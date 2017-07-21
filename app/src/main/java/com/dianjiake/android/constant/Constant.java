@@ -48,6 +48,7 @@ public interface Constant {
 
     String WEB_SERVICE = "http://www.quanminlebang.com/m/activity/revenue/proDatail.html?src=app&fuwuid=";
     String WEB_STAFF = "http://www.quanminlebang.com/m/activity/revenue/mainClerk.html?shanghuid=%s&openid=%s&src=app";
+    String WEB_SHOP_INFO = "http://www.quanminlebang.com/m/mobile/mobilestation/shopinfo.html?src=app&id=%s";
 
     String SHARE_SHOP = "http://www.quanminlebang.com/m/mobile161/#/page/main?id=%s";
 

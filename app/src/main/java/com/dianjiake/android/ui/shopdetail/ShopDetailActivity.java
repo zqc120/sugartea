@@ -24,6 +24,7 @@ import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.ui.shopdetail.comment.CommentFragment;
 import com.dianjiake.android.ui.shopdetail.service.ServiceFragment;
 import com.dianjiake.android.ui.shopdetail.staff.StaffFragment;
+import com.dianjiake.android.ui.simpleactivity.SimpleActivity;
 import com.dianjiake.android.util.AMapUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FrescoUtil;
@@ -191,6 +192,13 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
             ShareDialog.Show(this, shopBean.getMingcheng(),
                     "糖茶app", String.format(Constant.SHARE_SHOP, shopBean.getId()),
                     FrescoUtil.getShopLogoUri(shopBean.getLogo(), shopBean.getCover()).toString());
+        }
+    }
+
+    @OnClick(R.id.shop_info_holder)
+    void clickShopInfo(View v) {
+        if (presenter.getDetailBean() != null) {
+            SimpleActivity.getStartIntent(String.format(Constant.WEB_SHOP_INFO, presenter.getDetailBean().getDianpu().getId()), "店铺简介");
         }
     }
 
