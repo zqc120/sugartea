@@ -22,6 +22,7 @@ import com.dianjiake.android.R;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
  * Created by lfs on 16/11/7.
@@ -76,8 +77,8 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
+
                 super.onPageFinished(view, url);
-                mToolbarTitle.setText(view.getTitle());
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -88,6 +89,13 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
                     mProgressBar.setVisibility(newProgress != 100 ? View.VISIBLE : View.GONE);
                     mProgressBar.setProgress(newProgress);
                 }
+            }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                Timber.d("title" + title);
+                mToolbarTitle.setText(title);
+                super.onReceivedTitle(view, title);
             }
         });
         WebSettings settings = mWebView.getSettings();

@@ -68,13 +68,12 @@ public abstract class BaseShopContentPresenter<T, V extends BaseListView> implem
 
     @Override
     public void reload() {
-        items.clear();
         page = 1;
         load(true);
     }
 
     @Override
-    public void load(boolean isReload) {
+    public void load(final boolean isReload) {
         cd.clear();
         provideObservable()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -83,6 +82,9 @@ public abstract class BaseShopContentPresenter<T, V extends BaseListView> implem
 
                     @Override
                     public void onSuccess(List<T> list, boolean isAll) {
+                        if (isReload) {
+                            items.clear();
+                        }
                         items.addAll(list);
                         page++;
                         if (isAll) {

@@ -82,7 +82,6 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
     @Override
     public void reload() {
         page = 1;
-        items.clear();
         load(true);
     }
 

@@ -159,7 +159,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         if (shopDetail.getDianpu() != null) {
             shopLogo.setImageURI(FrescoUtil.getShopLogoUri(shopDetail.getDianpu().getLogo(), shopDetail.getDianpu().getCover()));
             shopName.setText(shopDetail.getDianpu().getMingcheng());
-            shopTime.setText("营业时间：" + DateUtil.formatOnlyHM(shopDetail.getDianpu().getKaishishijian()) + DateUtil.formatOnlyHM(shopDetail.getDianpu().getJieshushijian()));
+            shopTime.setText("营业时间：" + shopDetail.getDianpu().getKaishishijian() + "-" + shopDetail.getDianpu().getJieshushijian());
             shopLocation.setText(shopDetail.getDianpu().getDizhi() + " " + AMapUtil.formatDistance(LongUtil.parseLong(shopDetail.getDianpu().getJuli())));
             String evaluateCount = shopDetail.getDianpu().getPinglunshu();
             if (IntegerUtil.parseInt(shopDetail.getDianpu().getPinglunshu()) > 999) {

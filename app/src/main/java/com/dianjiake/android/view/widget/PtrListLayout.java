@@ -75,7 +75,7 @@ public class PtrListLayout extends LoadingLayout implements PtrHandler, LifeCycl
     //以下为对外暴露接口
 
     public void setAdapter(BaseLoadMoreAdapter adapter) {
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setLayoutManager(new WrapContentLinearLayoutManager(getContext()));
         this.adapter = adapter;
         rv.setAdapter(adapter);
     }
