@@ -20,6 +20,7 @@ public class ActiivtyDataHelper {
     private static final String KEY_TIME = "keytime";
     private static final String KEY_POI = "keypoi";
     private static final String KEY_ORDER = "keyorder";
+    private static final String KEY_TEXT = "keytext";
 
     public static Intent getServiceStaffData(UserInfoBean item) {
         Intent intent = new Intent();
@@ -69,5 +70,15 @@ public class ActiivtyDataHelper {
 
     public static OrderBean getOrderBean(Intent intent) {
         return intent.getParcelableExtra(KEY_ORDER);
+    }
+
+    public static Intent getTextIntent(String str) {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_TEXT, str);
+        return intent;
+    }
+
+    public static String getText(Intent intent) {
+        return intent.getStringExtra(KEY_TEXT);
     }
 }

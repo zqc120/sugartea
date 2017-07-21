@@ -76,6 +76,9 @@
         <activity
             android:name=".ui.setting.SettingActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.EditNameActivity"
+            android:screenOrientation="portrait" />
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"

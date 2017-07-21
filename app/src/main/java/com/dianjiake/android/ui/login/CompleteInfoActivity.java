@@ -85,6 +85,7 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
     private static final int REQUEST_GALLERY = 0x346;
     private static final int REQUEST_CROP_PICTURE = 0x347;
     private static final int REQUEST_LOCATION = 0x357;
+    private static final int REQUEST_NAME = 0x3337;
     private static final String TYPE_EDIT = "edit";
     private static final String KEY_NICKNAME = "nickname";
     private static final String KEY_AVATAR = "avatar";
@@ -97,7 +98,7 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
     @BindView(R.id.toolbar_divider)
     View mToolbarDivider;
     @BindView(R.id.complete_info_nickname)
-    EditText mNickname;
+    TextView mNickname;
     @BindView(R.id.complete_info_gender_text)
     TextView mGenderText;
     @BindView(R.id.complete_info_gender)
@@ -151,14 +152,6 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
         return intent;
     }
 
-    TextWatcher mNicknameWathcer = new MyTextWatcher() {
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            mFormNickname = String.valueOf(s);
-            setButtonStatus();
-        }
-    };
-
     private List<OccupationBean> mOccupations;
 
 
@@ -205,13 +198,8 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
             getUserInfo();
         }
 
-        if (!TextUtils.isEmpty(mNickname.getText())) {
-            mNickname.setSelection(mNickname.length());
-        }
 
-        mNickname.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
         mOccupations = new ArrayList<>();
-        mNickname.addTextChangedListener(mNicknameWathcer);
         getOccupation();
 
         setButtonStatus();
@@ -254,6 +242,10 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
         startActivityForResult(SearchLocationActivity.getChooseLocationIntent(), REQUEST_LOCATION);
     }
 
+    @OnClick(R.id.name_holder)
+    void pressName(View v) {
+        startActivityForResult(EditNameActivity.getStartIntent(mFormNickname), REQUEST_NAME);
+    }
 
     void avatarPickerDialog() {
         if (isFinishing()) return;
@@ -543,6 +535,10 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
                 mFormLongitude = poiItem.getLatLonPoint().getLongitude() + "";
                 mFormLocation = poiItem.getTitle();
                 mMicrodistrictText.setText(poiItem.getTitle());
+            } else if (requestCode == REQUEST_NAME) {
+                mFormNickname = ActiivtyDataHelper.getText(data);
+                mNickname.setText(mFormNickname);
+                setButtonStatus();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -609,7 +605,6 @@ public class CompleteInfoActivity extends BaseTranslateActivity {
 
     @Override
     protected void onDestroy() {
-        mNickname.removeTextChangedListener(mNicknameWathcer);
         super.onDestroy();
     }
 }

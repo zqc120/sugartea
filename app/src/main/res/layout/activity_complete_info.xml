@@ -25,10 +25,12 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/base_size2"
                 android:paddingTop="@dimen/base_size2">
+
                 <TextView
                     style="@style/TextMeItemStyle"
                     android:layout_marginLeft="0dp"
                     android:text="头像" />
+
                 <Space
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -37,9 +39,9 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/complete_info_avatar"
                     android:layout_width="62dp"
-                    android:layout_marginRight="@dimen/base_size2"
                     android:layout_height="62dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/base_size2"
                     app:placeholderImage="@drawable/ic_defaul_avatar"
                     app:roundAsCircle="true" />
 
@@ -50,17 +52,18 @@
 
             <ImageView style="@style/DividerHorizontalStyle" />
 
-            <LinearLayout style="@style/MeItemHolderStyle">
+            <LinearLayout
+                android:id="@+id/name_holder"
+                style="@style/MeItemHolderStyle">
 
                 <TextView
                     style="@style/TextMeItemStyle"
                     android:layout_marginLeft="0dp"
                     android:text="昵称" />
 
-                <EditText
+                <TextView
                     android:id="@+id/complete_info_nickname"
                     style="@style/TextMeItemHintStyle"
-                    android:layout_marginRight="0dp"
                     android:background="@null"
                     android:gravity="right"
                     android:hint="请输入您的昵称"
@@ -68,6 +71,9 @@
                     android:textColorHint="@color/text_content_hint"
                     android:textCursorDrawable="@null" />
 
+                <ImageView
+                    style="@style/MeItemIconStyle"
+                    android:src="@drawable/ic_right_arrow" />
             </LinearLayout>
 
 
