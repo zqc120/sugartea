@@ -25,6 +25,9 @@ public class ServiceResultPresenter extends BaseSearchPresenter<ServiceBean, Ser
     @Override
     public void load(boolean isReload) {
         cd.clear();
+        if(isReload){
+            view.loading();
+        }
         Network.getInstance().searchService(
                 BSConstant.SEARCH_SERVICE,
                 loginInfo.getOpenId(),

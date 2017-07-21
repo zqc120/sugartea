@@ -25,6 +25,9 @@ public class ShopResultPresenter extends BaseSearchPresenter<HomeShopBean, ShopR
     @Override
     public void load(boolean isReload) {
         cd.clear();
+        if(isReload){
+            view.loading();
+        }
         Network.getInstance().searchShop(
                 BSConstant.SEARCH_SHOP,
                 loginInfo.getOpenId(),

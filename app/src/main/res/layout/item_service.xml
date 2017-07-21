@@ -45,10 +45,12 @@
             android:textSize="@dimen/text_size_subhead"
             tools:text="fsdfdsfdfsdfsdfsdfs" />
 
-        <TextView
+        <ImageView
             android:id="@+id/service_promotion"
             style="@style/TagStyle.Promotion"
-            android:layout_marginLeft="@dimen/base_size2" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/base_size1"
+            android:src="@drawable/ic_shop_promotion" />
 
 
         <Space
@@ -179,19 +181,19 @@
             android:textSize="@dimen/text_size_body"
             tools:text="fsdffsdfsdfd" />
 
-        <TextView
+        <ImageView
             android:id="@+id/shop_promotion"
-            style="@style/TagStyle.Promotion"
             android:layout_width="@dimen/text_size_body"
             android:layout_height="@dimen/text_size_body"
-            android:layout_marginLeft="@dimen/base_size2" />
+            android:layout_marginLeft="@dimen/base_size2"
+            android:src="@drawable/ic_shop_promotion" />
 
-        <TextView
+        <ImageView
             android:id="@+id/shop_card"
-            style="@style/TagStyle.Card"
             android:layout_width="@dimen/text_size_body"
             android:layout_height="@dimen/text_size_body"
-            android:layout_marginLeft="@dimen/base_size1" />
+            android:layout_marginLeft="@dimen/base_size1"
+            android:src="@drawable/ic_shop_coupon" />
 
         <Space
             android:layout_width="wrap_content"
