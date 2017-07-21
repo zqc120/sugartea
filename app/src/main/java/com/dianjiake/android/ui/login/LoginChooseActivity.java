@@ -200,13 +200,8 @@ public class LoginChooseActivity extends BaseTranslateActivity {
                         switch (userInfo.getCode()) {
                             case 200:
                                 ToastUtil.showShortToast("登录成功");
-                                if ("1".equals(userInfo.getObj().getUser().getWanshanziliao())) {
-                                    saveLoginUserInfo(userInfo.getObj().getUser());
-                                    LoginActivitiesManger.newInstance().phoneLoginSuccess();
-                                } else {
-//                                    startActivity(CompleteInfoActivity.getStartIntent(user.getOpenid(), mLoginAuthorModule.getAvatar(),
-//                                            mLoginAuthorModule.getNickname()));
-                                }
+                                saveLoginUserInfo(userInfo.getObj().getUser());
+                                LoginActivitiesManger.newInstance().phoneLoginSuccess();
                                 break;
                             case 203:
                             case 204:

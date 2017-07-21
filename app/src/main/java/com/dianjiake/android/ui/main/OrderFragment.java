@@ -132,7 +132,7 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
 
     @Override
     public void dismissCancelPD() {
-        if (cancelPD != null) {
+        if (cancelPD != null && cancelPD.isAdded()) {
             cancelPD.dismissAllowingStateLoss();
         }
     }

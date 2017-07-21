@@ -62,52 +62,58 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
     @Override
     public void reload() {
         page = 1;
-        items.clear();
         load(true);
     }
 
     @Override
     public void load(final boolean isReload) {
         cd.clear();
-        provideApi().subscribeWith(new OrderListObserver<OrderBean>() {
-            @Override
-            public void onSuccess(List<OrderBean> list, boolean isAll, int noCommentCount) {
-                if (isReload && view.getShowNoCommentHolder() && noCommentCount > 0) {
-                    OrderBean orderBean = new OrderBean();
-                    orderBean.setViewType(OrderViewType.HEADER);
-                    items.add(orderBean);
-                    view.setNoCommentCount(noCommentCount);
-                }
+        provideApi()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new OrderListObserver<OrderBean>() {
+                    @Override
+                    public void onSuccess(List<OrderBean> list, boolean isAll, int noCommentCount) {
+                        if (isReload) {
+                            items.clear();
+                        }
 
-                items.addAll(list);
-                page++;
-                if (isAll) {
-                    view.loadAll();
-                } else {
-                    view.loadComplete();
-                }
-            }
+                        if (isReload && view.getShowNoCommentHolder() && noCommentCount > 0) {
+                            OrderBean orderBean = new OrderBean();
+                            orderBean.setViewType(OrderViewType.HEADER);
+                            items.add(orderBean);
+                            view.setNoCommentCount(noCommentCount);
+                        }
 
-            @Override
-            public void onEmpty() {
-                view.loadEmptyContent();
-            }
+                        items.addAll(list);
+                        page++;
+                        if (isAll) {
+                            view.loadAll();
+                        } else {
+                            view.loadComplete();
+                        }
+                    }
 
-            @Override
-            public void onAll() {
-                view.loadAll();
-            }
+                    @Override
+                    public void onEmpty() {
+                        view.loadEmptyContent();
+                    }
 
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-                cd.add(d);
-            }
+                    @Override
+                    public void onAll() {
+                        view.loadAll();
+                    }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-                view.loadNetworkError();
-            }
-        });
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        view.loadNetworkError();
+                    }
+                });
     }
 
     public void cancelOrder(final OrderBean orderBean, final int position) {

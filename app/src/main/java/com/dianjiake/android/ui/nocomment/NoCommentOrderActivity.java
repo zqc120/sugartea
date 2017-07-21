@@ -107,12 +107,12 @@ public class NoCommentOrderActivity extends BaseListActivity<NoCommentOrderPrese
 
     @Override
     public void onLoadMore() {
-
+        presenter.load(false);
     }
 
     @Override
     public void onReload() {
-
+        presenter.reload();
     }
 
     @OnClick(R.id.toolbar_icon_left)

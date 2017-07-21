@@ -118,7 +118,7 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
         evaluateParams.setOrderNum(orderNum);
         evaluateParams.setShopId(shopId);
         evaluateParams.setPinglunlist(new Gson().toJson(evaluates));
-        Network.getInstance().editUserInfo(evaluateParams.getRequestParams()).
+        Network.getInstance().evaluateOrder(evaluateParams.getRequestParams()).
                 observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean>() {

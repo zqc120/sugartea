@@ -23,6 +23,8 @@ public class OrderServiceBean implements Parcelable {
     private String photo;
     private int viewType;
 
+
+
     public String getPhoto() {
         return photo;
     }
@@ -157,6 +159,7 @@ public class OrderServiceBean implements Parcelable {
         dest.writeString(this.status);
         dest.writeString(this.kaishishijian);
         dest.writeString(this.wanchengshijian);
+        dest.writeString(this.photo);
         dest.writeInt(this.viewType);
     }
 
@@ -173,6 +176,7 @@ public class OrderServiceBean implements Parcelable {
         this.status = in.readString();
         this.kaishishijian = in.readString();
         this.wanchengshijian = in.readString();
+        this.photo = in.readString();
         this.viewType = in.readInt();
     }
 

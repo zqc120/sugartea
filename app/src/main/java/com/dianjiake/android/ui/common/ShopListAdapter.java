@@ -132,6 +132,7 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
             promotionHolder.setVisibility("1".equals(item.getCuxiao()) ? View.VISIBLE : View.GONE);
             promotionDesc.setText(item.getCuxiaofuwumingcheng());
             cardHolder.setVisibility("0".equals(item.getGongkaikaquan()) ? View.GONE : View.VISIBLE);
+            cardDesc.setText(item.getKaquanmingcheng());
         }
 
         @OnClick(R.id.holder)

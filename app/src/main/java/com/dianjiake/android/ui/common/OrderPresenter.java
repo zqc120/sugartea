@@ -65,8 +65,6 @@ public class OrderPresenter extends BaseOrderPresenter {
 
     @Override
     public Observable<BaseListBean<OrderBean>> provideApi() {
-        return Network.getInstance().orders(BSConstant.ORDER_LIST, loginInfo.getOpenId(), page)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io());
+        return Network.getInstance().orders(BSConstant.ORDER_LIST, loginInfo.getOpenId(), page);
     }
 }
