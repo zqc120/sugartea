@@ -379,4 +379,6 @@ public interface Api {
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid,
             @NonNull @Query("shanghuid") String shopId);
+
+
 }

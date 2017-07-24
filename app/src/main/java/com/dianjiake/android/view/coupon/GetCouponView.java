@@ -5,7 +5,6 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -78,6 +77,7 @@ public class GetCouponView extends FrameLayout {
     public void setShop(HomeShopBean shop) {
         if (shop != null) {
             cd.clear();
+            adapter.setShopBean(shop);
             Network.getInstance().shopCoupon(
                     BSConstant.SHOP_COUPON,
                     loginInfo.getOpenId(),
@@ -93,7 +93,10 @@ public class GetCouponView extends FrameLayout {
                         @Override
                         public void onNext(@io.reactivex.annotations.NonNull BaseListBean<CouponBean> couponList) {
                             if (!CheckEmptyUtil.isEmpty(couponList.getObj().getList())) {
+                                setVisibility(VISIBLE);
                                 adapter.setItems(couponList.getObj().getList());
+                            } else {
+                                setVisibility(GONE);
                             }
                         }
 
@@ -117,71 +120,15 @@ public class GetCouponView extends FrameLayout {
         super.onDetachedFromWindow();
     }
 
-    public static class GetCouponAdapter extends PagerAdapter {
-
-        private List<CouponBean> mItems;
-        private HomeShopBean shopBean;
-
-        public GetCouponAdapter() {
-            mItems = new ArrayList<>();
-        }
-
-        public void setShopBean(HomeShopBean shopBean) {
-            this.shopBean = shopBean;
-        }
-
-        public void setItems(List items) {
-            mItems.clear();
-            mItems.addAll(items);
-            mItems.addAll(items);
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public int getCount() {
-            return mItems == null ? 0 : mItems.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            CouponView couponView = (CouponView) container.findViewWithTag(position);
-            if (couponView == null) {
-                couponView = new CouponView(container.getContext());
-                couponView.setGetVisible(true);
-            }
-            couponView.setCoupon(mItems.get(position), shopBean);
-            couponView.setTag(position);
-            container.addView(couponView);
-            return couponView;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            if (mItems.size() > position) {
-                container.removeView((View) object);
-            }
-        }
-
-        @Override
-        public float getPageWidth(int position) {
-            return 0.8f;
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return POSITION_NONE;
-        }
-
-    }
 
     public static class Adapter extends RecyclerView.Adapter<ViewHolder> {
         private List<CouponBean> items = new ArrayList<>();
         private CouponAdapterHelper couponAdapterHelper = new CouponAdapterHelper();
+        private HomeShopBean shopBean;
+
+        public void setShopBean(HomeShopBean shopBean) {
+            this.shopBean = shopBean;
+        }
 
         public void setItems(List<CouponBean> items) {
             this.items.clear();
@@ -206,7 +153,7 @@ public class GetCouponView extends FrameLayout {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             couponAdapterHelper.onBindViewHolder(holder.itemView, position, getItemCount());
-            holder.setItem(items.get(position));
+            holder.setItem(items.get(position), shopBean);
         }
 
         @Override
@@ -217,13 +164,14 @@ public class GetCouponView extends FrameLayout {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CouponView couponView;
+
         public ViewHolder(View itemView) {
             super(itemView);
             couponView = (CouponView) itemView.findViewById(R.id.cv);
         }
 
-        public void setItem(CouponBean couponBean) {
-            couponView.setCoupon(couponBean, null);
+        public void setItem(CouponBean couponBean, HomeShopBean shopBean) {
+            couponView.setCoupon(couponBean, shopBean);
         }
     }
 }

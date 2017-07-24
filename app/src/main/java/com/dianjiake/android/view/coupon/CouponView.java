@@ -20,6 +20,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 /**
  * Created by lfs on 2017/7/24.
@@ -43,6 +45,8 @@ public class CouponView extends ConstraintLayout {
     @BindView(R.id.get)
     Button get;
 
+    CompositeDisposable cd;
+
     public CouponView(Context context) {
         super(context);
         init();
@@ -61,6 +65,7 @@ public class CouponView extends ConstraintLayout {
     void init() {
         View view = inflate(getContext(), R.layout.coupon_view, this);
         ButterKnife.bind(this, view);
+        cd = new CompositeDisposable();
     }
 
 
@@ -107,5 +112,10 @@ public class CouponView extends ConstraintLayout {
     @OnClick(R.id.get)
     void getCoupon(View v) {
         ToastUtil.showShortToast("领取");
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
     }
 }
