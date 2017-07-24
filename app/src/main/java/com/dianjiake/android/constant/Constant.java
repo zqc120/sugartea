@@ -52,4 +52,5 @@ public interface Constant {
 
     String SHARE_SHOP = "http://www.quanminlebang.com/m/mobile161/#/page/main?id=%s";
 
+
 }

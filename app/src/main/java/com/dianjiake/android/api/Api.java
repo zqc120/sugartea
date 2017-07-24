@@ -8,6 +8,7 @@ import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.AddOrderBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
+import com.dianjiake.android.data.bean.CouponBean;
 import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
@@ -365,4 +366,17 @@ public interface Api {
     @POST(Constant.ORDERS)
     Observable<BaseBean> evaluateOrder(
             @PartMap Map<String, RequestBody> parts);
+
+    /**
+     *
+     * @param bs  {@link BSConstant#ORDER_LIST}
+     * @param openid
+     * @param shopId
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<CouponBean>> shopCoupon(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid,
+            @NonNull @Query("shanghuid") String shopId);
 }

@@ -32,6 +32,7 @@ import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.coupon.GetCouponView;
 import com.dianjiake.android.view.dialog.ShareDialog;
 import com.dianjiake.android.view.widget.StarView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -82,12 +83,12 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     TextView shopLocation;
     @BindView(R.id.shop_call)
     FrameLayout shopCall;
-    @BindView(R.id.shop_cards)
-    ViewPager shopCards;
     @BindView(R.id.toolbar_icon_share)
     ImageView toolbarShare;
     @BindView(R.id.toolbar_icon_collection)
     ImageView toolbarCollection;
+    @BindView(R.id.get_coupon)
+    GetCouponView getCouponView;
 
 
     ShopDetailAdapter adapter;
@@ -137,6 +138,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         UIUtil.setUpIndicatorWidth(tab);
         appbar.addOnOffsetChangedListener(onOffsetChangedListener);
         setToolbarBGTransparent();
+        getCouponView.setVisibility(View.GONE);
     }
 
     @Override
@@ -166,6 +168,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
                 evaluateCount += "+";
             }
             tab.getTabAt(2).setText("评价(" + evaluateCount + ")");
+            getCouponView.setShop(shopDetail.getDianpu());
         }
 
     }
