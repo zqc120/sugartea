@@ -62,7 +62,7 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
     @Override
     public void initFragments() {
         Fragment fm1 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
-        Fragment fm2 = FragmentFactory.createFragmentByFM(HomeFragment.class, getFragmentManager());
+        Fragment fm2 = FragmentFactory.createFragmentByFM(ServiceFragment.class, getFragmentManager());
         Fragment fm3 = FragmentFactory.createFragmentByFM(OrderFragment.class, getFragmentManager());
         Fragment fm4 = FragmentFactory.createFragmentByFM(MineFragment.class, getFragmentManager());
         tabManager.putFragment(R.id.main_radio_home, fm1);

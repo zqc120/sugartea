@@ -58,5 +58,6 @@ public interface BSConstant {
     String MY_COLLECTION = "shoucangshuanghuliebiao";//我的收藏
     String DELETE_COLLECTION = "quxiaoshoucangshanghu";//取消收藏
     String MY_COUPON = "wodekaquanliebiao";//我的优惠券列表
+    String SERVICE_TYPE = "fuwuleibie";//服务类别
 
 }

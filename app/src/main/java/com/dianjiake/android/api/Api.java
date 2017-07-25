@@ -17,6 +17,7 @@ import com.dianjiake.android.data.bean.MyCouponBean;
 import com.dianjiake.android.data.bean.OccupationBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.data.bean.ServiceTypeBean;
 import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
@@ -430,4 +431,14 @@ public interface Api {
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid,
             @NonNull @Query("page") int page);
+
+    /**
+     * 服务分类列表
+     *
+     * @param bs {@link BSConstant#SERVICE_TYPE}
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseBean<ServiceTypeBean>> serviceType(
+            @NonNull @Query("bs") String bs);
 }

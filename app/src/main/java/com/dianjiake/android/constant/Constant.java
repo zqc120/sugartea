@@ -41,6 +41,7 @@ public interface Constant {
     String IMAGE_SHOP = ROOT + "photo/shanghu/";//头像
     String IMAGE_QR = ROOT + "photo/erweima/";//二维码
     String IMAGE_AD = ROOT + "photo/msg/";//首页广告
+    String IMAGE_SERVICE_ICON = ROOT + "photo/leibie/";// 服务分类图标
 
     String SHOP_HOMEPAGE = ROOT + "m/mobiles/index.html#/page/main?share=yes&id=";
 

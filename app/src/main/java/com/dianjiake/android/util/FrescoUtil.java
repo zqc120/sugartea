@@ -40,6 +40,10 @@ public class FrescoUtil {
         return Uri.parse(Constant.IMAGE_AD + adImage);
     }
 
+    public static Uri getServiceTyoeIcon(String icon) {
+        return Uri.parse(Constant.IMAGE_SERVICE_ICON + icon);
+    }
+
     public static Uri getFileUri(String path) {
         return Uri.parse("file://" + path);
     }
