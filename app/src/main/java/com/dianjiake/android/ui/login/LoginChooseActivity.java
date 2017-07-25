@@ -176,6 +176,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
 
 
     void login(final String wxOpenId, final String unionId) {
+        showAuthorizePD("正在登录");
         Network.getInstance().login(BSConstant.LOGIN,
                 null,
                 null,
@@ -203,6 +204,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
                                 saveLoginUserInfo(userInfo.getObj().getUser());
                                 LoginActivitiesManger.newInstance().phoneLoginSuccess();
                                 break;
+                            case 202:
                             case 203:
                             case 204:
                                 startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));

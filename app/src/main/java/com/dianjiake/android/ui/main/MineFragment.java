@@ -93,8 +93,10 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
 
     @Override
     public void setViews(UserInfoBean userInfoBean) {
-        setAvatar(userInfoBean.getAvatar());
-        setName(userInfoBean.getNickname(), userInfoBean.getPhone());
+        if(userInfoBean!=null){
+            setAvatar(userInfoBean.getAvatar());
+            setName(userInfoBean.getNickname(), userInfoBean.getPhone());
+        }
     }
 
     @Override

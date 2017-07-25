@@ -64,6 +64,7 @@ public class ServiceTypeActivity extends BaseTranslateActivity {
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+        toolbarIconRight.setImageResource(R.drawable.ic_toolbar_search);
         secondBean = getIntent().getParcelableExtra("bean");
         toolbarRadio0.setText(secondBean.getMingcheng());
         toolbarRadio0.post(new Runnable() {
