@@ -57,5 +57,6 @@ public interface BSConstant {
     String VIP_LIST = "huiyuanka";//会员卡
     String MY_COLLECTION = "shoucangshuanghuliebiao";//我的收藏
     String DELETE_COLLECTION = "quxiaoshoucangshanghu";//取消收藏
+    String MY_COUPON = "wodekaquanliebiao";//我的优惠券列表
 
 }

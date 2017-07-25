@@ -2,10 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/click_white"
-    android:id="@+id/holder"
+    android:background="@drawable/click_white"
     android:orientation="vertical">
 
     <com.facebook.drawee.view.SimpleDraweeView

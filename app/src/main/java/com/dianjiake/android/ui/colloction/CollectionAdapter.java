@@ -42,7 +42,8 @@ public class CollectionAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
     @Override
     public void myOnBindViewHolder(BaseViewHolder holder, int position) {
-
+        ViewHolder vh = (ViewHolder) holder;
+        vh.setItem(getItem(position));
     }
 
     @Override

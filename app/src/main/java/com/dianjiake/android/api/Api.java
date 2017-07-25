@@ -13,6 +13,7 @@ import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.LoginBean;
+import com.dianjiake.android.data.bean.MyCouponBean;
 import com.dianjiake.android.data.bean.OccupationBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.ServiceBean;
@@ -415,5 +416,18 @@ public interface Api {
     Observable<BaseBean> deleteCollection(
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid,
-            @NonNull @Query("shopid") String shopId);
+            @NonNull @Query("shanghuid") String shopId);
+
+    /**
+     * 我的优惠券
+     *
+     * @param bs     {@link BSConstant#MY_COUPON}
+     * @param openid
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<MyCouponBean>> myCoupon(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid,
+            @NonNull @Query("page") int page);
 }

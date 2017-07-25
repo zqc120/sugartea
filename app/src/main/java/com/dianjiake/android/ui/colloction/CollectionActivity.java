@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/25.
@@ -46,6 +48,7 @@ public class CollectionActivity extends BaseListActivity<CollectionPresenter> im
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
         ptrListLayout.setNeedLoadMore(false);
+        toolbarTitle.setText("收藏店铺");
     }
 
     @Override
@@ -86,5 +89,10 @@ public class CollectionActivity extends BaseListActivity<CollectionPresenter> im
         if (progressDialog != null && progressDialog.isAdded()) {
             progressDialog.dismissAllowingStateLoss();
         }
+    }
+
+    @OnClick(R.id.toolbar_icon_left)
+    void clickBack(View v) {
+        finish();
     }
 }

@@ -1,10 +1,13 @@
 package com.dianjiake.android.data.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by lfs on 2017/7/24.
  */
 
-public class CouponBean {
+public class CouponBean implements Parcelable {
     private String id;
     private String shanghuid;
     private String leixing;
@@ -284,4 +287,93 @@ public class CouponBean {
     public void setLingqushuliang(String lingqushuliang) {
         this.lingqushuliang = lingqushuliang;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.shanghuid);
+        dest.writeString(this.leixing);
+        dest.writeString(this.miaoshu);
+        dest.writeString(this.fuwuid);
+        dest.writeString(this.shijian);
+        dest.writeString(this.kaishishijian);
+        dest.writeString(this.jieshushijian);
+        dest.writeString(this.xianshi);
+        dest.writeString(this.shuliang);
+        dest.writeString(this.xiaofeijine);
+        dest.writeString(this.youhuijine);
+        dest.writeString(this.lipinmingcheng);
+        dest.writeString(this.fuwumingcheng);
+        dest.writeString(this.kaquanmingcheng);
+        dest.writeString(this.youxiaoqileixing);
+        dest.writeString(this.xinhuiyuan);
+        dest.writeString(this.laohuiyuan);
+        dest.writeString(this.xinyuangong);
+        dest.writeString(this.laoyuangong);
+        dest.writeString(this.shifougongkai);
+        dest.writeString(this.shiyongleixing);
+        dest.writeString(this.shiyongkaishi1);
+        dest.writeString(this.shiyongjieshu1);
+        dest.writeString(this.shiyongkaishi2);
+        dest.writeString(this.shiyongjieshu2);
+        dest.writeString(this.kelingqushu);
+        dest.writeString(this.xingqi);
+        dest.writeString(this.fenxiangshu);
+        dest.writeString(this.jianjie);
+        dest.writeString(this.lingqushuliang);
+    }
+
+    public CouponBean() {
+    }
+
+    protected CouponBean(Parcel in) {
+        this.id = in.readString();
+        this.shanghuid = in.readString();
+        this.leixing = in.readString();
+        this.miaoshu = in.readString();
+        this.fuwuid = in.readString();
+        this.shijian = in.readString();
+        this.kaishishijian = in.readString();
+        this.jieshushijian = in.readString();
+        this.xianshi = in.readString();
+        this.shuliang = in.readString();
+        this.xiaofeijine = in.readString();
+        this.youhuijine = in.readString();
+        this.lipinmingcheng = in.readString();
+        this.fuwumingcheng = in.readString();
+        this.kaquanmingcheng = in.readString();
+        this.youxiaoqileixing = in.readString();
+        this.xinhuiyuan = in.readString();
+        this.laohuiyuan = in.readString();
+        this.xinyuangong = in.readString();
+        this.laoyuangong = in.readString();
+        this.shifougongkai = in.readString();
+        this.shiyongleixing = in.readString();
+        this.shiyongkaishi1 = in.readString();
+        this.shiyongjieshu1 = in.readString();
+        this.shiyongkaishi2 = in.readString();
+        this.shiyongjieshu2 = in.readString();
+        this.kelingqushu = in.readString();
+        this.xingqi = in.readString();
+        this.fenxiangshu = in.readString();
+        this.jianjie = in.readString();
+        this.lingqushuliang = in.readString();
+    }
+
+    public static final Parcelable.Creator<CouponBean> CREATOR = new Parcelable.Creator<CouponBean>() {
+        @Override
+        public CouponBean createFromParcel(Parcel source) {
+            return new CouponBean(source);
+        }
+
+        @Override
+        public CouponBean[] newArray(int size) {
+            return new CouponBean[size];
+        }
+    };
 }
