@@ -392,4 +392,28 @@ public interface Api {
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid);
 
+    /**
+     * 我的收藏列表
+     *
+     * @param bs     {@link BSConstant#MY_COLLECTION}
+     * @param openid
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<HomeShopBean>> myCollection(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid);
+
+    /**
+     * 取消收藏
+     *
+     * @param bs     {@link BSConstant#MY_COLLECTION}
+     * @param openid
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseBean> deleteCollection(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid,
+            @NonNull @Query("shopid") String shopId);
 }

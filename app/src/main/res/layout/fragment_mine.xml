@@ -84,12 +84,13 @@
 
             <ImageView style="@style/ItemArrowStyle" />
         </LinearLayout>
+        <include layout="@layout/divider_horizontal" />
 
         <!-- 收藏-->
         <LinearLayout
             android:id="@+id/mine_collection"
             style="@style/ItemWhiteStyle"
-            android:visibility="gone">
+            >
 
             <ImageView
                 style="@style/MineIconStyle"
@@ -108,6 +109,7 @@
 
             <ImageView style="@style/ItemArrowStyle" />
         </LinearLayout>
+        <include layout="@layout/divider_horizontal" />
 
         <!-- 优惠券-->
         <LinearLayout

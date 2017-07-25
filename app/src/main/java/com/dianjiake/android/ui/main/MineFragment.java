@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.ui.colloction.CollectionActivity;
 import com.dianjiake.android.ui.login.CompleteInfoActivity;
 import com.dianjiake.android.ui.setting.SettingActivity;
 import com.dianjiake.android.ui.vip.VipActivity;
@@ -166,4 +167,9 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
         startActivity(IntentUtil.getIntent(VipActivity.class));
     }
 
+    @OnClick(R.id.mine_collection)
+    void clickCollection(View v) {
+        startActivity(IntentUtil.getIntent(CollectionActivity.class));
+
+    }
 }

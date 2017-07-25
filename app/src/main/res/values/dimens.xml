@@ -21,7 +21,7 @@
     <dimen name="text_size_display2">45dp</dimen>
     <dimen name="text_size_display1">34dp</dimen>
     <dimen name="text_size_headline">24dp</dimen>
-    <dimen name="text_size_title">18dp</dimen>
+    <dimen name="text_size_title">16dp</dimen>
     <dimen name="text_size_subhead">14dp</dimen>
     <dimen name="text_size_body">12dp</dimen>
     <dimen name="text_size_caption">11dp</dimen>
