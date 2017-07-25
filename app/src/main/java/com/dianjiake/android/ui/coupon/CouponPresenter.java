@@ -93,4 +93,9 @@ public class CouponPresenter implements CouponContract.Presenter {
                     }
                 });
     }
+
+    @Override
+    public List<MyCouponBean> getItems() {
+        return items;
+    }
 }

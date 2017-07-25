@@ -91,6 +91,10 @@
         <activity
             android:name=".ui.colloction.CollectionActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.coupon.CouponActivity"
+            android:screenOrientation="portrait" />
+
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"

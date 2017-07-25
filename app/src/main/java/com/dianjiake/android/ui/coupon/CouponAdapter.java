@@ -30,7 +30,8 @@ public class CouponAdapter extends BaseLoadMoreAdapter<MyCouponBean> {
 
     @Override
     public void myOnBindViewHolder(BaseViewHolder holder, int position) {
-
+        ViewHolder vh = (ViewHolder) holder;
+        vh.setItem(getItem(position));
     }
 
     @Override
@@ -51,6 +52,7 @@ public class CouponAdapter extends BaseLoadMoreAdapter<MyCouponBean> {
 
         public ViewHolder(View itemView) {
             super(itemView);
+            coupon.setGetVisible(false);
         }
 
 
@@ -61,7 +63,7 @@ public class CouponAdapter extends BaseLoadMoreAdapter<MyCouponBean> {
 
         @OnClick(R.id.coupon)
         void click(View v) {
-            if (item.getDianpu() == null) return;
+            if (item != null && item.getDianpu() == null) return;
             IntentUtil.startActivity(v, ShopDetailActivity.getStartIntent(item.getDianpu().getId()));
         }
 

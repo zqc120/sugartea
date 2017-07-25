@@ -2,7 +2,7 @@
 <com.dianjiake.android.view.coupon.CouponView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/coupon"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/base_margin"
     android:layout_marginRight="@dimen/base_margin"
     android:layout_marginTop="@dimen/base_size2"

@@ -14,8 +14,10 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.colloction.CollectionActivity;
+import com.dianjiake.android.ui.coupon.CouponActivity;
 import com.dianjiake.android.ui.login.CompleteInfoActivity;
 import com.dianjiake.android.ui.setting.SettingActivity;
+import com.dianjiake.android.ui.simpleactivity.SimpleActivity;
 import com.dianjiake.android.ui.vip.VipActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.EventUtil;
@@ -33,8 +35,7 @@ import butterknife.OnClick;
  */
 
 public class MineFragment extends BaseFragment<MineContract.Presenter> implements MineContract.View {
-    @BindView(R.id.space)
-    ToolbarSpaceView space;
+
     @BindView(R.id.bg)
     ImageView bg;
     @BindView(R.id.toolbar_space)
@@ -87,6 +88,7 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbarIconLeft.setImageResource(R.drawable.ic_mine_setting);
+        toolbarSpace.getBackground().mutate().setAlpha(0);
     }
 
     @Override
@@ -170,6 +172,15 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     @OnClick(R.id.mine_collection)
     void clickCollection(View v) {
         startActivity(IntentUtil.getIntent(CollectionActivity.class));
+    }
 
+    @OnClick(R.id.mine_cards)
+    void clickCoupon(View v) {
+        startActivity(IntentUtil.getIntent(CouponActivity.class));
+    }
+
+    @OnClick(R.id.mine_join)
+    void clickJoin(View v) {
+        startActivity(SimpleActivity.getStartIntent("http://www.quanminlebang.com/msg.php?id=4", "商家入驻"));
     }
 }

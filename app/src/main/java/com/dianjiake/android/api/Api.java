@@ -425,7 +425,7 @@ public interface Api {
      * @param openid
      * @return
      */
-    @GET(Constant.SHOP)
+    @GET(Constant.USER)
     Observable<BaseListBean<MyCouponBean>> myCoupon(
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid,
