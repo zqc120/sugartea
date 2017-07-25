@@ -133,13 +133,13 @@
             <ImageView style="@style/ItemArrowStyle" />
         </LinearLayout>
 
+        <include layout="@layout/divider_horizontal" />
 
         <!-- 会员卡-->
         <LinearLayout
             android:id="@+id/mine_vip"
 
-            style="@style/ItemWhiteStyle"
-            android:visibility="gone">
+            style="@style/ItemWhiteStyle">
 
             <ImageView
                 style="@style/MineIconStyle"

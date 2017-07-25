@@ -83,6 +83,10 @@
             android:name=".view.dialog.ShareDialog"
             android:screenOrientation="portrait"
             android:theme="@style/DialogActivity"></activity>
+
+        <activity
+            android:name=".ui.vip.VipActivity"
+            android:screenOrientation="portrait" />
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"

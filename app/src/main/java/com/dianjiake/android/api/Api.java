@@ -19,6 +19,7 @@ import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.ShopCommentBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.data.bean.VipBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -368,8 +369,7 @@ public interface Api {
             @PartMap Map<String, RequestBody> parts);
 
     /**
-     *
-     * @param bs  {@link BSConstant#ORDER_LIST}
+     * @param bs     {@link BSConstant#ORDER_LIST}
      * @param openid
      * @param shopId
      * @return
@@ -380,5 +380,16 @@ public interface Api {
             @NonNull @Query("openid") String openid,
             @NonNull @Query("shanghuid") String shopId);
 
+    /**
+     * 会员卡列表
+     *
+     * @param bs     {@link BSConstant#VIP_LIST}
+     * @param openid
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseListBean<VipBean>> vipList(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid);
 
 }

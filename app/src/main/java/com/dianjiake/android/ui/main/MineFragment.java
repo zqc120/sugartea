@@ -15,6 +15,7 @@ import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.login.CompleteInfoActivity;
 import com.dianjiake.android.ui.setting.SettingActivity;
+import com.dianjiake.android.ui.vip.VipActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.FrescoUtil;
@@ -158,6 +159,11 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     @OnClick(R.id.mine_order)
     void clickOrder(View v) {
         EventUtil.postToOrder();
+    }
+
+    @OnClick(R.id.mine_vip)
+    void clickVip(View v) {
+        startActivity(IntentUtil.getIntent(VipActivity.class));
     }
 
 }

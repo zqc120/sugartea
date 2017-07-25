@@ -54,5 +54,6 @@ public interface BSConstant {
     String ORDER_CANCEL = "fuwudingdanquxiao";// 取消订单
     String EVALUATE_ORDER = "fuwudingdanpinglun";// 评价订单
     String SHOP_COUPON = "gongkaikaquanliebiao";//商户优惠券列表
+    String VIP_LIST = "huiyuanka";//会员卡
 
 }
