@@ -92,16 +92,16 @@ public class VipAdapter extends BaseLoadMoreAdapter<VipBean> {
             if (FloatUtil.parseFloat(vipBean.getMoney()) > 0) {
                 TableRow moneyRow = new TableRow(itemView.getContext());
                 moneyRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-                moneyRow.addView(TableRowUtil.getVipTitle("储值卡", itemView.getContext()));
-                moneyRow.addView(TableRowUtil.getVipEndText(vipBean.getMoney(), itemView.getContext()));
+                moneyRow.addView(TableRowUtil.getVipListTitle("储值卡", itemView.getContext()));
+                moneyRow.addView(TableRowUtil.getVipListEnd(vipBean.getMoney(), itemView.getContext()));
                 table.addView(moneyRow);
             }
             if (!CheckEmptyUtil.isEmpty(vipBean.getJicikalist())) {
                 for (VipBean.JicikalistBean card : vipBean.getJicikalist()) {
                     TableRow cardRow = new TableRow(itemView.getContext());
                     cardRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-                    cardRow.addView(TableRowUtil.getVipTitle("计次卡 " + card.getJicikamingcheng(), itemView.getContext()));
-                    cardRow.addView(TableRowUtil.getVipEndText(card.getShengyucishu() + "次", itemView.getContext()));
+                    cardRow.addView(TableRowUtil.getVipListTitle("计次卡 " + card.getJicikamingcheng(), itemView.getContext()));
+                    cardRow.addView(TableRowUtil.getVipListEnd(card.getShengyucishu() + "次", itemView.getContext()));
                     table.addView(cardRow);
                 }
             }

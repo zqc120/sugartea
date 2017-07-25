@@ -81,7 +81,7 @@ public class TableRowUtil {
         return textView;
     }
 
-    public static TextView getVipTitle(String text, Context context) {
+    public static TextView getVipListTitle(String text, Context context) {
         TextView textView = new TextView(context);
         textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
         textView.setTextColor(UIUtil.getColor(R.color.text_white));
@@ -90,7 +90,7 @@ public class TableRowUtil {
         return textView;
     }
 
-    public static TextView getVipTitleEnd(String text, Context context) {
+    public static TextView getVipListEnd(String text, Context context) {
         TextView textView = new TextView(context);
         textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         textView.setPadding((int) UIUtil.dp2px(8), 0, 0, 0);
