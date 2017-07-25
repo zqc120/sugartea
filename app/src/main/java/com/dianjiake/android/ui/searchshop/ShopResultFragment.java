@@ -2,11 +2,13 @@ package com.dianjiake.android.ui.searchshop;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationItemView;
 import android.view.View;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
 import com.dianjiake.android.ui.common.ShopListAdapter;
+import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 
 /**
@@ -14,6 +16,12 @@ import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
  */
 
 public class ShopResultFragment extends BaseListFragment<ShopResultPresenter> implements ShopResultContract.View {
+    public static Bundle getBundle(String typeId) {
+        Bundle bundle = new Bundle();
+        bundle.putString("id", typeId);
+        return bundle;
+    }
+
     @Override
     protected int provideLayout() {
         return R.layout.fragment_comment_list;
@@ -21,7 +29,12 @@ public class ShopResultFragment extends BaseListFragment<ShopResultPresenter> im
 
     @Override
     protected ShopResultPresenter getPresenter() {
-        return new ShopResultPresenter(this);
+        Bundle bundle = getArguments();
+        if (bundle == null) {
+            return new ShopResultPresenter(this);
+        } else {
+            return new ShopResultPresenter(this, bundle.getString("id"));
+        }
     }
 
     @Override

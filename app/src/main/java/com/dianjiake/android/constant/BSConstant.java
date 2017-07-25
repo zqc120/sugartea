@@ -59,5 +59,6 @@ public interface BSConstant {
     String DELETE_COLLECTION = "quxiaoshoucangshanghu";//取消收藏
     String MY_COUPON = "wodekaquanliebiao";//我的优惠券列表
     String SERVICE_TYPE = "fuwuleibie";//服务类别
-
+    String RETRIEVE_SERVICE = "jiansuofuwuliebiao";//检索服务
+    String RETRIEVE_SHOP = "jiansuoshanghuliebiao";//检索商户
 }

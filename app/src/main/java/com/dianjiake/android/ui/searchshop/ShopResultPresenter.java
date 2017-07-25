@@ -2,11 +2,13 @@ package com.dianjiake.android.ui.searchshop;
 
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.request.ListObserver;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -22,52 +24,29 @@ public class ShopResultPresenter extends BaseSearchPresenter<HomeShopBean, ShopR
         super(view);
     }
 
-    @Override
-    public void load(boolean isReload) {
-        cd.clear();
-        if(isReload){
-            view.loading();
-        }
-        Network.getInstance().searchShop(
-                BSConstant.SEARCH_SHOP,
-                loginInfo.getOpenId(),
-                keyword,
-                0,
-                appInfo.getLongitude() + "," + appInfo.getLatitude(),
-                page)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new ListObserver<HomeShopBean>() {
-                    @Override
-                    public void onSuccess(List<HomeShopBean> list, boolean isAll) {
-                        items.addAll(list);
-                        page++;
-                        if (isAll) {
-                            view.loadAll();
-                        } else {
-                            view.loadComplete();
-                        }
-                    }
-
-                    @Override
-                    public void onEmpty() {
-                        view.loadEmptyContent();
-                    }
-
-                    @Override
-                    public void onAll() {
-                        view.loadAll();
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        cd.add(d);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        view.loadNetworkError();
-                    }
-                });
+    public ShopResultPresenter(ShopResultContract.View view, String typeId) {
+        super(view, typeId);
     }
+
+    @Override
+    public Observable<BaseListBean<HomeShopBean>> provideNetwork() {
+        if (searchType == SearchType.SEARCH) {
+            return Network.getInstance().searchShop(
+                    BSConstant.SEARCH_SHOP,
+                    loginInfo.getOpenId(),
+                    keyword,
+                    0,
+                    appInfo.getLongitude() + "," + appInfo.getLatitude(),
+                    page);
+        } else {
+            return Network.getInstance().retrieveShop(BSConstant.RETRIEVE_SHOP,
+                    loginInfo.getOpenId(),
+                    typeId,
+                    0,
+                    appInfo.getLongitude() + "," + appInfo.getLatitude(),
+                    page);
+        }
+    }
+
+
 }

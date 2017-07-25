@@ -38,4 +38,15 @@ public class FragmentFactory {
 
     }
 
+
+    public static <T extends Fragment> T createFragmentByFM(Class<T> clz, FragmentManager fm, Bundle bundle) {
+        T t = (T) fm.findFragmentByTag(clz.getName());
+        if (t == null) {
+            return createFragment(clz, bundle);
+        } else {
+            return t;
+        }
+
+    }
+
 }

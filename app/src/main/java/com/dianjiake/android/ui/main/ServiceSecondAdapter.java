@@ -7,8 +7,10 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.ServiceSecondBean;
+import com.dianjiake.android.ui.servicetype.ServiceTypeActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.FrescoUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -107,7 +109,7 @@ public class ServiceSecondAdapter extends RecyclerView.Adapter {
 
         @OnClick(R.id.holder)
         void click(View v) {
-
+            IntentUtil.startActivity(v, ServiceTypeActivity.getStartIntent(item));
         }
 
     }

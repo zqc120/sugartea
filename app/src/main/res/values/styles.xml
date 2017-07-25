@@ -19,6 +19,7 @@
     <style name="AppButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:stateListAnimator">@null</item>
     </style>
+
     <style name="DialogActivity" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -282,5 +283,18 @@
         <item name="android:background">@drawable/button_order</item>
         <item name="android:textSize">@dimen/text_size_subhead</item>
         <item name="android:textColor">@color/text_content_title</item>
+    </style>
+
+    <style name="ToolbarRadioStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/toolbar_radio</item>
+        <item name="android:paddingLeft">@dimen/base_size4</item>
+        <item name="android:paddingRight">@dimen/base_size4</item>
+        <item name="android:paddingBottom">@dimen/base_size1</item>
+        <item name="android:paddingTop">@dimen/base_size1</item>
     </style>
 </resources>

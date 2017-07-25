@@ -105,6 +105,49 @@ public interface Api {
             @Query("page") int page
     );
 
+    /**
+     * 检索商户
+     *
+     * @param bs         {@link BSConstant#RETRIEVE_SHOP}
+     * @param openid
+     * @param typeId
+     * @param order
+     * @param coordinate
+     * @param page
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<HomeShopBean>> retrieveShop(
+            @Query("bs") String bs,
+            @Query("openid") String openid,
+            @Query("erjileibie") String typeId,
+            @Query("paixu") int order,
+            @Query("zuobiao") String coordinate,
+            @Query("page") int page
+    );
+
+    /**
+     * 检索服务
+     *
+     * @param bs         {@link BSConstant#RETRIEVE_SERVICE}
+     * @param openid
+     * @param typeId
+     * @param order
+     * @param coordinate
+     * @param page
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<ServiceBean>> retrieveService(
+            @Query("bs") String bs,
+            @Query("openid") String openid,
+            @Query("erjileibie") String typeId,
+            @Query("paixu") int order,
+            @Query("zuobiao") String coordinate,
+            @Query("page") int page
+    );
+
+
     @GET(Constant.SHOP)
     Observable<BaseBean<ShopDetailBean>> shopDetail(
             @Query("bs") String bs,
@@ -114,7 +157,7 @@ public interface Api {
     );
 
     /**
-     * 商户列表
+     * 服务列表
      *
      * @param bs     {@link BSConstant#SERVICE_LIST}
      * @param shopid
