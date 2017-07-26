@@ -130,7 +130,7 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
         timeName.setText(DateUtil.formatMDHM(timestamp));
         presenter.setChooseTime(timestamp);
 
-        name.setText(presenter.getLoginInfo().getName());
+        name.setText(presenter.getLoginInfo().getNickname());
         phone.setText(presenter.getLoginInfo().getPhone());
         presenter.setName(name.getText().toString());
         presenter.setPhone(phone.getText().toString());

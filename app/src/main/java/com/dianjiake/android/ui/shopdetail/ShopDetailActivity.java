@@ -93,6 +93,8 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     ImageView toolbarCollection;
     @BindView(R.id.get_coupon)
     GetCouponView getCouponView;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
 
     NormalProgressDialog collectionPD;
     ShopDetailAdapter adapter;
@@ -179,6 +181,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
             }
             tab.getTabAt(2).setText("评价(" + evaluateCount + ")");
             getCouponView.setShop(shopDetail.getDianpu());
+            toolbarTitle.setText(shopDetail.getDianpu().getMingcheng());
         }
 
     }
@@ -265,6 +268,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         } else if (shopLogoHeight - Math.abs(location) > toolbarBottomLocation) {
             float property = Math.abs(location) / (float) (shopLogoHeight - toolbarBottomLocation);
             setToolbarBGAlpha((int) (255 * property));
+            toolbarTitle.setAlpha(0);
         } else {
             setToolbarBGOpacity();
         }
@@ -276,6 +280,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     private void setToolbarBGOpacity() {
         setToolbarBGAlpha(255);
+        toolbarTitle.setAlpha(1.0f);
     }
 
 

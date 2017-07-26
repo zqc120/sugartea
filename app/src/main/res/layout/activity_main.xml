@@ -31,7 +31,7 @@
         <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/main_radio_service"
             style="@style/MainTabStyle"
-            android:drawableTop="@drawable/radio_home"
+            android:drawableTop="@drawable/radio_service"
 
             android:text="服务" />
 

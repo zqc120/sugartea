@@ -90,6 +90,16 @@ public class ShareDialog extends AppCompatActivity implements UMShareListener {
         startShare(SHARE_MEDIA.WEIXIN_CIRCLE);
     }
 
+    @OnClick(R.id.share_qq)
+    void qq(View v){
+        startShare(SHARE_MEDIA.QQ);
+    }
+
+    @OnClick(R.id.share_qzone)
+    void qzone(View v){
+        startShare(SHARE_MEDIA.QZONE);
+    }
+
     @OnClick(R.id.share_close)
     void close(View v) {
         finish();
