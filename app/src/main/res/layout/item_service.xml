@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/base_margin"
             android:layout_marginRight="@dimen/base_margin"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintLeft_toLeftOf="parent"

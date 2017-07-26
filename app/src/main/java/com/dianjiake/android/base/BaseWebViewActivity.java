@@ -88,8 +88,8 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 canShare = true;
-                shareUrl = url.replace("&src=app", "");
-                view.loadUrl("javascript:window.local_obj.showSource(document.getElementsByTagName('img')[0].src);");
+                shareUrl = url.replace("&src=app", "&share=yes");
+                view.loadUrl("javascript:window.local.showSource(document.getElementsByTagName('img')[0].src);");
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -128,7 +128,7 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
         mToolbarTitle.setText(getToolbarTitle());
         mWebView.loadUrl(getUrl());
 //
-        mWebView.addJavascriptInterface(new LocalJS(), "local_obj");
+        mWebView.addJavascriptInterface(new LocalJS(), "local");
     }
 
 
@@ -161,7 +161,7 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
 
     @Override
     protected void onDestroy() {
-        mWebView.removeJavascriptInterface("local_obj");
+        mWebView.removeJavascriptInterface("local");
         super.onDestroy();
     }
 

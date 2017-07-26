@@ -51,7 +51,6 @@ public class OrderBean implements Parcelable {
     private String shifoupinglun;
     private HomeShopBean dianpu;
     private String chuzhi;
-    private String youhui;
     private ArrayList<OrderServiceBean> dingdanfuwu;
     int viewType;
 
@@ -375,14 +374,6 @@ public class OrderBean implements Parcelable {
         this.chuzhi = chuzhi;
     }
 
-    public String getYouhui() {
-        return youhui;
-    }
-
-    public void setYouhui(String youhui) {
-        this.youhui = youhui;
-    }
-
     public ArrayList<OrderServiceBean> getDingdanfuwu() {
         return dingdanfuwu;
     }
@@ -444,7 +435,6 @@ public class OrderBean implements Parcelable {
         dest.writeString(this.shifoupinglun);
         dest.writeParcelable(this.dianpu, flags);
         dest.writeString(this.chuzhi);
-        dest.writeString(this.youhui);
         dest.writeTypedList(this.dingdanfuwu);
         dest.writeInt(this.viewType);
     }
@@ -489,7 +479,6 @@ public class OrderBean implements Parcelable {
         this.shifoupinglun = in.readString();
         this.dianpu = in.readParcelable(HomeShopBean.class.getClassLoader());
         this.chuzhi = in.readString();
-        this.youhui = in.readString();
         this.dingdanfuwu = in.createTypedArrayList(OrderServiceBean.CREATOR);
         this.viewType = in.readInt();
     }

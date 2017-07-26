@@ -58,12 +58,12 @@ public class MsgActivity extends BaseListActivity<MsgContract.Presenter> impleme
 
     @Override
     public MsgContract.Presenter getPresenter() {
-        return null;
+        return new MsgPresenter(this);
     }
 
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
-        return null;
+        return new MsgAdapter(presenter.getItems(), presenter);
     }
 
     @Override

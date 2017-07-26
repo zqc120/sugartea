@@ -218,11 +218,6 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
             this.items.clear();
             if (!CheckEmptyUtil.isEmpty(items)) {
                 this.items.addAll(items);
-                this.items.addAll(items);
-                this.items.addAll(items);
-                this.items.addAll(items);
-                this.items.addAll(items);
-                this.items.addAll(items);
             }
             notifyDataSetChanged();
         }
@@ -231,6 +226,7 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
             if (position < items.size()) {
                 items.remove(position);
             }
+            notifyDataSetChanged();
             return items.size();
         }
 
