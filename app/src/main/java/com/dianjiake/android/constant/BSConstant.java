@@ -57,8 +57,10 @@ public interface BSConstant {
     String VIP_LIST = "huiyuanka";//会员卡
     String MY_COLLECTION = "shoucangshuanghuliebiao";//我的收藏
     String DELETE_COLLECTION = "quxiaoshoucangshanghu";//取消收藏
+    String COLLECT = "shoucangshanghu";//收藏店铺
     String MY_COUPON = "wodekaquanliebiao";//我的优惠券列表
     String SERVICE_TYPE = "fuwuleibie";//服务类别
     String RETRIEVE_SERVICE = "jiansuofuwuliebiao";//检索服务
     String RETRIEVE_SHOP = "jiansuoshanghuliebiao";//检索商户
+    String HOME_COLLECTION = "shoucangtuijian";//收藏推荐
 }

@@ -449,15 +449,30 @@ public interface Api {
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid);
 
+
     /**
      * 取消收藏
+     *
+     * @param bs     {@link BSConstant#DELETE_COLLECTION}
+     * @param openid
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseBean> deleteCollection(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openid,
+            @NonNull @Query("shanghuid") String shopId);
+
+
+    /**
+     * 收藏
      *
      * @param bs     {@link BSConstant#MY_COLLECTION}
      * @param openid
      * @return
      */
     @GET(Constant.SHOP)
-    Observable<BaseBean> deleteCollection(
+    Observable<BaseBean> collect(
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openid,
             @NonNull @Query("shanghuid") String shopId);
@@ -484,4 +499,16 @@ public interface Api {
     @GET(Constant.SHOP)
     Observable<BaseBean<ServiceTypeBean>> serviceType(
             @NonNull @Query("bs") String bs);
+
+    /**
+     * 首页收藏推荐
+     *
+     * @param bs {@link BSConstant#HOME_COLLECTION}
+     * @return
+     */
+    @GET(Constant.SHOP)
+    Observable<BaseListBean<HomeShopBean>> homeCollection(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openId
+    );
 }

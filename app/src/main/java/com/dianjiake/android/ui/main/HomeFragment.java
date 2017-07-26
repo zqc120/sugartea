@@ -35,6 +35,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     int totalScrollY;
     int toolbarBottomDistance;
     int adViewTopDistance;
+    int collectionBottomDistance;
 
     @BindView(R.id.toolbar_space)
     ToolbarSpaceView toolbarSpace;
@@ -88,6 +89,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
 
         toolbarBottomDistance = UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.toolbar_size);
         adViewTopDistance = UIUtil.getScreenWidth() / 2;
+        collectionBottomDistance = UIUtil.getDimensionPixelSize(R.dimen.home_collection);
         toolbarHolder.getBackground().mutate().setAlpha(0);
         toolbarSpace.getBackground().mutate().setAlpha(0);
         presenter.addRG(filter.getFilterGroup());
@@ -117,22 +119,23 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @Override
     public void judgeScrollY(int totalY) {
         int toolbarThreshold = adViewTopDistance - toolbarBottomDistance;
+        int filterThreshold = toolbarThreshold + collectionBottomDistance;
         if (totalY >= toolbarThreshold) {
             toolbarLocationHolder.setVisibility(View.GONE);
 //            toolbarMsgHolder.setVisibility(View.GONE);
             toolbarHolder.getBackground().mutate().setAlpha(255);
             toolbarSpace.getBackground().mutate().setAlpha(255);
-            filter.setVisibility(View.VISIBLE);
             toolbarSearchHolder.setBackgroundResource(R.drawable.bg_home_search);
         } else {
             Timber.d("alpha " + (255 * totalY * 1.0f / toolbarThreshold));
             toolbarHolder.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
             toolbarSpace.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
-            filter.setVisibility(View.INVISIBLE);
             toolbarLocationHolder.setVisibility(View.VISIBLE);
 //            toolbarMsgHolder.setVisibility(View.VISIBLE);
             toolbarSearchHolder.setBackgroundResource(R.drawable.bg_home_search_white);
         }
+
+        filter.setVisibility(totalY >= filterThreshold ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -152,9 +155,10 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
 
     @Override
     public void moveRecyclerView() {
-        totalScrollY = adViewTopDistance - toolbarBottomDistance;
+        ptrListLayout.getRecyclerView().stopScroll();
+        totalScrollY = adViewTopDistance - toolbarBottomDistance + collectionBottomDistance;
         ((LinearLayoutManager) ptrListLayout.getRecyclerView().getLayoutManager())
-                .scrollToPositionWithOffset(1, UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.button_size_normal));
+                .scrollToPositionWithOffset(2, UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.button_size_normal));
     }
 
     @OnClick(R.id.toolbar_location_holder)

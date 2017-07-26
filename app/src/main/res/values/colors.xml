@@ -51,5 +51,6 @@
     <color name="map_radius_fill">#55ff5c5c</color>
     <color name="map_radius_stroke">@color/text_white</color>
 
+    <color name="toast_color">#8a000000</color>
 
 </resources>

@@ -9,12 +9,14 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.ADBean;
-import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
+import com.dianjiake.android.data.bean.ServiceTypeBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
+import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
+import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.event.HomeReloadEvent;
 import com.dianjiake.android.ui.main.HomeType;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
@@ -29,6 +31,7 @@ import com.dianjiake.android.view.widget.ADView;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.BaseViewHolder;
 import com.dianjiake.android.view.widget.HomeFilterView;
+import com.dianjiake.android.view.widget.RecommendView;
 import com.dianjiake.android.view.widget.StarView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -63,6 +66,8 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
                 break;
             case HomeType.FILTER:
                 break;
+            case HomeType.COLLECTION:
+                break;
             default:
                 ViewHolder vh = (ViewHolder) holder;
                 vh.setItem(getItem(position));
@@ -77,6 +82,8 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
                 return ADHolder.newInstance(parent);
             case HomeType.FILTER:
                 return FilterHolder.newInstance(parent);
+            case HomeType.COLLECTION:
+                return CollectionHolder.newInstance(parent);
             default:
                 return ViewHolder.newInstance(parent, this);
         }
@@ -215,6 +222,65 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
 
         @Override
         public void destroy() {
+
+        }
+    }
+
+    public static class CollectionHolder extends BaseViewHolder {
+
+        @BindView(R.id.recommend_views)
+        RecommendView recommendViews;
+
+        CompositeDisposable cd;
+        LoginInfoModel loginInfo;
+
+        public static CollectionHolder newInstance(ViewGroup parent) {
+            return new CollectionHolder(UIUtil.inflate(R.layout.item_home_collection, parent));
+        }
+
+        private CollectionHolder(View itemView) {
+            super(itemView);
+            cd = new CompositeDisposable();
+            loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
+            EventBus.getDefault().register(this);
+            reLoad(null);
+        }
+
+        @Subscribe(threadMode = ThreadMode.MAIN)
+        public void reLoad(HomeReloadEvent event) {
+            cd.clear();
+            Network.getInstance().homeCollection(BSConstant.HOME_COLLECTION, loginInfo.getOpenId())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribeWith(new Observer<BaseListBean<HomeShopBean>>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                            cd.add(d);
+                        }
+
+                        @Override
+                        public void onNext(@NonNull BaseListBean<HomeShopBean> shop) {
+                            if (shop.getCode() == 200 && !CheckEmptyUtil.isEmpty(shop.getObj().getList())) {
+                                recommendViews.setItems(shop.getObj().getList());
+                            }
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        }
+
+        @Override
+        public void destroy() {
+            cd.clear();
+            EventBus.getDefault().unregister(this);
 
         }
     }

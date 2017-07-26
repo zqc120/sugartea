@@ -10,10 +10,12 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
@@ -21,6 +23,7 @@ import com.dianjiake.android.common.FragmentFactory;
 import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
+import com.dianjiake.android.ui.login.LoginChooseActivity;
 import com.dianjiake.android.ui.shopdetail.comment.CommentFragment;
 import com.dianjiake.android.ui.shopdetail.service.ServiceFragment;
 import com.dianjiake.android.ui.shopdetail.staff.StaffFragment;
@@ -33,6 +36,7 @@ import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.LongUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.coupon.GetCouponView;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.dialog.ShareDialog;
 import com.dianjiake.android.view.widget.StarView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -90,9 +94,11 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     @BindView(R.id.get_coupon)
     GetCouponView getCouponView;
 
-
+    NormalProgressDialog collectionPD;
     ShopDetailAdapter adapter;
     List<BaseShopContentFragment> fragmentList = new ArrayList<>();
+    Toast toast;
+    TextView toastText;
     int shopLogoHeight = UIUtil.getScreenWidth() * 2 / 3;
     int toolbarBottomLocation = UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.toolbar_size);
     int toolbarAlpha;
@@ -125,7 +131,11 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
-        toolbarCollection.setVisibility(View.GONE);
+        toast = Toast.makeText(this, " ", Toast.LENGTH_SHORT);
+        toast.setView(UIUtil.inflate(R.layout.toast_collect_success, this));
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toastText = (TextView) toast.getView().findViewById(R.id.text);
+
         systemToolbar.getLayoutParams().height += UIUtil.getStatusBarHeight();
         fragmentList.clear();
         fragmentList.add(FragmentFactory.createFragment(ServiceFragment.class, ServiceFragment.getBundle(getShopId())));
@@ -172,6 +182,39 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     }
 
+    @Override
+    public void showCollectionPD() {
+        if (collectionPD == null) {
+            collectionPD = NormalProgressDialog.newInstance("正在提交，请稍候...");
+        }
+        collectionPD.showDialog(getFragmentManager(), "collection");
+    }
+
+    @Override
+    public void dismissCollectionPD() {
+        if (collectionPD != null && collectionPD.isAdded()) {
+            collectionPD.dismissAllowingStateLoss();
+        }
+    }
+
+    @Override
+    public void showCollectSuccessToast() {
+        toastText.setText("收藏成功");
+        toast.show();
+    }
+
+    @Override
+    public void showDeleteSuccessToast() {
+        toastText.setText("取消收藏成功");
+        toast.show();
+    }
+
+    @Override
+    public void showNetworkErrorToast() {
+        toastText.setText("网络繁忙");
+        toast.show();
+    }
+
     @OnClick(R.id.shop_call)
     void clickCall(View v) {
         IntentUtil.startCall(this, presenter.getPhone());
@@ -184,7 +227,11 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
 
     @OnClick(R.id.toolbar_icon_collection)
     void clickCollect(View v) {
-
+        if (presenter.isLogin()) {
+            presenter.collect();
+        } else {
+            startActivity(IntentUtil.getIntent(LoginChooseActivity.class));
+        }
     }
 
     @OnClick(R.id.toolbar_icon_share)
@@ -238,7 +285,8 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         setToolbarIconByAlpha();
     }
 
-    private void setToolbarIconByAlpha() {
+    @Override
+    public void setToolbarIconByAlpha() {
         toolbarIconLeft.setImageResource(toolbarAlpha > TOOLBAR_ICON_THRESHOLD ? R.drawable.ic_shop_detail_back_grey : R.drawable.ic_shop_detail_back_white);
         toolbarShare.setImageResource(toolbarAlpha > TOOLBAR_ICON_THRESHOLD ? R.drawable.ic_shop_detail_share_grey : R.drawable.ic_shop_detail_share_white);
         if (presenter.isCollect()) {

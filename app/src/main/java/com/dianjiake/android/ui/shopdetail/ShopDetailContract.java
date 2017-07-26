@@ -14,15 +14,29 @@ public interface ShopDetailContract {
         String getShopId();
 
         void setView(ShopDetailBean shopDetail);
+
+        void showCollectionPD();
+
+        void dismissCollectionPD();
+
+        void showCollectSuccessToast();
+        void showDeleteSuccessToast();
+        void showNetworkErrorToast();
+
+        void setToolbarIconByAlpha();
     }
 
     interface Presenter extends BasePresenter {
         void load();
+
+        void collect();
 
         String getPhone();
 
         boolean isCollect();
 
         ShopDetailBean getDetailBean();
+
+        boolean isLogin();
     }
 }

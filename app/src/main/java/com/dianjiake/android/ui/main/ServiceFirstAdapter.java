@@ -95,7 +95,7 @@ public class ServiceFirstAdapter extends RecyclerView.Adapter<ServiceFirstAdapte
             title.setTextColor(getAdapterPosition() == adapter.getCheckedPosition() ?
                     UIUtil.getColor(R.color.main) : UIUtil.getColor(R.color.text_content_secondary));
             title.setBackgroundResource(getAdapterPosition() == adapter.getCheckedPosition() ?
-                    R.color.translate : R.drawable.click_white);
+                    R.color.background : R.drawable.click_white);
         }
 
         @OnClick(R.id.title)

@@ -12,6 +12,8 @@
     <dimen name="base_size9">36dp</dimen>
     <dimen name="base_size10">40dp</dimen>
 
+    <dimen name="size6">6dp</dimen>
+
     <dimen name="toolbar_size">48dp</dimen>
     <dimen name="base_margin">@dimen/base_size3</dimen>
     <dimen name="divider_size">0.2dp</dimen>
@@ -40,4 +42,5 @@
     <dimen name="base_loading_view_size">120dp</dimen>
 
     <dimen name="ad_icon_size">6dp</dimen>
+    <dimen name="home_collection">192dp</dimen>
 </resources>

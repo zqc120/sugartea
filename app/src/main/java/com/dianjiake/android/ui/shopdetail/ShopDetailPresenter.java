@@ -9,6 +9,7 @@ import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
+import com.dianjiake.android.util.CheckEmptyUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -69,7 +70,7 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
                             detailBean = shopDetailBean.getObj();
                             view.setView(shopDetailBean.getObj());
                             phone = shopDetailBean.getObj().getDianpu().getDianhua();
-                            isCollect = "1".equals(shopDetailBean.getObj().getDianpu().getShifoushoucang());
+
                         }
                     }
 
@@ -86,17 +87,103 @@ public class ShopDetailPresenter implements ShopDetailContract.Presenter {
     }
 
     @Override
+    public void collect() {
+        if (detailBean != null && detailBean.getDianpu() != null) {
+            view.showCollectionPD();
+            if (!isCollect()) {
+                Network.getInstance().collect(BSConstant.COLLECT, loginInfo.getOpenId(), detailBean.getDianpu().getId())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribeWith(new Observer<BaseBean>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+                                cd.add(d);
+                            }
+
+                            @Override
+                            public void onNext(@NonNull BaseBean baseBean) {
+                                view.dismissCollectionPD();
+                                if (baseBean.getCode() == 200) {
+                                    detailBean.getDianpu().setShifoushoucang("1");
+                                    view.setToolbarIconByAlpha();
+                                    view.showCollectSuccessToast();
+                                } else {
+                                    view.showNetworkErrorToast();
+                                }
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+                                view.dismissCollectionPD();
+                                view.showNetworkErrorToast();
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+            } else {
+                Network.getInstance().deleteCollection(BSConstant.DELETE_COLLECTION, loginInfo.getOpenId(), detailBean.getDianpu().getId())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribeWith(new Observer<BaseBean>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+                                cd.add(d);
+                            }
+
+                            @Override
+                            public void onNext(@NonNull BaseBean baseBean) {
+                                view.dismissCollectionPD();
+                                if (baseBean.getCode() == 200) {
+                                    detailBean.getDianpu().setShifoushoucang("0");
+                                    view.setToolbarIconByAlpha();
+                                    view.showDeleteSuccessToast();
+                                } else {
+                                    view.showNetworkErrorToast();
+
+                                }
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+                                view.dismissCollectionPD();
+                                view.showNetworkErrorToast();
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+            }
+        }
+    }
+
+    @Override
     public String getPhone() {
         return phone;
     }
 
     @Override
     public boolean isCollect() {
-        return isCollect;
+        if (detailBean != null && detailBean.getDianpu() != null) {
+            return "1".equals(detailBean.getDianpu().getShifoushoucang());
+        } else {
+            return false;
+        }
     }
 
     @Override
     public ShopDetailBean getDetailBean() {
         return detailBean;
+    }
+
+    @Override
+    public boolean isLogin() {
+        return !CheckEmptyUtil.isEmpty(loginInfo.getOpenId());
     }
 }

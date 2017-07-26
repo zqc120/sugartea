@@ -25,6 +25,7 @@ public class TabFragmentManager implements RadioGroup.OnCheckedChangeListener {
     boolean checkLogin;
     LoginInfoDBHelper loginInfo;
     RadioGroup radioGroup;
+    int lastCheckedId;
 
     public TabFragmentManager(FragmentManager fm, RadioGroup radioGroup, boolean checkLogin) {
         this.fm = fm;
@@ -44,12 +45,14 @@ public class TabFragmentManager implements RadioGroup.OnCheckedChangeListener {
     }
 
     public void changeTab(@IdRes int id) {
-        if (checkLogin && !loginInfo.isLogin() && id != radioGroup.getChildAt(0).getId()) {
-            ((AppCompatRadioButton) radioGroup.getChildAt(0)).setChecked(true);
+        if (checkLogin && !loginInfo.isLogin() && id != radioGroup.getChildAt(0).getId() && id != radioGroup.getChildAt(1).getId()) {
+            if (lastCheckedId != 0) {
+                ((AppCompatRadioButton) radioGroup.findViewById(lastCheckedId)).setChecked(true);
+            }
             IntentUtil.startActivity(radioGroup.getContext(), LoginChooseActivity.class);
             return;
         }
-
+        lastCheckedId = id;
         FragmentTransaction ft = fm.beginTransaction();
         if (!fragments.get(id).isAdded()) {
             ft.add(R.id.fragment_content, fragments.get(id), fragments.get(id).getClass().getName());

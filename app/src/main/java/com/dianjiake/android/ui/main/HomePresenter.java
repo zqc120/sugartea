@@ -112,6 +112,9 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
                             HomeShopBean temp = new HomeShopBean();
                             temp.setViewType(HomeType.AD);
                             items.add(0, temp);
+                            HomeShopBean collections = new HomeShopBean();
+                            collections.setViewType(HomeType.COLLECTION);
+                            items.add(collections);
                             HomeShopBean filter = new HomeShopBean();
                             filter.setViewType(HomeType.FILTER);
                             items.add(filter);
