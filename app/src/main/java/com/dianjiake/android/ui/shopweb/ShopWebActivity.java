@@ -7,6 +7,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
+import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseWebViewActivity;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
@@ -14,6 +15,7 @@ import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.view.dialog.ShareDialog;
 import com.google.gson.Gson;
 
 import butterknife.OnClick;
@@ -67,6 +69,8 @@ public class ShopWebActivity extends BaseWebViewActivity {
     @Override
     @SuppressLint("AddJavascriptInterface")
     protected void initWebView(WebView webView) {
+        mToolbarRight.setVisibility(View.VISIBLE);
+        mToolbarRight.setImageResource(R.drawable.ic_toolbar_share);
         webView.addJavascriptInterface(new JS(), "storehome");
     }
 
@@ -82,6 +86,7 @@ public class ShopWebActivity extends BaseWebViewActivity {
 
             }
         }
+
         @JavascriptInterface
         public void shop(String s) {
             HomeShopBean shopEntity;
@@ -93,4 +98,10 @@ public class ShopWebActivity extends BaseWebViewActivity {
             }
         }
     }
+
+    @OnClick(R.id.toolbar_icon_right)
+    void clickShare(View v) {
+        ShareDialog.Show(this, shareTitle, "糖茶", shareUrl, shareImage);
+    }
+
 }

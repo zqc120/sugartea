@@ -19,6 +19,12 @@ import android.widget.TextView;
 
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.bean.HomeShopBean;
+import com.dianjiake.android.data.bean.ServiceBean;
+import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
+import com.dianjiake.android.ui.shopweb.ShopWebActivity;
+import com.dianjiake.android.ui.subscribe.SubscribeActivity;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,6 +49,9 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
 
     @BindView(R.id.activity_web_view_progressbar)
     ProgressBar mProgressBar;
+
+    public boolean canShare;
+    public String shareTitle, shareUrl, shareImage;
 
     @Override
     public int provideContentView() {
@@ -77,8 +86,10 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-
                 super.onPageFinished(view, url);
+                canShare = true;
+                shareUrl = url.replace("&src=app", "");
+                view.loadUrl("javascript:window.local_obj.showSource(document.getElementsByTagName('img')[0].src);");
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -94,6 +105,7 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 Timber.d("title" + title);
+                shareTitle = title;
                 mToolbarTitle.setText(title);
                 super.onReceivedTitle(view, title);
             }
@@ -116,6 +128,7 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
         mToolbarTitle.setText(getToolbarTitle());
         mWebView.loadUrl(getUrl());
 //
+        mWebView.addJavascriptInterface(new LocalJS(), "local_obj");
     }
 
 
@@ -144,7 +157,12 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
         } else {
             super.onBackPressed();
         }
+    }
 
+    @Override
+    protected void onDestroy() {
+        mWebView.removeJavascriptInterface("local_obj");
+        super.onDestroy();
     }
 
     protected abstract void provideIntent(Intent intent);
@@ -157,5 +175,14 @@ public abstract class BaseWebViewActivity extends BaseTranslateActivity {
 
     @SuppressLint("AddJavascriptInterface")
     protected abstract void initWebView(WebView webView);
+
+
+    class LocalJS {
+        @JavascriptInterface
+        public void showSource(String html) {
+            shareImage = html;
+        }
+
+    }
 
 }

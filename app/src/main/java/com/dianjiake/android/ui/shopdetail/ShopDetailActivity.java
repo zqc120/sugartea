@@ -182,6 +182,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
             tab.getTabAt(2).setText("评价(" + evaluateCount + ")");
             getCouponView.setShop(shopDetail.getDianpu());
             toolbarTitle.setText(shopDetail.getDianpu().getMingcheng());
+            toolbarTitle.setAlpha(0);
         }
 
     }
