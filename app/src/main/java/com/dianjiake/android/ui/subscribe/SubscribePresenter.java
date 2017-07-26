@@ -334,4 +334,9 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
                     }
                 });
     }
+
+    @Override
+    public void setShopId(String shopId) {
+        shopId = shopId;
+    }
 }

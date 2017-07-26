@@ -80,7 +80,7 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
                 EvaluateBean evaluateBean = new EvaluateBean();
                 evaluateBean.setPingfen(5);
                 evaluateBean.setBeipinglunopenid(b.getFuwuopenid());
-                evaluateBean.getFuwuid();
+                evaluateBean.setFuwuid(b.getFuwuid());
                 evaluates.add(evaluateBean);
             }
             OrderServiceBean bean = new OrderServiceBean();

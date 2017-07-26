@@ -20,6 +20,7 @@ import com.dianjiake.android.common.ActiivtyDataHelper;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderGoodBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
+import com.dianjiake.android.ui.common.OrderPayType;
 import com.dianjiake.android.ui.common.OrderStatus;
 import com.dianjiake.android.ui.evaluate.EvaluateActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
@@ -210,14 +211,14 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         if (orderStatus == OrderStatus.COMPLETE) {
             TableRow payTool = new TableRow(this);
             payTool.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-            payTool.addView(TableRowUtil.getVipTitleText("支付方式：" + item.getPays(), this));
+            payTool.addView(TableRowUtil.getVipTitleText("支付方式：" + OrderPayType.getPayType(item.getPays()), this));
             payTool.addView(TableRowUtil.getVipEndText("实付金额：￥" + item.getShifujine(), this));
             tableLayout2.addView(payTool);
 
             TableRow payTime = new TableRow(this);
             payTime.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
             payTime.addView(TableRowUtil.getVipTitleText("结账时间：" + DateUtil.formatYMDHM(item.getPaytime()), this));
-            tableLayout2.addView(payTool);
+            tableLayout2.addView(payTime);
         }
 
         setButtonText();
@@ -232,7 +233,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         TableRow info = new TableRow(this);
         info.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
         info.addView(TableRowUtil.getSubText("客户信息：", this));
-        info.addView(TableRowUtil.getSubText(item.getName(), this));
+        info.addView(TableRowUtil.getSubText(item.getName() + " " + item.getTel(), this));
         subTable.addView(info);
 
         TableRow addTime = new TableRow(this);

@@ -100,7 +100,7 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter {
 
     @Override
     public void reSub() {
-        IntentUtil.startActivity(view.provideContext(), SubscribeActivity.getStartIntent(null, null));
+        IntentUtil.startActivity(view.provideContext(), SubscribeActivity.getStartIntent(orderBean.getDianpu().getId()));
     }
 
     @Override

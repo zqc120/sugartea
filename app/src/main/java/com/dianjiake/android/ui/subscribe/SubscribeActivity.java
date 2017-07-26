@@ -25,6 +25,7 @@ import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.ui.orderdetail.OrderDetailActivity;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
+import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.ToastUtil;
@@ -44,6 +45,7 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
 
     private static final String KEY_SERVICE = "key_service";
     private static final String KEY_STAFF = "key_staff";
+    private static final String KEY_ID = "key_id";
     private static final int REQUEST_SERVICE = 2025;
     private static final int REQUEST_STAFF = 1025;
     private static final int REQUEST_TIME = 35;
@@ -54,6 +56,12 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
         Intent intent = IntentUtil.getIntent(SubscribeActivity.class);
         intent.putExtra(KEY_SERVICE, serviceBean);
         intent.putExtra(KEY_STAFF, staff);
+        return intent;
+    }
+
+    public static Intent getStartIntent(String id) {
+        Intent intent = IntentUtil.getIntent(SubscribeActivity.class);
+        intent.putExtra(KEY_ID, id);
         return intent;
     }
 
@@ -143,6 +151,10 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
         addServiceItem();
         presenter.setDefaultValue((ServiceBean) getIntent().getParcelableExtra(KEY_SERVICE),
                 (UserInfoBean) getIntent().getParcelableExtra(KEY_STAFF));
+        String shopId = getIntent().getStringExtra(KEY_ID);
+        if(CheckEmptyUtil.isEmpty(shopId)){
+            presenter.setShopId(shopId);
+        }
     }
 
     @Override

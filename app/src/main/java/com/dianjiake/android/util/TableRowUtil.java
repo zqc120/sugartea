@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.amap.api.maps.model.Text;
 import com.dianjiake.android.R;
 
 /**
@@ -18,16 +19,18 @@ public class TableRowUtil {
 
     public static TextView getServiceTitleText(String text, Context context) {
         TextView textView = new TextView(context);
-        textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
+        textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
         textView.setTextColor(UIUtil.getColor(R.color.text_content_title));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setText(text);
         return textView;
     }
 
     public static TextView getServiceCenterText(String text, Context context) {
         TextView textView = new TextView(context);
-        textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         textView.setPadding((int) UIUtil.dp2px(8), 0, 0, 0);
         textView.setSingleLine(true);
         textView.setEllipsize(TextUtils.TruncateAt.END);
@@ -39,10 +42,12 @@ public class TableRowUtil {
 
     public static TextView getServiceEndText(String text, Context context) {
         TextView textView = new TextView(context);
-        textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        textView.setLayoutParams(new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 3f));
         textView.setPadding((int) UIUtil.dp2px(8), 0, 0, 0);
         textView.setTextColor(UIUtil.getColor(R.color.text_content_title));
         textView.setGravity(Gravity.END);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         textView.setText(text);
         return textView;
@@ -63,7 +68,8 @@ public class TableRowUtil {
     }
 
     public static TextView getVipTitleText(String text, Context context) {
-        return getServiceTitleText(text, context);
+        TextView tv = getServiceTitleText(text, context);
+        return tv;
     }
 
     public static TextView getVipEndText(String text, Context context) {
@@ -77,6 +83,8 @@ public class TableRowUtil {
         TextView textView = new TextView(context);
         textView.setTextColor(UIUtil.getColor(R.color.text_content_title));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setText(text);
         return textView;
     }
@@ -86,6 +94,8 @@ public class TableRowUtil {
         textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
         textView.setTextColor(UIUtil.getColor(R.color.text_white));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setText(text);
         return textView;
     }
@@ -94,6 +104,8 @@ public class TableRowUtil {
         TextView textView = new TextView(context);
         textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         textView.setPadding((int) UIUtil.dp2px(8), 0, 0, 0);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setTextColor(UIUtil.getColor(R.color.text_white));
         textView.setGravity(Gravity.END);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);

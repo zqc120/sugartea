@@ -82,5 +82,7 @@ public interface SubscribeContract {
         void checkSubmitButtonEnable();
 
         void submit();
+
+        void setShopId(String shopId);
     }
 }
