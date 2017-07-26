@@ -80,6 +80,7 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
         EventBus.getDefault().register(this);
         toolbarIconLeft.setVisibility(View.INVISIBLE);
         toolbarTitle.setText("订单");
+        checkUnread(null);
     }
 
     @Override

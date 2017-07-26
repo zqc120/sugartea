@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
 import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -15,7 +16,7 @@ import org.greenrobot.greendao.annotation.Generated;
 public class MsgBean implements Parcelable {
     @Id(autoincrement = true)
     private Long _id;
-    @Unique
+    @Index
     private String id;
     private String openid;
     private String biaoti;
@@ -163,8 +164,8 @@ public class MsgBean implements Parcelable {
 
     @Generated(hash = 1024982133)
     public MsgBean(Long _id, String id, String openid, String biaoti, String miaoshu, String neirong,
-            String addtime, String xianshi, String chakan, String leixing, String shanghuid,
-            String xinxiid) {
+                   String addtime, String xianshi, String chakan, String leixing, String shanghuid,
+                   String xinxiid) {
         this._id = _id;
         this.id = id;
         this.openid = openid;

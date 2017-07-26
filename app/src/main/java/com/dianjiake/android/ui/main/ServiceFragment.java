@@ -101,6 +101,7 @@ public class ServiceFragment extends BaseFragment<ServiceContract.Presenter> imp
 
         initAdapterListener();
         presenter.load();
+        checkUnread(null);
     }
 
     private void initAdapterListener() {

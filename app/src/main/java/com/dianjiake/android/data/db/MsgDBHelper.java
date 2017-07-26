@@ -5,6 +5,8 @@ import com.dianjiake.android.data.bean.MsgBeanDao;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.EventUtil;
 
+import org.greenrobot.greendao.query.DeleteQuery;
+
 import java.util.List;
 
 
@@ -25,14 +27,26 @@ public class MsgDBHelper {
         return DBManager.getInstance().getDaoSession().getMsgBeanDao();
     }
 
-    public void save(List<MsgBean> msgBeen) {
-        getMsgDao().insertOrReplaceInTx(msgBeen);
-        EventUtil.postCheckMsgUnread();
+    public void save(List<MsgBean> msgBean) {
+        if (msgBean != null) {
+            getMsgDao().insertOrReplaceInTx(msgBean);
+            EventUtil.postCheckMsgUnread();
+        }
+    }
+
+    public void save(MsgBean msgBean) {
+        if (msgBean != null) {
+            getMsgDao().insertOrReplace(msgBean);
+            EventUtil.postCheckMsgUnread();
+        }
     }
 
     public void delete(MsgBean msgBean) {
         if (msgBean != null) {
-            getMsgDao().delete(msgBean);
+            DeleteQuery<MsgBean> deleteQuery= getMsgDao().queryBuilder()
+                    .where(MsgBeanDao.Properties.Id.eq(msgBean.getId()))
+                    .buildDelete();
+            deleteQuery.executeDeleteWithoutDetachingEntities();
             EventUtil.postCheckMsgUnread();
         }
     }

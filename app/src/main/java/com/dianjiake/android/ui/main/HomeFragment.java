@@ -104,7 +104,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         toolbarHolder.getBackground().mutate().setAlpha(0);
         toolbarSpace.getBackground().mutate().setAlpha(0);
         presenter.addRG(filter.getFilterGroup());
-
+        checkUnread(null);
     }
 
     @Override

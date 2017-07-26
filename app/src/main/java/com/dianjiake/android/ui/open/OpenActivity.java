@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.ui.coupon.CouponActivity;
 import com.dianjiake.android.ui.main.MainActivity;
 import com.dianjiake.android.ui.msg.MsgType;
@@ -34,6 +35,7 @@ public class OpenActivity extends AppCompatActivity {
         if (msgBean == null) {
             finish();
         } else {
+            MsgDBHelper.newInstance().delete(msgBean);
             switch (msgBean.getLeixing()) {
                 case MsgType.COUPON:
                     jump(IntentUtil.getIntent(CouponActivity.class));

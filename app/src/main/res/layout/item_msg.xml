@@ -2,17 +2,18 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/click_white"
-    android:id="@+id/holder"
     android:clipChildren="false">
 
     <com.dianjiake.android.view.widget.MsgIconView
         android:id="@+id/icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_margin="@dimen/base_margin"
+        android:src="@drawable/img_msg_order"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,6 @@
         android:singleLine="true"
         android:textColor="@color/text_content_title"
         android:textSize="@dimen/text_size_title"
-        app:layout_constraintBottom_toBottomOf="@+id/icon"
         app:layout_constraintLeft_toRightOf="@+id/icon"
         app:layout_constraintRight_toLeftOf="@+id/time"
         app:layout_constraintTop_toTopOf="@+id/icon"
@@ -55,7 +55,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/title"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/icon"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_goneMarginTop="@dimen/base_size2"
         tools:text="福利空间撒地方简单来说这些哦陈 vi 中西餐 v 哦 i 从 vi 从下次 v 哦哦朴正熙从旁 v 朴正熙陈 vi 这些词 v 这些词 vi 张 vi 系哦胖次 v 哦哦皮脂腺从旁 v 哦朋" />
 
 </android.support.constraint.ConstraintLayout>

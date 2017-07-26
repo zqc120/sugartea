@@ -12,6 +12,7 @@ import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.BaseUnrealBean;
 import com.dianjiake.android.data.bean.MsgBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
+import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.ui.open.OpenActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -52,6 +53,7 @@ public class ReceivePushService extends GTIntentService {
                 }.getType());
                 if (baseBean.getCode() == 1000) {
                     MsgBean msgBean = baseBean.getObj().getList().get(0);
+                    MsgDBHelper.newInstance().save(msgBean);
                     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OpenActivity.getStartIntent(msgBean), PendingIntent.FLAG_UPDATE_CURRENT);
                     createNotification(context, msgBean.getBiaoti(), msgBean.getMiaoshu(), pendingIntent);
                 }

@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@+id/toolbar_icon_left"
-        app:layout_constraintRight_toLeftOf="@+id/right_holder"
+        app:layout_constraintRight_toLeftOf="@+id/toolbar_msg_holder"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_space"
         tools:text="我是标范德萨范德萨范德萨发撒大法师发地方都是发题" />
 

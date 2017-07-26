@@ -97,6 +97,7 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
         EventBus.getDefault().register(this);
         toolbarIconLeft.setImageResource(R.drawable.ic_mine_setting);
         toolbarSpace.getBackground().mutate().setAlpha(0);
+        checkUnread(null);
     }
 
     @Override
