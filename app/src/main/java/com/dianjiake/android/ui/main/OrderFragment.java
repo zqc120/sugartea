@@ -11,15 +11,22 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
+import com.dianjiake.android.event.CheckMsgUnreadEvent;
 import com.dianjiake.android.ui.common.OrderListAdapter;
 import com.dianjiake.android.ui.common.OrderPresenter;
 import com.dianjiake.android.ui.common.OrderView;
+import com.dianjiake.android.ui.msg.MsgActivity;
 import com.dianjiake.android.ui.nocomment.NoCommentOrderActivity;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
+import com.dianjiake.android.view.widget.MsgIconView;
 import com.dianjiake.android.view.widget.PtrListLayout;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,7 +46,7 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     @BindView(R.id.toolbar_icon_right)
-    ImageView toolbarIconRight;
+    MsgIconView msgIconView;
     @BindView(R.id.toolbar_divider)
     ImageView toolbarDivider;
     @BindView(R.id.toolbar_holder)
@@ -70,6 +77,7 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
 
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         toolbarIconLeft.setVisibility(View.INVISIBLE);
         toolbarTitle.setText("订单");
     }
@@ -95,8 +103,16 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
         startActivity(IntentUtil.getIntent(NoCommentOrderActivity.class));
     }
 
+
+    @OnClick(R.id.toolbar_msg_holder)
+    void clickMsg(View v) {
+        startActivity(MsgActivity.getStartIntent());
+    }
+
+
     @Override
     public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }
 
@@ -142,5 +158,8 @@ public class OrderFragment extends BaseListFragment<OrderPresenter> implements O
         return getFragmentManager();
     }
 
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void checkUnread(CheckMsgUnreadEvent event) {
+        msgIconView.setShowRedIcon(presenter.haveUnreadMsg());
+    }
 }

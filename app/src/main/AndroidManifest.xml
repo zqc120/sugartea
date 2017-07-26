@@ -105,7 +105,15 @@
             android:name=".view.dialog.GetCouponFailDialog"
             android:screenOrientation="portrait"
             android:theme="@style/DialogActivity" />
-
+        <activity
+            android:name=".ui.simpleactivity.SimpleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.msg.MsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.open.OpenActivity"
+            android:screenOrientation="portrait" />
         <!--微信-->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -113,7 +121,27 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.simpleactivity.SimpleActivity" />
+
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -122,6 +150,14 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="596df666b27b0a5f3f0005c7"></meta-data>
+
+        <!--个推-->
+        <service
+            android:name=".service.InitPushService"
+            android:exported="true"
+            android:label="PushService"
+            android:process=":pushservice"></service>
+        <service android:name=".service.ReceivePushService" />
     </application>
 
 </manifest>

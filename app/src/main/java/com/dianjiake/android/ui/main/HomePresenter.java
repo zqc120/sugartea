@@ -9,6 +9,7 @@ import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.event.HomeReloadEvent;
@@ -45,6 +46,7 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
     String longitude;
     String latitude;
     HomeTabHelper homeTabHelper;
+    MsgDBHelper msgDBHelper;
 
     public HomePresenter(HomeContract.View view) {
         this.view = view;
@@ -59,6 +61,7 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
         EventBus.getDefault().register(this);
         homeTabHelper = new HomeTabHelper();
         homeTabHelper.setCheckedChangeListener(this);
+        msgDBHelper = MsgDBHelper.newInstance();
     }
 
     @Override
@@ -152,6 +155,11 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
     public void addRG(RadioGroup rg) {
         homeTabHelper.addRG(rg);
 
+    }
+
+    @Override
+    public boolean haveUnreadMsg() {
+        return msgDBHelper.isUnread();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

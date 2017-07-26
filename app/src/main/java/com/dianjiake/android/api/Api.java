@@ -14,6 +14,7 @@ import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.LoginBean;
+import com.dianjiake.android.data.bean.MsgBean;
 import com.dianjiake.android.data.bean.MyCouponBean;
 import com.dianjiake.android.data.bean.OccupationBean;
 import com.dianjiake.android.data.bean.OrderBean;
@@ -545,6 +546,21 @@ public interface Api {
             @NonNull @Query("bs") String bs,
             @NonNull @Query("shanghuid") String shopId,
             @NonNull @Query("id") String orderId
+    );
+
+    /**
+     * 消息列表
+     *
+     * @param bs  {@link BSConstant#MSG_LIST}
+     * @param openId
+     * @param page
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseListBean<MsgBean>> msgList(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openId,
+            @NonNull @Query("page") int page
     );
 
 }

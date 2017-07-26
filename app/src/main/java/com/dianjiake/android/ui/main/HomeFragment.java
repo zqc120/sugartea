@@ -12,15 +12,23 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListFragment;
+import com.dianjiake.android.event.CheckMsgUnreadEvent;
 import com.dianjiake.android.ui.common.ShopListAdapter;
+import com.dianjiake.android.ui.msg.MsgActivity;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.ui.searchshop.SearchShopActivity;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.HomeFilterView;
+import com.dianjiake.android.view.widget.MsgIconView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,6 +61,8 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     LinearLayout toolbarHolder;
     @BindView(R.id.filter)
     HomeFilterView filter;
+    @BindView(R.id.msg_icon)
+    MsgIconView msgIconView;
 
     NormalProgressDialog pd;
 
@@ -83,6 +93,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
 
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         ptrListLayout.getRecyclerView().addOnScrollListener(scrollListener);
         ptrListLayout.getPtr().disableWhenHorizontalMove(true);
         toolbarLocationText.setMaxWidth(UIUtil.getScreenWidth() * 1 / 4);
@@ -93,6 +104,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         toolbarHolder.getBackground().mutate().setAlpha(0);
         toolbarSpace.getBackground().mutate().setAlpha(0);
         presenter.addRG(filter.getFilterGroup());
+
     }
 
     @Override
@@ -108,6 +120,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @Override
     public void onDestroyView() {
         ptrListLayout.getRecyclerView().removeOnScrollListener(scrollListener);
+        EventBus.getDefault().unregister(this);
         super.onDestroyView();
     }
 
@@ -122,7 +135,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         int filterThreshold = toolbarThreshold + collectionBottomDistance;
         if (totalY >= toolbarThreshold) {
             toolbarLocationHolder.setVisibility(View.GONE);
-//            toolbarMsgHolder.setVisibility(View.GONE);
+            toolbarMsgHolder.setVisibility(View.GONE);
             toolbarHolder.getBackground().mutate().setAlpha(255);
             toolbarSpace.getBackground().mutate().setAlpha(255);
             toolbarSearchHolder.setBackgroundResource(R.drawable.bg_home_search);
@@ -131,7 +144,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
             toolbarHolder.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
             toolbarSpace.getBackground().mutate().setAlpha((int) (255 * totalY * 1.0f / toolbarThreshold));
             toolbarLocationHolder.setVisibility(View.VISIBLE);
-//            toolbarMsgHolder.setVisibility(View.VISIBLE);
+            toolbarMsgHolder.setVisibility(View.VISIBLE);
             toolbarSearchHolder.setBackgroundResource(R.drawable.bg_home_search_white);
         }
 
@@ -169,5 +182,15 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
     @OnClick(R.id.toolbar_search_holder)
     void clickSearch(View v) {
         startActivity(IntentUtil.getIntent(SearchShopActivity.class));
+    }
+
+    @OnClick(R.id.toolbar_msg_holder)
+    void clickMsg(View v) {
+        startActivity(MsgActivity.getStartIntent());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void checkUnread(CheckMsgUnreadEvent event) {
+        msgIconView.setShowRedIcon(presenter.haveUnreadMsg());
     }
 }

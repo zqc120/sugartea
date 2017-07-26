@@ -65,5 +65,6 @@ public interface BSConstant {
     String HOME_COLLECTION = "shoucangtuijian";//收藏推荐
     String GET_COUPON = "lingqukaquan";//领取优惠券
     String ORDER_DETAIL = "dingdanxiangqing";//订单详情
+    String MSG_LIST = "xiaoxiliebiao";//消息列表
 
 }

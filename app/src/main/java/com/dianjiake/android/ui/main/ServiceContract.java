@@ -13,13 +13,16 @@ import java.util.List;
 
 public interface ServiceContract {
     interface View extends BaseView<Presenter> {
-        void setItems(List<ServiceFirstBean> items,List<ServiceSecondBean> seconds);
+        void setItems(List<ServiceFirstBean> items, List<ServiceSecondBean> seconds);
     }
 
     interface Presenter extends BasePresenter {
         void load();
 
+        boolean haveUnreadMsg();
+
         List<ServiceFirstBean> getServiceFirsts();
+
         List<ServiceSecondBean> getServiceSeconds();
     }
 }

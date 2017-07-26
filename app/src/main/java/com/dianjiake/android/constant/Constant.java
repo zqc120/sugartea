@@ -8,6 +8,8 @@ public interface Constant {
 
     String WX_AppID = "wx2ab30dbdea83497b";
     String WX_AppSecret = "3e07746e20905304c76e9285b986de02";
+    String QQ_ID = "1106217427";
+    String QQ_KEY = "hfJHocvYD1bsc54e";
     String URL_VERSION = "api100/";
 
     String SALT = "3c66790a694fd53aed110a8e85f1aeec";

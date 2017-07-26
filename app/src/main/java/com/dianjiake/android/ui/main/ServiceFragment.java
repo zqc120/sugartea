@@ -15,11 +15,19 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.ServiceFirstBean;
 import com.dianjiake.android.data.bean.ServiceSecondBean;
+import com.dianjiake.android.event.CheckMsgUnreadEvent;
+import com.dianjiake.android.ui.msg.MsgActivity;
+import com.dianjiake.android.view.widget.MsgIconView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 /**
@@ -41,6 +49,8 @@ public class ServiceFragment extends BaseFragment<ServiceContract.Presenter> imp
     RecyclerView rvFirst;
     @BindView(R.id.rv_second)
     RecyclerView rvSecond;
+    @BindView(R.id.msg_icon)
+    MsgIconView msgIconView;
 
     ServiceFirstAdapter firstAdapter;
     LinearLayoutManager firstLayoutManager;
@@ -70,6 +80,7 @@ public class ServiceFragment extends BaseFragment<ServiceContract.Presenter> imp
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         firstAdapter = new ServiceFirstAdapter();
         firstLayoutManager = new LinearLayoutManager(view.getContext());
         rvFirst.setLayoutManager(firstLayoutManager);
@@ -138,8 +149,21 @@ public class ServiceFragment extends BaseFragment<ServiceContract.Presenter> imp
     }
 
 
+    @OnClick(R.id.toolbar_msg_holder)
+    void clickMsg(View v) {
+        startActivity(MsgActivity.getStartIntent());
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void checkUnread(CheckMsgUnreadEvent event) {
+        msgIconView.setShowRedIcon(presenter.haveUnreadMsg());
+    }
+
+
     @Override
     public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
         rvSecond.removeOnScrollListener(secondScrollListener);
         super.onDestroyView();
 

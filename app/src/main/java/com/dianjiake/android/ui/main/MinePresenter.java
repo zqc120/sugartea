@@ -5,6 +5,7 @@ import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.LoginBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.db.MsgDBHelper;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,16 +22,18 @@ public class MinePresenter implements MineContract.Presenter {
     LoginInfoDBHelper loginInfoDBHelper;
     MineContract.View view;
     CompositeDisposable cd;
+    MsgDBHelper msgDBHelper;
 
     public MinePresenter(MineContract.View view) {
         this.view = view;
         cd = new CompositeDisposable();
         loginInfoDBHelper = LoginInfoDBHelper.newInstance();
+        msgDBHelper = MsgDBHelper.newInstance();
     }
 
     @Override
     public void start() {
-        view.setName(loginInfoDBHelper.getLoginInfo().getNickname(),loginInfoDBHelper.getLoginInfo().getPhone());
+        view.setName(loginInfoDBHelper.getLoginInfo().getNickname(), loginInfoDBHelper.getLoginInfo().getPhone());
         view.setAvatar(loginInfoDBHelper.getLoginInfo().getAvatar());
     }
 
@@ -72,5 +75,10 @@ public class MinePresenter implements MineContract.Presenter {
 
                     }
                 });
+    }
+
+    @Override
+    public boolean haveUnreadMsg() {
+        return msgDBHelper.isUnread();
     }
 }

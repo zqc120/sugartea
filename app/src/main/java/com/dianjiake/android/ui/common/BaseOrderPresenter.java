@@ -8,6 +8,7 @@ import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.event.RefreshOrderListEvent;
 import com.dianjiake.android.request.OrderListObserver;
@@ -39,6 +40,7 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
     public CompositeDisposable cd;
     public LoginInfoModel loginInfo;
     public int page = 1;
+    MsgDBHelper msgDBHelper;
 
     public BaseOrderPresenter(OrderView view) {
         this.view = view;
@@ -46,6 +48,7 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
         cd = new CompositeDisposable();
         loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
         EventBus.getDefault().register(this);
+        msgDBHelper = MsgDBHelper.newInstance();
     }
 
     @Override
@@ -169,6 +172,10 @@ public abstract class BaseOrderPresenter implements BaseListPresenter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRefreshEvent(RefreshOrderListEvent event) {
         reload();
+    }
+
+    public boolean haveUnreadMsg() {
+        return msgDBHelper.isUnread();
     }
 
     public abstract void clickHolder(OrderBean orderBean, int position);

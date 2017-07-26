@@ -5,6 +5,7 @@
     android:id="@+id/toolbar_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/text_white"
     android:windowActionModeOverlay="true">
 
     <com.dianjiake.android.view.widget.ToolbarSpaceView
@@ -29,6 +30,26 @@
         app:layout_constraintRight_toLeftOf="@+id/toolbar_title"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_space" />
 
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/toolbar_size"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="@dimen/base_margin"
+        android:paddingRight="@dimen/base_margin"
+        android:singleLine="true"
+        android:textColor="@color/text_content_title"
+        android:textSize="@dimen/text_size_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/toolbar_icon_left"
+        app:layout_constraintRight_toLeftOf="@+id/right_holder"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_space"
+        tools:text="我是标范德萨范德萨范德萨发撒大法师发地方都是发题" />
+
+
     <FrameLayout
         android:id="@+id/toolbar_msg_holder"
         android:layout_width="@dimen/toolbar_size"
@@ -45,8 +66,15 @@
             android:layout_width="@dimen/base_size4"
             android:layout_height="@dimen/base_size4"
             android:layout_gravity="center"
-            android:src="@drawable/ic_msg_white" />
+            android:src="@drawable/ic_msg_grey" />
     </FrameLayout>
 
-
+    <ImageView
+        android:id="@+id/toolbar_divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_size"
+        android:src="@color/divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

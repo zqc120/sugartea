@@ -1,6 +1,7 @@
 package com.dianjiake.android.util;
 
 
+import com.dianjiake.android.event.CheckMsgUnreadEvent;
 import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.event.LogOutEvent;
 import com.dianjiake.android.event.LoginEvent;
@@ -15,6 +16,8 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 public class EventUtil {
+
+
     public static void postLocationEvent(LocationEvent event) {
         EventBus.getDefault().post(event);
     }
@@ -38,5 +41,9 @@ public class EventUtil {
 
     public static void postToOrder() {
         EventBus.getDefault().post(new ToOrderEvent());
+    }
+
+    public static void postCheckMsgUnread() {
+        EventBus.getDefault().post(new CheckMsgUnreadEvent());
     }
 }

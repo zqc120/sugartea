@@ -33,5 +33,7 @@ public interface HomeContract {
         List<HomeShopBean> getItems();
 
         void addRG(RadioGroup rg);
+
+        boolean haveUnreadMsg();
     }
 }

@@ -6,6 +6,7 @@ import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.ServiceFirstBean;
 import com.dianjiake.android.data.bean.ServiceSecondBean;
 import com.dianjiake.android.data.bean.ServiceTypeBean;
+import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.util.CheckEmptyUtil;
 
 import java.util.ArrayList;
@@ -27,12 +28,14 @@ public class ServicePresenter implements ServiceContract.Presenter {
     ServiceContract.View view;
     List<ServiceSecondBean> serviceSeconds;
     List<ServiceFirstBean> serviceFirsts;
+    MsgDBHelper msgDBHelper;
 
     public ServicePresenter(ServiceContract.View view) {
         this.view = view;
         cd = new CompositeDisposable();
         serviceSeconds = new ArrayList<>();
         serviceFirsts = new ArrayList<>();
+        msgDBHelper = MsgDBHelper.newInstance();
     }
 
     @Override
@@ -81,6 +84,11 @@ public class ServicePresenter implements ServiceContract.Presenter {
 
                     }
                 });
+    }
+
+    @Override
+    public boolean haveUnreadMsg() {
+        return msgDBHelper.isUnread();
     }
 
     @Override

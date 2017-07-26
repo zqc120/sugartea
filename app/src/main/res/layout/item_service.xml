@@ -24,6 +24,18 @@
         app:roundTopRight="true"
         app:roundedCornerRadius="@dimen/base_size1" />
 
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/mark"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/logo"
+        app:layout_constraintTop_toTopOf="@+id/logo"
+        app:roundBottomLeft="false"
+        app:roundBottomRight="false"
+        app:roundTopLeft="true"
+        app:roundTopRight="false"
+        app:placeholderImage="@drawable/ic_service_mark" />
+
 
     <LinearLayout
         android:id="@+id/title_holder"

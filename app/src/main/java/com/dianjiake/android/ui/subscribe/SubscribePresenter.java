@@ -152,7 +152,7 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
 
     @Override
     public void setServiceType(ServiceBean service) {
-        serviceType = "1".equals(service.getFuwumoshi()) ? SERVICE_TYPE_SHOP : SERVICE_TYPE_HOME;
+        serviceType = "1".equals(service.getFuwumoshi()) ? SERVICE_TYPE_HOME : SERVICE_TYPE_SHOP;
         view.setHomeHolderVisible(serviceType == SERVICE_TYPE_HOME);
     }
 

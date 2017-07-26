@@ -10,6 +10,8 @@ import android.view.WindowManager;
 
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.service.InitPushService;
+import com.dianjiake.android.service.ReceivePushService;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
 import com.dianjiake.android.view.widget.LoadMoreRecyclerView;
@@ -25,7 +27,7 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseListActivity<P extends BaseListPresenter> extends AppCompatActivity implements BaseListView
-        , LoadingLayout.OnReloadListener,LoadMoreRecyclerView.OnLoadMoreListener {
+        , LoadingLayout.OnReloadListener, LoadMoreRecyclerView.OnLoadMoreListener {
     private Unbinder unbinder;
     protected P presenter;
     protected PtrListLayout ptrListLayout;
@@ -64,7 +66,7 @@ public abstract class BaseListActivity<P extends BaseListPresenter> extends AppC
             UIUtil.flymeSetStatusBarLightMode(getWindow(), true);
             UIUtil.miuiSetStatusBarLightMode(getWindow(), true);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP&&Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }
@@ -86,8 +88,8 @@ public abstract class BaseListActivity<P extends BaseListPresenter> extends AppC
         ptrListLayout.setOnLoadMoreListener(this);
         create(savedInstanceState);
         onReload();
-//        PushManager.getInstance().initialize(this.getApplicationContext(), InitPushService.class);
-//        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), ReceivePushService.class);
+        PushManager.getInstance().initialize(this.getApplicationContext(), InitPushService.class);
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), ReceivePushService.class);
     }
 
 

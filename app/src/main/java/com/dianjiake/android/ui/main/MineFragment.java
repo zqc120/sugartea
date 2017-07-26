@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseFragment;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.event.CheckMsgUnreadEvent;
 import com.dianjiake.android.ui.colloction.CollectionActivity;
 import com.dianjiake.android.ui.coupon.CouponActivity;
 import com.dianjiake.android.ui.login.CompleteInfoActivity;
+import com.dianjiake.android.ui.msg.MsgActivity;
 import com.dianjiake.android.ui.setting.SettingActivity;
 import com.dianjiake.android.ui.simpleactivity.SimpleActivity;
 import com.dianjiake.android.ui.vip.VipActivity;
@@ -24,8 +26,13 @@ import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.dialog.NormalAlertDialog;
+import com.dianjiake.android.view.widget.MsgIconView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,8 +49,6 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     ToolbarSpaceView toolbarSpace;
     @BindView(R.id.toolbar_icon_left)
     ImageView toolbarIconLeft;
-    @BindView(R.id.toolbar_icon_right)
-    ImageView toolbarIconRight;
     @BindView(R.id.avatar)
     SimpleDraweeView avatar;
     @BindView(R.id.name)
@@ -68,6 +73,8 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     LinearLayout mineCall;
     @BindView(R.id.item_holder)
     LinearLayout itemHolder;
+    @BindView(R.id.toolbar_icon_right)
+    MsgIconView msgIconView;
 
     @Override
     public void setPresenter(MineContract.Presenter presenter) {
@@ -87,13 +94,14 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         toolbarIconLeft.setImageResource(R.drawable.ic_mine_setting);
         toolbarSpace.getBackground().mutate().setAlpha(0);
     }
 
     @Override
     public void setViews(UserInfoBean userInfoBean) {
-        if(userInfoBean!=null){
+        if (userInfoBean != null) {
             setAvatar(userInfoBean.getAvatar());
             setName(userInfoBean.getNickname(), userInfoBean.getPhone());
         }
@@ -184,5 +192,21 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
     @OnClick(R.id.mine_join)
     void clickJoin(View v) {
         startActivity(SimpleActivity.getStartIntent("http://www.quanminlebang.com/msg.php?id=4", "商家入驻"));
+    }
+
+    @OnClick(R.id.toolbar_msg_holder)
+    void clickMsg(View v) {
+        startActivity(MsgActivity.getStartIntent());
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void checkUnread(CheckMsgUnreadEvent event) {
+        msgIconView.setShowRedIcon(presenter.haveUnreadMsg());
+    }
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
     }
 }

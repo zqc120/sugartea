@@ -5,6 +5,10 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dianjiake.android.service.InitPushService;
+import com.dianjiake.android.service.ReceivePushService;
+import com.igexin.sdk.PushManager;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -26,8 +30,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             presenter.start();
         }
         create(savedInstanceState);
-//        PushManager.getInstance().initialize(this.getApplicationContext(), InitPushService.class);
-//        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), ReceivePushService.class);
+        PushManager.getInstance().initialize(this.getApplicationContext(), InitPushService.class);
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), ReceivePushService.class);
     }
 
     @LayoutRes

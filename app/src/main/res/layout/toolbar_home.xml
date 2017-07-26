@@ -65,18 +65,19 @@
             android:orientation="horizontal"
             android:paddingLeft="@dimen/base_size2"
             android:paddingRight="@dimen/base_size2">
+
             <ImageView
                 android:layout_width="@dimen/base_size3"
+                android:layout_height="@dimen/base_size3"
                 android:layout_marginLeft="@dimen/base_size1"
-                android:src="@drawable/ic_toolbar_search_grey"
-                android:layout_height="@dimen/base_size3" />
+                android:src="@drawable/ic_toolbar_search_grey" />
 
             <TextView
                 android:id="@+id/toolbar_search_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null"
                 android:layout_marginLeft="@dimen/base_size2"
+                android:background="@null"
                 android:singleLine="true"
                 android:text="搜索感兴趣的服务和商家"
                 android:textColor="@color/text_content_secondary"
@@ -87,10 +88,18 @@
 
         <FrameLayout
             android:id="@+id/toolbar_msg_holder"
-            android:layout_width="30dp"
+            android:layout_width="50dp"
+            android:clipChildren="false"
             android:layout_height="30dp"
             android:layout_marginRight="@dimen/base_margin"
-            android:background="@drawable/bg_home_location"
-            android:visibility="gone"></FrameLayout>
+            android:background="@drawable/bg_home_location">
+
+            <com.dianjiake.android.view.widget.MsgIconView
+                android:id="@+id/msg_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_msg_white" />
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

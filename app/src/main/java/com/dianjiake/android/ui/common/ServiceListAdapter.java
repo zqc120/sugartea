@@ -13,6 +13,7 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.ui.main.ServiceType;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.ui.shopweb.ShopWebActivity;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
@@ -104,6 +105,8 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
         StarView star;
         @BindView(R.id.shop_holder)
         LinearLayout shopHolder;
+        @BindView(R.id.mark)
+        View mark;
 
 
         boolean showShop, showSub;
@@ -184,6 +187,8 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
                 Timber.e("dp2px:" + UIUtil.dp2px(size + 90));
                 shopName.setMaxWidth(UIUtil.getScreenWidth() - (int) UIUtil.dp2px(90) + size);
             }
+
+            mark.setVisibility("1".equals(serviceBean.getFuwumoshi())?View.VISIBLE:GONE);
         }
 
         @OnClick(R.id.holder)

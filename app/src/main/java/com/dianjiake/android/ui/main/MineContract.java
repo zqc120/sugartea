@@ -19,5 +19,6 @@ public interface MineContract {
 
     interface Presenter extends BasePresenter {
         void load();
+        boolean haveUnreadMsg();
     }
 }

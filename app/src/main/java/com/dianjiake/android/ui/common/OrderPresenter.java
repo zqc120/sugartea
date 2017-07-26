@@ -67,4 +67,6 @@ public class OrderPresenter extends BaseOrderPresenter {
     public Observable<BaseListBean<OrderBean>> provideApi() {
         return Network.getInstance().orders(BSConstant.ORDER_LIST, loginInfo.getOpenId(), page);
     }
+
+
 }
