@@ -36,189 +36,200 @@
         app:roundTopLeft="true"
         app:roundTopRight="false" />
 
-
-    <LinearLayout
-        android:id="@+id/title_holder"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/content_holder"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:layout_marginRight="@dimen/base_margin"
-        android:orientation="horizontal"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/logo"
         app:layout_constraintLeft_toRightOf="@+id/logo"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logo">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/title_holder"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="@color/text_content_title"
-            android:textSize="@dimen/text_size_subhead"
-            tools:text="fsdfdsfdfsdfsdfsdfs" />
-
-        <ImageView
-            android:id="@+id/service_promotion"
-            style="@style/TagStyle.Promotion"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/base_size1"
-            android:src="@drawable/ic_shop_promotion" />
-
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/sail_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/base_margin"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:textColor="@color/text_content_secondary"
-            android:textSize="@dimen/text_size_body"
-            android:visibility="gone"
-            tools:text="已约456单" />
-    </LinearLayout>
+            android:layout_marginRight="@dimen/base_margin"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/desc"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/text_content_title"
+                android:textSize="@dimen/text_size_subhead"
+                tools:text="fsdfdsfdfsdfsdfsdfs" />
+
+            <ImageView
+                android:id="@+id/service_promotion"
+                style="@style/TagStyle.Promotion"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/base_size1"
+                android:src="@drawable/ic_shop_promotion" />
 
 
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:layout_marginRight="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_margin"
-        android:singleLine="true"
-        android:textColor="@color/text_content_secondary"
-        android:textSize="@dimen/text_size_body"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toRightOf="@+id/logo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_holder"
-        tools:text="fasdfdsfsdfsdfsdfsdfsdfdsf" />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/price_holder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:layout_marginRight="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_size2"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toRightOf="@+id/logo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc">
+            <TextView
+                android:id="@+id/sail_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/base_margin"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/text_content_secondary"
+                android:textSize="@dimen/text_size_body"
+                android:visibility="gone"
+                tools:text="已约456单" />
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/main"
-            android:textSize="@dimen/text_size_title"
-            tools:text="526.00" />
-
-        <TextView
-            android:id="@+id/price_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_content_secondary"
-            android:textSize="@dimen/text_size_body"
-            tools:text="元" />
-
-        <TextView
-            android:id="@+id/old_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/base_size2"
-            android:textColor="@color/text_content_secondary"
-            android:textSize="@dimen/text_size_body"
-            tools:text="526.00" />
-
-        <TextView
-            android:id="@+id/subscribe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="立即预约"
-            android:textColor="@color/main"
-            android:textSize="@dimen/text_size_body" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/divider_size"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:layout_marginRight="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_size2"
-        android:src="@color/divider"
-        app:layout_constraintLeft_toRightOf="@+id/logo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price_holder" />
-
-
-    <LinearLayout
-        android:id="@+id/shop_holder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:layout_marginRight="@dimen/base_margin"
-        android:layout_marginTop="@dimen/base_size2"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/logo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0">
-
-
-        <ImageView
-            android:layout_width="@dimen/text_size_body"
-            android:layout_height="@dimen/text_size_body"
-            android:src="@drawable/ic_service_shop" />
-
-        <TextView
-            android:id="@+id/shop_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/base_size1"
+            android:layout_marginLeft="@dimen/base_margin"
+            android:layout_marginRight="@dimen/base_margin"
             android:singleLine="true"
             android:textColor="@color/text_content_secondary"
             android:textSize="@dimen/text_size_body"
-            tools:text="fsdffsdfsdfd" />
+            app:layout_constraintBottom_toTopOf="@+id/price_holder"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_holder"
+            tools:text="fasdfdsfsdfsdfsdfsdfsdfdsf" />
+
+        <LinearLayout
+            android:id="@+id/price_holder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_margin"
+            android:layout_marginRight="@dimen/base_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_size_title"
+                tools:text="526.00" />
+
+            <TextView
+                android:id="@+id/price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_content_secondary"
+                android:textSize="@dimen/text_size_body"
+                tools:text="元" />
+
+            <TextView
+                android:id="@+id/old_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_size2"
+                android:textColor="@color/text_content_secondary"
+                android:textSize="@dimen/text_size_body"
+                tools:text="526.00" />
+
+            <TextView
+                android:id="@+id/subscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="立即预约"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_size_body" />
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/shop_promotion"
-            android:layout_width="@dimen/text_size_body"
-            android:layout_height="@dimen/text_size_body"
-            android:layout_marginLeft="@dimen/base_size2"
-            android:src="@drawable/ic_shop_promotion" />
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_size"
+            android:layout_marginLeft="@dimen/base_margin"
+            android:layout_marginRight="@dimen/base_margin"
+            android:src="@color/divider"
+            app:layout_constraintBottom_toTopOf="@+id/shop_holder"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_holder" />
 
-        <ImageView
-            android:id="@+id/shop_card"
-            android:layout_width="@dimen/text_size_body"
-            android:layout_height="@dimen/text_size_body"
-            android:layout_marginLeft="@dimen/base_size1"
-            android:src="@drawable/ic_shop_coupon" />
 
-        <Space
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/shop_holder"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_marginLeft="@dimen/base_margin"
+            android:layout_marginRight="@dimen/base_margin"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:layout_constraintVertical_bias="0">
 
-        <com.dianjiake.android.view.widget.StarView
-            android:id="@+id/star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
-    </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/text_size_body"
+                android:layout_height="@dimen/text_size_body"
+                android:src="@drawable/ic_service_shop" />
+
+            <TextView
+                android:id="@+id/shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_size1"
+                android:singleLine="true"
+                android:textColor="@color/text_content_secondary"
+                android:textSize="@dimen/text_size_body"
+                tools:text="fsdffsdfsdfd" />
+
+            <ImageView
+                android:id="@+id/shop_promotion"
+                android:layout_width="@dimen/text_size_body"
+                android:layout_height="@dimen/text_size_body"
+                android:layout_marginLeft="@dimen/base_size2"
+                android:src="@drawable/ic_shop_promotion" />
+
+            <ImageView
+                android:id="@+id/shop_card"
+                android:layout_width="@dimen/text_size_body"
+                android:layout_height="@dimen/text_size_body"
+                android:layout_marginLeft="@dimen/base_size1"
+                android:src="@drawable/ic_shop_coupon" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.dianjiake.android.view.widget.StarView
+                android:id="@+id/star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
 
 
     <ImageView
