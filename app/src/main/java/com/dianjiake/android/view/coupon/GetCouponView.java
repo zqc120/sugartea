@@ -145,14 +145,18 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
         }
     }
 
-    void showGetSuccessDialog(CouponBean couponBean) {
+    void showGetSuccessDialog(CouponBean couponBean, int position) {
         if (getContext() != null) {
             IntentUtil.startActivity(getContext(), GetCouponSuccessDialog.getStartIntent(couponBean, shopBean));
         }
+        if (adapter != null) {
+            setVisibility(adapter.removeItem(position) == 0 ? GONE : VISIBLE);
+        }
+
     }
 
     void showGetFailDialog(int code) {
-        if(getContext()!=null){
+        if (getContext() != null) {
             IntentUtil.startActivity(getContext(), GetCouponFailDialog.getStartIntent(code));
         }
     }
@@ -164,40 +168,39 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
     }
 
     @Override
-    public void onGet(final CouponBean coupon, int position) {
+    public void onGet(final CouponBean coupon, final int position) {
         cd.clear();
-        showGetFailDialog(4001);
-//        showPD();
-//        Network.getInstance().getCoupon(BSConstant.GET_COUPON, loginInfo.getOpenId(), coupon.getId(), null, null)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribeWith(new Observer<BaseBean>() {
-//                    @Override
-//                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
-//                        cd.add(d);
-//                    }
-//
-//                    @Override
-//                    public void onNext(@io.reactivex.annotations.NonNull BaseBean baseBean) {
-//                        dismissPD();
-//                        if (baseBean.getCode() == 200) {
-//                            showGetSuccessDialog(coupon);
-//                        } else {
-//                            showGetFailDialog();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-//                        dismissPD();
-//                        showGetFailDialog();
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//
-//                    }
-//                });
+        showPD();
+        Network.getInstance().getCoupon(BSConstant.GET_COUPON, loginInfo.getOpenId(), coupon.getId(), null, null)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseBean>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@io.reactivex.annotations.NonNull BaseBean baseBean) {
+                        dismissPD();
+                        if (baseBean.getCode() == 200) {
+                            showGetSuccessDialog(coupon, position);
+                        } else {
+                            showGetFailDialog(baseBean.getCode());
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                        dismissPD();
+                        showGetFailDialog(4444);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 
@@ -222,6 +225,13 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
                 this.items.addAll(items);
             }
             notifyDataSetChanged();
+        }
+
+        public int removeItem(int position) {
+            if (position < items.size()) {
+                items.remove(position);
+            }
+            return items.size();
         }
 
         @Override

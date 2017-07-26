@@ -28,6 +28,7 @@ import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.TableRowUtil;
 import com.dianjiake.android.util.UIUtil;
+import com.dianjiake.android.view.coupon.GetCouponView;
 import com.dianjiake.android.view.dialog.NormalAlertDialog;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
@@ -84,14 +85,23 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     ImageView subDivider;
     @BindView(R.id.sub_table)
     TableLayout subTable;
+    @BindView(R.id.get_coupon)
+    GetCouponView couponView;
 
     int orderStatus;
     OrderBean orderBean;
-    NormalProgressDialog cancelPD;
+    NormalProgressDialog cancelPD, getPD;
 
     public static Intent getStartIntent(OrderBean order) {
         Intent intent = IntentUtil.getIntent(OrderDetailActivity.class);
         intent.putExtra("order", order);
+        return intent;
+    }
+
+    public static Intent getStartIntent(String shopId, String orderId) {
+        Intent intent = IntentUtil.getIntent(OrderDetailActivity.class);
+        intent.putExtra("shopid", shopId);
+        intent.putExtra("orderid", orderId);
         return intent;
     }
 
@@ -108,9 +118,14 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
         orderBean = getIntent().getParcelableExtra("order");
-        presenter.setOrderBean(orderBean);
         toolbarTitle.setText("订单详情");
-        setView(orderBean);
+        couponView.setFragmentManager(getFragmentManager());
+        if (orderBean != null) {
+            presenter.setOrderBean(orderBean);
+            setView(orderBean);
+        } else {
+            presenter.getOrderDetail(getIntent().getStringExtra("shopid"), getIntent().getStringExtra("orderid"));
+        }
 
     }
 
@@ -128,6 +143,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     public void setView(OrderBean item) {
         orderBean = item;
         if (item.getDianpu() != null) {
+            couponView.setShop(item.getDianpu());
             logo.setImageURI(FrescoUtil.getShopLogoUri(item.getDianpu().getLogo(), item.getDianpu().getCover()));
             detailLogo.setImageURI(FrescoUtil.getShopLogoUri(item.getDianpu().getLogo(), item.getDianpu().getCover()));
             name.setText(item.getDianpu().getMingcheng());
@@ -242,6 +258,21 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     }
 
     @Override
+    public void showGetPD() {
+        if (getPD == null) {
+            getPD = NormalProgressDialog.newInstance("正在获取订单详情，请稍候...");
+        }
+        getPD.showDialog(getFragmentManager(), "get");
+    }
+
+    @Override
+    public void dismissGetPD() {
+        if (getPD != null && getPD.isAdded()) {
+            getPD.dismissAllowingStateLoss();
+        }
+    }
+
+    @Override
     public Context provideContext() {
         return this;
     }
@@ -281,6 +312,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
     @OnClick(R.id.detail_button1)
     void clickButton1(View v) {
+        if (orderBean == null) return;
         switch (orderStatus) {
             case OrderStatus.NO_CONFIRM:
             case OrderStatus.CONFIRM:
@@ -296,6 +328,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
     @OnClick(R.id.detail_button2)
     void clickButton2(View v) {
+        if (orderBean == null) return;
         switch (orderStatus) {
             case OrderStatus.NO_CONFIRM:
             case OrderStatus.CONFIRM:

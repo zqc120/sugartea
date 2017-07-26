@@ -18,6 +18,10 @@ public interface OrderDetailContract {
 
         void dismissCancelPD();
 
+        void showGetPD();
+
+        void dismissGetPD();
+
         Context provideContext();
     }
 
@@ -31,5 +35,7 @@ public interface OrderDetailContract {
         void reSub();
 
         void evaluate();
+
+        void getOrderDetail(String shopId, String orderId);
     }
 }

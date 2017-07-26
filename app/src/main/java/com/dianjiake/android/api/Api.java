@@ -8,6 +8,7 @@ import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.AddOrderBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
+import com.dianjiake.android.data.bean.BaseUnrealBean;
 import com.dianjiake.android.data.bean.CouponBean;
 import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
@@ -522,10 +523,28 @@ public interface Api {
      * @param sharedOpenId
      * @return
      */
+    @GET(Constant.USER)
     Observable<BaseBean> getCoupon(
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openId,
             @NonNull @Query("kaquanid") String couponId,
             @NonNull @Query("fenxiangleixing") String shareType,
             @NonNull @Query("fenxiangopenid") String sharedOpenId);
+
+
+    /**
+     * 订单详情
+     *
+     * @param bs      {@link BSConstant#ORDER_DETAIL}
+     * @param shopId
+     * @param orderId
+     * @return
+     */
+    @GET(Constant.ORDERS)
+    Observable<BaseUnrealBean<OrderBean>> orderDetail(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("shanghuid") String shopId,
+            @NonNull @Query("id") String orderId
+    );
+
 }

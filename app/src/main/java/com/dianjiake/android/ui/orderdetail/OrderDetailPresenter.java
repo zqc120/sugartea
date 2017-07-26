@@ -1,10 +1,12 @@
 package com.dianjiake.android.ui.orderdetail;
 
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
+import com.dianjiake.android.data.bean.BaseUnrealBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
@@ -104,5 +106,42 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter {
     @Override
     public void evaluate() {
 
+    }
+
+    @Override
+    public void getOrderDetail(String shopId, String orderId) {
+        cd.clear();
+        view.showGetPD();
+        Network.getInstance().orderDetail(BSConstant.ORDER_DETAIL, shopId, orderId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseUnrealBean<OrderBean>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseUnrealBean<OrderBean> bean) {
+                        view.dismissGetPD();
+                        if (bean.getCode() == 200) {
+                            setOrderBean(bean.getObj().getList());
+                            view.setView(bean.getObj().getList());
+                        } else {
+                            ToastUtil.showShortToast("请求失败，请返回重试");
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        view.dismissGetPD();
+                        ToastUtil.showShortToast("请求失败，请返回重试");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
