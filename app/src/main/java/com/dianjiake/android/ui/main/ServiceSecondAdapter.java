@@ -109,7 +109,7 @@ public class ServiceSecondAdapter extends RecyclerView.Adapter {
 
         @OnClick(R.id.holder)
         void click(View v) {
-            IntentUtil.startActivity(v, ServiceTypeActivity.getStartIntent(item));
+            IntentUtil.startActivity(v, ServiceTypeActivity.getStartIntent(item,"64".equals(item.getSid())));
         }
 
     }

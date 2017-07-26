@@ -58,6 +58,25 @@
             android:textColor="@color/toolbar_radio" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/toolbar_size"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="@dimen/base_margin"
+        android:paddingRight="@dimen/base_margin"
+        android:singleLine="true"
+        android:textColor="@color/text_content_title"
+        android:textSize="@dimen/text_size_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@+id/toolbar_icon_left"
+        app:layout_constraintRight_toLeftOf="@+id/toolbar_icon_right"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_space"
+        tools:text="我是标范德萨范德萨范德萨发撒大法师发地方都是发题" />
+
     <ImageView
         android:id="@+id/toolbar_icon_right"
         android:layout_width="@dimen/toolbar_size"

@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BasePresenter;
@@ -31,9 +32,10 @@ import butterknife.OnClick;
  */
 
 public class ServiceTypeActivity extends BaseTranslateActivity {
-    public static Intent getStartIntent(ServiceSecondBean bean) {
+    public static Intent getStartIntent(ServiceSecondBean bean, boolean isSingle) {
         Intent intent = IntentUtil.getIntent(ServiceTypeActivity.class);
         intent.putExtra("bean", bean);
+        intent.putExtra("single", isSingle);
         return intent;
     }
 
@@ -53,9 +55,12 @@ public class ServiceTypeActivity extends BaseTranslateActivity {
     ImageView toolbarDivider;
     @BindView(R.id.toolbar_holder)
     ConstraintLayout toolbarHolder;
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
 
     ServiceSecondBean secondBean;
     TabFragmentManager tabManager;
+    boolean isSingle;
 
     @Override
     public int provideContentView() {
@@ -65,6 +70,7 @@ public class ServiceTypeActivity extends BaseTranslateActivity {
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
         toolbarIconRight.setImageResource(R.drawable.ic_toolbar_search);
+        isSingle = getIntent().getBooleanExtra("single", false);
         secondBean = getIntent().getParcelableExtra("bean");
         toolbarRadio0.setText(secondBean.getMingcheng());
         toolbarRadio0.post(new Runnable() {
@@ -76,10 +82,18 @@ public class ServiceTypeActivity extends BaseTranslateActivity {
             }
         });
         tabManager = new TabFragmentManager(getFragmentManager(), toolbarRg, false);
-        Fragment fm1 = FragmentFactory.createFragmentByFM(ServiceResultFragment.class, getFragmentManager(), ServiceResultFragment.getBundle(secondBean.getId()));
         Fragment fm2 = FragmentFactory.createFragmentByFM(ShopResultFragment.class, getFragmentManager(), ShopResultFragment.getBundle(secondBean.getId()));
-        tabManager.putFragment(R.id.toolbar_radio_0, fm1);
         tabManager.putFragment(R.id.toolbar_radio_1, fm2);
+        if (isSingle) {
+            toolbarRg.setVisibility(View.GONE);
+            toolbarTitle.setText(secondBean.getMingcheng());
+            toolbarTitle.setVisibility(View.VISIBLE);
+        } else {
+            toolbarTitle.setVisibility(View.INVISIBLE);
+            Fragment fm1 = FragmentFactory.createFragmentByFM(ServiceResultFragment.class, getFragmentManager(), ServiceResultFragment.getBundle(secondBean.getId()));
+            tabManager.putFragment(R.id.toolbar_radio_0, fm1);
+
+        }
         tabManager.start();
     }
 
