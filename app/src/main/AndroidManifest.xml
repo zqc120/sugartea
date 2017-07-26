@@ -97,7 +97,14 @@
         <activity
             android:name=".ui.servicetype.ServiceTypeActivity"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".view.dialog.GetCouponSuccessDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogActivity" />
+        <activity
+            android:name=".view.dialog.GetCouponFailDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogActivity" />
 
         <!--微信-->
         <activity

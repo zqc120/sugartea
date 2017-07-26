@@ -52,7 +52,6 @@ public class CouponAdapter extends BaseLoadMoreAdapter<MyCouponBean> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            coupon.setGetVisible(false);
         }
 
 

@@ -511,4 +511,21 @@ public interface Api {
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openId
     );
+
+    /**
+     * 领取优惠券
+     *
+     * @param bs           {@link BSConstant#GET_COUPON}
+     * @param openId
+     * @param couponId
+     * @param shareType
+     * @param sharedOpenId
+     * @return
+     */
+    Observable<BaseBean> getCoupon(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openId,
+            @NonNull @Query("kaquanid") String couponId,
+            @NonNull @Query("fenxiangleixing") String shareType,
+            @NonNull @Query("fenxiangopenid") String sharedOpenId);
 }

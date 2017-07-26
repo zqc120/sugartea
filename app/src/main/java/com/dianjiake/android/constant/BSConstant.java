@@ -63,4 +63,6 @@ public interface BSConstant {
     String RETRIEVE_SERVICE = "jiansuofuwuliebiao";//检索服务
     String RETRIEVE_SHOP = "jiansuoshanghuliebiao";//检索商户
     String HOME_COLLECTION = "shoucangtuijian";//收藏推荐
+    String GET_COUPON = "lingqukaquan";//领取优惠券
+
 }

@@ -46,6 +46,9 @@ public class CouponView extends ConstraintLayout {
     Button get;
 
     CompositeDisposable cd;
+    OnGetListener onGetListener;
+    CouponBean couponBean;
+    int position = -1;
 
     public CouponView(Context context) {
         super(context);
@@ -68,15 +71,17 @@ public class CouponView extends ConstraintLayout {
         cd = new CompositeDisposable();
     }
 
-
-    public void setGetVisible(boolean visible) {
-        get.setVisibility(visible ? VISIBLE : GONE);
+    public void setCoupon(CouponBean coupon, HomeShopBean shopBean, int position) {
+        get.setVisibility(VISIBLE);
+        this.position = position;
+        setCoupon(coupon, shopBean);
     }
 
     public void setCoupon(CouponBean coupon, HomeShopBean shopBean) {
         if (shopBean != null) {
             logo.setImageURI(FrescoUtil.getShopLogoUri(shopBean.getLogo(), shopBean.getCover()));
         }
+        this.couponBean = coupon;
         title.setText(coupon.getKaquanmingcheng());
         String ruleString = "使用规则：";
         switch (coupon.getLeixing()) {
@@ -109,13 +114,24 @@ public class CouponView extends ConstraintLayout {
         );
     }
 
+    public void setOnGetListener(OnGetListener onGetListener) {
+        this.onGetListener = onGetListener;
+    }
+
     @OnClick(R.id.get)
     void getCoupon(View v) {
-        ToastUtil.showShortToast("领取");
+        if (onGetListener != null && couponBean != null) {
+            onGetListener.onGet(couponBean, position);
+        }
     }
+
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+    }
+
+    public static interface OnGetListener {
+        void onGet(CouponBean coupon, int position);
     }
 }

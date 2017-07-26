@@ -148,6 +148,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
         UIUtil.setUpIndicatorWidth(tab);
         appbar.addOnOffsetChangedListener(onOffsetChangedListener);
         setToolbarBGTransparent();
+        getCouponView.setFragmentManager(getFragmentManager());
     }
 
     @Override

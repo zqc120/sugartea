@@ -52,6 +52,7 @@ public interface Constant {
     String WEB_SHOP_INFO = "http://www.quanminlebang.com/m/mobile/mobilestation/shopinfo.html?src=app&id=%s";
 
     String SHARE_SHOP = "http://www.quanminlebang.com/m/mobile161/#/page/main?id=%s";
+    String SHARE_COUPON = "http://www.quanminlebang.com/m/activity/Coupon/index.html?kaquanid=%s&shanghuid=%s";
 
 
 }

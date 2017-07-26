@@ -1,5 +1,6 @@
 package com.dianjiake.android.view.coupon;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
@@ -15,15 +16,20 @@ import android.widget.FrameLayout;
 import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.CouponBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.util.CheckEmptyUtil;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.coupon.common.CouponAdapterHelper;
 import com.dianjiake.android.view.coupon.common.CouponScaleHelper;
+import com.dianjiake.android.view.dialog.GetCouponFailDialog;
+import com.dianjiake.android.view.dialog.GetCouponSuccessDialog;
+import com.dianjiake.android.view.dialog.NormalProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +44,15 @@ import io.reactivex.schedulers.Schedulers;
  * Created by lfs on 2017/7/24.
  */
 
-public class GetCouponView extends FrameLayout {
+public class GetCouponView extends FrameLayout implements CouponView.OnGetListener {
     RecyclerView rv;
     Adapter adapter;
     CompositeDisposable cd;
     LoginInfoModel loginInfo;
     CouponScaleHelper couponScaleHelper;
+    FragmentManager fm;
+    NormalProgressDialog pd;
+    HomeShopBean shopBean;
 
     public GetCouponView(@NonNull Context context) {
         super(context);
@@ -68,14 +77,20 @@ public class GetCouponView extends FrameLayout {
         rv = (RecyclerView) view.findViewById(R.id.coupon_rv);
         cd = new CompositeDisposable();
         adapter = new Adapter();
+        adapter.setOnGetListener(this);
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rv.setAdapter(adapter);
         couponScaleHelper.attachToRecyclerView(rv);
         loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
     }
 
+    public void setFragmentManager(FragmentManager fm) {
+        this.fm = fm;
+    }
+
     public void setShop(HomeShopBean shop) {
         if (shop != null) {
+            this.shopBean = shop;
             cd.clear();
             adapter.setShopBean(shop);
             Network.getInstance().shopCoupon(
@@ -113,6 +128,34 @@ public class GetCouponView extends FrameLayout {
         }
     }
 
+    void showPD() {
+        if (pd == null) {
+            pd = NormalProgressDialog.newInstance("正在领取，请稍候...");
+        }
+
+        if (fm != null) {
+            pd.showDialog(fm, "pd");
+        }
+
+    }
+
+    void dismissPD() {
+        if (pd != null && pd.isAdded()) {
+            pd.dismissAllowingStateLoss();
+        }
+    }
+
+    void showGetSuccessDialog(CouponBean couponBean) {
+        if (getContext() != null) {
+            IntentUtil.startActivity(getContext(), GetCouponSuccessDialog.getStartIntent(couponBean, shopBean));
+        }
+    }
+
+    void showGetFailDialog(int code) {
+        if(getContext()!=null){
+            IntentUtil.startActivity(getContext(), GetCouponFailDialog.getStartIntent(code));
+        }
+    }
 
     @Override
     protected void onDetachedFromWindow() {
@@ -120,11 +163,49 @@ public class GetCouponView extends FrameLayout {
         super.onDetachedFromWindow();
     }
 
+    @Override
+    public void onGet(final CouponBean coupon, int position) {
+        cd.clear();
+        showGetFailDialog(4001);
+//        showPD();
+//        Network.getInstance().getCoupon(BSConstant.GET_COUPON, loginInfo.getOpenId(), coupon.getId(), null, null)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribeWith(new Observer<BaseBean>() {
+//                    @Override
+//                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+//                        cd.add(d);
+//                    }
+//
+//                    @Override
+//                    public void onNext(@io.reactivex.annotations.NonNull BaseBean baseBean) {
+//                        dismissPD();
+//                        if (baseBean.getCode() == 200) {
+//                            showGetSuccessDialog(coupon);
+//                        } else {
+//                            showGetFailDialog();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+//                        dismissPD();
+//                        showGetFailDialog();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+    }
+
 
     public static class Adapter extends RecyclerView.Adapter<ViewHolder> {
         private List<CouponBean> items = new ArrayList<>();
         private CouponAdapterHelper couponAdapterHelper = new CouponAdapterHelper();
         private HomeShopBean shopBean;
+        CouponView.OnGetListener onGetListener;
 
         public void setShopBean(HomeShopBean shopBean) {
             this.shopBean = shopBean;
@@ -147,7 +228,7 @@ public class GetCouponView extends FrameLayout {
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = UIUtil.inflate(R.layout.item_coupon_view, parent);
             couponAdapterHelper.onCreateViewHolder(parent, view);
-            return new ViewHolder(view);
+            return new ViewHolder(view, this);
         }
 
         @Override
@@ -160,18 +241,36 @@ public class GetCouponView extends FrameLayout {
         public int getItemCount() {
             return items.size();
         }
+
+        public void setOnGetListener(CouponView.OnGetListener onGetListener) {
+            this.onGetListener = onGetListener;
+        }
+
+        public void onGet(CouponBean couponBean, int position) {
+            if (onGetListener != null) {
+                onGetListener.onGet(couponBean, position);
+            }
+        }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements CouponView.OnGetListener {
         CouponView couponView;
+        Adapter adapter;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, Adapter adapter) {
             super(itemView);
+            this.adapter = adapter;
             couponView = (CouponView) itemView.findViewById(R.id.cv);
+            couponView.setOnGetListener(this);
         }
 
         public void setItem(CouponBean couponBean, HomeShopBean shopBean) {
-            couponView.setCoupon(couponBean, shopBean);
+            couponView.setCoupon(couponBean, shopBean, getAdapterPosition());
+        }
+
+        @Override
+        public void onGet(CouponBean coupon, int position) {
+            adapter.onGet(coupon, position);
         }
     }
 }
