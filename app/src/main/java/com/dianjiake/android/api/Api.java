@@ -551,7 +551,7 @@ public interface Api {
     /**
      * 消息列表
      *
-     * @param bs  {@link BSConstant#MSG_LIST}
+     * @param bs     {@link BSConstant#MSG_LIST}
      * @param openId
      * @param page
      * @return
@@ -563,4 +563,35 @@ public interface Api {
             @NonNull @Query("page") int page
     );
 
+    /**
+     * 标记信息为已读
+     *
+     * @param bs     {@link BSConstant#MARK_MSG}
+     * @param openId
+     * @param msgId
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseBean> readMsg(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openId,
+            @NonNull @Query("id") String msgId
+    );
+
+    /**
+     * 修改手机号
+     *
+     * @param bs     {@link BSConstant#CHANGE_PHONE}
+     * @param openId
+     * @param phone
+     * @param sms
+     * @return
+     */
+    @GET(Constant.USER)
+    Observable<BaseBean> changePhone(
+            @NonNull @Query("bs") String bs,
+            @NonNull @Query("openid") String openId,
+            @NonNull @Query("phone") String phone,
+            @NonNull @Query("sms") String sms
+    );
 }

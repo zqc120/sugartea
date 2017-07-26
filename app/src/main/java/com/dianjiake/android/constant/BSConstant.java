@@ -66,5 +66,7 @@ public interface BSConstant {
     String GET_COUPON = "lingqukaquan";//领取优惠券
     String ORDER_DETAIL = "dingdanxiangqing";//订单详情
     String MSG_LIST = "xiaoxiliebiao";//消息列表
+    String MARK_MSG = "xiaoxizhuangtai";//标记消息为已读
+    String CHANGE_PHONE = "upphone";//修改手机号
 
 }

@@ -200,14 +200,13 @@ public class LoginChooseActivity extends BaseTranslateActivity {
 
                         switch (userInfo.getCode()) {
                             case 200:
-                                ToastUtil.showShortToast("登录成功");
-                                saveLoginUserInfo(userInfo.getObj().getUser());
-                                LoginActivitiesManger.newInstance().phoneLoginSuccess();
-                                break;
                             case 202:
                             case 203:
                             case 204:
-                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));
+                                ToastUtil.showShortToast("登录成功");
+                                saveLoginUserInfo(userInfo.getObj().getUser());
+                                LoginActivitiesManger.newInstance().phoneLoginSuccess();
+//                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));
                                 break;
                             case 201://绑定失败，这用不上
                                 ToastUtil.showShortToast("登录失败");

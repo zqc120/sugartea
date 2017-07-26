@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,20 +16,17 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.constant.BSConstant;
-import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.ui.login.LoginPhoneActivity;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.view.dialog.NormalAlertDialog;
-import com.dianjiake.android.view.dialog.NormalProgressDialog;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -38,6 +34,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class SettingActivity extends BaseTranslateActivity<SettingPresenter> implements SettingContract.View {
+    static final int REQUEST_PHONE = 343;
+
     @BindView(R.id.toolbar_space)
     ToolbarSpaceView toolbarSpace;
     @BindView(R.id.toolbar_icon_left)
@@ -56,10 +54,19 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
     LinearLayout settingEvaluate;
     @BindView(R.id.setting_log_out)
     Button settingLogOut;
+    @BindView(R.id.setting_phone_text)
+    TextView settingPhoneText;
+    @BindView(R.id.setting_phone)
+    LinearLayout settingPhone;
 
     @Override
     public void setPresenter(SettingContract.Presenter presenter) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -70,11 +77,12 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
         toolbarTitle.setText("设置");
+        presenter.getInfo();
     }
 
     @Override
     public SettingPresenter getPresenter() {
-        return null;
+        return new SettingPresenter(this);
     }
 
 
@@ -120,6 +128,11 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
         dialog.showDialog(getFragmentManager(), "logout");
     }
 
+    @OnClick(R.id.setting_phone)
+    void clickPhone(View v) {
+        startActivityForResult(LoginPhoneActivity.getEditIntent(presenter.getLoginInfo().getOpenId()), REQUEST_PHONE);
+    }
+
     void logOut() {
         Network.getInstance().logout(BSConstant.LOGOUT, LoginInfoDBHelper.newInstance().getLoginInfo().getOpenId())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -134,5 +147,18 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
         LoginInfoDBHelper.newInstance().logout();
         EventUtil.postLogOutEvent();
         finish();
+    }
+
+    @Override
+    public void setPhone(String phone) {
+        settingPhoneText.setText(phone);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_PHONE) {
+            presenter.getInfo();
+        }
     }
 }

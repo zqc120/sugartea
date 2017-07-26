@@ -91,7 +91,7 @@
 
             <ImageView
                 style="@style/MineIconStyle"
-                android:src="@drawable/ic_defaul_avatar" />
+                android:src="@drawable/ic_mine_collection" />
 
             <TextView
                 style="@style/MineTitleStyle"
@@ -116,7 +116,7 @@
 
             <ImageView
                 style="@style/MineIconStyle"
-                android:src="@drawable/ic_defaul_avatar" />
+                android:src="@drawable/ic_mine_coupon" />
 
             <TextView
                 style="@style/MineTitleStyle"
@@ -142,7 +142,7 @@
 
             <ImageView
                 style="@style/MineIconStyle"
-                android:src="@drawable/ic_defaul_avatar" />
+                android:src="@drawable/ic_mine_vip" />
 
             <TextView
                 style="@style/MineTitleStyle"
@@ -167,7 +167,7 @@
 
             <ImageView
                 style="@style/MineIconStyle"
-                android:src="@drawable/ic_defaul_avatar" />
+                android:src="@drawable/ic_mine_join" />
 
             <TextView
                 style="@style/MineTitleStyle"

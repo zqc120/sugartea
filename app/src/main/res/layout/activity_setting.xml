@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar_main" />
 
+    <LinearLayout
+        android:id="@+id/setting_phone"
+        style="@style/ItemWhiteStyle"
+        android:layout_marginTop="@dimen/base_margin">
+
+
+        <TextView
+            style="@style/MineTitleStyle"
+            android:layout_marginLeft="0dp"
+            android:text="修改手机号" />
+
+        <Space style="@style/ItemSpaceStyle" />
+
+        <TextView
+            android:id="@+id/setting_phone_text"
+            style="@style/MineTextStyle"
+            tools:text="23" />
+
+        <ImageView style="@style/ItemArrowStyle" />
+    </LinearLayout>
+
+    <include layout="@layout/divider_horizontal" />
 
     <LinearLayout
         android:id="@+id/setting_call"
-        style="@style/ItemWhiteStyle"
-        android:layout_marginTop="@dimen/base_margin">
+        style="@style/ItemWhiteStyle">
 
 
         <TextView

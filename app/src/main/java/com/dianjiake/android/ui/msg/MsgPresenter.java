@@ -2,6 +2,7 @@ package com.dianjiake.android.ui.msg;
 
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.MsgBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.db.MsgDBHelper;
@@ -11,6 +12,7 @@ import com.dianjiake.android.request.ListObserver;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -105,9 +107,37 @@ public class MsgPresenter implements MsgContract.Presenter {
     public void clickItem(MsgBean msgBean, int position) {
         view.open(msgBean);
         msgDBHelper.delete(msgBean);
+        markRead(msgBean);
         if (items.size() > position) {
             items.get(position).setChakan("1");
             view.loadComplete();
         }
+    }
+
+    private void markRead(MsgBean msgBean) {
+        Network.getInstance().readMsg(BSConstant.MARK_MSG, loginInfo.getOpenId(), msgBean.getId())
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseBean baseBean) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

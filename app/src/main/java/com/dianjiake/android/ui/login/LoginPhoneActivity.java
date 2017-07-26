@@ -26,6 +26,7 @@ import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.db.PhoneInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
+import com.dianjiake.android.ui.main.MainActivity;
 import com.dianjiake.android.util.AppUtil;
 import com.dianjiake.android.util.CheckStringUtil;
 import com.dianjiake.android.util.IntentUtil;
@@ -319,7 +320,7 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
     }
 
     /**
-     * 绑定或者更改手机号
+     * 绑定
      */
     void requestBindPhone(String wxoi, String wxun) {
         showLoginDialog();
@@ -345,11 +346,11 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
                             saveLoginUserInfo(baseBean.getObj().getUser());
                             if (getIntent().getType().equals(TYPE_BIND)) {
                                 LoginActivitiesManger.newInstance().phoneRegisterSuccess();
-//                                startActivity(CompleteInfoActivity.getStartIntent(response.body().getObj().getUser().getOpenid(),
-//                                        null, null));
                             } else if (getIntent().getType().equals(TYPE_SIGN)) {
                                 LoginActivitiesManger.newInstance().phoneLoginSuccess();
                             }
+                            startActivity(IntentUtil.getIntent(MainActivity.class));
+                            finish();
                         } else if (baseBean != null && baseBean.getCode() == 4003) {
                             ToastUtil.showShortToast("验证码有误，请重新输入");
                         } else if (baseBean != null && baseBean.getCode() == 4005) {
@@ -380,36 +381,41 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
      */
     void requestChangePhone() {
         showLoginDialog();
-//        mNetwork.changePhone(mOpenId, mPhoneInput.getText().toString(), mPasswordInput.getText().toString(), new Callback<BaseBean>() {
-//            @Override
-//            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
-//                dissmissLoginDialog();
-//                BaseBean baseBean = response.body();
-//                if (baseBean != null && baseBean.getCode() == 200) {
-//                    if (getIntent().getType().equals(TYPE_BIND)) {
-//                        startActivity(CompleteInfoActivity.getStartIntent(mOpenId, "", ""));
-//                    } else {
-//                        UserInfoSP.newInstance().setName(mPhoneInput.getText().toString());
-//                    }
-//                    LoginActivitiesManger.newInstance().phoneRegisterSuccess();
-//                } else if (baseBean != null && baseBean.getCode() == 4003) {
-//                    ToastUtil.showShortToast("验证码有误，请重新输入");
-//                } else if (baseBean != null && baseBean.getCode() == 4005) {
-//                    ToastUtil.showShortToast("手机号已存在");
-//                } else {
-//                    ToastUtil.showServiceErrorToast();
-//                }
-//            }
-//
-//
-//            @Override
-//            public void onFailure(Call<BaseBean> call, Throwable t) {
-//                if (!call.isCanceled()) {
-//                    dissmissLoginDialog();
-//                    ToastUtil.showServiceErrorToast(t.getMessage());
-//                }
-//            }
-//        });
+        Network.getInstance().changePhone(BSConstant.CHANGE_PHONE, loginInfoDBHelper.getLoginInfo().getOpenId(),
+                mPhoneInput.getText().toString(), mPasswordInput.getText().toString())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new Observer<BaseBean>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        cd.add(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseBean baseBean) {
+                        dissmissLoginDialog();
+                        if (baseBean != null && baseBean.getCode() == 200) {
+                            LoginActivitiesManger.newInstance().phoneRegisterSuccess();
+                        } else if (baseBean != null && baseBean.getCode() == 4003) {
+                            ToastUtil.showShortToast("验证码有误，请重新输入");
+                        } else if (baseBean != null && baseBean.getCode() == 4005) {
+                            ToastUtil.showShortToast("手机号已存在");
+                        } else {
+                            ToastUtil.showServiceErrorToast();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dissmissLoginDialog();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void saveLoginUserInfo(UserInfoBean userInfoBean) {
@@ -424,11 +430,13 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
         mPhoneInput.removeTextChangedListener(mPhoneWatcher);
         mPasswordInput.removeTextChangedListener(mPasswordWatcher);
         mIMM = null;
+        cd.clear();
         super.onDestroy();
     }
 
     @Override
     public void finish() {
+        setResult(RESULT_OK);
         super.finish();
         sInstance = null;
     }
