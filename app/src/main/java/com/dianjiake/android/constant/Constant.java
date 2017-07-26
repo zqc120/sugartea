@@ -19,16 +19,16 @@ public interface Constant {
     /**
      * 测试
      */
-    String ROOT = "http://www.quanminlebang.cn/";
-    String APP_URL = ROOT + URL_VERSION;
-    boolean IS_DEBUG = true;
+//    String ROOT = "http://www.quanminlebang.cn/";
+//    String APP_URL = ROOT + URL_VERSION;
+//    boolean IS_DEBUG = true;
 
     /**
      * 正式
      */
-//    String ROOT = "http://www.quanminlebang.com/";
-//    String APP_URL = ROOT + URL_VERSION;
-//    boolean IS_DEBUG = true;
+    String ROOT = "http://www.quanminlebang.com/";
+    String APP_URL = ROOT + URL_VERSION;
+    boolean IS_DEBUG = true;
 
     String USER = "user.php";
     String INCOME = "yingshou.php";
