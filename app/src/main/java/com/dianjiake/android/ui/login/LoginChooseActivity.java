@@ -157,7 +157,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
                         ((ProgressDialog) mAuthorizePD.getDialog()).setMessage("正在登录，请稍候...");
                     }
                 });
-                login(map.get("openid"), map.get("unionid"),map.get("nickname"),map.get("headimgurl"));
+                login(map.get("openid"), map.get("unionid"), map.get("nickname"), map.get("headimgurl"));
             }
 
             @Override
@@ -175,7 +175,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
     }
 
 
-    void login(final String wxOpenId, final String unionId,String wxName,String wxAvatar) {
+    void login(final String wxOpenId, final String unionId, String wxName, String wxAvatar) {
         showAuthorizePD("正在登录");
         Network.getInstance().login(BSConstant.LOGIN,
                 null,
@@ -202,13 +202,14 @@ public class LoginChooseActivity extends BaseTranslateActivity {
 
                         switch (userInfo.getCode()) {
                             case 200:
-                            case 202:
                             case 203:
                             case 204:
                                 ToastUtil.showShortToast("登录成功");
                                 saveLoginUserInfo(userInfo.getObj().getUser());
                                 LoginActivitiesManger.newInstance().phoneLoginSuccess();
-//                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));
+                                break;
+                            case 202:
+                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));
                                 break;
                             case 201://绑定失败，这用不上
                                 ToastUtil.showShortToast("登录失败");

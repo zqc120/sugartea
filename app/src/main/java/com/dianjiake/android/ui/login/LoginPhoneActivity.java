@@ -57,6 +57,8 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
     public static final String KEY_MODULE = "module";
     public static final String KEY_WXOPNEOD = "wxopen";
     public static final String KEY_WXUNION = "wxunion";
+    public static final String KEY_WXNAME = "wxname";
+    public static final String KEY_WXAVATAR = "wxavatar";
 
     @BindView(R.id.toolbar_icon_left)
     ImageView mToolbarBack;
@@ -87,7 +89,7 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
     boolean mIsCountingDown;//是否正在倒计时
     NormalProgressDialog mLoginDialog;
     CompositeDisposable cd;
-    String wxOpenId, wxUnionId;
+    String wxOpenId, wxUnionId, wxName, wxAvatar;
     AppInfoModel appInfo;
     LoginInfoDBHelper loginInfoDBHelper;
 
@@ -97,11 +99,13 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
         return intent;
     }
 
-    public static Intent getBindIntent(String wxOpenId, String wxUnionId) {
+    public static Intent getBindIntent(String wxOpenId, String wxUnionId, String wxAvatar, String wxName) {
         Intent intent = IntentUtil.getIntent(LoginPhoneActivity.class);
         intent.setType(TYPE_BIND);
         intent.putExtra(KEY_WXOPNEOD, wxOpenId);
         intent.putExtra(KEY_WXUNION, wxUnionId);
+        intent.putExtra(KEY_WXAVATAR, wxAvatar);
+        intent.putExtra(KEY_WXNAME, wxName);
         return intent;
     }
 
@@ -127,6 +131,8 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
         mOpenId = getIntent().getStringExtra(KEY_OPEN_ID);
         wxOpenId = getIntent().getStringExtra(KEY_WXOPNEOD);
         wxUnionId = getIntent().getStringExtra(KEY_WXUNION);
+        wxName = getIntent().getStringExtra(KEY_WXNAME);
+        wxAvatar = getIntent().getStringExtra(KEY_WXAVATAR);
 
         mLoginPhoneType = getLoginPhoneType();
         mToolbarTitle.setText(mLoginPhoneType.getToolbarTitle());
@@ -330,7 +336,7 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
                 mPasswordInput.getText().toString(),
                 wxoi,
                 wxun,
-                appInfo.getCid(), null, null)
+                appInfo.getCid(), wxName, wxAvatar)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean<LoginBean>>() {

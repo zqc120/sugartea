@@ -21,6 +21,9 @@ public class LoginActivitiesManger {
         if (LoginPhoneActivity.sInstance != null) {
             LoginPhoneActivity.sInstance.finish();
         }
+        if (LoginChooseActivity.sInstance != null) {
+            LoginChooseActivity.sInstance.finish();
+        }
     }
 
     /**
