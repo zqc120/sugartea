@@ -2,7 +2,7 @@ package com.dianjiake.android.ui.msg;
 
 import com.dianjiake.android.base.BaseListPresenter;
 import com.dianjiake.android.base.BaseListView;
-import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.model.MsgModel;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import java.util.List;
 
 public interface MsgContract {
     interface View extends BaseListView {
-        void open(MsgBean msgBean);
+        void open(MsgModel msgModel);
     }
 
     interface Presenter extends BaseListPresenter {
-        List<MsgBean> getItems();
+        List<MsgModel> getItems();
 
-        void clickItem(MsgBean msgBean, int position);
+        void clickItem(MsgModel msgModel, int position);
     }
 }

@@ -1,10 +1,11 @@
 package com.dianjiake.android.data.db;
 
 import com.dianjiake.android.base.App;
-import com.dianjiake.android.data.bean.MsgBeanDao;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModelDao;
+import com.dianjiake.android.data.model.MsgModel;
+import com.dianjiake.android.data.model.MsgModelDao;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.igexin.sdk.PushManager;
 
@@ -72,8 +73,8 @@ public class LoginInfoDBHelper {
 
         LoginInfoModelDao.dropTable(DBManager.getInstance().getDaoMaster().getDatabase(), true);
         LoginInfoModelDao.createTable(DBManager.getInstance().getDaoMaster().getDatabase(), true);
-        MsgBeanDao.dropTable(DBManager.getInstance().getDaoMaster().getDatabase(), true);
-        MsgBeanDao.createTable(DBManager.getInstance().getDaoMaster().getDatabase(), true);
+        MsgModelDao.dropTable(DBManager.getInstance().getDaoMaster().getDatabase(), true);
+        MsgModelDao.createTable(DBManager.getInstance().getDaoMaster().getDatabase(), true);
     }
 
 }

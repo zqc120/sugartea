@@ -3,13 +3,11 @@ package com.dianjiake.android.data.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dianjiake.android.data.bean.MsgBean;
-import com.dianjiake.android.data.bean.MsgBeanDao;
 import com.dianjiake.android.data.model.AppInfoModelDao;
 import com.dianjiake.android.data.model.DaoMaster;
 import com.dianjiake.android.data.model.LoginInfoModelDao;
+import com.dianjiake.android.data.model.MsgModelDao;
 import com.dianjiake.android.data.model.PhoneInfoModelDao;
-import com.dianjiake.android.data.model.SearchHistoryModel;
 import com.dianjiake.android.data.model.SearchHistoryModelDao;
 
 
@@ -25,6 +23,6 @@ public class ProductionOpenHelp extends DaoMaster.OpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        MigrationHelper.migrate(db, AppInfoModelDao.class, LoginInfoModelDao.class, PhoneInfoModelDao.class, SearchHistoryModelDao.class, MsgBeanDao.class);
+        MigrationHelper.migrate(db, AppInfoModelDao.class, LoginInfoModelDao.class, PhoneInfoModelDao.class, SearchHistoryModelDao.class, MsgModelDao.class);
     }
 }

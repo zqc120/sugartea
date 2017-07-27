@@ -143,6 +143,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     @Override
     public void setView(OrderBean item) {
         orderBean = item;
+        if (item == null) return;
         if (item.getDianpu() != null) {
             couponView.setShop(item.getDianpu());
             logo.setImageURI(FrescoUtil.getShopLogoUri(item.getDianpu().getLogo(), item.getDianpu().getCover()));

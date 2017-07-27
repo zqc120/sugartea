@@ -1,7 +1,7 @@
 package com.dianjiake.android.data.db;
 
-import com.dianjiake.android.data.bean.MsgBean;
-import com.dianjiake.android.data.bean.MsgBeanDao;
+import com.dianjiake.android.data.model.MsgModel;
+import com.dianjiake.android.data.model.MsgModelDao;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.EventUtil;
 
@@ -23,28 +23,28 @@ public class MsgDBHelper {
     private MsgDBHelper() {
     }
 
-    public MsgBeanDao getMsgDao() {
-        return DBManager.getInstance().getDaoSession().getMsgBeanDao();
+    public MsgModelDao getMsgDao() {
+        return DBManager.getInstance().getDaoSession().getMsgModelDao();
     }
 
-    public void save(List<MsgBean> msgBean) {
-        if (msgBean != null) {
-            getMsgDao().insertOrReplaceInTx(msgBean);
+    public void save(List<MsgModel> msgModel) {
+        if (msgModel != null) {
+            getMsgDao().insertOrReplaceInTx(msgModel);
             EventUtil.postCheckMsgUnread();
         }
     }
 
-    public void save(MsgBean msgBean) {
-        if (msgBean != null) {
-            getMsgDao().insertOrReplace(msgBean);
+    public void save(MsgModel msgModel) {
+        if (msgModel != null) {
+            getMsgDao().insertOrReplace(msgModel);
             EventUtil.postCheckMsgUnread();
         }
     }
 
-    public void delete(MsgBean msgBean) {
-        if (msgBean != null) {
-            DeleteQuery<MsgBean> deleteQuery= getMsgDao().queryBuilder()
-                    .where(MsgBeanDao.Properties.Id.eq(msgBean.getId()))
+    public void delete(MsgModel msgModel) {
+        if (msgModel != null) {
+            DeleteQuery<MsgModel> deleteQuery= getMsgDao().queryBuilder()
+                    .where(MsgModelDao.Properties.Id.eq(msgModel.getId()))
                     .buildDelete();
             deleteQuery.executeDeleteWithoutDetachingEntities();
             EventUtil.postCheckMsgUnread();

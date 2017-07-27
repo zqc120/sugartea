@@ -1,4 +1,4 @@
-package com.dianjiake.android.data.bean;
+package com.dianjiake.android.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,14 +6,13 @@ import android.os.Parcelable;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by lfs on 2017/7/26.
  */
 @Entity
-public class MsgBean implements Parcelable {
+public class MsgModel implements Parcelable {
     @Id(autoincrement = true)
     private Long _id;
     @Index
@@ -145,10 +144,10 @@ public class MsgBean implements Parcelable {
         this._id = _id;
     }
 
-    public MsgBean() {
+    public MsgModel() {
     }
 
-    protected MsgBean(Parcel in) {
+    protected MsgModel(Parcel in) {
         this.id = in.readString();
         this.openid = in.readString();
         this.biaoti = in.readString();
@@ -162,10 +161,10 @@ public class MsgBean implements Parcelable {
         this.xinxiid = in.readString();
     }
 
-    @Generated(hash = 1024982133)
-    public MsgBean(Long _id, String id, String openid, String biaoti, String miaoshu, String neirong,
-                   String addtime, String xianshi, String chakan, String leixing, String shanghuid,
-                   String xinxiid) {
+    @Generated(hash = 702483170)
+    public MsgModel(Long _id, String id, String openid, String biaoti, String miaoshu, String neirong,
+            String addtime, String xianshi, String chakan, String leixing, String shanghuid,
+            String xinxiid) {
         this._id = _id;
         this.id = id;
         this.openid = openid;
@@ -180,15 +179,16 @@ public class MsgBean implements Parcelable {
         this.xinxiid = xinxiid;
     }
 
-    public static final Parcelable.Creator<MsgBean> CREATOR = new Parcelable.Creator<MsgBean>() {
+    
+    public static final Parcelable.Creator<MsgModel> CREATOR = new Parcelable.Creator<MsgModel>() {
         @Override
-        public MsgBean createFromParcel(Parcel source) {
-            return new MsgBean(source);
+        public MsgModel createFromParcel(Parcel source) {
+            return new MsgModel(source);
         }
 
         @Override
-        public MsgBean[] newArray(int size) {
-            return new MsgBean[size];
+        public MsgModel[] newArray(int size) {
+            return new MsgModel[size];
         }
     };
 }

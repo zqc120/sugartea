@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dianjiake.android.R;
-import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.model.MsgModel;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
@@ -21,10 +21,10 @@ import butterknife.OnClick;
  * Created by lfs on 2017/7/26.
  */
 
-public class MsgAdapter extends BaseLoadMoreAdapter<MsgBean> {
+public class MsgAdapter extends BaseLoadMoreAdapter<MsgModel> {
     MsgContract.Presenter p;
 
-    public MsgAdapter(List<MsgBean> items, MsgContract.Presenter p) {
+    public MsgAdapter(List<MsgModel> items, MsgContract.Presenter p) {
         super(items);
         this.p = p;
     }
@@ -56,24 +56,24 @@ public class MsgAdapter extends BaseLoadMoreAdapter<MsgBean> {
         @BindView(R.id.desc)
         TextView desc;
         MsgContract.Presenter p;
-        MsgBean msgBean;
+        MsgModel msgModel;
 
         public ViewHolder(View itemView, MsgContract.Presenter p) {
             super(itemView);
             this.p = p;
         }
 
-        public void setItem(MsgBean msgBean) {
-            this.msgBean = msgBean;
-            title.setText(msgBean.getBiaoti());
-            desc.setText(msgBean.getMiaoshu());
-            time.setText(DateUtil.formatMDHM(msgBean.getAddtime()));
-            icon.setShowRedIcon("0".equals(msgBean.getChakan()));
+        public void setItem(MsgModel msgModel) {
+            this.msgModel = msgModel;
+            title.setText(msgModel.getBiaoti());
+            desc.setText(msgModel.getMiaoshu());
+            time.setText(DateUtil.formatMDHM(msgModel.getAddtime()));
+            icon.setShowRedIcon("0".equals(msgModel.getChakan()));
         }
 
         @OnClick(R.id.holder)
         void click(View v) {
-            p.clickItem(msgBean, getAdapterPosition());
+            p.clickItem(msgModel, getAdapterPosition());
         }
 
         @Override

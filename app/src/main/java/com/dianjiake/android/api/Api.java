@@ -4,17 +4,15 @@ import android.support.annotation.NonNull;
 
 import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.bean.ADBean;
-import com.dianjiake.android.data.bean.ADItemBean;
 import com.dianjiake.android.data.bean.AddOrderBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.BaseUnrealBean;
 import com.dianjiake.android.data.bean.CouponBean;
-import com.dianjiake.android.data.bean.EvaluateBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.LoginBean;
-import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.model.MsgModel;
 import com.dianjiake.android.data.bean.MyCouponBean;
 import com.dianjiake.android.data.bean.OccupationBean;
 import com.dianjiake.android.data.bean.OrderBean;
@@ -25,23 +23,17 @@ import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 import com.dianjiake.android.data.bean.VipBean;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 
 /**
@@ -559,7 +551,7 @@ public interface Api {
      * @return
      */
     @GET(Constant.USER)
-    Observable<BaseListBean<MsgBean>> msgList(
+    Observable<BaseListBean<MsgModel>> msgList(
             @NonNull @Query("bs") String bs,
             @NonNull @Query("openid") String openId,
             @NonNull @Query("page") int page

@@ -80,7 +80,7 @@ public class RecommendView extends FrameLayout {
             if ((i + 1) * 8 >= size) {
                 end = items.size();
             }
-            contents.add(items.subList(i * 7, end));
+            contents.add(items.subList(i * 8, end));
         }
         mAdapter.setItems(contents);
         mAdapter.notifyDataSetChanged();

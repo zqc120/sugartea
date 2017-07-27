@@ -14,6 +14,7 @@ import com.dianjiake.android.event.LogOutEvent;
 import com.dianjiake.android.event.ToOrderEvent;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.TabFragmentManager;
+import com.dianjiake.android.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,6 +34,7 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
     AppCompatRadioButton orderRaido;
     TabFragmentManager tabManager;
 
+    long lastBackTimestamp;
 
     @Override
     public int provideContentView() {
@@ -80,6 +82,17 @@ public class MainActivity extends BaseTranslateActivity<MainPresenter> implement
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void changeToOrder(ToOrderEvent event) {
         orderRaido.setChecked(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        long now = System.currentTimeMillis();
+        if (now - lastBackTimestamp > 1500) {
+            ToastUtil.showShortToast("再次点击返回键退出应用");
+            lastBackTimestamp = now;
+        }else{
+            super.onBackPressed();
+        }
     }
 
     @Override

@@ -7,10 +7,8 @@ import android.content.Context;
 import android.support.v7.app.NotificationCompat;
 
 import com.dianjiake.android.R;
-import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
-import com.dianjiake.android.data.bean.BaseUnrealBean;
-import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.model.MsgModel;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.ui.open.OpenActivity;
@@ -49,13 +47,13 @@ public class ReceivePushService extends GTIntentService {
             String msg = new String(gtTransmitMessage.getPayload());
             try {
                 Gson gson = new Gson();
-                BaseListBean<MsgBean> baseBean = gson.fromJson(msg, new TypeToken<BaseListBean<MsgBean>>() {
+                BaseListBean<MsgModel> baseBean = gson.fromJson(msg, new TypeToken<BaseListBean<MsgModel>>() {
                 }.getType());
                 if (baseBean.getCode() == 1000) {
-                    MsgBean msgBean = baseBean.getObj().getList().get(0);
-                    MsgDBHelper.newInstance().save(msgBean);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OpenActivity.getStartIntent(msgBean), PendingIntent.FLAG_UPDATE_CURRENT);
-                    createNotification(context, msgBean.getBiaoti(), msgBean.getMiaoshu(), pendingIntent);
+                    MsgModel msgModel = baseBean.getObj().getList().get(0);
+                    MsgDBHelper.newInstance().save(msgModel);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OpenActivity.getStartIntent(msgModel), PendingIntent.FLAG_UPDATE_CURRENT);
+                    createNotification(context, msgModel.getBiaoti(), msgModel.getMiaoshu(), pendingIntent);
                 }
             } catch (Exception e) {
                 Timber.d("employee_push_error:" + e.toString());

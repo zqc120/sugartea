@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseListActivity;
-import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.model.MsgModel;
 import com.dianjiake.android.ui.coupon.CouponActivity;
 import com.dianjiake.android.ui.orderdetail.OrderDetailActivity;
 import com.dianjiake.android.ui.vip.VipActivity;
@@ -82,8 +82,8 @@ public class MsgActivity extends BaseListActivity<MsgContract.Presenter> impleme
     }
 
     @Override
-    public void open(MsgBean msgBean) {
-        switch (msgBean.getLeixing()) {
+    public void open(MsgModel msgModel) {
+        switch (msgModel.getLeixing()) {
             case MsgType.COUPON:
                 startActivity(IntentUtil.getIntent(CouponActivity.class));
                 break;
@@ -94,7 +94,7 @@ public class MsgActivity extends BaseListActivity<MsgContract.Presenter> impleme
             case MsgType.ORDER_CANCEL:
             case MsgType.ORDER_COMPLETE:
             case MsgType.ORDER_CONFIRM:
-                startActivity(OrderDetailActivity.getStartIntent(msgBean.getShanghuid(), msgBean.getXinxiid()));
+                startActivity(OrderDetailActivity.getStartIntent(msgModel.getShanghuid(), msgModel.getXinxiid()));
                 break;
         }
     }

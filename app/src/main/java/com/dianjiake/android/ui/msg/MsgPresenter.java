@@ -3,7 +3,7 @@ package com.dianjiake.android.ui.msg;
 import com.dianjiake.android.api.Network;
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
-import com.dianjiake.android.data.bean.MsgBean;
+import com.dianjiake.android.data.model.MsgModel;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.db.MsgDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MsgPresenter implements MsgContract.Presenter {
     CompositeDisposable cd;
-    List<MsgBean> items;
+    List<MsgModel> items;
     LoginInfoModel loginInfo;
     MsgContract.View view;
     int page = 1;
@@ -60,9 +60,9 @@ public class MsgPresenter implements MsgContract.Presenter {
         Network.getInstance().msgList(BSConstant.MSG_LIST, loginInfo.getOpenId(), page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(new ListObserver<MsgBean>() {
+                .subscribeWith(new ListObserver<MsgModel>() {
                     @Override
-                    public void onSuccess(List<MsgBean> list, boolean isAll) {
+                    public void onSuccess(List<MsgModel> list, boolean isAll) {
                         if (isReload) {
                             items.clear();
                         }
@@ -99,23 +99,23 @@ public class MsgPresenter implements MsgContract.Presenter {
     }
 
     @Override
-    public List<MsgBean> getItems() {
+    public List<MsgModel> getItems() {
         return items;
     }
 
     @Override
-    public void clickItem(MsgBean msgBean, int position) {
-        view.open(msgBean);
-        msgDBHelper.delete(msgBean);
-        markRead(msgBean);
+    public void clickItem(MsgModel msgModel, int position) {
+        view.open(msgModel);
+        msgDBHelper.delete(msgModel);
+        markRead(msgModel);
         if (items.size() > position) {
             items.get(position).setChakan("1");
             view.loadComplete();
         }
     }
 
-    private void markRead(MsgBean msgBean) {
-        Network.getInstance().readMsg(BSConstant.MARK_MSG, loginInfo.getOpenId(), msgBean.getId())
+    private void markRead(MsgModel msgModel) {
+        Network.getInstance().readMsg(BSConstant.MARK_MSG, loginInfo.getOpenId(), msgModel.getId())
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean>() {

@@ -75,7 +75,7 @@ public class CollectionAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
         public ViewHolder(View itemView, CollectionContract.Presenter p) {
             super(itemView);
             this.p = p;
-            dialog = NormalAlertDialog.newInstance("删除后，改店铺将取消收藏", true, true);
+            dialog = NormalAlertDialog.newInstance("删除后，该店铺将取消收藏", true, true);
             dialog.setOnButtonClick(this);
         }
 
