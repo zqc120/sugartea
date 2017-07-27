@@ -96,7 +96,7 @@ public class MineFragment extends BaseFragment<MineContract.Presenter> implement
         super.onViewCreated(view, savedInstanceState);
         EventBus.getDefault().register(this);
         toolbarIconLeft.setImageResource(R.drawable.ic_mine_setting);
-        toolbarSpace.getBackground().mutate().setAlpha(0);
+        toolbarSpace.getBackground().mutate().setAlpha(255);
         checkUnread(null);
     }
 
