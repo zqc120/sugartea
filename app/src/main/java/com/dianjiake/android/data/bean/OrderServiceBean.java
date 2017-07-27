@@ -22,8 +22,15 @@ public class OrderServiceBean implements Parcelable {
     private String wanchengshijian;
     private String photo;
     private int viewType;
+    private int tempStar;
 
+    public int getTempStar() {
+        return tempStar;
+    }
 
+    public void setTempStar(int tempStar) {
+        this.tempStar = tempStar;
+    }
 
     public String getPhoto() {
         return photo;
@@ -161,6 +168,7 @@ public class OrderServiceBean implements Parcelable {
         dest.writeString(this.wanchengshijian);
         dest.writeString(this.photo);
         dest.writeInt(this.viewType);
+        dest.writeInt(this.tempStar);
     }
 
     protected OrderServiceBean(Parcel in) {
@@ -178,6 +186,7 @@ public class OrderServiceBean implements Parcelable {
         this.wanchengshijian = in.readString();
         this.photo = in.readString();
         this.viewType = in.readInt();
+        this.tempStar = in.readInt();
     }
 
     public static final Creator<OrderServiceBean> CREATOR = new Creator<OrderServiceBean>() {

@@ -101,6 +101,7 @@ public class EvaluatePresenter implements EvaluateContract.Presenter {
     public void setRate(int rate, int position) {
         if (evaluates.size() > position) {
             evaluates.get(position).setPingfen(rate);
+            items.get(position).setTempStar(rate);
         }
     }
 

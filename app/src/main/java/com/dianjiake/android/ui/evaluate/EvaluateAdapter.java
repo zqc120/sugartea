@@ -106,6 +106,7 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 setInputCount(s.length());
+                presenter.setComment(s.toString(), getAdapterPosition());
 
             }
         };
@@ -114,6 +115,11 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
             evaluateLogo.setImageURI(FrescoUtil.getServiceUri(service.getPhoto()));
             evaluateName.setText(service.getFuwumingcheng());
             evaluatePrice.setText("￥" + service.getDanjia());
+            if (service.getTempStar() == 0) {
+                evaluateRating.setStar(5);
+            } else {
+                evaluateRating.setStar(service.getTempStar());
+            }
 //            evaluateUnit.setText(service.getDanwei());
 //            long nowTime = System.nanoTime();
 //            if ("1".equals(service.getCuxiao())) {
@@ -133,6 +139,7 @@ public class EvaluateAdapter extends BaseLoadMoreAdapter<OrderServiceBean> {
 
         void setRatingDesc(int num) {
             mFormScore = num;
+            presenter.setRate(num, getAdapterPosition());
             switch (num) {
                 case 1:
                     evaluateDesc.setText("非常不满意，各方面都比较差");

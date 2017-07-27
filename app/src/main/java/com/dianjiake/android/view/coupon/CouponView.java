@@ -28,6 +28,10 @@ import timber.log.Timber;
  */
 
 public class CouponView extends ConstraintLayout {
+
+    private final int TYPE_GET = 2;
+    private final int TYPE_LIST = 0;
+
     @BindView(R.id.gradient_bg)
     FrameLayout gradientBg;
     @BindView(R.id.wave_bg)
@@ -49,6 +53,7 @@ public class CouponView extends ConstraintLayout {
     OnGetListener onGetListener;
     CouponBean couponBean;
     int position = -1;
+    int type = TYPE_LIST;
 
     public CouponView(Context context) {
         super(context);
@@ -73,6 +78,7 @@ public class CouponView extends ConstraintLayout {
 
     public void setCoupon(CouponBean coupon, HomeShopBean shopBean, int position) {
         get.setVisibility(VISIBLE);
+        type = TYPE_GET;
         this.position = position;
         setCoupon(coupon, shopBean);
     }
@@ -107,11 +113,16 @@ public class CouponView extends ConstraintLayout {
                 break;
         }
         rule.setText(ruleString);
-        time.setText("使用期限："
-                + DateUtil.formatYMD(coupon.getKaishishijian())
-                + " ~ "
-                + DateUtil.formatYMD(coupon.getJieshushijian())
-        );
+        if (type == TYPE_LIST || "1".equals(coupon.getYouxiaoqileixing())) {
+            time.setText("使用期限："
+                    + DateUtil.formatYMD(coupon.getKaishishijian())
+                    + " ~ "
+                    + DateUtil.formatYMD(coupon.getJieshushijian())
+            );
+        } else {
+            time.setText("使用期限："
+                    + ("0".equals(coupon.getKaishishijian()) ? "当天生效" : "领取后" + coupon.getKaishishijian() + "天后生效"));
+        }
     }
 
     public void setOnGetListener(OnGetListener onGetListener) {
