@@ -169,6 +169,10 @@ public static final ** CREATOR;
 #stetho
 -keep class com.facebook.stetho.** {*;}
 
+#AVLoadingIndicatorView
+-keep class com.wang.avi.** { *; }
+-keep class com.wang.avi.indicators.** { *; }
+
 -keep class android.support.design.** { *; }
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }
