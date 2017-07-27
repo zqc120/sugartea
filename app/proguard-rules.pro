@@ -166,6 +166,9 @@ public static final ** CREATOR;
     <init>(java.lang.Throwable);
 }
 
+#stetho
+-keep class com.facebook.stetho.** {*;}
+
 -keep class android.support.design.** { *; }
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }

@@ -152,7 +152,7 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
         presenter.setDefaultValue((ServiceBean) getIntent().getParcelableExtra(KEY_SERVICE),
                 (UserInfoBean) getIntent().getParcelableExtra(KEY_STAFF));
         String shopId = getIntent().getStringExtra(KEY_ID);
-        if(CheckEmptyUtil.isEmpty(shopId)){
+        if(!CheckEmptyUtil.isEmpty(shopId)){
             presenter.setShopId(shopId);
         }
     }

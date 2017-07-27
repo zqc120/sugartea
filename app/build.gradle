@@ -113,11 +113,12 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:26.0.0-alpha1'
     compile 'com.getui:sdk:2.10.2.0'
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     compile 'com.tencent.bugly:crashreport:2.6.5'
     compile 'com.amap.api:3dmap:5.2.1'
     compile 'com.amap.api:search:5.2.1'
     compile 'com.amap.api:location:3.4.1'
     compile 'cn.carbswang.android:NumberPickerView:1.1.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
 }

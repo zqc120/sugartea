@@ -179,13 +179,21 @@ public class ServiceListAdapter extends BaseLoadMoreAdapter<ServiceBean> {
 
             HomeShopBean shopBean = serviceBean.getDianpu();
             if (shopBean != null) {
-                shopName.setText(shopBean.getMingcheng());
-                star.setScore(FloatUtil.parseFloat(shopBean.getPingfen()));
+                int maxWidth =UIUtil.getScreenWidth() - (int) UIUtil.dp2px(150) -  size;
                 shopPromotion.setVisibility("1".equals(shopBean.getCuxiao()) ? View.VISIBLE : GONE);
                 shopCard.setVisibility("1".equals(shopBean.getGongkaikaquan()) ? View.VISIBLE : GONE);
+                if("1".equals(shopBean.getCuxiao())){
+                    maxWidth -= UIUtil.dp2px(10);
+                }
+                if("1".equals(shopBean.getGongkaikaquan())){
+                    maxWidth -= UIUtil.dp2px(10);
+                }
+                shopName.setMaxWidth(maxWidth);
+                shopName.setText(shopBean.getMingcheng());
+                star.setScore(FloatUtil.parseFloat(shopBean.getPingfen()));
+
                 Timber.e("size:" + size);
                 Timber.e("dp2px:" + UIUtil.dp2px(size + 90));
-                shopName.setMaxWidth(UIUtil.getScreenWidth() - (int) UIUtil.dp2px(90) + size);
             }
 
             mark.setVisibility("1".equals(serviceBean.getFuwumoshi())?View.VISIBLE:GONE);

@@ -6,6 +6,7 @@ import android.support.multidex.MultiDexApplication;
 import com.dianjiake.android.constant.Constant;
 import com.dianjiake.android.data.db.DBManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.stetho.Stetho;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -38,6 +39,7 @@ public class App extends MultiDexApplication {
         DBManager.getInstance();
         if (Constant.IS_DEBUG) {
             Timber.plant(new Timber.DebugTree());
+            Stetho.initializeWithDefaults(this);
         }
         CrashReport.initCrashReport(getApplicationContext(), "f20630151e", Constant.IS_DEBUG);
         CrashReport.setIsDevelopmentDevice(this, Constant.IS_DEBUG);

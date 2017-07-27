@@ -2,9 +2,9 @@ package com.dianjiake.android.api;
 
 
 import com.dianjiake.android.constant.Constant;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,11 +23,11 @@ public class Network {
         if (instance == null) {
             synchronized (Network.class) {
                 if (instance == null) {
-                    LogInterceptor logging = new LogInterceptor();
+//                    LogInterceptor logging = new LogInterceptor();
 //                    logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
                     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
                     if (Constant.IS_DEBUG) {
-                        httpClient.addInterceptor(logging);
+                        httpClient.addNetworkInterceptor(new StethoInterceptor());
                     }
 
                     instance = new Retrofit.Builder()
