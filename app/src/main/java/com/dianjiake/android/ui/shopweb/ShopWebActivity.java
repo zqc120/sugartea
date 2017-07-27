@@ -97,6 +97,19 @@ public class ShopWebActivity extends BaseWebViewActivity {
 
             }
         }
+        
+        @JavascriptInterface
+        public void getStaffService(String staff, String service) {
+            ServiceBean serviceBean;
+            UserInfoBean userInfoBean;
+            try {
+                userInfoBean = new Gson().fromJson(staff, UserInfoBean.class);
+                serviceBean = new Gson().fromJson(service, ServiceBean.class);
+                startActivity(SubscribeActivity.getStartIntent(serviceBean, userInfoBean));
+            } catch (Exception e) {
+
+            }
+        }
     }
 
     @OnClick(R.id.toolbar_icon_right)

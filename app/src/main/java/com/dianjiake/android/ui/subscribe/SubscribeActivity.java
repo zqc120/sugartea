@@ -27,6 +27,7 @@ import com.dianjiake.android.ui.orderdetail.OrderDetailActivity;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.DateUtil;
+import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
@@ -262,6 +263,7 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
     public void submitSuccess(OrderBean orderBean) {
         ToastUtil.showShortToast("提交成功");
         startActivity(OrderDetailActivity.getStartIntent(orderBean));
+        EventUtil.postRefreshOrderList();
         finish();
     }
 

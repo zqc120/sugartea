@@ -1,6 +1,7 @@
 package com.dianjiake.android.util;
 
 
+import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.event.CheckMsgUnreadEvent;
 import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.event.LogOutEvent;

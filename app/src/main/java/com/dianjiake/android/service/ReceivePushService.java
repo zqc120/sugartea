@@ -7,6 +7,7 @@ import android.content.Context;
 import android.support.v7.app.NotificationCompat;
 
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.model.MsgModel;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
@@ -47,10 +48,10 @@ public class ReceivePushService extends GTIntentService {
             String msg = new String(gtTransmitMessage.getPayload());
             try {
                 Gson gson = new Gson();
-                BaseListBean<MsgModel> baseBean = gson.fromJson(msg, new TypeToken<BaseListBean<MsgModel>>() {
+                BaseBean<MsgModel> baseBean = gson.fromJson(msg, new TypeToken<BaseBean<MsgModel>>() {
                 }.getType());
-                if (baseBean.getCode() == 1000) {
-                    MsgModel msgModel = baseBean.getObj().getList().get(0);
+                if (baseBean.getObj() != null) {
+                    MsgModel msgModel = baseBean.getObj();
                     MsgDBHelper.newInstance().save(msgModel);
                     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OpenActivity.getStartIntent(msgModel), PendingIntent.FLAG_UPDATE_CURRENT);
                     createNotification(context, msgModel.getBiaoti(), msgModel.getMiaoshu(), pendingIntent);

@@ -30,6 +30,8 @@ import com.dianjiake.android.R;
 import com.dianjiake.android.base.App;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.ActiivtyDataHelper;
+import com.dianjiake.android.data.db.AppInfoDBHelper;
+import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.event.LocationEvent;
 import com.dianjiake.android.ui.common.SearchHistoryAdapter;
 import com.dianjiake.android.util.EventUtil;
@@ -145,7 +147,7 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.draggable(false);
-                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.ic_location)));
+                markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_location)));
                 marker = map.addMarker(markerOptions);
                 marker.setPositionByPixels(markerPositionX, markerPositionY);
             }
@@ -276,6 +278,11 @@ public class SearchLocationActivity extends BaseTranslateActivity<SearchLocation
             EventUtil.postLocationEvent(new LocationEvent(item.getTitle(),
                     item.getLatLonPoint().getLongitude(),
                     item.getLatLonPoint().getLatitude()));
+            AppInfoDBHelper.newInstance().saveLocationInfo(item.getTitle(),
+                    item.getLatLonPoint().getLongitude()+"",
+                    item.getLatLonPoint().getLatitude()+"",
+                    item.getCityCode())
+            ;
         }
         finish();
     }
