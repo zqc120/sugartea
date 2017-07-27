@@ -11,6 +11,7 @@ import com.dianjiake.android.ui.evaluate.EvaluateActivity;
 import com.dianjiake.android.ui.orderdetail.OrderDetailActivity;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.util.ToastUtil;
 import com.dianjiake.android.view.dialog.NormalAlertDialog;
 
 import io.reactivex.Observable;
@@ -41,7 +42,11 @@ public class OrderPresenter extends BaseOrderPresenter {
 
     @Override
     public void clickReSub(OrderBean orderBean, int position) {
-        IntentUtil.startActivity(view.getViewContext(), SubscribeActivity.getStartIntent(null, null));
+        if(orderBean!=null&&orderBean.getDianpu()!=null){
+            IntentUtil.startActivity(view.getViewContext(), SubscribeActivity.getStartIntent(orderBean.getDianpu().getId()));
+        }else{
+            ToastUtil.showShortToast("暂未获得店铺信息");
+        }
     }
 
     @Override

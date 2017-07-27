@@ -56,7 +56,7 @@ public class SettingPresenter implements SettingContract.Presenter {
 
                     @Override
                     public void onNext(@NonNull BaseBean<LoginBean> baseBean) {
-                        if (baseBean.getCode() == 200) {
+                        if (baseBean.getCode() == 200 && baseBean.getObj().getUser() != null) {
                             loginInfo.setPhone(baseBean.getObj().getUser().getPhone());
                             view.setPhone(baseBean.getObj().getUser().getPhone());
                         }
