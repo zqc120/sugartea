@@ -66,7 +66,7 @@ public class RecommendItemView extends LinearLayout {
         mItems.clear();
         mItems.addAll(items);
         for (int i = 0; i < mItems.size() && i < 8; i++) {
-            mImages.get(i).setImageURI(FrescoUtil.getShopLogoUri(mItems.get(i).getLogo(), mItems.get(i).getCover()));
+            mImages.get(i).setImageURI(FrescoUtil.getShopLogoUri(mItems.get(i).getTubiao(), mItems.get(i).getCover()));
             mTexts.get(i).setText(mItems.get(i).getMingcheng());
         }
     }
