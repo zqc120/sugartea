@@ -175,7 +175,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
     }
 
 
-    void login(final String wxOpenId, final String unionId, String wxName, String wxAvatar) {
+    void login(final String wxOpenId, final String unionId, final String wxName, final String wxAvatar) {
         showAuthorizePD("正在登录");
         Network.getInstance().login(BSConstant.LOGIN,
                 null,
@@ -209,7 +209,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
                                 LoginActivitiesManger.newInstance().phoneLoginSuccess();
                                 break;
                             case 202:
-                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId));
+                                startActivity(LoginPhoneActivity.getBindIntent(wxOpenId, unionId,wxAvatar,wxName));
                                 break;
                             case 201://绑定失败，这用不上
                                 ToastUtil.showShortToast("登录失败");
