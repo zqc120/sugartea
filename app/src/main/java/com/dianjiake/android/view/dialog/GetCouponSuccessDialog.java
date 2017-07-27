@@ -76,7 +76,7 @@ public class GetCouponSuccessDialog extends AppCompatActivity implements UMShare
         shopBean = getIntent().getParcelableExtra("shop");
         if (couponBean != null && shopBean != null) {
             title = loginInfo.getNickname() + "送您一张优惠券";
-            desc = shopBean.getMingcheng() + couponBean.getKaquanmingcheng();
+            desc = shopBean.getMingcheng()+" · " + couponBean.getKaquanmingcheng();
             imgUrl = FrescoUtil.getShopLogoUri(shopBean.getLogo(), shopBean.getCover()).toString();
             url = String.format(Constant.SHARE_COUPON, couponBean.getId(), shopBean.getId());
         }

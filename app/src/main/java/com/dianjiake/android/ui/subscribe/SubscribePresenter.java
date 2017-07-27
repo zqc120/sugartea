@@ -289,6 +289,9 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
                     .append(chooseServices.get(key).getJine())
                     .append(",");
         }
+        if (services.length() > 0) {
+            services.deleteCharAt(services.length() - 1);
+        }
 
         Network.getInstance().addService(
                 BSConstant.ADD_SERVICE,

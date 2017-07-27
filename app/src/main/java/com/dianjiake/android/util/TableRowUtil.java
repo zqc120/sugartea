@@ -93,7 +93,7 @@ public class TableRowUtil {
         TextView textView = new TextView(context);
         textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
         textView.setTextColor(UIUtil.getColor(R.color.text_white));
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
         textView.setSingleLine(true);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setText(text);
@@ -108,7 +108,7 @@ public class TableRowUtil {
         textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setTextColor(UIUtil.getColor(R.color.text_white));
         textView.setGravity(Gravity.END);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12);
         textView.setText(text);
         return textView;
     }

@@ -131,7 +131,7 @@
             android:paddingTop="@dimen/base_size3"
             android:textColor="@color/text_content_title"
             android:textColorHint="@color/text_content_hint"
-            android:textSize="@dimen/text_size_body" />
+            android:textSize="@dimen/text_size_subhead" />
 
         <TextView
             android:id="@+id/evaluate_count"
