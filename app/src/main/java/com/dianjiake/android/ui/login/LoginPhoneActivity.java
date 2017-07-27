@@ -330,7 +330,7 @@ public class LoginPhoneActivity extends BaseTranslateActivity {
                 mPasswordInput.getText().toString(),
                 wxoi,
                 wxun,
-                appInfo.getCid())
+                appInfo.getCid(), null, null)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean<LoginBean>>() {

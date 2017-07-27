@@ -157,7 +157,7 @@ public class LoginChooseActivity extends BaseTranslateActivity {
                         ((ProgressDialog) mAuthorizePD.getDialog()).setMessage("正在登录，请稍候...");
                     }
                 });
-                login(map.get("openid"), map.get("unionid"));
+                login(map.get("openid"), map.get("unionid"),map.get("nickname"),map.get("headimgurl"));
             }
 
             @Override
@@ -175,14 +175,16 @@ public class LoginChooseActivity extends BaseTranslateActivity {
     }
 
 
-    void login(final String wxOpenId, final String unionId) {
+    void login(final String wxOpenId, final String unionId,String wxName,String wxAvatar) {
         showAuthorizePD("正在登录");
         Network.getInstance().login(BSConstant.LOGIN,
                 null,
                 null,
                 wxOpenId,
                 unionId,
-                null).observeOn(AndroidSchedulers.mainThread())
+                null,
+                wxName,
+                wxAvatar).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseBean<LoginBean>>() {
                     @Override

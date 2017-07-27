@@ -290,7 +290,9 @@ public interface Api {
             @Field("sms") String sms,
             @Field("wxopenid") String wxOpenId,
             @Field("unionid") String unionId,
-            @Field("cid") String cid
+            @Field("cid") String cid,
+            @Field("wxname") String wxName,
+            @Field("wxtouxiang") String wxAvatar
     );
 
     /**
