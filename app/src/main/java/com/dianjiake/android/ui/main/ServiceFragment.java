@@ -17,6 +17,8 @@ import com.dianjiake.android.data.bean.ServiceFirstBean;
 import com.dianjiake.android.data.bean.ServiceSecondBean;
 import com.dianjiake.android.event.CheckMsgUnreadEvent;
 import com.dianjiake.android.ui.msg.MsgActivity;
+import com.dianjiake.android.ui.searchshop.SearchShopActivity;
+import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.view.widget.MsgIconView;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
 
@@ -153,6 +155,11 @@ public class ServiceFragment extends BaseFragment<ServiceContract.Presenter> imp
     @OnClick(R.id.toolbar_msg_holder)
     void clickMsg(View v) {
         startActivity(MsgActivity.getStartIntent());
+    }
+
+    @OnClick(R.id.toolbar_search_holder)
+    void clickSearch(View v) {
+        startActivity(IntentUtil.getIntent(SearchShopActivity.class));
     }
 
 

@@ -125,7 +125,7 @@ public class SubscribeActivity extends BaseTranslateActivity<SubscribePresenter>
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
-        AndroidBug5497Workaround.assistActivity(this);
+//        AndroidBug5497Workaround.assistActivity(this);
         toolbarTitle.setText("快速预约");
         phone.addTextChangedListener(phoneWatcher);
         name.addTextChangedListener(nameWatcher);
