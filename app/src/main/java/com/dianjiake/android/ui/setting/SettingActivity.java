@@ -146,6 +146,7 @@ public class SettingActivity extends BaseTranslateActivity<SettingPresenter> imp
 
         LoginInfoDBHelper.newInstance().logout();
         EventUtil.postLogOutEvent();
+        EventUtil.postCheckMsgUnread();
         finish();
     }
 
