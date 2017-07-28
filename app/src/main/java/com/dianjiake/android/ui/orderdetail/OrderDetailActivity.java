@@ -329,7 +329,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         alertDialog.showDialog(getFragmentManager(), "cancel");
     }
 
-    @OnClick(R.id.logo)
+    @OnClick(R.id.detail_logo)
     void clickLogo(View v) {
         if (orderBean == null || orderBean.getDianpu() == null) return;
         startActivity(ShopDetailActivity.getStartIntent(orderBean.getDianpu().getId()));
