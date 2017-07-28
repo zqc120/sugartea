@@ -235,7 +235,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
             TableRow payTime = new TableRow(this);
             payTime.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
-            payTime.addView(TableRowUtil.getVipTitleText("结账时间：" + DateUtil.formatYMDHM(item.getPaytime()), this));
+            payTime.addView(TableRowUtil.getVipTitleText("结账时间：" + DateUtil.formatYMDHM(item.getWanchengshijian()), this));
             tableLayout2.addView(payTime);
         }
 
