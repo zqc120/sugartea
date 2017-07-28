@@ -24,17 +24,19 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/base_size2"
+        android:singleLine="true"
         android:textColor="@color/text_content_title"
         android:textSize="@dimen/text_size_subhead"
         app:layout_constraintBottom_toBottomOf="@+id/logo"
+        android:layout_marginRight="@dimen/base_size2"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/logo"
         app:layout_constraintRight_toLeftOf="@+id/status"
         app:layout_constraintTop_toTopOf="@+id/logo"
-        tools:text="没加" />
+        tools:text="没加发生的佛挡杀佛就少的发计算机等级福建师大浪费流量看电视剧孙打飞机" />
 
 
     <TextView
