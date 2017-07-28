@@ -172,7 +172,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
     @Override
     public void setView(ShopDetailBean shopDetail) {
         if (shopDetail.getDianpu() != null) {
-            shopLogo.setImageURI(FrescoUtil.getShopLogoUri(shopDetail.getDianpu().getLogo(), shopDetail.getDianpu().getCover()));
+            shopLogo.setImageURI(FrescoUtil.getShopCoverUri(shopDetail.getDianpu().getLogo(), shopDetail.getDianpu().getCover()));
             shopName.setText(shopDetail.getDianpu().getMingcheng());
             shopTime.setText("营业时间：" + shopDetail.getDianpu().getKaishishijian() + "-" + shopDetail.getDianpu().getJieshushijian());
             shopLocation.setText(shopDetail.getDianpu().getDizhi() + " " + AMapUtil.formatDistance(LongUtil.parseLong(shopDetail.getDianpu().getJuli())));

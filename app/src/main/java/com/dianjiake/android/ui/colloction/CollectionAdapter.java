@@ -10,9 +10,12 @@ import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ShopDetailBean;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.ui.shopdetail.comment.CommentContract;
+import com.dianjiake.android.util.AMapUtil;
 import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntentUtil;
+import com.dianjiake.android.util.LongUtil;
+import com.dianjiake.android.util.StringUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.dialog.NormalAlertDialog;
 import com.dianjiake.android.view.widget.BaseLoadMoreAdapter;
@@ -85,6 +88,7 @@ public class CollectionAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
             name.setText(shopBean.getMingcheng());
             desc.setText(shopBean.getJianjie());
             star.setScore(FloatUtil.parseFloat(shopBean.getPingfen()));
+            distance.setText(AMapUtil.formatDistance(LongUtil.parseLong(shopBean.getJuli())));
         }
 
         @OnClick(R.id.holder)

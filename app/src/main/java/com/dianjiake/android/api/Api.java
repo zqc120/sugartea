@@ -443,7 +443,8 @@ public interface Api {
     @GET(Constant.SHOP)
     Observable<BaseListBean<HomeShopBean>> myCollection(
             @NonNull @Query("bs") String bs,
-            @NonNull @Query("openid") String openid);
+            @NonNull @Query("openid") String openid,
+            @Query("zuobiao") String coordinate);
 
 
     /**

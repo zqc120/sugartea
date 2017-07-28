@@ -28,6 +28,14 @@ public class FrescoUtil {
         }
     }
 
+    public static Uri getShopCoverUri(String logo, String cover) {
+        if (!TextUtils.isEmpty(cover)) {
+            return Uri.parse(Constant.IMAGE_SHOP + cover);
+        } else {
+            return Uri.parse(Constant.IMAGE_SHOP + logo);
+        }
+    }
+
     public static Uri getOccupationAvatar(String oa) {
         return Uri.parse(Constant.IMAGE_PRO_PHOTO + oa);
     }

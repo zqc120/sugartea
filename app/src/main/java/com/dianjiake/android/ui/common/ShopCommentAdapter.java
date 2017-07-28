@@ -76,6 +76,7 @@ public class ShopCommentAdapter extends BaseLoadMoreAdapter<ShopCommentBean> {
             starView.setScore(FloatUtil.parseFloat(bean.getPingfen()));
             time.setText(DateUtil.formatMDHM(bean.getShijian()));
             comment.setText(bean.getNeirong());
+            comment.setVisibility(CheckEmptyUtil.isEmpty(bean.getNeirong()) ? View.GONE : View.VISIBLE);
         }
 
         @Override

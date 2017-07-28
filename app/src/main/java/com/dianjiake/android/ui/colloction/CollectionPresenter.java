@@ -7,7 +7,9 @@ import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
+import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.ToastUtil;
@@ -31,11 +33,13 @@ public class CollectionPresenter implements CollectionContract.Presenter {
     CompositeDisposable cd;
     LoginInfoModel loginInfo;
     List<HomeShopBean> items;
+    AppInfoModel appInfo;
 
     public CollectionPresenter(CollectionContract.View view) {
         this.view = view;
         cd = new CompositeDisposable();
         loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
+        appInfo = AppInfoDBHelper.newInstance().getAppInfo();
         items = new ArrayList<>();
     }
 
@@ -57,7 +61,7 @@ public class CollectionPresenter implements CollectionContract.Presenter {
     @Override
     public void load(boolean isReload) {
         cd.clear();
-        Network.getInstance().myCollection(BSConstant.MY_COLLECTION, loginInfo.getOpenId())
+        Network.getInstance().myCollection(BSConstant.MY_COLLECTION, loginInfo.getOpenId(), appInfo.getLongitude() + "," + appInfo.getLatitude())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new Observer<BaseListBean<HomeShopBean>>() {
