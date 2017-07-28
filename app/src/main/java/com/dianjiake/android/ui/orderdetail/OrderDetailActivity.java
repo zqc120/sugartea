@@ -17,12 +17,14 @@ import android.widget.TextView;
 import com.dianjiake.android.R;
 import com.dianjiake.android.base.BaseTranslateActivity;
 import com.dianjiake.android.common.ActiivtyDataHelper;
+import com.dianjiake.android.data.bean.DiscountBean;
 import com.dianjiake.android.data.bean.OrderBean;
 import com.dianjiake.android.data.bean.OrderGoodBean;
 import com.dianjiake.android.data.bean.OrderServiceBean;
 import com.dianjiake.android.ui.common.OrderPayType;
 import com.dianjiake.android.ui.common.OrderStatus;
 import com.dianjiake.android.ui.evaluate.EvaluateActivity;
+import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.util.CheckEmptyUtil;
 import com.dianjiake.android.util.DateUtil;
 import com.dianjiake.android.util.FrescoUtil;
@@ -88,6 +90,8 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
     TableLayout subTable;
     @BindView(R.id.get_coupon)
     GetCouponView couponView;
+    @BindView(R.id.discount_table)
+    TableLayout discountTable;
 
     int orderStatus;
     OrderBean orderBean;
@@ -157,6 +161,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
 
         tableLayout.removeAllViews();
         tableLayout2.removeAllViews();
+        discountTable.removeAllViews();
 
         if (!CheckEmptyUtil.isEmpty(item.getDingdanfuwu())) {
             for (int i = 0; i < item.getDingdanfuwu().size(); i++) {
@@ -194,12 +199,24 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
             }
         }
 
+        //中间
         if (!CheckEmptyUtil.isEmpty(item.getDingdanfuwu())) {
             TableRow countRow = new TableRow(this);
             countRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
             countRow.addView(TableRowUtil.getCountTitleText(item.getDingdanfuwu().size() + "个项目", this));
             countRow.addView(TableRowUtil.getCountEndText("合计：￥" + item.getYingfujine(), this));
-            tableLayout.addView(countRow);
+            discountTable.addView(countRow);
+        }
+
+        if (!CheckEmptyUtil.isEmpty(item.getYouhui())) {
+            for (DiscountBean b : item.getYouhui()) {
+                TableRow countRow = new TableRow(this);
+                countRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
+                countRow.addView(TableRowUtil.getDiscountIcon(b, this));
+                countRow.addView(TableRowUtil.getDiscountTitle(b, this));
+                countRow.addView(TableRowUtil.getDiscountEnd(b, this));
+                discountTable.addView(countRow);
+            }
         }
 
 
@@ -310,6 +327,12 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
             }
         });
         alertDialog.showDialog(getFragmentManager(), "cancel");
+    }
+
+    @OnClick(R.id.logo)
+    void clickLogo(View v) {
+        if (orderBean == null || orderBean.getDianpu() == null) return;
+        startActivity(ShopDetailActivity.getStartIntent(orderBean.getDianpu().getId()));
     }
 
     @OnClick(R.id.detail_button1)

@@ -69,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="71dp"
         android:layout_marginRight="@dimen/base_margin"
+        android:lineSpacingExtra="@dimen/base_size1"
         android:paddingBottom="@dimen/base_margin"
         tools:text="fsfsafsdfsdfsdfdsffsdfsdfsdfsdfsdffsdfsddfsdfsdfsffsdfsdfsfsffsdfsdfdddddddddddddddddddddddddddddddddfssdfsdfd" />
 

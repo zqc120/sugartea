@@ -2,14 +2,17 @@ package com.dianjiake.android.util;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.LayoutDirection;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.amap.api.maps.model.Text;
 import com.dianjiake.android.R;
+import com.dianjiake.android.data.bean.DiscountBean;
 
 /**
  * Created by lfs on 2017/7/20.
@@ -67,6 +70,43 @@ public class TableRowUtil {
         return tv;
     }
 
+    public static ImageView getDiscountIcon(DiscountBean discountBean, Context context) {
+        ImageView imageView = new ImageView(context);
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(UIUtil.getDimensionPixelSize(R.dimen.base_margin), UIUtil.getDimensionPixelSize(R.dimen.base_margin));
+        imageView.setLayoutParams(lp);
+        imageView.setImageResource("1".equals(discountBean.getLeixing()) ? R.drawable.ic_order_coupon : R.drawable.ic_order_times);
+        return imageView;
+    }
+
+
+    public static TextView getDiscountTitle(DiscountBean discountBean, Context context) {
+        TextView textView = new TextView(context);
+        textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
+        textView.setTextColor(UIUtil.getColor(R.color.text_content_secondary));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
+        if ("1".equals(discountBean.getLeixing())) {
+            textView.setText(discountBean.getKaquanmingcheng());
+        } else {
+            textView.setText("计次卡 " + discountBean.getFuwumingcheng());
+        }
+        return textView;
+    }
+
+    public static TextView getDiscountEnd(DiscountBean discountBean, Context context) {
+        TextView textView = new TextView(context);
+        textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
+        textView.setTextColor(UIUtil.getColor(R.color.main));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        textView.setSingleLine(true);
+        textView.setGravity(Gravity.END);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
+        textView.setText("-￥" + discountBean.getYouhuijine());
+        return textView;
+    }
+
+
     public static TextView getVipTitleText(String text, Context context) {
         TextView tv = getServiceTitleText(text, context);
         return tv;
@@ -112,4 +152,6 @@ public class TableRowUtil {
         textView.setText(text);
         return textView;
     }
+
+
 }

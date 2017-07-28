@@ -77,7 +77,7 @@ public class CouponView extends ConstraintLayout {
     }
 
     public void setCoupon(CouponBean coupon, HomeShopBean shopBean, int position) {
-        get.setVisibility(VISIBLE);
+
         type = TYPE_GET;
         this.position = position;
         setCoupon(coupon, shopBean);
@@ -119,7 +119,11 @@ public class CouponView extends ConstraintLayout {
                     + " ~ "
                     + DateUtil.formatYMD(coupon.getJieshushijian())
             );
+            get.setText("立即使用");
+            get.setClickable(false);
         } else {
+            get.setText("领取");
+            get.setClickable(true);
             time.setText("使用期限："
                     + ("0".equals(coupon.getKaishishijian()) ? "当天生效" : "领取后" + coupon.getKaishishijian() + "天后生效"));
         }

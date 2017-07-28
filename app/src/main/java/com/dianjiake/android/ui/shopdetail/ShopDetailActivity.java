@@ -30,6 +30,7 @@ import com.dianjiake.android.ui.shopdetail.staff.StaffFragment;
 import com.dianjiake.android.ui.simpleactivity.SimpleActivity;
 import com.dianjiake.android.util.AMapUtil;
 import com.dianjiake.android.util.DateUtil;
+import com.dianjiake.android.util.FloatUtil;
 import com.dianjiake.android.util.FrescoUtil;
 import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.IntentUtil;
@@ -183,6 +184,7 @@ public class ShopDetailActivity extends BaseTranslateActivity<ShopDetailPresente
             getCouponView.setShop(shopDetail.getDianpu());
             toolbarTitle.setText(shopDetail.getDianpu().getMingcheng());
             toolbarTitle.setAlpha(0);
+            star.setScore(FloatUtil.parseFloat(shopDetail.getDianpu().getPingfen()));
         }
 
     }
