@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -211,6 +212,7 @@ public class OrderDetailActivity extends BaseTranslateActivity<OrderDetailPresen
         if (!CheckEmptyUtil.isEmpty(item.getYouhui())) {
             for (DiscountBean b : item.getYouhui()) {
                 TableRow countRow = new TableRow(this);
+                countRow.setGravity(Gravity.CENTER_VERTICAL);
                 countRow.setPadding(0, 0, 0, UIUtil.getDimensionPixelSize(R.dimen.base_size3));
                 countRow.addView(TableRowUtil.getDiscountIcon(b, this));
                 countRow.addView(TableRowUtil.getDiscountTitle(b, this));

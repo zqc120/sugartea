@@ -52,6 +52,6 @@ public class MsgDBHelper {
     }
 
     public boolean isUnread() {
-        return !CheckEmptyUtil.isEmpty(getMsgDao().queryBuilder().list());
+        return !CheckEmptyUtil.isEmpty(getMsgDao().queryBuilder().where(MsgModelDao.Properties.Chakan.eq(0)).list());
     }
 }

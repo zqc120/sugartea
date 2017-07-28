@@ -73,6 +73,7 @@ public class TableRowUtil {
     public static ImageView getDiscountIcon(DiscountBean discountBean, Context context) {
         ImageView imageView = new ImageView(context);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(UIUtil.getDimensionPixelSize(R.dimen.base_margin), UIUtil.getDimensionPixelSize(R.dimen.base_margin));
+        lp.setMargins(0,0,8,0);
         imageView.setLayoutParams(lp);
         imageView.setImageResource("1".equals(discountBean.getLeixing()) ? R.drawable.ic_order_coupon : R.drawable.ic_order_times);
         return imageView;
