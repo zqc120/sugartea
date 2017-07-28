@@ -16,6 +16,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by lfs on 2017/7/26.
@@ -79,6 +80,11 @@ public class GetCouponFailDialog extends AppCompatActivity {
         }
     }
 
+
+    @OnClick(R.id.close)
+    void clickClose(View v){
+        finish();
+    }
 
     @Override
     public void finish() {

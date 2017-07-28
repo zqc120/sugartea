@@ -23,6 +23,7 @@ import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.util.CheckEmptyUtil;
+import com.dianjiake.android.util.IntegerUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.coupon.common.CouponAdapterHelper;
@@ -52,6 +53,7 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
     CouponScaleHelper couponScaleHelper;
     FragmentManager fm;
     NormalProgressDialog pd;
+    NormalProgressDialog getListPD;
     HomeShopBean shopBean;
 
     public GetCouponView(@NonNull Context context) {
@@ -76,7 +78,8 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
         couponScaleHelper = new CouponScaleHelper();
         rv = (RecyclerView) view.findViewById(R.id.coupon_rv);
         cd = new CompositeDisposable();
-        adapter = new Adapter();
+        adapter = new Adapter(this
+        );
         adapter.setOnGetListener(this);
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         rv.setAdapter(adapter);
@@ -107,6 +110,7 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
 
                         @Override
                         public void onNext(@io.reactivex.annotations.NonNull BaseListBean<CouponBean> couponList) {
+                            dismissListPD();
                             if (!CheckEmptyUtil.isEmpty(couponList.getObj().getList())) {
                                 setVisibility(VISIBLE);
                                 adapter.setItems(couponList.getObj().getList());
@@ -117,7 +121,7 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
 
                         @Override
                         public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-
+                            dismissListPD();
                         }
 
                         @Override
@@ -125,6 +129,29 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
 
                         }
                     });
+        }
+    }
+
+    public void regetList() {
+        if (this.shopBean != null) {
+//            showListPD();
+            setShop(this.shopBean);
+        }
+    }
+
+    void showListPD() {
+        if (getListPD == null) {
+            getListPD = NormalProgressDialog.newInstance("获取优惠券列表，请稍候...");
+        }
+
+        if (getListPD != null) {
+            getListPD.showDialog(fm, "getListPD");
+        }
+    }
+
+    void dismissListPD() {
+        if (getListPD != null && getListPD.isAdded()) {
+            getListPD.dismissAllowingStateLoss();
         }
     }
 
@@ -209,6 +236,11 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
         private CouponAdapterHelper couponAdapterHelper = new CouponAdapterHelper();
         private HomeShopBean shopBean;
         CouponView.OnGetListener onGetListener;
+        GetCouponView getCouponView;
+
+        public Adapter(GetCouponView getCouponView) {
+            this.getCouponView = getCouponView;
+        }
 
         public void setShopBean(HomeShopBean shopBean) {
             this.shopBean = shopBean;
@@ -223,10 +255,18 @@ public class GetCouponView extends FrameLayout implements CouponView.OnGetListen
         }
 
         public int removeItem(int position) {
-            if (position < items.size()) {
-                items.remove(position);
+            if(getCouponView!=null){
+                getCouponView.regetList();
             }
-            notifyDataSetChanged();
+//            if (position < items.size()) {
+//                int count = IntegerUtil.parseInt(items.get(position).getLingqushuliang());
+//                count--;
+//                items.get(position).setLingqushuliang(count + "");
+//                if (count < 1) {
+//                    items.remove(position);
+//                }
+//            }
+//            notifyDataSetChanged();
             return items.size();
         }
 
