@@ -59,4 +59,10 @@
         app:layout_goneMarginTop="@dimen/base_size2"
         tools:text="福利空间撒地方简单来说这些哦陈 vi 中西餐 v 哦 i 从 vi 从下次 v 哦哦朴正熙从旁 v 朴正熙陈 vi 这些词 v 这些词 vi 张 vi 系哦胖次 v 哦哦皮脂腺从旁 v 哦朋" />
 
+    <ImageView
+        style="@style/DividerHorizontalStyle"
+        android:layout_width="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -52,7 +52,7 @@ public class MsgIconView extends AppCompatImageView {
             paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
             int size = UIUtil.getDimensionPixelSize(R.dimen.base_size1);
-            canvas.drawCircle(width / 2 + size * 2, size/2, size, paint);
+            canvas.drawCircle(width, size/2, size, paint);
         }
     }
 }
