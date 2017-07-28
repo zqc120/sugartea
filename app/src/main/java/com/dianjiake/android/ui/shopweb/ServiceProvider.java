@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.dianjiake.android.constant.BSConstant;
 import com.dianjiake.android.constant.Constant;
+import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 
 /**
@@ -13,6 +14,7 @@ import com.dianjiake.android.data.bean.ServiceBean;
 
 public class ServiceProvider implements BaseProvider<ServiceBean>, Parcelable {
     ServiceBean serviceBean;
+    HomeShopBean shopBean;
 
     public ServiceProvider(ServiceBean serviceBean) {
         this.serviceBean = serviceBean;
@@ -31,6 +33,11 @@ public class ServiceProvider implements BaseProvider<ServiceBean>, Parcelable {
     @Override
     public ServiceBean getBean() {
         return serviceBean;
+    }
+
+    @Override
+    public HomeShopBean getShopBean() {
+        return serviceBean.getDianpu();
     }
 
     @Override

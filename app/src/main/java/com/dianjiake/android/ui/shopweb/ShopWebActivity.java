@@ -32,6 +32,7 @@ public class ShopWebActivity extends BaseWebViewActivity {
 
     BaseProvider provider;
 
+
     public static Intent getServiceDetail(ServiceBean serviceBean) {
         Intent intent = IntentUtil.getIntent(ShopWebActivity.class);
         intent.setType(TYPE_SERVICE);
@@ -97,7 +98,7 @@ public class ShopWebActivity extends BaseWebViewActivity {
 
             }
         }
-        
+
         @JavascriptInterface
         public void getStaffService(String staff, String service) {
             ServiceBean serviceBean;
@@ -114,7 +115,8 @@ public class ShopWebActivity extends BaseWebViewActivity {
 
     @OnClick(R.id.toolbar_icon_right)
     void clickShare(View v) {
-        ShareDialog.Show(this, shareTitle, "糖茶", shareUrl, shareImage);
+        String desc = provider.getShopBean() != null ? provider.getShopBean().getMingcheng() + " · " + provider.getShopBean().getJianjie() : "糖茶,让生活更有滋味！";
+        ShareDialog.Show(this, shareTitle, desc, shareUrl, shareImage);
     }
 
 }

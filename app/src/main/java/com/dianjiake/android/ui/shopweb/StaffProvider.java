@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.util.StringBuilderPrinter;
 
 import com.dianjiake.android.constant.Constant;
+import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
 
 /**
@@ -13,6 +14,8 @@ import com.dianjiake.android.data.bean.UserInfoBean;
 
 public class StaffProvider implements BaseProvider<UserInfoBean>, Parcelable {
     UserInfoBean userInfoBean;
+    HomeShopBean shopBean;
+
 
     public StaffProvider(UserInfoBean userInfoBean) {
         this.userInfoBean = userInfoBean;
@@ -36,6 +39,11 @@ public class StaffProvider implements BaseProvider<UserInfoBean>, Parcelable {
     @Override
     public UserInfoBean getBean() {
         return userInfoBean;
+    }
+
+    @Override
+    public HomeShopBean getShopBean() {
+        return userInfoBean.getDianpu();
     }
 
     @Override
