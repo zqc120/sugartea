@@ -2,7 +2,6 @@ package com.dianjiake.android.ui.searchshop;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.security.keystore.KeyInfo;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -24,8 +23,6 @@ import com.dianjiake.android.ui.common.SearchHistoryAdapter;
 import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.widget.ToolbarSpaceView;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +71,9 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
 
     @Override
     public void create(@Nullable Bundle savedInstanceState) {
+
         imm = (InputMethodManager) App.getInstance().getSystemService(INPUT_METHOD_SERVICE);
+
         toolbarTitle.setHint("搜索感兴趣的服务和商家");
         toolbarInput.setHint("搜索感兴趣的服务和商家");
         toolbarDivider.setVisibility(View.GONE);
@@ -104,6 +103,9 @@ public class SearchShopActivity extends BaseTranslateActivity<SearchShopContract
             }
         });
         setSearchFocus(true);
+
+
+
     }
 
 
