@@ -89,10 +89,10 @@
         <FrameLayout
             android:id="@+id/toolbar_msg_holder"
             android:layout_width="50dp"
-            android:clipChildren="false"
             android:layout_height="30dp"
             android:layout_marginRight="@dimen/base_margin"
-            android:background="@drawable/bg_home_location">
+            android:background="@drawable/bg_home_location"
+            android:clipChildren="false">
 
             <com.dianjiake.android.view.widget.MsgIconView
                 android:id="@+id/msg_icon"

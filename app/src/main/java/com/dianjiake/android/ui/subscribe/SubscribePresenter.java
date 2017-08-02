@@ -41,7 +41,9 @@ public class SubscribePresenter implements SubscribeContract.Presenter {
     ServiceBean defaultService;
     UserInfoBean defaultUserInfo;
     long chooseTime;
-    String phone, name, location, address;
+    String phone, name;
+    String location = "";
+    String address = "";
     int gender;
 
     int otherServiceTag = 0;

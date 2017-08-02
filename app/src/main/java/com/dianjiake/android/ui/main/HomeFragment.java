@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +17,6 @@ import com.dianjiake.android.ui.common.ShopListAdapter;
 import com.dianjiake.android.ui.msg.MsgActivity;
 import com.dianjiake.android.ui.searchlocation.SearchLocationActivity;
 import com.dianjiake.android.ui.searchshop.SearchShopActivity;
-import com.dianjiake.android.util.EventUtil;
 import com.dianjiake.android.util.IntentUtil;
 import com.dianjiake.android.util.UIUtil;
 import com.dianjiake.android.view.dialog.NormalProgressDialog;
@@ -75,22 +74,24 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         }
     };
 
-
+    //提供了布局
     @Override
     protected int provideLayout() {
         return R.layout.fragment_home;
     }
 
+    //设置了presenter
     @Override
     protected HomeContract.Presenter getPresenter() {
         return new HomePresenter(this);
     }
 
+    //提供了一个适配器
     @Override
     protected BaseLoadMoreAdapter provideAdapter() {
         return new ShopListAdapter(presenter.getItems());
     }
-
+    //初始化viewcreate方法
     @Override
     protected void viewCreated(View view, @Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -124,6 +125,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         super.onDestroyView();
     }
 
+    //设置定位的名称
     @Override
     public void setLocationName(String locationName) {
         toolbarLocationText.setText(locationName);
@@ -151,6 +153,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         filter.setVisibility(totalY >= filterThreshold ? View.VISIBLE : View.INVISIBLE);
     }
 
+    //展示加载中进度
     @Override
     public void showPD() {
         if (pd == null) {
@@ -158,7 +161,7 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         }
         pd.showDialog(getFragmentManager(), "pdd");
     }
-
+    //隐藏
     @Override
     public void dismissPD() {
         if (pd != null) {
@@ -166,12 +169,15 @@ public class HomeFragment extends BaseListFragment<HomeContract.Presenter> imple
         }
     }
 
+    //移动recycleview
     @Override
     public void moveRecyclerView() {
         ptrListLayout.getRecyclerView().stopScroll();
         totalScrollY = adViewTopDistance - toolbarBottomDistance + collectionBottomDistance;
+        Log.e("totalScrollY"+totalScrollY, "moveRecyclerView: "+adViewTopDistance+"---"+toolbarBottomDistance+"---"+collectionBottomDistance);
         ((LinearLayoutManager) ptrListLayout.getRecyclerView().getLayoutManager())
                 .scrollToPositionWithOffset(2, UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.button_size_normal));
+    //.scrollToPositionWithOffset(2, UIUtil.getStatusBarHeight() + UIUtil.getDimensionPixelSize(R.dimen.button_size_normal)
     }
 
     @OnClick(R.id.toolbar_location_holder)

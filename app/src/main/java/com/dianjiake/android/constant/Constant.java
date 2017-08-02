@@ -28,7 +28,7 @@ public interface Constant {
      */
     String ROOT = "http://www.quanminlebang.com/";
     String APP_URL = ROOT + URL_VERSION;
-    boolean IS_DEBUG = true;
+    boolean IS_DEBUG = false;
 
     String USER = "user.php";
     String INCOME = "yingshou.php";

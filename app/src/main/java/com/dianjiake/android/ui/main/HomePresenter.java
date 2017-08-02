@@ -14,6 +14,7 @@ import com.dianjiake.android.data.model.AppInfoModel;
 import com.dianjiake.android.data.model.LoginInfoModel;
 import com.dianjiake.android.event.HomeReloadEvent;
 import com.dianjiake.android.event.LocationEvent;
+import com.dianjiake.android.event.LoginEvent;
 import com.dianjiake.android.request.ListObserver;
 
 import org.greenrobot.eventbus.EventBus;
@@ -118,9 +119,11 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
                             HomeShopBean collections = new HomeShopBean();
                             collections.setViewType(HomeType.COLLECTION);
                             items.add(collections);
+                            //zai zhe ge di fang tian jia xin bu ju
                             HomeShopBean filter = new HomeShopBean();
                             filter.setViewType(HomeType.FILTER);
                             items.add(filter);
+
                         }
                         items.addAll(list);
                         page++;
@@ -174,6 +177,11 @@ public class HomePresenter implements HomeContract.Presenter, RadioGroup.OnCheck
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onBindTabEvent(RadioGroup radioGroup) {
         homeTabHelper.addRG(radioGroup);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(LoginEvent event) {
+        loginInfo = LoginInfoDBHelper.newInstance().getLoginInfo();
     }
 
     @Override

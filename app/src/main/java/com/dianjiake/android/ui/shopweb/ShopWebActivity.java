@@ -12,6 +12,8 @@ import com.dianjiake.android.base.BaseWebViewActivity;
 import com.dianjiake.android.data.bean.HomeShopBean;
 import com.dianjiake.android.data.bean.ServiceBean;
 import com.dianjiake.android.data.bean.UserInfoBean;
+import com.dianjiake.android.data.db.LoginInfoDBHelper;
+import com.dianjiake.android.ui.login.LoginChooseActivity;
 import com.dianjiake.android.ui.shopdetail.ShopDetailActivity;
 import com.dianjiake.android.ui.subscribe.SubscribeActivity;
 import com.dianjiake.android.util.IntentUtil;
@@ -79,36 +81,50 @@ public class ShopWebActivity extends BaseWebViewActivity {
     class JS {
         @JavascriptInterface
         public void getService(String s) {
-            ServiceBean serviceBean;
-            try {
-                serviceBean = new Gson().fromJson(s, ServiceBean.class);
-                startActivity(SubscribeActivity.getStartIntent(serviceBean, null));
-            } catch (Exception e) {
+            if (LoginInfoDBHelper.newInstance().isLogin()) {
+                ServiceBean serviceBean;
+                try {
+                    serviceBean = new Gson().fromJson(s, ServiceBean.class);
+                    startActivity(SubscribeActivity.getStartIntent(serviceBean, null));
+                } catch (Exception e) {
 
+                }
+            } else {
+                startActivity(IntentUtil.getIntent(LoginChooseActivity.class));
             }
+
+
         }
 
         @JavascriptInterface
         public void shop(String s) {
-            HomeShopBean shopEntity;
-            try {
-                shopEntity = new Gson().fromJson(s, HomeShopBean.class);
-                startActivity(ShopDetailActivity.getStartIntent(shopEntity.getId()));
-            } catch (Exception e) {
+            if (LoginInfoDBHelper.newInstance().isLogin()) {
+                HomeShopBean shopEntity;
+                try {
+                    shopEntity = new Gson().fromJson(s, HomeShopBean.class);
+                    startActivity(ShopDetailActivity.getStartIntent(shopEntity.getId()));
+                } catch (Exception e) {
 
+                }
+            } else {
+                startActivity(IntentUtil.getIntent(LoginChooseActivity.class));
             }
         }
 
         @JavascriptInterface
         public void getStaffService(String staff, String service) {
-            ServiceBean serviceBean;
-            UserInfoBean userInfoBean;
-            try {
-                userInfoBean = new Gson().fromJson(staff, UserInfoBean.class);
-                serviceBean = new Gson().fromJson(service, ServiceBean.class);
-                startActivity(SubscribeActivity.getStartIntent(serviceBean, userInfoBean));
-            } catch (Exception e) {
+            if (LoginInfoDBHelper.newInstance().isLogin()) {
+                ServiceBean serviceBean;
+                UserInfoBean userInfoBean;
+                try {
+                    userInfoBean = new Gson().fromJson(staff, UserInfoBean.class);
+                    serviceBean = new Gson().fromJson(service, ServiceBean.class);
+                    startActivity(SubscribeActivity.getStartIntent(serviceBean, userInfoBean));
+                } catch (Exception e) {
 
+                }
+            } else {
+                startActivity(IntentUtil.getIntent(LoginChooseActivity.class));
             }
         }
     }

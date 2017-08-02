@@ -12,7 +12,6 @@ import com.dianjiake.android.data.bean.ADBean;
 import com.dianjiake.android.data.bean.BaseBean;
 import com.dianjiake.android.data.bean.BaseListBean;
 import com.dianjiake.android.data.bean.HomeShopBean;
-import com.dianjiake.android.data.bean.ServiceTypeBean;
 import com.dianjiake.android.data.db.AppInfoDBHelper;
 import com.dianjiake.android.data.db.LoginInfoDBHelper;
 import com.dianjiake.android.data.model.AppInfoModel;
@@ -186,6 +185,9 @@ public class ShopListAdapter extends BaseLoadMoreAdapter<HomeShopBean> {
                         public void onNext(@NonNull BaseBean<ADBean> ad) {
                             if (ad.getCode() == 200 && !CheckEmptyUtil.isEmpty(ad.getObj().getContent())) {
                                 adView.setItems(ad.getObj().getContent());
+
+
+
                             }
                         }
 

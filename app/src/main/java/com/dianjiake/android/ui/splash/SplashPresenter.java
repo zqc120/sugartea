@@ -54,6 +54,10 @@ public class SplashPresenter implements SplashContract.Presenter {
         compositeDisposable.clear();
     }
 
+
+    /*
+    guaju ：拿到手机网络及屏幕状态
+     */
     @Override
     public void getPhoneInfo() {
         Network.newOtherApi().networkInfo()
